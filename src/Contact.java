@@ -70,18 +70,7 @@ public class Contact {
 	// TODO : Contact 변수에 입력된 값을 .txt에 저장한다.
 	public void generateDBCreate() {
 		String path = "data\\Contact.txt";
-//		File f = new File("Contact.txt");
-//		
-//		if(!f.exists()) {
-//			try {
-//				f.createNewFile();
-//				System.out.println(f.getName());
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//		}
-
+		
 		try {
 			FileWriter fw = new FileWriter(path, true);
 			fw.write(String.format("%s,%s,%s,%s,%s,%d\n", 
@@ -94,7 +83,7 @@ public class Contact {
 	}
 
 	// TODO : dump로 Contact에 여러 자료를 채운다.
-
+	
 	public User getID() {
 		return ID;
 	}
