@@ -1,6 +1,5 @@
 
 public class CoperationCar {
-	private String model;
-	private MyCalendar date;
-	//53
+    private String model;
+    private MyCalendar date;
 }
