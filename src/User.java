@@ -13,6 +13,12 @@ public class User {
 		this.passWord = "";
 	}
 
+	public User(User iD) {
+		// TODO Auto-generated constructor stub
+		this.ID = iD.ID;
+		this.passWord = iD.passWord;
+	}
+
 	public String getID() {
 		return ID;
 	}
