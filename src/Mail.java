@@ -17,7 +17,7 @@ public class Mail {
 	
 
 
-	Contact user = new Contact();
+	User user = new User();
 	String path = "data/Contact.txt"; // Mac 용 
 	//String path = "data\\Contact.txt"; // Window 용 
 //	user.getMail;
