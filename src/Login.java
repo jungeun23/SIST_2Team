@@ -30,7 +30,19 @@ public class Login {
 	
 	//temp[0]= 아이디, temp[1] = 비밀번호 temp[2] = 이름 , temp[3] = 이메일,temp[4] = 전화번호, temp[5] = 직급
 	
+
 	public User loginScreen() {
+		
+		
+		System.out.println("=======================");
+		System.out.println("        [로그인]");
+		System.out.println("=======================");
+		System.out.print("ID : ");
+		this.id = scan.nextLine();
+		System.out.print("PW : ");
+		this.pw = scan.nextLine();
+
+	
 		try {
 			
 			
@@ -45,6 +57,7 @@ public class Login {
 			this.pw = scan.nextLine();
 			System.out.println("=======================");
 		
+
 		
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 			
