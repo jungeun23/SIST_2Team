@@ -22,7 +22,8 @@ public class Login {
 	//temp[0]= 아이디, temp[1] = 비밀번호 temp[2] = 이름 , temp[3] = 이메일,temp[4] = 전화번호, temp[5] = 직급
 	
 	public Contact loginScreen() {
-			
+		
+		
 		System.out.println("=======================");
 		System.out.println("        [로그인]");
 		System.out.println("=======================");
