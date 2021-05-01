@@ -35,7 +35,6 @@ public class Login {
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 			
 			String line = "";
-			String temp2 ="";
 			
 			boolean id = false;
 			boolean pw = false;
