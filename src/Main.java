@@ -10,7 +10,8 @@ public class Main {
 		//ialbutt0,qdf5bG
 		Login login = new Login();
 		
-		login.loginScreen();
+		user = login.loginScreen();
+		
 		
 		
 	}

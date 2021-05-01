@@ -10,29 +10,35 @@ import java.util.Scanner;
 
 public class Contact {
 	private static final String ContactPATH = "data\\Contact.txt";
-	private User ID;
+//	private User ID;
 
+	private String id;
 	private String name;
-	private String password;
+	private String pw;
 	private String email;
 	private String phone;
 	private int position;
 
 	public Contact() {
-		ID = new User();
-		this.ID.setID("");
-		this.ID.setPassWord("");
+//		ID = new User();
+//		this.ID.setID("");
+//		this.ID.setPassWord("");
+		this.id = "";
+		this.pw = "";
 		this.name = "";
 		this.email = "";
 		this.phone = "";
 		this.position = 0;
 	}
 
-	public Contact(String id, String name, String password, String email, String phone, int position) {
+	public Contact(String id, String name, String pw, String email, String phone, int position) {
 		super();
-		ID = new User(id);
-		this.ID.setID(name);
-		this.ID.setPassWord(password);
+//		ID = new User(id);
+//		this.ID.setID(name);
+//		this.ID.setPassWord(password);
+		
+		this.id = id;
+		this.pw = pw;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -46,12 +52,12 @@ public class Contact {
 //		String id = sc.nextLine();
 //		String id = "asdfqwer1234";
 		String id = Util.get("아이디 : ");
-		this.ID.setID(id);
+//		this.ID.setID(id); **
 
 //		System.out.print("비밀번호 : ");
 //		String pw = sc.nextLine();
 		String pw = Util.get("비밀번호 : ");
-		this.ID.setPassWord("pw");
+//		this.ID.setPassWord("pw");**
 
 //		System.out.print("이름 : ");
 //		this.name = sc.nextLine();
@@ -77,15 +83,15 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return String.format("id: %s\npassword: %s\nname: %s\nemail: %s\nphone: %s\nposition: %s\n", this.ID.getID(),
-				this.ID.getPassWord(), this.name, this.email, this.phone, this.position);
+		return String.format("id: %s\npassword: %s\nname: %s\nemail: %s\nphone: %s\nposition: %s\n", this.id,
+				this.pw, this.name, this.email, this.phone, this.position);
 	}
 
 	// TODO : Contact 변수에 입력된 값을 .txt에 저장한다.
 	public void generateDBCreate() {
 		try {
 			FileWriter fw = new FileWriter(ContactPATH, true);
-			fw.write(String.format("%s,%s,%s,%s,%s,%d\n", this.ID.getID(), this.ID.getPassWord(), this.name, this.email,
+			fw.write(String.format("%s,%s,%s,%s,%s,%d\n", this.id, this.pw, this.name, this.email,
 					this.phone, this.position));
 			fw.close();
 		} catch (IOException e) {
@@ -154,12 +160,12 @@ public class Contact {
 		return firstName.get(0) + lastName.get(0) + lastName.get(1);
 	}
 
-	public User getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 
-	public void setID(User iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -168,6 +174,14 @@ public class Contact {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
 	public String getEmail() {
@@ -193,4 +207,10 @@ public class Contact {
 	public void setPosition(int position) {
 		this.position = position;
 	}
+
+	public static String getContactpath() {
+		return ContactPATH;
+	}
+
+
 }

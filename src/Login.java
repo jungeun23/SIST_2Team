@@ -9,6 +9,8 @@ public class Login {
 	private Scanner scan;
 	private String id;
 	private String pw;
+	private Contact ct;
+	
 	
 	public Login() {
 		DATA = "data\\Contact.txt";
@@ -19,7 +21,9 @@ public class Login {
 	
 	//temp[0]= 아이디, temp[1] = 비밀번호 temp[2] = 이름 , temp[3] = 이메일,temp[4] = 전화번호, temp[5] = 직급
 	
-	public void loginScreen() {
+	public Contact loginScreen() {
+			
+		
 		
 		System.out.println("=======================");
 		System.out.println("        [로그인]");
@@ -29,11 +33,11 @@ public class Login {
 		System.out.print("PW : ");
 		this.pw = scan.nextLine();
 		
-		load();
-		
+		ct = load();
+		return ct;
 	}
 	
-	public void load() {
+	public Contact load() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 			
@@ -53,21 +57,31 @@ public class Login {
 					if(temp[1].equals(this.pw)) {// 비밀번호 비교
 						pw = true;
 						System.out.println("로그인 성공");
+						ct.setId(this.id);
+						ct.setPw(this.pw);
+						ct.setName(temp[2]);
+						ct.setEmail(temp[3]);
+						ct.setPhone(temp[4]);
+						ct.setPosition(Integer.parseInt(temp[5]));
+						
+						
 						break;
 					}
 				} 
 			}
+			
 			if(id == false) {
 				System.out.println("ID를 다시 입력하세요.");
 			} else if(id == true && pw == false) {
 				System.out.println("PW를 다시 입력하세요.");
 			}
 			
+			return ct;
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+		return null;
 	}
 
 	public void setId(String id) {
