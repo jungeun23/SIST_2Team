@@ -1,4 +1,4 @@
 
-public class ElecPayment {
+public class ElecApproval {
 
 }
