@@ -1,6 +1,14 @@
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.Scanner;
+
+import javax.imageio.ImageIO;
 
 public class Login {
 	private final String DATA;
@@ -23,18 +31,21 @@ public class Login {
 	//temp[0]= 아이디, temp[1] = 비밀번호 temp[2] = 이름 , temp[3] = 이메일,temp[4] = 전화번호, temp[5] = 직급
 	
 	public User loginScreen() {
-		
-		System.out.println("       그룹웨어");
-		System.out.println("=======================");
-		System.out.println("        [로그인]");
-		System.out.println();
-		System.out.print("     ▶ ID : ");
-		this.id = scan.nextLine();
-		System.out.print("     ▶ PW : ");
-		this.pw = scan.nextLine();
-		System.out.println("=======================");
-		
 		try {
+			
+			
+			
+			System.out.println("       그룹웨어");
+			System.out.println("=======================");
+			System.out.println("        [로그인]");
+			System.out.println();
+			System.out.print("     ▶ ID : ");
+			this.id = scan.nextLine();
+			System.out.print("     ▶ PW : ");
+			this.pw = scan.nextLine();
+			System.out.println("=======================");
+		
+		
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 			
 			String line = "";
