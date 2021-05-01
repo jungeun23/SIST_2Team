@@ -23,8 +23,6 @@ public class Login {
 	
 	public Contact loginScreen() {
 			
-		
-		
 		System.out.println("=======================");
 		System.out.println("        [로그인]");
 		System.out.println("=======================");
@@ -33,11 +31,6 @@ public class Login {
 		System.out.print("PW : ");
 		this.pw = scan.nextLine();
 		
-		ct = load();
-		return ct;
-	}
-	
-	public Contact load() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 			
@@ -76,13 +69,12 @@ public class Login {
 				System.out.println("PW를 다시 입력하세요.");
 			}
 			
-			return ct;
-			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return null;
+		return ct;
 	}
+	
 
 	public void setId(String id) {
 		this.id = id;

@@ -3,6 +3,7 @@ public class User {
 	private String iD;
 	private String passWord;
 	
+	
 	public User(String iD) {
 		super();
 		this.iD = iD;
