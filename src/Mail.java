@@ -1,6 +1,7 @@
 import java.awt.print.Printable;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -71,7 +72,7 @@ public class Mail {
 		title = scan.nextLine();
 		System.out.print("내용을 입력하세요.");
 		content = scan.nextLine();
-		
+
 		String path = "data\\mail\\" + this.user.getName() + "_" + this.receiverName;
 //	      path = "data\\mail\\" ;
 
@@ -105,5 +106,58 @@ public class Mail {
 				System.out.println(result);
 			}
 		}
+
 	}
-}// Mail
+
+	public void searchMail() throws IOException {
+		String path = "data\\mail\\";
+		File f = new File(path);
+		File[] fl = f.listFiles();
+		String result = "";
+		String keyword = ""; // 사용자로부터 입력받아함
+		for (int i = 0; i < fl.length; i++) {
+			if (fl[i].isFile()) {
+				String s = fl[i].getName();
+				String t = "";
+				t = s.substring(s.indexOf("_"));
+				if (t.equals(this.user.getName())) {
+					BufferedReader read = new BufferedReader(new FileReader(path + t));
+					String line = "";
+					while ((line = read.readLine()) != null) {
+						result += line + "\r\n";
+					}
+					if (result.contains(keyword))
+						System.out.println(s + "에 해당 검색어가 존재합니다.");
+				}
+			}
+
+		} // Mail
+	}
+
+	public void sapmMailFilter() throws IOException {
+		String path = "data\\mail\\";
+		File f = new File(path);
+		File[] fl = f.listFiles();
+		String result = "";
+		String[] keyword = { "환영", "승부", "도박", "하우스", "포인트", "현출", "슬롯", "베팅" };
+		for (int i = 0; i < fl.length; i++) {
+			if (fl[i].isFile()) {
+				String s = fl[i].getName();
+				String t = "";
+				t = s.substring(s.indexOf("_"));
+				if (t.equals(this.user.getName())) {
+					BufferedReader read = new BufferedReader(new FileReader(path + t));
+					String line = "";
+					while ((line = read.readLine()) != null) {
+						result += line + "\r\n";
+					}
+					for (int j = 0; j < keyword.length; j++) {
+						if (result.contains(keyword[j]))
+							System.out.println(s + "는 스팸 메일일 가능성이 높습니다.");
+					}
+				}
+			}
+
+		} // Mail
+	}
+}
