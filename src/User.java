@@ -1,31 +1,31 @@
 
 public class User {
-	private String ID;
+	private String iD;
 	private String passWord;
 	
 	public User(String iD) {
 		super();
-		this.ID = iD;
+		this.iD = iD;
 	}
 
 	public User() {
-		this.ID = "";
+		this.iD = "";
 		this.passWord = "";
 	}
 
 	public User(User iD) {
 		// TODO Auto-generated constructor stub
-		this.ID = iD.ID;
+		this.iD = iD.iD;
 		this.passWord = iD.passWord;
 	}
 
 	public String getID() {
-		return ID;
+		return iD;
 	}
 
 	public void setID(String id) {
 		// TODO Auto-generated method stub
-		this.ID = id;
+		this.iD = id;
 	}
 
 	public String getPassWord() {

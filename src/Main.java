@@ -7,5 +7,11 @@ public class Main {
 		user.updateDB();
 //		System.out.println(user);
 		
+		//ialbutt0,qdf5bG
+		Login login = new Login();
+		
+		login.loginScreen();
+		
+		
 	}
 }
