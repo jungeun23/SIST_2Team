@@ -9,7 +9,7 @@ public class Login {
 	private Scanner scan;
 	private String id;
 	private String pw;
-	private User ct;
+	private User user;
 	
 	
 	public Login() {
@@ -17,25 +17,27 @@ public class Login {
 		scan = new Scanner(System.in);
 		id = "";
 		pw = "";
+		user = new User();
 	}
 	
 	//temp[0]= 아이디, temp[1] = 비밀번호 temp[2] = 이름 , temp[3] = 이메일,temp[4] = 전화번호, temp[5] = 직급
 	
 	public User loginScreen() {
-			
+		
+		System.out.println("       그룹웨어");
 		System.out.println("=======================");
 		System.out.println("        [로그인]");
-		System.out.println("=======================");
-		System.out.print("ID : ");
+		System.out.println();
+		System.out.print("     ▶ ID : ");
 		this.id = scan.nextLine();
-		System.out.print("PW : ");
+		System.out.print("     ▶ PW : ");
 		this.pw = scan.nextLine();
+		System.out.println("=======================");
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 			
 			String line = "";
-			String temp2 ="";
 			
 			boolean id = false;
 			boolean pw = false;
@@ -49,28 +51,31 @@ public class Login {
 					
 					if(temp[1].equals(this.pw)) {// 비밀번호 비교
 						pw = true;
-						System.out.println("로그인 성공");
-						ct.setId(this.id);
-						ct.setPw(this.pw);
-						ct.setName(temp[2]);
-						ct.setEmail(temp[3]);
-						ct.setPhone(temp[4]);
-						ct.setPosition(Integer.parseInt(temp[5]));
+						System.out.println();
+						System.out.println("     ㅁ[로그인 성공]");
+						user.setId(this.id);
+						user.setPw(this.pw);
+						user.setName(temp[2]);
+						user.setEmail(temp[3]);
+						user.setPhone(temp[4]);
+						user.setPosition(Integer.parseInt(temp[5]));
+						
+						
 						break;
 					}
 				} 
 			}
-			
+			System.out.println();
 			if(id == false) {
-				System.out.println("ID를 다시 입력하세요.");
+				System.out.println("       ID를 다시 입력하세요.");
 			} else if(id == true && pw == false) {
-				System.out.println("PW를 다시 입력하세요.");
+				System.out.println("       PW를 다시 입력하세요.");
 			}
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return ct;
+		return user;
 	}
 	
 
