@@ -1,4 +1,4 @@
 
 public class Email {
-	private Contact user;
+	private User user;
 }
