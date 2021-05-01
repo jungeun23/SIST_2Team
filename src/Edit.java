@@ -34,10 +34,12 @@ public class Edit {
 					
 				}
 
-				
+				String[] jikgeop = {"인턴","사원","대리","과장","차장","부장" };
 				String[] buseo = { "회계","재무","인사","영업","마케팅","개발","디자인"};
 				
 				Random rand = new Random(); 
+				
+				temp3.set(5, jikgeop[rand.nextInt(6)]);
 				
 				temp3.add(buseo[rand.nextInt(7)]);
 				

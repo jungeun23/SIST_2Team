@@ -17,7 +17,7 @@ public class User {
 	private String pw;
 	private String email;
 	private String phone;
-	private int position;
+	private int position; //TODO :Contact.txt 직급 자료형 문자열로 바꿈에 따라 int > String 변경 요망
 
 	public User() {
 //		ID = new User();

@@ -63,7 +63,7 @@ public class Login {
 					if(temp[1].equals(this.pw)) {// 비밀번호 비교
 						pw = true;
 						System.out.println();
-						System.out.println("     ㅁ[로그인 성공]");
+						System.out.println("     [로그인 성공]");
 						user.setId(this.id);
 						user.setPw(this.pw);
 						user.setName(temp[2]);
