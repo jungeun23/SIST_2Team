@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,13 +18,13 @@ public class Mail {
 	
 
 
-	Contact user = new Contact();
+	User user;
 	String path = "data/Contact.txt"; // Mac 용 
 	//String path = "data\\Contact.txt"; // Window 용 
 //	user.getMail;
 	String line = "";
-	String receiveEmail = "";
-	String receiveName = "";
+	String receiverEmail = "";
+	String receiverName = "";
 	String senderName = "홍길동"; //  보내는 사람, 발신자 
 	
 	/**
@@ -38,13 +39,11 @@ public class Mail {
 		String result = "";
 		while ((line = read.readLine()) != null) {
 			String[] temp = line.split(",");
-			if (temp[2].equals(this.receiveName)) {
-				this.receiveEmail = temp[3];
+			if (temp[2].equals(this.receiverName)) {
+				this.receiverEmail = temp[3];
 				break;
 			}
 		} // while
-		
-		
 	}
 	
 	/**
@@ -55,16 +54,42 @@ public class Mail {
 		String title = "";
 		String content = "";
 		
-		path = "data/mail/"+this.senderName+"_"+this.receiveName+"_"+ title ;
-		path = "data\\mail\\" ;
+		path = "data\\mail\\"+this.senderName+"_"+this.receiverName;
+//		path = "data\\mail\\" ;
 		
-		FileWriter fw = new FileWriter(path);
+		FileWriter fw = new FileWriter(path, true);
 		fw.write(title);
 		fw.write("-----");
 		fw.write(content);
+		fw.write("*****");
 		fw.close();
 		
 	}
+	
+	public void readMail() throws IOException {
+		String path = "data\\mail\\";
+		File f = new File(path);
+		File[] fl = f.listFiles();
+		String result = "";
+		
+		for(int i=0; i<fl.length; i++) {
+			if(fl[i].isFile()) {
+				String s = fl[i].getName();
+				String t ="";
+				t = s.substring(s.indexOf("_"));
+				if( t.equals(this.user.getName())) {
+					BufferedReader read = new BufferedReader(new FileReader(path+t));
+					String line = "";
+					while((line = read.readLine()) != null) {
+						result += line +"\r\n";
+					}
+				}
+				System.out.println(result);
+			}
+		}
+	}
+	
+	
 }// Mail
 
 
