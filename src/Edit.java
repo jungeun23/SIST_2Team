@@ -16,9 +16,7 @@ public class Edit {
 	public static void main(String[] args) {
 
 		try {
-
-			
-			
+		
 			//직급,부서 랜덤 부여
 //			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 //
