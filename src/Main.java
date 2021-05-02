@@ -5,12 +5,16 @@ public class Main {
 	private static Scanner sc = new Scanner(System.in);
 	private static User user = new User();
 
+	public static HR hr = new HR();
+	
 	public static void main(String[] args) throws Exception {
 
 //		user.regist_user();
 //		user.updateDB();
 //		System.out.println(user);
-
+		
+		
+		
 		Login login = new Login();
 		user = login.loginScreen();
 		
@@ -206,7 +210,7 @@ public class Main {
 			if (n == 1) {
 //				showElecApproval();
 			} else if (n == 2) {
-//				showAttendance();
+				hr.hrScreen();
 			} else if (n == 3) {
 //				showVacation();
 			} else if (n == 4) {

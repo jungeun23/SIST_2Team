@@ -3,10 +3,25 @@ public class ExtraPay {
     private int workHour;
     private String position;
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public ExtraPay(int workHour, String position) {
         super();
         this.workHour = workHour;
         this.position = position;
+        
+        
+        
     }
     
     public int getWorkHour() {
