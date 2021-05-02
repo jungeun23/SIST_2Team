@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -5,7 +6,7 @@ public class Main {
 
 	public static HR hr = new HR();
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		User user = new User();
 
 //		user.regist_user();
