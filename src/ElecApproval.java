@@ -14,7 +14,7 @@ public class ElecApproval {
 		this.user = user;
 	}
 
-	public void createElecApproval(User user) throws Exception {
+	public void createElecApproval() throws Exception {
 		String title = "";
 		String content = "";
 		String docuPW = "";
@@ -114,8 +114,8 @@ public class ElecApproval {
 		}
 	}
 
-	public void setElecApprovalCondition(User user) throws IOException {
-		if (user.getPosition().equals("부장")) {
+	public void setElecApprovalCondition() throws IOException {
+		if (this.user.getPosition().equals("부장")) {
 			File f = new File("data\\ElecDoc\\");
 			File[] fl = f.listFiles();
 			for (int i = 0, cnt = 1; i < fl.length; i++, cnt++) {
@@ -134,7 +134,8 @@ public class ElecApproval {
 				fw.close();
 			}
 		}
-		if (user.getPosition().equals("차장")) {
+		
+		if (this.user.getPosition().equals("차장")) {
 			File f = new File("data\\ElecDoc\\");
 			File[] fl = f.listFiles();
 			for (int i = 0, cnt = 1; i < fl.length; i++, cnt++) {
