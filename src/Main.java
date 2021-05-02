@@ -9,7 +9,10 @@ public class Main {
 //		user.regist_user();
 //		user.updateDB();
 //		System.out.println(user);
-
+		
+//		HR hr = new HR();
+//		hr.hrScreen();
+		
 		Login login = new Login();
 		user = login.loginScreen();
 
