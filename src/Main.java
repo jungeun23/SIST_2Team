@@ -8,7 +8,7 @@ public class Main {
 	public static ContactList cl = new ContactList();
 	
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		User user = new User();
 
 //		user.regist_user();
