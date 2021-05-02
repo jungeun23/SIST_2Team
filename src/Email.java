@@ -65,13 +65,14 @@ public class Email {
 	 */
 	private void load() throws IOException {
 		try {
-			System.out.println("load called");
+//			System.out.println("load called");
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 
 			String line = "";
-			Mail mail = new Mail();
+			
 //			번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
 			while ((line = reader.readLine()) != null) {
+				Mail mail = new Mail();
 				String[] temp = line.split(",");
 				mail.setSeq(Integer.parseInt(temp[0]));
 				mail.setTitle(temp[1]);
@@ -152,9 +153,8 @@ public class Email {
 	public void readMail() throws IOException {
 		int cnt = 0;
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).toString());
+//			System.out.println(list.get(i).toString());
 			if (list.get(i).getReceiverName().equals(this.user.getName())) {
-				
 				System.out.printf("[%s]\t%s\t\n", list.get(i).getSeq(), list.get(i).getTitle());
 				cnt++;
 			}
@@ -164,6 +164,7 @@ public class Email {
 			return;
 		}
 		int choice = Integer.parseInt(Util.get("읽을 메일 번호를 선택해주세요."));
+		choice--;
 		System.out.println();
 		System.out.println();
 		System.out.printf("제목 : %s\n내용 : %s", list.get(choice).getTitle(), list.get(choice).getContent());
