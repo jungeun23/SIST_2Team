@@ -1,9 +1,12 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 	Scanner sc = new Scanner(System.in);
 
 	public static HR hr = new HR();
+	public static ContactList cl = new ContactList();
+	
 	
 	public static void main(String[] args) throws Exception {
 		User user = new User();
@@ -11,7 +14,6 @@ public class Main {
 //		user.regist_user();
 //		user.updateDB();
 //		System.out.println(user);
-		
 		
 		
 		Login login = new Login();
@@ -102,6 +104,7 @@ public class Main {
 //				showMessenger();
 			} else if (n == 3) {
 //				showContactAddress();
+				cl.firstScreen();
 			} else if (n == 4) {
 				menu();
 				break;
