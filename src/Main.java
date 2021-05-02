@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-	Scanner sc = new Scanner(System.in);
+	private static Scanner sc = new Scanner(System.in);
 	private static User user = new User();
 
 	public static void main(String[] args) throws Exception {
@@ -13,8 +13,10 @@ public class Main {
 
 		Login login = new Login();
 		user = login.loginScreen();
-
 		
+//		Email mail = new Email(user);
+		
+//		mail.readMail();
 		menu();
 
 //		MyCalendar c = new MyCalendar();
@@ -61,7 +63,7 @@ public class Main {
 			System.out.println();
 
 			if (n == 0) {
-				break;
+				return;
 			} else if (n == 1) {
 				showContact();
 			} else if (n == 2) {
@@ -259,24 +261,26 @@ public class Main {
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
 			System.out.println();
-
+			
 			Email mail = new Email(user);
 			if (n == 1) {
-
 				try {
-					mail.writeMail();
+					mail.writeMail(); //메일 쓰기 test 완료
+					puase("메일 쓰기를 완료했습니다.");
 				} catch (IOException e) {
 					System.out.println(e);
 				}
 			} else if (n == 2) {
 				try {
 					mail.readMail();
+					puase("메일 읽기를 완료했습니다.");
 				} catch (IOException e) {
 					System.out.println(e);
 				}
 			} else if (n == 3) {
 				try {
 					mail.searchMail();
+					puase("메일 검색을 완료했습니다.");
 				} catch (IOException e) {
 					System.out.println(e);
 				}
@@ -288,6 +292,8 @@ public class Main {
 			}
 		}
 	}
+
+
 
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
 	private static void showElecApproval() {
@@ -336,7 +342,12 @@ public class Main {
 			}
 		}
 	}
-
+	private static void puase(String string) {
+		System.out.println(string);
+		System.out.println("계속하시려면 엔터를 입력해주세요.");
+		sc.nextLine();
+		
+	}
 	private static void cls() {
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
