@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Main {
 	Scanner sc = new Scanner(System.in);
 
+	public static HR hr = new HR();
+	
 	public static void main(String[] args) throws Exception {
 		User user = new User();
 
@@ -10,8 +12,7 @@ public class Main {
 //		user.updateDB();
 //		System.out.println(user);
 		
-//		HR hr = new HR();
-//		hr.hrScreen();
+		
 		
 		Login login = new Login();
 		user = login.loginScreen();
@@ -205,7 +206,7 @@ public class Main {
 			if (n == 1) {
 //				showElecApproval();
 			} else if (n == 2) {
-//				showAttendance();
+				hr.hrScreen();
 			} else if (n == 3) {
 //				showVacation();
 			} else if (n == 4) {
