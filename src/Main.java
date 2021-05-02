@@ -1,12 +1,12 @@
 import java.io.IOException;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		User user = new User();
 		
 		
 //		user.regist_user();
-		user.updateDB();
+//		user.updateDB();
 //		System.out.println(user);
 		
 		//ialbutt0,qdf5bG
@@ -14,7 +14,9 @@ public class Main {
 		
 		user = login.loginScreen();
 		
-
+		ElecApproval ea = new ElecApproval(user);
+		ea.CreateElecApproval(user);
+		
 		
 		
 	}
