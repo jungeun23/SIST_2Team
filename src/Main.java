@@ -9,15 +9,20 @@ public class Main {
 //		user.regist_user();
 //		user.updateDB();
 //		System.out.println(user);
+		
+		//주소록 테스트용
+//		ContactList contactList = new ContactList();
+//		contactList.firstScreen();
+		
 
 		Login login = new Login();
 		user = login.loginScreen();
-
+		
 		
 		menu();
 
-//		MyCalendar c = new MyCalendar();
-//		c.output();
+		MyCalendar c = new MyCalendar();
+		c.output();
 
 	}
 
