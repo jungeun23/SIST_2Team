@@ -1,5 +1,7 @@
+import java.awt.print.Printable;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +12,8 @@ import java.util.Scanner;
  * @author 2조 통합 Mail 기능 클래스 1. 메일 쓰기 - 수신자 검색 -> 해당하는 mail주소 가져오기 -> 내용입력 후 새로운
  *         txt 파일로 저장. 2. 메일 읽기 - 내 메일을 찾아 내용 읽기
  */
+public class Mail {
+
 public class EMail {
 	//
 	private final String DATA;
@@ -20,6 +24,8 @@ public class EMail {
 	private String receiverName;
 	private User user;
 
+	public Mail() {
+
 	public EMail() {
 
 		DATA = "data\\Contact.txt"; // Window
@@ -29,6 +35,8 @@ public class EMail {
 		receiverName = "";
 		senderName = "";
 	}
+
+	public Mail(User user) {
 
 	public EMail(User user) {
 

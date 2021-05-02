@@ -15,9 +15,8 @@ public class Main {
 		user = login.loginScreen();
 		
 		ElecApproval ea = new ElecApproval(user);
-		ea.CreateElecApproval(user);
-		
-		
+		ea.createElecApproval(user);
+
 		
 	}
 }
