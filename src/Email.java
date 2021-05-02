@@ -232,29 +232,37 @@ public class Email {
 	}
 
 	public void sapmMailFilter() throws IOException {
-		String path = "data\\Email\\";
-		File f = new File(path);
-		File[] fl = f.listFiles();
-		String result = "";
 		String[] keyword = { "환영", "승부", "도박", "하우스", "포인트", "현출", "슬롯", "베팅" };
-		for (int i = 0; i < fl.length; i++) {
-			if (fl[i].isFile()) {
-				String s = fl[i].getName();
-				String t = "";
-				t = s.substring(s.indexOf("_"));
-				if (t.equals(this.user.getName())) {
-					BufferedReader read = new BufferedReader(new FileReader(path + t));
-					String line = "";
-					while ((line = read.readLine()) != null) {
-						result += line + "\r\n";
-					}
-					for (int j = 0; j < keyword.length; j++) {
-						if (result.contains(keyword[j]))
-							System.out.println(s + "는 스팸 메일일 가능성이 높습니다.");
-					}
-				}
+		for(int i=0; i<list.size(); i++) {
+			for(int j=0; j<keyword.length; j++) {
+				if(list.get(i).getContent().contains(keyword[j]))	
+					System.out.println(list.get(i).getTitle() + " 메일은 스팸일 가능성이 높습니다.");
 			}
-
-		} // Mail
+			
+		}
+//		String path = "data\\Email\\";
+//		File f = new File(path);
+//		File[] fl = f.listFiles();
+//		String result = "";
+//		String[] keyword = { "환영", "승부", "도박", "하우스", "포인트", "현출", "슬롯", "베팅" };
+//		for (int i = 0; i < fl.length; i++) {
+//			if (fl[i].isFile()) {
+//				String s = fl[i].getName();
+//				String t = "";
+//				t = s.substring(s.indexOf("_"));
+//				if (t.equals(this.user.getName())) {
+//					BufferedReader read = new BufferedReader(new FileReader(path + t));
+//					String line = "";
+//					while ((line = read.readLine()) != null) {
+//						result += line + "\r\n";
+//					}
+//					for (int j = 0; j < keyword.length; j++) {
+//						if (result.contains(keyword[j]))
+//							System.out.println(s + "는 스팸 메일일 가능성이 높습니다.");
+//					}
+//				}
+//			}
+//
+//		} // Mail
 	}
 }
