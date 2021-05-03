@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ContactList {
@@ -9,6 +10,7 @@ public class ContactList {
 	
 	private final String DATA;
 	
+	ArrayList<String[]> list = new ArrayList<String[]>();
 	private int num;
 	private String name;
 	private String position;
@@ -18,6 +20,7 @@ public class ContactList {
 	public ContactList() {
 		DATA = "data\\Contact.txt";
 		name = "";
+		
 	}
 	
 	
@@ -26,46 +29,95 @@ public class ContactList {
 	
 	
 	//주소록 첫 화면 
-	public void firstScreen() throws IOException {
+	public void firstScreen()  {
 				
-				System.out.println("=============================================================");
-				System.out.println("|| 1.이름  || 2. 직급 || 3. 부서 || 4. 전직원  ||  0. 목차 ||");
-				System.out.println("||   검색  ||    검색 ||    검색 ||      검색  || 돌아가기 ||");
-				System.out.println("=============================================================");
+				load();
+				
+				System.out.println("================================================");
+				System.out.println("|| 1.이름  || 2. 직급 || 3. 부서 || 0. 주소록 ||");
+				System.out.println("||   검색  ||    검색 ||    검색 ||      추가 ||");
+				System.out.println("================================================");
 				System.out.println();
-				System.out.println("검색하고자 하는 카테고리(번호)를 선택하세요. ");
+				System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요. ");
 				System.out.print("카테고리 번호 : ");
 				this.num = scan.nextInt();
-				scan.nextLine(); // \r\n을 지워주고 가야함.
-
+				scan.nextLine(); // 입력 받으면서 들어온 \r\n을 지워주고 가야함.
 				
-				if (num == 0) {
-					//여기서 목차로 돌아가게 ... 가능한가?
-				} else if (num == 1) {
-					searchName();
-				} else if (num == 2) {
-					searchPosition();
-				} else if (num == 3) {
-					searchBuseo();
-				} else if (num == 4) {
-					//전직원 목록 출력
-				} else {
-					System.out.println("잘못된 번호가 선택되었습니다.");
+				
+				try {
+					
+					if (num == 0) {
+						//주소록 입력 및 추가
+					} else if (num == 1) {
+						searchName();
+					} else if (num == 2) {
+						searchPosition();
+					} else if (num == 3) {
+						searchBuseo();
+					} else {
+						System.out.println("잘못된 번호가 선택되었습니다.");
+					}
+					
+				} catch (Exception e) {
+					System.out.println(e);
 				}
+
 			
 	}//clScreen()
 
 	private void searchBuseo() {
+		
+		System.out.println();
+		System.out.println("--------------------------");
+		System.out.println();
+		System.out.print("부서: ");
+		this.buseo = scan.nextLine(); 
+		System.out.println();
+		System.out.println("--------------------------");
+		
+		
+		for (int i=0; i<list.size(); i++) {
+			
+			if((list.get(i)[6]).equals(this.buseo)) {
+				
+				System.out.printf("[부서]: %s팀\n[이름]: %s\n[아이디]: %s\n[이메일]: %s\n[전화번호]: %s\n[직급]:%s\n\n"
+						,list.get(i)[6] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5]);
+				
+			}
+			
+		}
+		System.out.println("=============================================================");
+		scan.nextLine();
 		
 	}//buseo()
 
 
 	private void searchPosition() {
 		
+		System.out.println();
+		System.out.println("--------------------------");
+		System.out.println();
+		System.out.print("직급: ");
+		this.position = scan.nextLine(); 
+		System.out.println();
+		System.out.println("--------------------------");
+		
+		for (int i=0; i<list.size(); i++) {
+			
+			if((list.get(i)[5]).equals(this.position)) {
+				
+				System.out.printf("[직급]: %s\n[이름]: %s\n[아이디]: %s\n[이메일]: %s\n[전화번호]: %s\n[부서]:%s팀\n\n"
+						,list.get(i)[5] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[6]);
+				
+			}
+		}
+		System.out.println("=============================================================");
+		scan.nextLine();
+		
 	}//position()
 
 
-	private void searchName() throws IOException {
+	private void searchName() {
 		
 		System.out.println();
 		System.out.println("--------------------------");
@@ -74,70 +126,60 @@ public class ContactList {
 		this.name = scan.nextLine(); 
 		System.out.println();
 		System.out.println("--------------------------");
-		
 
+		boolean loop = true;
+		while (loop) {
 		
-		BufferedReader reader = new BufferedReader(new FileReader(DATA));
-		
-		String line = "";
-		String temp2 = "";
-		
-		while ((line = reader.readLine()) != null) {
+			for (int i=0; i<list.size(); i++) {
 			
-			ArrayList<String> temp3 = new ArrayList<String>();
-			
-			String[] temp = line.split(",");
-			
-			for (int i=0; i<temp.length; i++) {
 				
-				temp3.add(temp[i]);
-			}
-			
-			
-			if (temp[2].equals(this.name)) {
+				//list.get(i)[2] = temp[2] / Array접근->배열접근->값접근 : 이게 내가 찾는 값. (string) 
+				if ((list.get(i)[2]).equals(this.name)){
+					
+					System.out.printf("[이름]: %s\n[아이디]: %s\n[이메일]: %s\n[전화번호]: %s\n[직급]: %s\n[부서]:%s팀\n"
+									,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5] ,list.get(i)[6]);
+					
+				} else {
+					loop = false;
+				}
 				
-				System.out.println();
-				temp2 += String.format("[이름]: %s\n[아이디]: %s\n[이메일]: %s\n[전화번호]: %s\n[직급]: %s\n[부서]:%s팀\n"
-							, temp3.get(2)
-							, temp3.get(0)
-							, temp3.get(3)
-							, temp3.get(4)
-							, temp3.get(5)
-							, temp3.get(6));
-
-				System.out.println(temp2);
-				System.out.println("=============================================================");
-			} else {
-				System.out.println("[이름] 검색 결과 없음");
 			}
-		
 		}//while
+		
+		System.out.println("잘못된 이름입니다");
+		System.out.println("=============================================================");
+		scan.nextLine();
 		
 	}//Name()
 	
 	
 	
-	
+	private void load() {
+		
+		
+		try {
+			
+			BufferedReader reader = new BufferedReader(new FileReader(DATA));
+			
+			String line = "";
+			String temp2 = "";
+			
+			while ((line = reader.readLine()) != null) {
+				
+				String[] temp = line.split(",");
+				
+				list.add(temp);
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}//load()
+
 
 }//class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

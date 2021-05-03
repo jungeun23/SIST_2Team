@@ -12,6 +12,7 @@ public class Main {
 	private static User user = new User();
 
 	public static HR hr = new HR();
+	public static ContactList cl = new ContactList();
 
 	public static void main(String[] args) throws Exception {
 
@@ -22,22 +23,14 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 
-//		menu();
+//		Email mail = new Email(user);
 
-		ElecApproval ea = new ElecApproval(user);
-		ea.createElecApproval();
-		
-		
-		
-		
-		
-		
-		
-		
-		
+//		mail.readMail();
+		menu();
+
 //		MyCalendar c = new MyCalendar();
 //		c.output();
-//		makeEmailDummy();
+		//makeEmailDummy();
 	}
 
 	private static void makeEmailDummy() throws Exception {
@@ -188,6 +181,7 @@ public class Main {
 //				showMessenger();
 			} else if (n == 3) {
 //				showContactAddress();
+				cl.firstScreen();
 			} else if (n == 4) {
 				menu();
 				break;
