@@ -19,8 +19,8 @@ public class Main {
 //		user.updateDB();
 //		System.out.println(user);
 
-//		Login login = new Login();
-//		user = login.loginScreen();
+		Login login = new Login();
+		user = login.loginScreen();
 
 //		Email mail = new Email(user);
 
@@ -29,7 +29,8 @@ public class Main {
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
-		makeEmailDummy();
+		//makeEmailDummy();
+		hr.hrScreen();
 	}
 
 	private static void makeEmailDummy() throws Exception {
