@@ -25,6 +25,52 @@ public class Edit_HR {
 			String result = "";
 
 			
+			
+			
+			
+			//월급 데이터 만들기
+//			while((line = reader.readLine())!=null) {
+//				
+//				//이름,직급,부서,인사고과,경력연차
+//				String[] temp = line.split(",");
+//				
+//				int salary = 0;
+//				
+//				if(temp[1].equals("인턴")) {
+//					salary = 2100000;
+//					
+//				} else if(temp[1].equals("사원")) {
+//					salary = 2800000;
+//					
+//				} else if(temp[1].equals("대리")) {
+//					salary = 3200000;
+//					
+//				} else if(temp[1].equals("과장")) {
+//					salary = 4000000;
+//					
+//				} else if(temp[1].equals("차장")) {
+//					salary = 5000000;
+//					
+//				} else if(temp[1].equals("부장")) {
+//					salary = 6000000;
+//					
+//				} else if(temp[1].equals("상무")) {
+//					salary = 7000000;
+//					
+//				} else if(temp[1].equals("전무")) {
+//					salary = 8000000;
+//					
+//				} else if(temp[1].equals("사장")) {
+//					salary = 10000000;
+//					
+//				}
+//				
+//				result += line +","+ salary +"\n";
+//				
+//				
+//			}
+//			
+//			System.out.println(result);
 			// 경력 연차 만들기
 //			while((line = reader.readLine())!=null) {
 //				//이름,직급,부서,인사고과,경력연차
@@ -58,7 +104,7 @@ public class Edit_HR {
 //			System.out.println(result);
 			
 			
-//				//인사 고가 데이터 만들기
+//				//인사 고과 데이터 만들기
 //			while((line = reader.readLine())!=null) {
 //				//아이디,비밀번호,이름,이메일,전화번호,직급,부서
 //				String[] temp = line.split(",");

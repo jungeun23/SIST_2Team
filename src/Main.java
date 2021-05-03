@@ -1,17 +1,18 @@
 import java.util.Scanner;
 
 public class Main {
-	Scanner sc = new Scanner(System.in);
+	private static Scanner sc = new Scanner(System.in);
+	private static User user = new User();
 
+	
 	public static void main(String[] args) throws Exception {
-		User user = new User();
 
 //		user.regist_user();
 //		user.updateDB();
 //		System.out.println(user);
 
 		Login login = new Login();
-		user = login.loginScreen();
+		Main.user = login.loginScreen();
 
 		
 		menu();
@@ -204,7 +205,7 @@ public class Main {
 			} else if (n == 2) {
 //				showAttendance();
 			} else if (n == 3) {
-//				showVacation();
+				showExtraPay();
 			} else if (n == 4) {
 				menu();
 				break;
@@ -244,5 +245,39 @@ public class Main {
 		for(int i=0; i<100; i++) {
 			System.out.println();
 		}
+	}
+	
+	
+	
+	
+	private static void showExtraPay() {
+
+		PayRoll ep = new PayRoll();
+
+		ep.load();
+		
+		System.out.println("[5. HR]");
+		System.out.println("■ 수당관리 ■");
+		System.out.println("1. 근로 수당 조회");
+		System.out.println("2. 성과급 조회");
+		System.out.println("3. 인사부 전용");
+		System.out.println("4. 목차로 돌아가기");
+		System.out.println();
+		System.out.print("선택: ");
+		
+		int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
+		
+		if(n == 1) {
+			ep.extraWork(Main.user);
+		} else if(n == 2) {
+			ep.bonus(Main.user);
+		} else if(n == 3) {
+			ep.HrTeam();
+		} else if(n == 4) {
+			menu();
+		} else {
+			System.out.println("잘못된 번호를 입력하셨습니다.");
+		}
+		
 	}
 }
