@@ -31,6 +31,11 @@ public class Main {
 //		MyCalendar c = new MyCalendar();
 //		c.output();
 		//makeEmailDummy();
+//		Attendance at = new Attendance(user);
+//		at.readWorkingTime();
+//		at.dayWorkingTime();
+//		at.searchWorkingTime();
+		
 	}
 
 	private static void makeEmailDummy() throws Exception {
@@ -206,7 +211,7 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-				showElecApproval();
+//				showElecApproval();
 			} else if (n == 2) {
 //				showAttendance();
 			} else if (n == 3) {
@@ -374,7 +379,7 @@ public class Main {
 	}
 
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
-	private static void showElecApproval() {
+	private static void showElecApproval() throws IOException {
 		while (true) {
 			cls();
 			System.out.println("            [전자결재 업무] ");
@@ -401,7 +406,7 @@ public class Main {
 			} else if (n == 2) {
 				ea.readElecApproval();
 			} else if (n == 3) {
-				ea.addCommnetElecApproval();
+//				ea.addCommnetElecApproval();
 			} else if (n == 4) {
 				ea.myElecApproval();
 			} else if (n == 5) {
