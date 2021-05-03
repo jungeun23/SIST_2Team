@@ -22,15 +22,22 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 
-//		Email mail = new Email(user);
-
-//		mail.readMail();
 //		menu();
 
+		ElecApproval ea = new ElecApproval(user);
+		ea.createElecApproval();
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		MyCalendar c = new MyCalendar();
 //		c.output();
-		//makeEmailDummy();
-		hr.hrScreen();
+//		makeEmailDummy();
 	}
 
 	private static void makeEmailDummy() throws Exception {
