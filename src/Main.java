@@ -31,6 +31,11 @@ public class Main {
 //		MyCalendar c = new MyCalendar();
 //		c.output();
 		//makeEmailDummy();
+//		Attendance at = new Attendance(user);
+//		at.readWorkingTime();
+//		at.dayWorkingTime();
+//		at.searchWorkingTime();
+		
 	}
 
 	private static void makeEmailDummy() throws Exception {
@@ -103,7 +108,7 @@ public class Main {
 		}
 	}
 
-	private static void menu() throws IOException {
+	private static void menu() {
 		while (true) {
 			System.out.println("=============================================");
 			System.out.println("               환영합니다.");
@@ -161,7 +166,7 @@ public class Main {
 	}
 /////////////////////////////////////////////////      Lane2      ///////////////////////////////////////////////
 
-	private static void showContact() throws IOException {
+	private static void showContact() {
 		while (true) {
 			cls();
 			System.out.println("            [1. CONTACT] ");
@@ -192,7 +197,7 @@ public class Main {
 
 	}
 
-	private static void showApproval() throws IOException {
+	private static void showApproval() {
 		while (true) {
 			cls();
 			System.out.println("            [2. APPROVAL] ");
@@ -206,7 +211,7 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-				showElecApproval();
+//				showElecApproval();
 			} else if (n == 2) {
 //				showAttendance();
 			} else if (n == 3) {
@@ -220,7 +225,7 @@ public class Main {
 		}
 	}
 
-	private static void showNotice() throws IOException {
+	private static void showNotice() {
 		while (true) {
 			cls();
 			System.out.println("            [3. NOTICE] ");
@@ -242,7 +247,7 @@ public class Main {
 		}
 	}
 
-	private static void showReservation() throws IOException {
+	private static void showReservation() {
 		while (true) {
 			cls();
 			System.out.println("            [4. RESERVATION] ");
@@ -270,7 +275,7 @@ public class Main {
 		}
 	}
 
-	private static void showHR() throws IOException {
+	private static void showHR() {
 		while (true) {
 			cls();
 			System.out.println("            [5. HR] ");
@@ -298,7 +303,7 @@ public class Main {
 		}
 	}
 
-	private static void showAdmin() throws IOException {
+	private static void showAdmin() {
 		while (true) {
 			cls();
 			System.out.println("            [6. 관리자 전용] ");
@@ -327,7 +332,7 @@ public class Main {
 ///////////////////////////////////////////////      Lane3      ///////////////////////////////////////////////
 ///////////////////////////////////////////////      CONTACT    ///////////////////////////////////////////////
 
-	private static void showMail() throws IOException {
+	private static void showMail() {
 		while (true) {
 			cls();
 			System.out.println("            [Mail 업무] ");
@@ -401,7 +406,7 @@ public class Main {
 			} else if (n == 2) {
 				ea.readElecApproval();
 			} else if (n == 3) {
-				//ea.addCommnetElecApproval();
+//				ea.addCommnetElecApproval();
 			} else if (n == 4) {
 				ea.myElecApproval();
 			} else if (n == 5) {
