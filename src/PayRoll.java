@@ -196,7 +196,7 @@ public class PayRoll {
 		ArrayList<String[]> buseo2 = new ArrayList<String[]>();
 		
 		
-		for(int i = 0; i<list.size(); i++) {
+		for(int i = 0; i<list.size(); i++) {	
 			
 			if(list.get(i)[2].equals(buseo)) {
 	
@@ -220,8 +220,6 @@ public class PayRoll {
 			}
 		}
 		
-		
-		
 		for(int i=0; i<buseo2.size(); i++) {
 			buseo2.get(i)[1] =  ""+level(buseo2.get(i)[1]);
 		}
@@ -242,23 +240,9 @@ public class PayRoll {
 				}
 				
 			}
-
 	
-//			if(o1.length() > o2.length()) {
-//				return 1;
-//			} else if(o1.length() < o2.length()) {
-//				return -1;
-//			} else {
-//				// 2차 정렬
-//				//같은 글자수 끼리는 문자 코드값으로 비교를 해라
-//				return o1.compareTo(o2);//양수, 음수, 0
-//			}
-			
-			
 		});
 		
-		
-	
 		for(int i=0; i<buseo2.size();i++) {
 			
 			if(buseo2.get(i)[1].equals("1")) {
@@ -324,7 +308,6 @@ public class PayRoll {
 		} else {
 			System.out.println("잘못된 입력입니다.");
 		}
-		
 		
 	}
 	
