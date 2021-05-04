@@ -26,13 +26,13 @@ public class Main {
 		//at.dummy();
 //		at.readWorkingTime2();
 //		at.dayWorkingTime2();
-		at.adminSearchWorkingTime();	
+		//at.adminSearchWorkingTime();	
 		
 		
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
