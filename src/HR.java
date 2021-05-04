@@ -29,19 +29,16 @@ public class HR {
 		int pw = 1234;
 
 		System.out.println("관리자 비밀번호를 입력하세요.");
-		System.out.println("=======================");
-		System.out.print("      PW: ");
+		System.out.println("=============================");
+		System.out.print("        PW: ");
 		pw = scan.nextInt();
-		System.out.println("=======================");
+		System.out.println("=============================");
 		System.out.println();
 		
 		if (pw == 1234) {
 
 			System.out.println("     [로그인 성공]");
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
+			cls();
 			
 			read();
 			
@@ -380,7 +377,7 @@ public class HR {
 
 	private static void cls() {
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 100; i++) {
 			System.out.println();
 		}
 	}//cls()
@@ -456,12 +453,13 @@ public class HR {
 			for(int i=0; i<hr.size(); i++) {
 				//System.out.println(Arrays.toString(save));
 				
-				writer2.write(String.format("%s,%s,%s,%s,%s\n"
+				writer2.write(String.format("%s,%s,%s,%s,%s,%s\n"
 												 , hr.get(i)[0]
 												 , hr.get(i)[1]
 												 , hr.get(i)[2]
 												 , hr.get(i)[3]
-												 , hr.get(i)[4]));
+												 , hr.get(i)[4]
+												 , hr.get(i)[5]));
 			}
 			
 			writer2.close();

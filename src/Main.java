@@ -28,16 +28,18 @@ public class Main {
 //		mail.readMail();
 //		menu();
 
-		MyCalendar c = new MyCalendar(user);
+//		MyCalendar c = new MyCalendar(user);
 //		c.output();
-//		c.createSchedule();
-		c.showSchedule();
+//   	c.createSchedule();
+//		c.showSchedule();
 		
 		//makeEmailDummy();
 //		Attendance at = new Attendance(user);
 //		at.readWorkingTime();
 //		at.dayWorkingTime();
 //		at.searchWorkingTime();
+		
+		hr.hrScreen();
 		
 	}
 
