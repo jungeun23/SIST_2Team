@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class User {
-	private static final String ContactPATH = "data\\Contact.txt";
+	private static final String ContactPATH = "data/Contact.txt";
 //	private User ID;
 
 	private String id;

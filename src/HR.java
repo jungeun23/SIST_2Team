@@ -16,8 +16,8 @@ public class HR {
 
 	public HR() {
 
-		DATA = "data//HR.txt";
-		DATA2 = "data//Contact.txt";
+		DATA = "data/HR.txt";
+		DATA2 = "data/Contact.txt";
 		scan = new Scanner(System.in);
 
 	}
