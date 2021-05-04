@@ -22,11 +22,19 @@ public class Main {
 
 		Login login = new Login();
 		user = login.loginScreen();
-
+		
+		Attendance at = new Attendance(user);
+		//at.dummy();
+//		at.readWorkingTime2();
+//		at.dayWorkingTime2();
+		at.adminSearchWorkingTime();	
+		
+		
+		
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		menu();
+		//menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
