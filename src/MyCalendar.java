@@ -27,43 +27,48 @@ public class MyCalendar {
 	private int day_of_week = 0;
 	private User user;
 	LinkedList<String[]> list = new LinkedList<>();
-	
+
 	public MyCalendar(User user) {
 		this.user = user;
 		DATA = "data\\schedule\\schedule.txt";
+		date = Calendar.getInstance();
+		this.year = date.get(Calendar.YEAR);
+		this.month = date.get(Calendar.MONTH);
+		this.day = date.get(Calendar.DATE);
 		load();
 	}
-	
+
 	private void load() {
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(DATA));
 			String line = "";
-			while((line = read.readLine()) != null){
+			while ((line = read.readLine()) != null) {
 				String[] temp = line.split(",");
 				list.add(temp);
 			}
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		
+
 	}
 
 	public void createSchedule() {
 		System.out.println("일정을 등록합니다. 달력을 확인해주세요");
-		output();
+		showCanlendar(this.year, this.month);
 		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
 		String title = Util.get("일정 제목을 입력해주세요");
 		String content = Util.get("일정의 내용을 입력해주세요");
-		String[] sl = {title, content, this.user.getName()};
+		String[] sl = { title, content, this.user.getName() };
 		list.add(sl);
-		
+
 		try {
 			FileWriter fw = new FileWriter(DATA, true);
 			fw.write(this.user.getName() + ",");
-			fw.write(newTask.get(Calendar.YEAR) + "-"+newTask.get(Calendar.MONTH)+"-"+newTask.get(Calendar.DAY_OF_MONTH)+ ",");
+			fw.write(newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
+					+ newTask.get(Calendar.DAY_OF_MONTH) + ",");
 			fw.write(title + ",");
 			fw.write(content + "\n");
 			fw.close();
@@ -71,19 +76,18 @@ public class MyCalendar {
 			System.out.println(e);
 		}
 	}
-	
+
 	public void showSchedule() {
-		//홍길동,2021-5-4,t,testaaa
-		int cnt=0;
-		for(int i=0; i<list.size(); i++, cnt++) {
-			if(list.get(i)[0].equals(this.user.getName())) {
+		// 홍길동,2021-5-4,t,testaaa
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
 				String[] temp = list.get(i)[1].split("-");
 				int year = Util.toInt(temp[0]);
 				int month = Util.toInt(temp[1]);
 				int day = Util.toInt(temp[2]);
 				System.out.println("일정을 선택해주세요");
-				int c = Util.toInt(showCanlendar(year, month, day));
-				if(c == day) {
+				int[] c = showCanlendar(year, month, day);
+				if (c[0] == year && c[1] == month && c[2] == day) {
 					System.out.println();
 					System.out.println("일정을 출력합니다");
 					System.out.println("제목 : " + list.get(i)[2]);
@@ -92,91 +96,128 @@ public class MyCalendar {
 			}
 		}
 		System.out.println("남은 일정이 없습니다.");
-		
+
 	}
-	private String showCanlendar(int year, int month, int day) {
+
+	public void deleteSchedule() {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				System.out.println("삭제할 일정을 선택해주세요");
+				int[] c = showCanlendar(year, month, day);
+				if (c[0] == year && c[1] == month && c[2] == day) {
+					System.out.println();
+					System.out.println(list.get(i)[2] + " 일정을 삭제했습니다.");
+					list.remove(i);
+				}
+			}
+		}
+	}
+
+	public void updateSchedule() {
+		// 홍길동,2021-5-4,t,testaaa
+		for (int i = 0; i < this.list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = this.list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				System.out.println("수정할 일정을 선택해주세요");
+				int[] c = showCanlendar(year, month, day);
+				if (c[0] == year && c[1] == month && c[2] == day) {
+					String title = Util.get("일정의 제목을 입력해주세요");
+					String content = Util.get("일정의 내용을 입력해주세요");
+					String[] t = { this.user.getName(), this.list.get(i)[1], title, content };
+					this.list.set(i, t);
+					System.out.println("일정 수정이 완료됐습니다.");
+				}
+			}
+		}
+	}
+
+	private int[] showCanlendar(int year, int month, int day) {
 		// 마지막일?
-				while (true) {
-					lastDay = getLastDay(year, month);
+		while (true) {
+			lastDay = getLastDay(year, month);
 
-					// 해당 월의 1일의 요일?
-					day_of_week = getDayOfWeek(year, month); // 4
-					// 달력 출력하기
-					System.out.println();
-					System.out.println("===================================================");
-					System.out.printf("                     %d년 %d월\n", year, month);
-					System.out.println("===================================================");
-					System.out.println("[일]\t[월]\t[화]\t[수]\t[목]\t[금]\t[토]");
+			// 해당 월의 1일의 요일?
+			day_of_week = getDayOfWeek(year, month); // 4
+			// 달력 출력하기
+			System.out.println();
+			System.out.println("===================================================");
+			System.out.printf("                     %d년 %d월\n", year, month);
+			System.out.println("===================================================");
+			System.out.println("[일]\t[월]\t[화]\t[수]\t[목]\t[금]\t[토]");
 
-					// 1일의 요일을 맞추기 위해서..
-					for (int i = 0; i < day_of_week; i++) {
-						System.out.print("\t");
-					}
+			// 1일의 요일을 맞추기 위해서..
+			for (int i = 0; i < day_of_week; i++) {
+				System.out.print("\t");
+			}
 
-					// 날짜 출력
-					for (int i = 1; i <= lastDay; i++) {
-						if(i==day)
+			// 날짜 출력
+			for (int i = 1; i <= lastDay; i++) {
+				if (i == day)
 //							System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
-							System.out.printf("%3d*\t", i);
-						else 
-						System.out.printf("%3d\t", i);
-						
-						int a = i % 7;
-						int b = 7 - day_of_week;
+					System.out.printf("%3d*\t", i);
+				else
+					System.out.printf("%3d\t", i);
 
-						b = 7 - day_of_week == 7 ? 0 : b;
-						if (i % 7 == b) {
+				int a = i % 7;
+				int b = 7 - day_of_week;
+
+				b = 7 - day_of_week == 7 ? 0 : b;
+				if (i % 7 == b) {
 //					if ((day_of_week + i - 1) % 7 == 0) {
-							System.out.println();
-						}
-					}
+					System.out.println();
+				}
+			}
 
-					System.out.println();
-					System.out.println();
-					String s = Util.get("월 이동(a or d) 끝내기(q) 날짜선택(요일입력)");
-					if (s.equals("q"))
-						break;
+			System.out.println();
+			System.out.println();
+			String s = Util.get("월 이동(a or d) 끝내기(q) 날짜선택(요일입력)");
+			if (s.equals("q"))
+				break;
 //					KeyEvent event = new KeyEvent();
 //					if(Event.getKeycode() == KeyEvent.VK_LEFT)
-					else if (s.equals("a")) {
-						if (month - 1 != 0)
-							month--;
-						else {
-							month = 12;
-							year--;
-						}
-					}
-					else if (s.equals("d")) {
-						if( month + 1 != 12)
-							month++;
-						else {
-							month = 1;
-							year++;
-						}
-					}
-					else {
-						return s;
-					}
-
+			else if (s.equals("a")) {
+				if (month - 1 != 0)
+					month--;
+				else {
+					month = 12;
+					year--;
 				}
-				return null;
-		
+			} else if (s.equals("d")) {
+				if (month + 1 != 12)
+					month++;
+				else {
+					month = 1;
+					year++;
+				}
+			} else {
+				int[] t = { year, month, Util.toInt(s) };
+				return t;
+			}
+
+		}
+		return null;
+
 	}
 
-	
-
-	public void output() {
-
-		this.date = Calendar.getInstance();
-		year = date.get(Calendar.YEAR);
-		month = date.get(Calendar.MONTH);
-		month++;
-
-		// System.out.println(day_of_week);
-
-		showCanlendar(year, month);
-
-	}// output
+//	public void output() {
+//
+//		this.date = Calendar.getInstance();
+//		year = date.get(Calendar.YEAR);
+//		month = date.get(Calendar.MONTH);
+//		month++;
+//
+//		// System.out.println(day_of_week);
+//
+//		showCanlendar(year, month);
+//
+//	}// output
 
 	private void showCanlendar(int year, int month) {
 		// 마지막일?
@@ -199,12 +240,12 @@ public class MyCalendar {
 
 			// 날짜 출력
 			for (int i = 1; i <= lastDay; i++) {
-				if(i==9999)
+				if (i == 9999)
 //					System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
 					System.out.printf("%3d*\t", i);
-				else 
-				System.out.printf("%3d\t", i);
-				
+				else
+					System.out.printf("%3d\t", i);
+
 				int a = i % 7;
 				int b = 7 - day_of_week;
 
@@ -231,7 +272,7 @@ public class MyCalendar {
 				}
 			}
 			if (s.equals("d")) {
-				if( month + 1 != 12)
+				if (month + 1 != 12)
 					month++;
 				else {
 					month = 1;

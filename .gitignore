@@ -124,3 +124,5 @@ settings.epf
 .metadata/.plugins/org.eclipse.ui.intro/introstate
 .metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml
 .metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
+lib/a.jar
+lib/java-string-similarity-2.0.0.jar
