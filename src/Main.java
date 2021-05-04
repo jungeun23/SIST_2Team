@@ -1,4 +1,8 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -6,26 +10,44 @@ public class Main {
 	private static User user = new User();
 
 	public static HR hr = new HR();
-	
+
 	public static void main(String[] args) throws Exception {
 
 //		user.regist_user();
 //		user.updateDB();
 //		System.out.println(user);
-		
-		
-		
-		Login login = new Login();
-		user = login.loginScreen();
-		
+
+//		Login login = new Login();
+//		user = login.loginScreen();
+
 //		Email mail = new Email(user);
-		
+
 //		mail.readMail();
-		menu();
+//		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
+		makeEmailDummy();
+	}
 
+	private static void makeEmailDummy() throws Exception {
+		String path = "Data\\Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
+		File f = new File(path);
+		System.out.println(f);
+		int cnt = 0;
+		BufferedReader reader = new BufferedReader(new FileReader("Data\\Email\\dummy.txt"));
+		String line ="";
+		String result = "";
+		ArrayList<String> title = new ArrayList<>(); //5, 6
+		reader.readLine();
+		while((line = reader.readLine()) != null){
+			String[] temp = line.split(",");
+			System.out.println(temp[7]);
+			title.add(temp[5]);
+		}
+		for(String s : title) {
+			System.out.println(s);
+		}
 	}
 
 	private static void menu() {
@@ -265,11 +287,11 @@ public class Main {
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
 			System.out.println();
-			
+
 			Email mail = new Email(user);
 			if (n == 1) {
 				try {
-					mail.writeMail(); //메일 쓰기 test 완료
+					mail.writeMail(); // 메일 쓰기 test 완료
 					puase("메일 쓰기를 완료했습니다.");
 				} catch (IOException e) {
 					System.out.println(e);
@@ -296,8 +318,6 @@ public class Main {
 			}
 		}
 	}
-
-
 
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
 	private static void showElecApproval() {
@@ -346,12 +366,14 @@ public class Main {
 			}
 		}
 	}
+
 	private static void puase(String string) {
 		System.out.println(string);
 		System.out.println("계속하시려면 엔터를 입력해주세요.");
 		sc.nextLine();
-		
+
 	}
+
 	private static void cls() {
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
