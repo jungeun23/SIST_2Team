@@ -13,7 +13,7 @@ public class Main {
 
 	public static HR hr = new HR();
 	public static ContactList cl = new ContactList();
-
+	public static Attendance at = new Attendance(user);
 	public static void main(String[] args) throws Exception {
 
 //		user.regist_user();
@@ -23,12 +23,10 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
-		Attendance at = new Attendance(user);
 		//at.dummy();
 //		at.readWorkingTime2();
 //		at.dayWorkingTime2();
 		at.adminSearchWorkingTime();	
-		
 		
 		
 //		Email mail = new Email(user);

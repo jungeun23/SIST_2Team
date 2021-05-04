@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class Attendance {
 	private User user;
 	private final String DATA;
 	private final String DATA2;
+	ArrayList<String[]> time = new ArrayList<String[]>();
 
 	private ArrayList<Calendar> chulgeun; // 출근 시간
 	private ArrayList<Calendar> toegeun; // 퇴근 시간
@@ -22,6 +25,7 @@ public class Attendance {
 	private String attendancePath;
 	private String dayWorkingTimePath;
 	private ArrayList<String> memberName;
+	private ArrayList<Integer> workingTime;
 	private int lastDay = 0;
 	private int day_of_week = 0;
 	private long weakWorkTime;
@@ -30,8 +34,7 @@ public class Attendance {
 	private static Scanner scan;
 
 	public Attendance(User user) {
-		DATA = "data/Contact.txt"; // Window
-		// DATA = "data/Contact.txt"; // Mac
+		DATA = "data/Contact.txt"; 
 		DATA2 = "data/attendance/working.txt";
 
 		weakWorkTime = 0;
@@ -44,6 +47,7 @@ public class Attendance {
 		attendancePath = "";
 		scan = new Scanner(System.in);
 		memberName = new ArrayList<String>();
+		workingTime = new ArrayList<Integer>();
 
 	}
 
@@ -175,6 +179,7 @@ public class Attendance {
 
 	/**
 	 * 원하는 년,월을 입력하여 해당 근무 시간을 조회하는 메소드 
+	 * 로그인한 본인의 근무시간 조회
 	 */
 	public void searchWorkingTime() {
 
@@ -417,6 +422,7 @@ public class Attendance {
 	 */
 	
 	public void adminSearchWorkingTime() {
+		
 		String testPath = "data/attendance/memberTime.txt";
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(testPath));
@@ -427,20 +433,17 @@ public class Attendance {
 
 			String[] temp1 = yearMonth.split("-"); // 입력받은 2021-5 쪼개기
 			
-//			ArrayList<Integer> list = new ArrayList<Integer>();
 
 			String line = "";
 			// String date = "2021-05-02";
 			String str = "";
 			int sum = 0;
 			int workingMin = 0;
-
+			
 			while ((line = read.readLine()) != null) {
 				//System.out.println(line);
 				String temp[] = line.split(",");
 				workingMin = Integer.parseInt(temp[2]);
-//				System.out.println(workingMin);
-				
 				if (temp[0].equals(memName)) {
 					String workingDay = temp[1];
 					String[] yearMonthDay = temp[1].split("-"); // 2021-5-3 쪼개기
@@ -459,6 +462,55 @@ public class Attendance {
 			System.out.println(e);
 		}
 	}// searchWorkingTime
+	
+	
+	//홍길동,차장,인사,A,12,5000000
+	public void hrWorkingTime() throws IOException {
+		String path = "data/HR.txt";
+		String[] temp = null;
+		try {
+			BufferedReader read = new BufferedReader(new FileReader(path));
+			
+			String line = "";
+			
+			while((line = read.readLine()) != null) {
+				temp = line.split(",");
+				this.time.add(temp); //홍길동,차장,인사,A,12,5000000
+				
+			}//while 
+			
+			
+			
+			
+			String path2 = "data/HR2.txt";
+			BufferedWriter wr = new BufferedWriter(new FileWriter(path2));
+			
+			for(int i= 0; i< time.size(); i ++) {
+				wr.write(String.format("%s,%s,%s,%s,%s,%s,%d\n"
+										,time.get(i)[0]
+										,time.get(i)[1]
+										,time.get(i)[2]
+										,time.get(i)[3]
+										,time.get(i)[4]
+										,time.get(i)[5]
+										,workingTime.get(i)
+												));
+			}
+			
+			wr.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 		// public void Time() {
