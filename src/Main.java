@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,74 +21,116 @@ public class Main {
 //		user.updateDB();
 //		System.out.println(user);
 
-		Login login = new Login();
-		user = login.loginScreen();
+//		Login login = new Login();
+//		user = login.loginScreen();
 
 //		Email mail = new Email(user);
 
 //		mail.readMail();
 //		menu();
 
-		MyCalendar c = new MyCalendar(user);
+//		MyCalendar c = new MyCalendar(user);
 //		c.output();
 //		c.createSchedule();
-		c.showSchedule();
-		
-		//makeEmailDummy();
+//		c.showSchedule();
+
+		// makeEmailDummy();
 //		Attendance at = new Attendance(user);
 //		at.readWorkingTime();
 //		at.dayWorkingTime();
 //		at.searchWorkingTime();
-		
+		System.out.println(getWorkday());
 	}
+	   private static int getWorkday() {
+		      
+	        Calendar startCal = Calendar.getInstance();
+	        startCal.set(2021, 04, 01);
+
+	        Calendar endCal = Calendar.getInstance();
+	        endCal.set(2021, 04, 31);
+
+	        int workDays = 0;
+	        
+	        while (startCal.getTimeInMillis() <= endCal.getTimeInMillis()) {
+	           
+	        	startCal.add(Calendar.DAY_OF_MONTH, 1);
+	           if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+	              workDays++;
+	           }
+	        }
+
+	        return workDays;
+	      
+	   }
+//	private static int getWorkday() {
+//
+//		Calendar startCal = Calendar.getInstance();
+//		startCal.set(2021, 04, 01);
+//
+//		Calendar endCal = Calendar.getInstance();
+//		endCal.set(2021, 04, 31);
+//
+//		int workDays = 0;
+//
+//		while (startCal.getTimeInMillis() <= endCal.getTimeInMillis()) {
+//			int day = startCal.get(Calendar.DAY_OF_WEEK);
+//			if ((day != Calendar.SATURDAY) && (day != Calendar.SUNDAY)) {
+//				workDays++;
+//			}
+//			startCal.add(Calendar.DAY_OF_MONTH, 1);
+//		}
+//
+//		return workDays;
+//
+//	}
 
 	private static void makeEmailDummy() throws Exception {
-		String path = "Data\\Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
+		String path = "Data\\Contract.txt"; // 제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
 		File f = new File(path);
 //		System.out.println(f);
 		int cnt = 0;
 		BufferedReader reader = new BufferedReader(new FileReader("Data\\Email\\dummy.txt"));
-		
-		String line ="";
+
+		String line = "";
 		String result = "";
-		ArrayList<String> title = new ArrayList<>(); //5, 6
+		ArrayList<String> title = new ArrayList<>(); // 5, 6
 		ArrayList<String> content = new ArrayList<>();
-		
-		while((line = reader.readLine()) != null){
+
+		while ((line = reader.readLine()) != null) {
 			String[] temp = line.split(",");
 //			System.out.println(Arrays.toString(temp));
 			title.add(temp[0]);
 			content.add(temp[1]);
 		}
-		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용 
-		ArrayList<String> t1 = new ArrayList<>();	//이름 + 이메일
+		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		ArrayList<String> t1 = new ArrayList<>(); // 이름 + 이메일
 //		ArrayList<String> t2 = new ArrayList<>();	//이메일
 //		ArrayList<String> t3 = new ArrayList<>();
 //		ArrayList<String> t4 = new ArrayList<>();
 //		ArrayList<String> t5 = new ArrayList<>();
 //		ArrayList<String> t6 = new ArrayList<>();
-		
+
 		BufferedReader reader2 = new BufferedReader(new FileReader("data\\Contact.txt"));
 //		t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
-		while((line = reader2.readLine())!=null) {
+		while ((line = reader2.readLine()) != null) {
 			String[] temp = line.split(",");
-			t1.add(temp[2] +","+temp[3]);
+			t1.add(temp[2] + "," + temp[3]);
 		}
-		//번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
-		//title, content t1(사람)
+		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		// title, content t1(사람)
 		int n = t1.size();
 		Random rand = new Random();
-		int c = rand.nextInt(t1.size()-1);
-		
+		int c = rand.nextInt(t1.size() - 1);
+
 		File f2 = new File("data\\Email\\dummyTest.txt");
 		FileWriter fw = new FileWriter(f2);
-		cnt=1;
-		for(int i=0; i<1000; i++, cnt++) {
-			c = rand.nextInt(t1.size()-1);
+		cnt = 1;
+		for (int i = 0; i < 1000; i++, cnt++) {
+			c = rand.nextInt(t1.size() - 1);
 			String[] temp = t1.get(c).split(",");
 			String sendName = temp[0];
 			String sendEmail = temp[1];
-			c = rand.nextInt(t1.size()-1);
+			c = rand.nextInt(t1.size() - 1);
 			temp = t1.get(c).split(",");
 			String receiveName = temp[0];
 			String receiveEmail = temp[1];
@@ -99,14 +142,11 @@ public class Main {
 			fw.write(receiveName + "\n");
 			fw.write(content.get(i) + "\n");
 			fw.write("-----\n");
-			//번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+			// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
 		}
 		fw.close();
-		
-		
-		
-			
-		for(String s : title) {
+
+		for (String s : title) {
 			System.out.println(s);
 		}
 	}
