@@ -1,4 +1,4 @@
-t,t,홍길동,a@sis2.co.kr,010-1234-1234,인턴,인사
+t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
 ialbutt0,qdf5bG,주반택,nbresland0@sist2.co.kr,010-9965-6848,과장,인사
 qbocock1,XRC1oHuY,문종분,ktrevon1@sist2.co.kr,010-7655-2518,차장,디자인
 ntchir2,sZE78vm,금누배,mbarringer2@sist2.co.kr,010-7077-1480,부장,마케팅
