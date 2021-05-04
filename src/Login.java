@@ -19,7 +19,7 @@ public class Login {
 	private User user;
 
 	public Login() {
-		DATA = "data\\Contact.txt";
+		DATA = "data/Contact.txt";
 		scan = new Scanner(System.in);
 		id = "";
 		pw = "";
