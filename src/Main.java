@@ -203,7 +203,7 @@ public class Main {
 			System.out.println("            [2. APPROVAL] ");
 			System.out.println("            1.  전자결재");
 			System.out.println("            2.  근태관리");
-			System.out.println("            3.  휴가관리");
+			System.out.println("            3.  휴가관리"); 
 			System.out.println();
 			System.out.println("            4.  목차로 돌아가기");
 			System.out.println();
@@ -229,7 +229,7 @@ public class Main {
 		while (true) {
 			cls();
 			System.out.println("            [3. NOTICE] ");
-			System.out.println("            1.  게시판");
+			System.out.println("            1.  게시판"); 
 			System.out.println();
 			System.out.println("            2.  목차로 돌아가기");
 			System.out.println();
@@ -253,7 +253,7 @@ public class Main {
 			System.out.println("            [4. RESERVATION] ");
 			System.out.println("            1.  일정관리");
 			System.out.println("            2.  예약/대여");
-			System.out.println("            3.  교육센터");
+			System.out.println("            3.  교육센터"); 
 			System.out.println();
 			System.out.println("            4.  목차로 돌아가기");
 			System.out.println();
@@ -381,12 +381,14 @@ public class Main {
 		}
 	}
 
-	private static void showExtraPay() {
+	public static void showExtraPay() {
 
 		PayRoll ep = new PayRoll();
 
 		ep.load();
 		
+		System.out.println();
+		System.out.println();
 		System.out.println("[5. HR]");
 		System.out.println("■ 수당관리 ■");
 		System.out.println("1. 근로 수당 조회");
@@ -396,18 +398,22 @@ public class Main {
 		System.out.println();
 		System.out.print("선택: ");
 		
-		int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
+		String n = (Util.get("번호를 입력해주세요."));
 		
-		if(n == 1) {
+		if(n.equals("1")) {
 			ep.extraWork(Main.user);
-		} else if(n == 2) {
+		} else if(n.equals("2")) {
 			ep.bonus(Main.user);
-		} else if(n == 3) {
-			ep.HrTeam();
-		} else if(n == 4) {
+		} else if(n.equals("3")) {
+			ep.HrAccess();
+		} else if(n.equals("4")) {
 			menu();
 		} else {
-			System.out.println("잘못된 번호를 입력하셨습니다.");
+			System.out.println("※ 올바르지 않은 입력입니다 ※");
+			System.out.println();
+			System.out.println();
+		
+			showExtraPay();
 		}
 		
 	}
