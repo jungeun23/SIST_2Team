@@ -7,5 +7,9 @@ public class Util {
 		System.out.print(label + ": ");
 		return scan.nextLine();		
 	}
+	
+	public static int toInt(String s) {
+		return Integer.parseInt(s);
+	}
 
 }
