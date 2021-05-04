@@ -26,10 +26,13 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		menu();
+//		menu();
 
-//		MyCalendar c = new MyCalendar();
+		MyCalendar c = new MyCalendar(user);
 //		c.output();
+//		c.createSchedule();
+		c.showSchedule();
+		
 		//makeEmailDummy();
 //		Attendance at = new Attendance(user);
 //		at.readWorkingTime();
