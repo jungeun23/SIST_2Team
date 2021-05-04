@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +12,7 @@ public class Main {
 	private static User user = new User();
 
 	public static HR hr = new HR();
+	public static ContactList cl = new ContactList();
 
 	public static void main(String[] args) throws Exception {
 
@@ -17,34 +20,89 @@ public class Main {
 //		user.updateDB();
 //		System.out.println(user);
 
-//		Login login = new Login();
-//		user = login.loginScreen();
+		Login login = new Login();
+		user = login.loginScreen();
 
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-//		menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
-		makeEmailDummy();
+		//makeEmailDummy();
+//		Attendance at = new Attendance(user);
+//		at.readWorkingTime();
+//		at.dayWorkingTime();
+//		at.searchWorkingTime();
+		
 	}
 
 	private static void makeEmailDummy() throws Exception {
 		String path = "Data\\Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
 		File f = new File(path);
-		System.out.println(f);
+//		System.out.println(f);
 		int cnt = 0;
 		BufferedReader reader = new BufferedReader(new FileReader("Data\\Email\\dummy.txt"));
+		
 		String line ="";
 		String result = "";
 		ArrayList<String> title = new ArrayList<>(); //5, 6
-		reader.readLine();
+		ArrayList<String> content = new ArrayList<>();
+		
 		while((line = reader.readLine()) != null){
 			String[] temp = line.split(",");
-			System.out.println(temp[7]);
-			title.add(temp[5]);
+//			System.out.println(Arrays.toString(temp));
+			title.add(temp[0]);
+			content.add(temp[1]);
 		}
+		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용 
+		ArrayList<String> t1 = new ArrayList<>();	//이름 + 이메일
+//		ArrayList<String> t2 = new ArrayList<>();	//이메일
+//		ArrayList<String> t3 = new ArrayList<>();
+//		ArrayList<String> t4 = new ArrayList<>();
+//		ArrayList<String> t5 = new ArrayList<>();
+//		ArrayList<String> t6 = new ArrayList<>();
+		
+		BufferedReader reader2 = new BufferedReader(new FileReader("data\\Contact.txt"));
+//		t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
+		while((line = reader2.readLine())!=null) {
+			String[] temp = line.split(",");
+			t1.add(temp[2] +","+temp[3]);
+		}
+		//번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		//title, content t1(사람)
+		int n = t1.size();
+		Random rand = new Random();
+		int c = rand.nextInt(t1.size()-1);
+		
+		File f2 = new File("data\\Email\\dummyTest.txt");
+		FileWriter fw = new FileWriter(f2);
+		cnt=1;
+		for(int i=0; i<1000; i++, cnt++) {
+			c = rand.nextInt(t1.size()-1);
+			String[] temp = t1.get(c).split(",");
+			String sendName = temp[0];
+			String sendEmail = temp[1];
+			c = rand.nextInt(t1.size()-1);
+			temp = t1.get(c).split(",");
+			String receiveName = temp[0];
+			String receiveEmail = temp[1];
+			fw.write(cnt + ",");
+			fw.write(title.get(i) + ",");
+			fw.write(sendEmail + ",");
+			fw.write(receiveEmail + ",");
+			fw.write(sendName + ",");
+			fw.write(receiveName + "\n");
+			fw.write(content.get(i) + "\n");
+			fw.write("-----\n");
+			//번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		}
+		fw.close();
+		
+		
+		
+			
 		for(String s : title) {
 			System.out.println(s);
 		}
@@ -128,6 +186,7 @@ public class Main {
 //				showMessenger();
 			} else if (n == 3) {
 //				showContactAddress();
+				cl.firstScreen();
 			} else if (n == 4) {
 				menu();
 				break;
@@ -152,7 +211,7 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-				showElecApproval();
+//				showElecApproval();
 			} else if (n == 2) {
 //				showAttendance();
 			} else if (n == 3) {
@@ -320,7 +379,7 @@ public class Main {
 	}
 
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
-	private static void showElecApproval() {
+	private static void showElecApproval() throws IOException {
 		while (true) {
 			cls();
 			System.out.println("            [전자결재 업무] ");
@@ -347,7 +406,7 @@ public class Main {
 			} else if (n == 2) {
 				ea.readElecApproval();
 			} else if (n == 3) {
-				ea.addCommnetElecApproval();
+//				ea.addCommnetElecApproval();
 			} else if (n == 4) {
 				ea.myElecApproval();
 			} else if (n == 5) {

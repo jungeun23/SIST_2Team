@@ -136,7 +136,7 @@ public class Email {
 		list.add(tempMail);
 		String path = DATA;
 //	      path = "data\\mail\\" ;
-		// 제목 내용 보낸이메일 받는이메일 보낸이름 받는이름
+		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용 
 		FileWriter fw = new FileWriter(path, true);
 		fw.write(tempMail.getSeq() + ",");
 		fw.write(title + ",");
