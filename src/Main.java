@@ -31,7 +31,13 @@ public class Main {
 		
 //		MeetingRoom mr = new MeetingRoom(user);
 //		mr.createRoomReservation();
-//		
+		
+		Board bd = new Board(user);
+//		bd.createBoard();
+//		bd.readBoard();
+//		bd.deleteBoard();
+		bd.updateBoard();
+		
 		
 		
 		
@@ -46,7 +52,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		menu();
+		//menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
