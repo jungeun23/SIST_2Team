@@ -32,11 +32,11 @@ public class Main {
 //		MeetingRoom mr = new MeetingRoom(user);
 //		mr.createRoomReservation();
 		
-		Board bd = new Board(user);
-		bd.createBoard();
+//		Board bd = new Board(user);
+//		bd.createBoard();
 		
 		
-		
+		hr.hrScreen();
 		
 		
 		

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MyCalendar {
+public class MyCalendar_subin {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -34,7 +34,7 @@ public class MyCalendar {
 	LinkedList<String[]> listCar = new LinkedList<>();
 	LinkedList<String[]> listRoom = new LinkedList<>();
 
-	public MyCalendar(User user) {
+	public MyCalendar_subin(User user) {
 		this.user = user;
 		DATA = "data\\schedule\\schedule.txt";
 		DATA2 = "data\\schedule\\vacation.txt";
