@@ -1,12 +1,12 @@
 
 public class Vacation {
 	User user;
-	MyCalendar mc;
+	MyCalendar_je mc;
 //	final String HRDB = "data\\HR.txt";
 	
 	Vacation(User user){
 		this.user = user;
-		this.mc = new MyCalendar(user);
+		this.mc = new MyCalendar_je(user);
 //		load();
 	}
 	

@@ -1,5 +1,5 @@
 
 public class TrainingCenter {
-    private MyCalendar trainDate;
-    private MyCalendar eventDate;
+    private MyCalendar_je trainDate;
+    private MyCalendar_je eventDate;
 }

@@ -32,11 +32,11 @@ public class Main {
 //		MeetingRoom mr = new MeetingRoom(user);
 //		mr.createRoomReservation();
 		
-		Board bd = new Board(user);
+//		Board bd = new Board(user);
 //		bd.createBoard();
 //		bd.readBoard();
 //		bd.deleteBoard();
-		bd.updateBoard();
+//		bd.updateBoard();
 		
 		
 		
@@ -52,7 +52,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
@@ -289,7 +289,7 @@ public class Main {
 			if (n == 1) {
 //				showSchedule();
 			} else if (n == 2) {
-//				showReservate();
+				showReservate();
 			} else if (n == 3) {
 //				showTrainingCenter();
 			} else if (n == 4) {
@@ -298,6 +298,25 @@ public class Main {
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
+		}
+	}
+
+	private static void showReservate() {
+		System.out.println("[4. RESERVATION - 2.예약/대여]");
+		System.out.println("1. 회의실 예약");
+		System.out.println("2. 차량 대여");
+		System.out.println("3. 목차로 돌아가기");
+		String n = (Util.get("번호를 입력해주세요"));
+		
+		if(n.equals("1")) {
+			//수빈 - 회의실 예약
+		} else if(n.equals("2")) {
+			
+			CoperationCar cop = new CoperationCar(user);
+			cop.copCar();
+			
+		} else {
+			showReservation();
 		}
 	}
 

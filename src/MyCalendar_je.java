@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MyCalendar {
+public class MyCalendar_je {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -34,7 +34,7 @@ public class MyCalendar {
 	LinkedList<String[]> listCar = new LinkedList<>();
 	LinkedList<String[]> listRoom = new LinkedList<>();
 
-	public MyCalendar(User user) {
+	public MyCalendar_je(User user) {
 		this.user = user;
 		DATA = "data\\schedule\\schedule.txt";
 		DATA2 = "data\\schedule\\vacation.txt";
@@ -161,7 +161,7 @@ public class MyCalendar {
 		}
 	}
 
-	private int[] showCanlendar(int year, int month, int day) {
+	public int[] showCanlendar(int year, int month, int day) {
 		// 마지막일?
 		while (true) {
 			lastDay = getLastDay(year, month);
@@ -281,7 +281,7 @@ public class MyCalendar {
 
 			System.out.println();
 			System.out.println();
-			String s = Util.get("월 이동(a or d) 끝내기(q)");
+			String s = Util.get("월 이동(a or d) 일정/예약 날짜 입력(q)");
 			if (s.equals("q"))
 				break;
 //			KeyEvent event = new KeyEvent();
@@ -419,6 +419,13 @@ public class MyCalendar {
 		System.out.println("휴가 일정 등록이 완료됐습니다.");
 	}
 
+	/**
+	 * 
+	 * @param carList
+	 * 
+	 * 
+	 */
+	
 	public void createCopCarReseravtion(ArrayList<String[]> carList) {
 		System.out.println("법인차량 예약을 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
@@ -426,8 +433,7 @@ public class MyCalendar {
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
+		String reason = Util.get("예약 사유를 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
 
@@ -443,6 +449,7 @@ public class MyCalendar {
 		selectedCar--;
 		if (Util.toInt(carList.get(selectedCar)[1]) == 0) {
 			System.out.println(selectedCar + " 차량의 재고가 존재하지 않습니다.");
+			return;
 		} else {
 			int t = Util.toInt(carList.get(selectedCar)[1]);
 			carList.get(selectedCar)[1] = Integer.toString(t - 1);
@@ -461,7 +468,7 @@ public class MyCalendar {
 					position = t[1];
 					depart = t[2];
 					String[] sl = { this.user.getName(), position, depart, carList.get(selectedCar)[0],
-							(carList.get(selectedCar)[1]), ymd, title, content };
+							(carList.get(selectedCar)[1]), ymd, reason };
 					listCar.add(sl);
 				}
 			}
@@ -473,8 +480,7 @@ public class MyCalendar {
 			fw.write(carList.get(selectedCar)[0] + ",");
 			fw.write(carList.get(selectedCar)[1] + ",");
 			fw.write(ymd + ",");
-			fw.write(title + ",");
-			fw.write(content + "\n");
+			fw.write(reason +"\n");
 			fw.close();
 
 		} catch (IOException e) {
