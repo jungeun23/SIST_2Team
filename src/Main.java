@@ -29,8 +29,11 @@ public class Main {
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		mr.createRoomReservation();
+//		MeetingRoom mr = new MeetingRoom(user);
+//		mr.createRoomReservation();
+		
+		Board bd = new Board(user);
+		bd.createBoard();
 		
 		
 		
