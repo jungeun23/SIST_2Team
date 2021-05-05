@@ -32,8 +32,17 @@ public class Main {
 //		MeetingRoom mr = new MeetingRoom(user);
 //		mr.createRoomReservation();
 		
+<<<<<<< HEAD
 //		Board bd = new Board(user);
 //		bd.createBoard();
+=======
+		Board bd = new Board(user);
+//		bd.createBoard();
+//		bd.readBoard();
+//		bd.deleteBoard();
+		bd.updateBoard();
+		
+>>>>>>> 581b8200ebc99b24c386c95ba06b7c41d9d23d29
 		
 		
 		hr.hrScreen();

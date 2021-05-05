@@ -172,7 +172,7 @@ public class ContactList {
 			
 			if((list.get(i)[6]).equals(this.buseo)) {
 				
-				line = String.format("||  %s  ||   %s   || %s  ||  %s  ||   %s   ||   %s   ||"
+				line = String.format("||%4s\t||%s\t||%s\t||%23s\t||%s\t||%s||"
 						,list.get(i)[6] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5]);
 				
 				System.out.println(line);
@@ -211,26 +211,26 @@ public class ContactList {
 		
 		String line = "";
 		
-		System.out.println("============================================================================================");
-		System.out.println("||  직급  ||   이름   ||    아이디 \t ||     이메일\t ||  전화번호\t ||   부서\t ||");
-		System.out.println("============================================================================================");
+		System.out.println("=================================================================================================");
+		System.out.println("||직급\t||이름  \t||아이디 \t||이메일                    \t||전화번호\t||부서\t||");
+		System.out.println("==================================================================================================");
 
 		
 		for (int i=0; i<list.size(); i++) {
 			
 			if((list.get(i)[5]).equals(this.position)) {
 				
-				line = String.format("||  %s  ||  %s  || %s\t ||  %s\t  ||   %s   ||   %s   ||"
+				line = String.format("||%s\t||%s\t||%s\t||%23s\t||%s\t||%4s||"
 							,list.get(i)[5] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[6]);
 				
-				System.out.println("--------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------");
 				System.out.println(line);
 				}
 		}//for
 		if (line.equals("")) 
 			System.out.println("잘못된 직급입니다.");
 		
-		System.out.println("============================================================================================\n");
+		System.out.println("================================================================================================\n");
 		System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
 		this.num = scan.nextInt();
 		
