@@ -111,7 +111,7 @@ public class Edit_HR {
 //				String year = "";
 //				
 //				if(temp[1].equals("인턴")) {
-//					year = (rand.nextInt(2)+1) +""; //인턴 1~2년
+//					year = (rand.nextInt(2)+1) +""; //인턴 1~2년 > 
 //				} else if(temp[1].equals("사원")) {
 //					year = (rand.nextInt(3)+1) + ""; //사원 1~3년  
 //				} else if(temp[1].equals("대리")) {
