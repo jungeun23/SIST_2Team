@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Random;
 
 public class CoperationCar {
@@ -21,34 +23,128 @@ public class CoperationCar {
 			"TESLA Semi" };
 
 	private int stock;
-	private MyCalendar_subin mc;
+	private MyCalendar_je mc;
 	private User user;
 //    private HashMap<String, Integer> list = new HashMap<>();
-	private ArrayList<String[]> list = new ArrayList<>();
-
+	private ArrayList<String[]> listCar = new ArrayList<>();
+	private final String DATA;
+	
+	private ArrayList<String[]> list = new ArrayList<String[]>();
+	
 	public CoperationCar(User user) {
 		this.user = user;
-		this.mc = new MyCalendar_subin(user);
+		this.mc = new MyCalendar_je(user);
 		Long seed = System.currentTimeMillis();
 		Random rand = new Random(seed);
 		rand.setSeed(seed);
 		for (int i = 0; i < model.length; i++) {
 			String[] s = { model[i], Integer.toString(rand.nextInt(5) + 1) };
-			list.add(s);
+			listCar.add(s);
 		}
+		this.DATA = "data\\schedule\\car.txt";
 	}
 
+	public void load() {
+		try {
+			BufferedReader readCar = new BufferedReader(new FileReader(DATA));
+			String line = "";
+			while ((line = readCar.readLine()) != null) {
+				String[] temp = line.split(",");
+				list.add(temp);
+			}
+			
+			readCar.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void copCar() {
+		load();
+		for(int i=0; i<list.size(); i++) {
+		System.out.println(Arrays.toString(list.get(i)));
+		}
+		System.out.println("===================================");
+		System.out.println("||1. 법인차량 | 2. 법인차량 | 3. 법인차량||");
+		System.out.println("||  예약 신청 |   예약 확인 |   예약 취소||");
+		System.out.println("===================================");
+		String n = (Util.get("번호를 입력해주세요"));
+		if(n.equals("1")) {
+			createCopCarSchedule();
+		} else if(n.equals("2")) {
+			readCopCarSchedule();
+		} else if(n.equals("3")) {
+			deleteCopCarSchedule();
+		} else {
+			System.out.println("잘못된 입력입니다.");
+			copCar();
+		}
+	}
+	
 	public void createCopCarSchedule() {
-		mc.createCopCarReseravtion(list);
+		mc.createCopCarReseravtion(listCar); // 법인 차량 일정 등록
 	}
 	
 	public void readCopCarSchedule() {
 		
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				System.out.println("일정을 선택해주세요");
+				int[] c = mc.showCanlendar(year, month, day);
+				if (c[0] == year && c[1] == month && c[2] == day) {
+					System.out.println();
+					System.out.println("일정을 출력합니다");
+					System.out.println("제목 : " + list.get(i)[2]);
+					System.out.println("내용 : " + list.get(i)[3]);
+				}
+			}
+		}
+		System.out.println("남은 일정이 없습니다.");
+		
+		
 	}
+	
+	
 	public void updateCopCarSchedule() {
-		
+		for (int i = 0; i < this.list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = this.list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				System.out.println("수정할 일정을 선택해주세요");
+				int[] c = mc.showCanlendar(year, month, day);
+				if (c[0] == year && c[1] == month && c[2] == day) {
+					String title = Util.get("일정의 제목을 입력해주세요");
+					String content = Util.get("일정의 내용을 입력해주세요");
+					String[] t = { this.user.getName(), this.list.get(i)[1], title, content };
+					this.list.set(i, t);
+					System.out.println("일정 수정이 완료됐습니다.");
+				}
+			}
+		}
 	}
+	
 	public void deleteCopCarSchedule() {
-		
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				System.out.println("취소할 차량 예약 일정을 선택해주세요");
+				int[] c = mc.showCanlendar(year, month, day);
+				if (c[0] == year && c[1] == month && c[2] == day) {
+					System.out.println();
+					System.out.println(list.get(i)[2] + " 차량 예약을 삭제했습니다.");
+					list.remove(i);
+				}
+			}
+		}
 	}
 }
