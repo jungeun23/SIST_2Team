@@ -33,7 +33,10 @@ public class Main {
 //		mr.createRoomReservation();
 		
 		Board bd = new Board(user);
-		bd.createBoard();
+//		bd.createBoard();
+//		bd.readBoard();
+//		bd.deleteBoard();
+		bd.updateBoard();
 		
 		
 		
