@@ -23,16 +23,33 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
+//		Vacation v = new Vacation(user);
+//		v.createVacation();
+		
+//		CoperationCar cc = new CoperationCar(user);
+//		cc.createCopCarSchedule();
+		
+//		MeetingRoom mr = new MeetingRoom(user);
+//		mr.createRoomReservation();
+		
+		Board bd = new Board(user);
+		bd.createBoard();
+		
+		
+		
+		
+		
+		
 		//at.dummy();
 //		at.readWorkingTime2();
 //		at.dayWorkingTime2();
-		//at.adminSearchWorkingTime();	
+//		at.adminSearchWorkingTime();	
 		
 		
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		menu();
+		//menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
@@ -474,7 +491,10 @@ public class Main {
 			}
 		}
 	}
-
+///////////////////////////////////////////////      NOTICE         ///////////////////////////////////////////////
+///////////////////////////////////////////////      RESERVATION    ///////////////////////////////////////////////
+///////////////////////////////////////////////      HR             ///////////////////////////////////////////////
+///////////////////////////////////////////////      ADMIN          ///////////////////////////////////////////////
 	private static void puase(String string) {
 		System.out.println(string);
 		System.out.println("계속하시려면 엔터를 입력해주세요.");

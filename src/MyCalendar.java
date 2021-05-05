@@ -1,12 +1,12 @@
-import java.awt.Event;
-import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class MyCalendar {
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -19,6 +19,9 @@ public class MyCalendar {
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
 	private final String DATA;
+	private final String DATA2;
+	private final String DATA3;
+	private final String DATA4;
 	private Calendar date;
 	private int year;
 	private int month;
@@ -27,13 +30,19 @@ public class MyCalendar {
 	private int day_of_week = 0;
 	private User user;
 	LinkedList<String[]> list = new LinkedList<>();
+	LinkedList<String[]> listVacation = new LinkedList<>();
+	LinkedList<String[]> listCar = new LinkedList<>();
+	LinkedList<String[]> listRoom = new LinkedList<>();
 
 	public MyCalendar(User user) {
 		this.user = user;
 		DATA = "data\\schedule\\schedule.txt";
+		DATA2 = "data\\schedule\\vacation.txt";
+		DATA3 = "data\\schedule\\car.txt";
+		DATA4 = "data\\schedule\\meetingRoom.txt";
 		date = Calendar.getInstance();
 		this.year = date.get(Calendar.YEAR);
-		this.month = date.get(Calendar.MONTH);
+		this.month = date.get(Calendar.MONTH) + 1;
 		this.day = date.get(Calendar.DATE);
 		load();
 	}
@@ -45,6 +54,16 @@ public class MyCalendar {
 			while ((line = read.readLine()) != null) {
 				String[] temp = line.split(",");
 				list.add(temp);
+			}
+			BufferedReader readVacation = new BufferedReader(new FileReader(DATA2));
+			while ((line = readVacation.readLine()) != null) {
+				String[] temp = line.split(",");
+				listVacation.add(temp);
+			}
+			BufferedReader readCar = new BufferedReader(new FileReader(DATA3));
+			while ((line = readCar.readLine()) != null) {
+				String[] temp = line.split(",");
+				listCar.add(temp);
 			}
 		} catch (IOException e) {
 			System.out.println(e);
@@ -61,14 +80,17 @@ public class MyCalendar {
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
 		String title = Util.get("일정 제목을 입력해주세요");
 		String content = Util.get("일정의 내용을 입력해주세요");
-		String[] sl = { title, content, this.user.getName() };
+
+		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
+				+ newTask.get(Calendar.DAY_OF_MONTH);
+		// 홍길동,2021-5-4,t,testaaa
+		String[] sl = { this.user.getName(), ymd, title, content };
 		list.add(sl);
 
 		try {
 			FileWriter fw = new FileWriter(DATA, true);
 			fw.write(this.user.getName() + ",");
-			fw.write(newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
-					+ newTask.get(Calendar.DAY_OF_MONTH) + ",");
+			fw.write(ymd + ",");
 			fw.write(title + ",");
 			fw.write(content + "\n");
 			fw.close();
@@ -343,6 +365,184 @@ public class MyCalendar {
 		} else {
 			return false; // 평년
 		}
+
+	}
+
+	public void createScheduleVacation() {
+		System.out.println("휴가를 등록합니다. 달력을 확인해주세요");
+		showCanlendar(this.year, this.month);
+		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
+		String[] temp = s.split("-");
+		Calendar newTask = Calendar.getInstance();
+		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
+		String title = Util.get("일정 제목을 입력해주세요");
+		String content = Util.get("일정의 내용을 입력해주세요");
+		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
+				+ newTask.get(Calendar.DAY_OF_MONTH);
+		// 홍길동,2021-5-4,t,testaaa
+		String position = null;
+		String depart = null;
+		String randNum = null;
+
+		try {
+			BufferedReader read = new BufferedReader(new FileReader("data\\HR.txt"));
+			long seed = System.currentTimeMillis();
+			Random rand = new Random(seed);
+			rand.setSeed(seed);
+			randNum = Integer.toString(rand.nextInt(15) + 1);
+
+			String line = "";
+			while ((line = read.readLine()) != null) {
+				String[] t = line.split(",");
+				if (t[0].equals(this.user.getName())) {
+					position = t[1];
+					depart = t[2];
+					String[] sl = { this.user.getName(), position, depart, randNum, ymd, title, content };
+					listVacation.add(sl);
+				}
+			}
+
+			FileWriter fw = new FileWriter(DATA2, true);
+			fw.write(this.user.getName() + ",");
+			fw.write(position + ",");
+			fw.write(depart + ",");
+			fw.write(randNum + ",");
+			fw.write(ymd + ",");
+			fw.write(title + ",");
+			fw.write(content + "\n");
+			fw.close();
+
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		System.out.println("휴가 일정 등록이 완료됐습니다.");
+	}
+
+	public void createCopCarReseravtion(ArrayList<String[]> carList) {
+		System.out.println("법인차량 예약을 등록합니다. 달력을 확인해주세요");
+		showCanlendar(this.year, this.month);
+		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
+		String[] temp = s.split("-");
+		Calendar newTask = Calendar.getInstance();
+		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
+		String title = Util.get("일정 제목을 입력해주세요");
+		String content = Util.get("일정의 내용을 입력해주세요");
+		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
+				+ newTask.get(Calendar.DAY_OF_MONTH);
+
+		System.out.println("법인 차량 목록입니다.");
+		for (int i = 0; i < carList.size(); i++) {
+			System.out.printf("[%d] : %s\n", i + 1, carList.get(i)[0]);
+		}
+//		for (String ss : carList.keySet()) {
+//			System.out.printf("[%d] : %s\n", cnt++ , ss);
+//		}
+//		String selecetedCar = Util.get("차량이름을 입력하세요");
+		int selectedCar = Util.toInt(Util.get("번호를 입력해주세요"));
+		selectedCar--;
+		if (Util.toInt(carList.get(selectedCar)[1]) == 0) {
+			System.out.println(selectedCar + " 차량의 재고가 존재하지 않습니다.");
+		} else {
+			int t = Util.toInt(carList.get(selectedCar)[1]);
+			carList.get(selectedCar)[1] = Integer.toString(t - 1);
+		}
+		// 홍길동,2021-5-4,t,testaaa
+		String position = null;
+		String depart = null;
+		String randNum = null;
+
+		try {
+			BufferedReader read = new BufferedReader(new FileReader("data\\HR.txt"));
+			String line = "";
+			while ((line = read.readLine()) != null) {
+				String[] t = line.split(",");
+				if (t[0].equals(this.user.getName())) {
+					position = t[1];
+					depart = t[2];
+					String[] sl = { this.user.getName(), position, depart, carList.get(selectedCar)[0],
+							(carList.get(selectedCar)[1]), ymd, title, content };
+					listCar.add(sl);
+				}
+			}
+
+			FileWriter fw = new FileWriter(DATA3, true);
+			fw.write(this.user.getName() + ",");
+			fw.write(position + ",");
+			fw.write(depart + ",");
+			fw.write(carList.get(selectedCar)[0] + ",");
+			fw.write(carList.get(selectedCar)[1] + ",");
+			fw.write(ymd + ",");
+			fw.write(title + ",");
+			fw.write(content + "\n");
+			fw.close();
+
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		System.out.println("차량 예약 등록이 완료됐습니다.");
+	}
+
+	public void createRoomReservation(String[] roomNumber) {
+		System.out.println("회의실 예약을 등록합니다. 달력을 확인해주세요");
+		showCanlendar(this.year, this.month);
+		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
+		String[] temp = s.split("-");
+		Calendar newTask = Calendar.getInstance();
+		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
+		String title = Util.get("일정 제목을 입력해주세요");
+		String content = Util.get("일정의 내용을 입력해주세요");
+		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
+				+ newTask.get(Calendar.DAY_OF_MONTH);
+		// 홍길동,2021-5-4,t,testaaa
+		for (int i = 0; i < roomNumber.length; i++) {
+			System.out.printf("[%d] %s\n", i + 1, roomNumber[i]);
+		}
+		int choiceRoom = Util.toInt(Util.get("방 번호를 선택해주세요"));
+		String selectedRoom = roomNumber[choiceRoom-1];
+		String position = null;
+		String depart = null;
+		String randNum = null;
+		
+		try {
+			BufferedReader readRoom = new BufferedReader(new FileReader(DATA4));
+			String line ="";
+			while((line = readRoom.readLine())!=null) {
+				String[] t = line.split(","); 
+				if(selectedRoom == t[3] && ymd == t[4]){
+					Util.puase("이미 예약된 방과 날짜 입니다. 다시 선택해주세요");
+					return;
+				}
+			}
+			BufferedReader read = new BufferedReader(new FileReader("data\\HR.txt"));
+//			long seed = System.currentTimeMillis();
+//			Random rand = new Random(seed);
+//			rand.setSeed(seed);
+//			randNum = Integer.toString(rand.nextInt(15) + 1);
+
+			while ((line = read.readLine()) != null) {
+				String[] t = line.split(",");
+				if (t[0].equals(this.user.getName())) {
+					position = t[1];
+					depart = t[2];
+					String[] sl = { this.user.getName(), position, depart, selectedRoom, ymd, title, content };
+					listRoom.add(sl);
+				}
+			}
+
+			FileWriter fw = new FileWriter(DATA4, true);
+			fw.write(this.user.getName() + ",");
+			fw.write(position + ",");
+			fw.write(depart + ",");
+			fw.write(selectedRoom + ",");
+			fw.write(ymd + ",");
+			fw.write(title + ",");
+			fw.write(content + "\n");
+			fw.close();
+
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		System.out.println("휴가 일정 등록이 완료됐습니다.");
 
 	}
 }
