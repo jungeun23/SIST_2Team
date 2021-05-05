@@ -14,6 +14,8 @@ public class Main {
 	public static HR hr = new HR();
 	public static ContactList cl = new ContactList();
 	public static Attendance at = new Attendance(user);
+	public static Vacation v = new Vacation(user);
+	
 	public static void main(String[] args) throws Exception {
 
 //		user.regist_user();
@@ -32,20 +34,19 @@ public class Main {
 //		MeetingRoom mr = new MeetingRoom(user);
 //		mr.createRoomReservation();
 		
-<<<<<<< HEAD
+
 //		Board bd = new Board(user);
 //		bd.createBoard();
-=======
-		Board bd = new Board(user);
+
+//		Board bd = new Board(user);
 //		bd.createBoard();
 //		bd.readBoard();
 //		bd.deleteBoard();
-		bd.updateBoard();
-		
->>>>>>> 581b8200ebc99b24c386c95ba06b7c41d9d23d29
+//		bd.updateBoard();
 		
 		
-		hr.hrScreen();
+		
+//		hr.hrScreen();
 		
 		
 		
@@ -58,7 +59,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
@@ -153,7 +154,7 @@ public class Main {
 			System.out.println();
 
 			System.out.println("            [2. APPROVAL] ");
-			System.out.println("            전자결재, 근태관리, 휴과관리");
+			System.out.println("            전자결재, 근태관리, 휴가관리");
 			System.out.println();
 
 			System.out.println("            [3. NOTICE] ");
@@ -247,7 +248,7 @@ public class Main {
 			} else if (n == 2) {
 //				showAttendance();
 			} else if (n == 3) {
-//				showVacation();
+				v.firstScreen();
 			} else if (n == 4) {
 				menu();
 				break;
