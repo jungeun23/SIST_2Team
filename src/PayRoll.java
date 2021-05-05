@@ -364,19 +364,26 @@ public class PayRoll {
 	// 연장 근무 계산 메소드
 	private int extraWork(int index) {
 	
-		//int extra list.get(index)[6] > 분 데이터임 > 시간으로 만들어서해야함
-	
+		int salary = Integer.parseInt(list.get(index)[5]);// 기본급
 		
+		int hourlyRate = salary / 209; // 통상 시급 (기본급 / 209H)
 		
+		int workday = getWorkday();
 		
+		int extraTime =  Integer.parseInt(list.get(index)[6])/60; //> 분 데이터임 > 시간으로 만듦 한달 일한 시간
 		
+		int legalWorkingTime = workday * 8; //workday * 8시간 근무 = 법적 근무시간
 		
-		
-	 int workday = getWorkday();
-	 
-	 //workday = 
-	 
-		//return 0;
+		if(extraTime - legalWorkingTime > 0) {
+			
+			int extraWorkPay = (int)((extraTime - legalWorkingTime) * hourlyRate * 1.5); // 연장 근무 시간 * 통상시급 * 1.5
+			
+			return extraWorkPay;
+			
+		} else {
+			return 0;
+		}
+
 	}
 
 	

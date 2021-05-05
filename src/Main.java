@@ -29,9 +29,9 @@ public class Main {
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		mr.createRoomReservation();
-		
+//		MeetingRoom mr = new MeetingRoom(user);
+//		mr.createRoomReservation();
+//		
 		
 		
 		
@@ -46,7 +46,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
