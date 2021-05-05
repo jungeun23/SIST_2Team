@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class PayRoll {
 		this.scan = new Scanner(System.in);
 		this.user = new User();
 		this.mentBonus = "지급된 성과급";
-		this.mentExtraWork = "지급된 추가수당";
+		this.mentExtraWork = "지급된 연장근무 수당";
 		this.mentSalary = "지급된  급여";
 		this.mainMenu = new Main();
 	}
@@ -475,7 +476,7 @@ public class PayRoll {
 			}
 		}
 		
-		for(int i=0; i<buseo2.size(); i++) {
+		for(int i=0; i<buseo2.size(); i++) { //직급을 숫자로 환산한 것 일단 문자열로 넣어주고
 			buseo2.get(i)[1] =  ""+level(buseo2.get(i)[1]);
 		}
 		
@@ -520,7 +521,7 @@ public class PayRoll {
 				buseo2.get(i)[1] = "인턴";
 			}
 			
-			result += String.format("||  %s  ||  %s  ||  %s  ||  %,d원 ||\n"
+			result += String.format("||  %s  ||  %s  ||  %s  ||  %,11d원 ||\n"
 	
 												, buseo2.get(i)[0]
 												, buseo2.get(i)[1]
@@ -571,11 +572,11 @@ public class PayRoll {
 			
 			System.out.println();
 			System.out.println();
-			System.out.println("==============================================");  
-			System.out.printf("||   이름  ||  부서  ||  직급  ||   %s  ||  \n",ment);
+			System.out.println("===============================================");  
+			System.out.printf("||   이름  ||  부서  ||  직급  ||   %8s  ||  \n",ment);
 			System.out.println("-----------------------------------------------");  
-			System.out.printf("||  %s  ||  %s  ||  %s  ||  %,d원 ||\n",list.get(index)[0], list.get(index)[2], list.get(index)[1],pay);
-			System.out.println("==============================================");  
+			System.out.printf("||  %s  ||  %s  ||  %s  ||  %,11d원 ||\n",list.get(index)[0], list.get(index)[2], list.get(index)[1],pay);
+			System.out.println("===============================================");  
 			System.out.println();
 			System.out.println();
 			
@@ -613,11 +614,14 @@ public class PayRoll {
 			while((line = reader.readLine())!=null) {
 				//석박남,대리,인사,D,5,월급,근무시간(월)
 				String [] temp = line.split(",");
-				
+//				System.out.println(Arrays.toString(temp));
 				list.add(temp);
 
 			}
 
+//			for(int i =0; i<list.size(); i++) {
+//			System.out.println(Arrays.toString(list.get(i)));
+//			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
