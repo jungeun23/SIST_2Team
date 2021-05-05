@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class User {
-	private static final String ContactPATH = "data\\Contact.txt";
+	private static final String ContactPATH = "data/Contact.txt";
 //	private User ID;
 
 	private String id;
@@ -17,7 +17,8 @@ public class User {
 	private String pw;
 	private String email;
 	private String phone;
-	private int position;
+	private String position; // TODO :Contact.txt 직급 자료형 문자열로 바꿈에 따라 int > String 변경 요망 //TODO complete 확인
+	private String depart;
 
 	public User() {
 //		ID = new User();
@@ -28,21 +29,23 @@ public class User {
 		this.name = "";
 		this.email = "";
 		this.phone = "";
-		this.position = 0;
+		this.position = "";
+		this.depart = "";
 	}
 
-	public User(String id, String name, String pw, String email, String phone, int position) {
+	public User(String id, String name, String pw, String email, String phone, String position, String depart) {
 		super();
 //		ID = new User(id);
 //		this.ID.setID(name);
 //		this.ID.setPassWord(password);
-		
+
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.position = position;
+		this.depart = depart;
 	}
 
 	public void regist_user() {
@@ -77,22 +80,22 @@ public class User {
 //		System.out.print("직급 : ");
 //		this.position = sc.nextInt();
 //		this.position = 1;
-		this.position = Integer.parseInt(Util.get("직급 : "));
+		this.position = Util.get("직급 : ");
 		generateDBCreate();
 	}
 
 	@Override
 	public String toString() {
-		return String.format("id: %s\npassword: %s\nname: %s\nemail: %s\nphone: %s\nposition: %s\n", this.id,
-				this.pw, this.name, this.email, this.phone, this.position);
+		return String.format("id: %s\npassword: %s\nname: %s\nemail: %s\nphone: %s\nposition: %s\n", this.id, this.pw,
+				this.name, this.email, this.phone, this.position);
 	}
 
 	// TODO : Contact 변수에 입력된 값을 .txt에 저장한다.
 	public void generateDBCreate() {
 		try {
 			FileWriter fw = new FileWriter(ContactPATH, true);
-			fw.write(String.format("%s,%s,%s,%s,%s,%d\n", this.id, this.pw, this.name, this.email,
-					this.phone, this.position));
+			fw.write(String.format("%s,%s,%s,%s,%s,%d\n", this.id, this.pw, this.name, this.email, this.phone,
+					this.position));
 			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -106,8 +109,8 @@ public class User {
 
 	}
 
-	// TODO : dump로 Contact에 여러 자료를 채운다.
 	public void updateDB() throws IOException {
+		// TODO : updateDB 불러오기 금지... 형식지금은 맞춰져서 이후 확정 이후 재구현 예정
 		BufferedReader reader = new BufferedReader(new FileReader(ContactPATH));
 
 		String result = "";
@@ -200,11 +203,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public int getPosition() {
+	public String getPosition() {
 		return position;
 	}
 
-	public void setPosition(int position) {
+	public void setPosition(String position) {
 		this.position = position;
 	}
 
@@ -212,5 +215,12 @@ public class User {
 		return ContactPATH;
 	}
 
+	public String getDepart() {
+		return depart;
+	}
+
+	public void setDepart(String depart) {
+		this.depart = depart;
+	}
 
 }
