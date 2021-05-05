@@ -29,23 +29,24 @@ public class Main {
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-//		MeetingRoom mr = new MeetingRoom(user);
-//		mr.createRoomReservation();
+		MeetingRoom mr = new MeetingRoom(user);
+		//mr.createRoomReservation();
+		mr.MeetingRoomScreen();
 		
-<<<<<<< HEAD
+
 //		Board bd = new Board(user);
 //		bd.createBoard();
-=======
-		Board bd = new Board(user);
+
+//		Board bd = new Board(user);
 //		bd.createBoard();
 //		bd.readBoard();
 //		bd.deleteBoard();
-		bd.updateBoard();
+//		bd.updateBoard();
 		
->>>>>>> 581b8200ebc99b24c386c95ba06b7c41d9d23d29
+
 		
 		
-		hr.hrScreen();
+//		hr.hrScreen();
 		
 		
 		

@@ -65,6 +65,11 @@ public class MyCalendar_subin {
 				String[] temp = line.split(",");
 				listCar.add(temp);
 			}
+			BufferedReader readMeetingRoom = new BufferedReader(new FileReader(DATA4));
+			while((line = readMeetingRoom.readLine()) != null) {
+				String[] temp = line.split(",");
+				listRoom.add(temp);
+			}
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -161,7 +166,7 @@ public class MyCalendar_subin {
 		}
 	}
 
-	private int[] showCanlendar(int year, int month, int day) {
+	public int[] showCanlendar(int year, int month, int day) {
 		// 마지막일?
 		while (true) {
 			lastDay = getLastDay(year, month);
@@ -182,7 +187,7 @@ public class MyCalendar_subin {
 
 			// 날짜 출력
 			for (int i = 1; i <= lastDay; i++) {
-				if (i == day)
+				if (i == day && this.month == month && this.year == year)
 //							System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
 					System.out.printf("%3d*\t", i);
 				else
@@ -490,8 +495,7 @@ public class MyCalendar_subin {
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
+		String content = Util.get("예약 목적을 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
 		// 홍길동,2021-5-4,t,testaaa
@@ -510,7 +514,7 @@ public class MyCalendar_subin {
 			while((line = readRoom.readLine())!=null) {
 				String[] t = line.split(","); 
 				if(selectedRoom == t[3] && ymd == t[4]){
-					Util.puase("이미 예약된 방과 날짜 입니다. 다시 선택해주세요");
+					Util.puase("이미 예약된 방과 같은 날짜 입니다. 다시 선택해주세요");
 					return;
 				}
 			}
@@ -525,7 +529,7 @@ public class MyCalendar_subin {
 				if (t[0].equals(this.user.getName())) {
 					position = t[1];
 					depart = t[2];
-					String[] sl = { this.user.getName(), position, depart, selectedRoom, ymd, title, content };
+					String[] sl = { this.user.getName(), position, depart, selectedRoom, ymd, content };
 					listRoom.add(sl);
 				}
 			}
@@ -536,14 +540,13 @@ public class MyCalendar_subin {
 			fw.write(depart + ",");
 			fw.write(selectedRoom + ",");
 			fw.write(ymd + ",");
-			fw.write(title + ",");
 			fw.write(content + "\n");
 			fw.close();
 
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		System.out.println("휴가 일정 등록이 완료됐습니다.");
+		System.out.println("회의실 예약이 완료됐습니다.");
 
 	}
 }
