@@ -363,6 +363,10 @@ public class PayRoll {
 	
 	// 연장 근무 계산 메소드
 	private int extraWork(int index) {
+	
+		//int extra list.get(index)[6] > 분 데이터임 > 시간으로 만들어서해야함
+	
+		
 		
 		
 		
@@ -370,7 +374,9 @@ public class PayRoll {
 		
 	 int workday = getWorkday();
 	 
-		return 0;
+	 //workday = 
+	 
+		//return 0;
 	}
 
 	
@@ -388,10 +394,10 @@ public class PayRoll {
 		  
 		  while (startCal.getTimeInMillis() <= endCal.getTimeInMillis()) {
 			  
-			  startCal.add(Calendar.DAY_OF_MONTH, 1);
 			  if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
 				  workDays++;
 			  }
+			  startCal.add(Calendar.DAY_OF_MONTH, 1);
 		  }
 
 		  return workDays;
