@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 public class Edit_HR {
@@ -24,8 +25,6 @@ public class Edit_HR {
 			String line = "";
 			String result = "";
 
-			
-			
 			
 			
 			//월급 데이터 만들기

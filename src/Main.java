@@ -23,10 +23,27 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
+//		Vacation v = new Vacation(user);
+//		v.createVacation();
+		
+//		CoperationCar cc = new CoperationCar(user);
+//		cc.createCopCarSchedule();
+		
+//		MeetingRoom mr = new MeetingRoom(user);
+//		mr.createRoomReservation();
+		
+		Board bd = new Board(user);
+		bd.createBoard();
+		
+		
+		
+		
+		
+		
 		//at.dummy();
 //		at.readWorkingTime2();
 //		at.dayWorkingTime2();
-		at.adminSearchWorkingTime();	
+//		at.adminSearchWorkingTime();	
 		
 		
 //		Email mail = new Email(user);
@@ -209,7 +226,7 @@ public class Main {
 			System.out.println("            [2. APPROVAL] ");
 			System.out.println("            1.  전자결재");
 			System.out.println("            2.  근태관리");
-			System.out.println("            3.  휴가관리");
+			System.out.println("            3.  휴가관리"); 
 			System.out.println();
 			System.out.println("            4.  목차로 돌아가기");
 			System.out.println();
@@ -235,7 +252,7 @@ public class Main {
 		while (true) {
 			cls();
 			System.out.println("            [3. NOTICE] ");
-			System.out.println("            1.  게시판");
+			System.out.println("            1.  게시판"); 
 			System.out.println();
 			System.out.println("            2.  목차로 돌아가기");
 			System.out.println();
@@ -259,7 +276,7 @@ public class Main {
 			System.out.println("            [4. RESERVATION] ");
 			System.out.println("            1.  일정관리");
 			System.out.println("            2.  예약/대여");
-			System.out.println("            3.  교육센터");
+			System.out.println("            3.  교육센터"); 
 			System.out.println();
 			System.out.println("            4.  목차로 돌아가기");
 			System.out.println();
@@ -299,7 +316,7 @@ public class Main {
 			} else if (n == 2) {
 				hr.hrScreen();
 			} else if (n == 3) {
-//				showVacation();
+				showExtraPay();
 			} else if (n == 4) {
 				menu();
 				break;
@@ -335,6 +352,9 @@ public class Main {
 		}
 	}
 
+
+	
+	
 ///////////////////////////////////////////////      Lane3      ///////////////////////////////////////////////
 ///////////////////////////////////////////////      CONTACT    ///////////////////////////////////////////////
 
@@ -384,6 +404,46 @@ public class Main {
 		}
 	}
 
+	public static void showExtraPay() {
+
+		PayRoll ep = new PayRoll();
+
+		ep.load();
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("[5. HR]");
+		System.out.println("■ 수당관리 ■");
+		System.out.println("1. 근로 수당 조회");
+		System.out.println("2. 성과급 조회");
+		System.out.println("3. 인사부 전용");
+		System.out.println("4. 목차로 돌아가기");
+		System.out.println();
+		System.out.print("선택: ");
+		
+		String n = (Util.get("번호를 입력해주세요."));
+		
+		if(n.equals("1")) {
+			ep.extraWork(Main.user);
+		} else if(n.equals("2")) {
+			ep.bonus(Main.user);
+		} else if(n.equals("3")) {
+			ep.HrAccess();
+		} else if(n.equals("4")) {
+			menu();
+		} else {
+			System.out.println("※ 올바르지 않은 입력입니다 ※");
+			System.out.println();
+			System.out.println();
+		
+			showExtraPay();
+		}
+		
+	}
+
+	
+	
+	
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
 	private static void showElecApproval() throws IOException {
 		while (true) {
@@ -431,7 +491,10 @@ public class Main {
 			}
 		}
 	}
-
+///////////////////////////////////////////////      NOTICE         ///////////////////////////////////////////////
+///////////////////////////////////////////////      RESERVATION    ///////////////////////////////////////////////
+///////////////////////////////////////////////      HR             ///////////////////////////////////////////////
+///////////////////////////////////////////////      ADMIN          ///////////////////////////////////////////////
 	private static void puase(String string) {
 		System.out.println(string);
 		System.out.println("계속하시려면 엔터를 입력해주세요.");
