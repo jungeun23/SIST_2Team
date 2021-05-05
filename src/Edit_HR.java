@@ -21,10 +21,43 @@ public class Edit_HR {
 		try {
 			
 			BufferedReader reader = new BufferedReader(new FileReader("data\\HR.txt"));
-			
 			String line = "";
 			String result = "";
 
+			
+			// 월 근무시간 추가하기
+			BufferedReader readerTime = new BufferedReader(new FileReader("data\\attendance\\memberTime.txt"));
+			
+			ArrayList<String[]> listTime = new ArrayList<String[]>();
+			
+			while((line = readerTime.readLine()) != null) {
+				
+				String[] temp = line.split(",");
+				listTime.add(temp);
+				
+			}
+
+			line = "";
+			
+			while((line = reader.readLine()) != null ) {
+				
+				String[] temp = line.split(",");
+				
+				int time = 0;
+				
+				for(int i=0; i<listTime.size(); i++) {
+					if(temp[0].equals(listTime.get(i)[0])) {
+						time += Integer.parseInt(listTime.get(i)[2]);
+					}
+				}
+				
+				
+				result += line + ","+time+"\n";
+			}
+			
+			System.out.println(result);
+			
+			
 			
 			
 			//월급 데이터 만들기
@@ -78,7 +111,7 @@ public class Edit_HR {
 //				String year = "";
 //				
 //				if(temp[1].equals("인턴")) {
-//					year = (rand.nextInt(2)+1) +""; //인턴 1~2년
+//					year = (rand.nextInt(2)+1) +""; //인턴 1~2년 > 
 //				} else if(temp[1].equals("사원")) {
 //					year = (rand.nextInt(3)+1) + ""; //사원 1~3년  
 //				} else if(temp[1].equals("대리")) {
@@ -128,7 +161,8 @@ public class Edit_HR {
 //			writer.write(result);
 //			
 //			writer.close();
-			
+//			
+//			System.out.println("쓰기 완료");
 		
 		} catch (Exception e) {
 			System.out.println(e);

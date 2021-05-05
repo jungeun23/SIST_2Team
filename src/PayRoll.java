@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class PayRoll {
 		this.scan = new Scanner(System.in);
 		this.user = new User();
 		this.mentBonus = "지급된 성과급";
-		this.mentExtraWork = "지급된 추가수당";
+		this.mentExtraWork = "지급된 연장근무 수당";
 		this.mentSalary = "지급된  급여";
 		this.mainMenu = new Main();
 	}
@@ -363,14 +364,27 @@ public class PayRoll {
 	
 	// 연장 근무 계산 메소드
 	private int extraWork(int index) {
+	
+		int salary = Integer.parseInt(list.get(index)[5]);// 기본급
 		
+		int hourlyRate = salary / 209; // 통상 시급 (기본급 / 209H)
 		
+		int workday = getWorkday();
 		
+		int extraTime =  Integer.parseInt(list.get(index)[6])/60; //> 분 데이터임 > 시간으로 만듦 한달 일한 시간
 		
+		int legalWorkingTime = workday * 8; //workday * 8시간 근무 = 법적 근무시간
 		
-	 int workday = getWorkday();
-	 
-		return 0;
+		if(extraTime - legalWorkingTime > 0) {
+			
+			int extraWorkPay = (int)((extraTime - legalWorkingTime) * hourlyRate * 1.5); // 연장 근무 시간 * 통상시급 * 1.5
+			
+			return extraWorkPay;
+			
+		} else {
+			return 0;
+		}
+
 	}
 
 	
@@ -388,10 +402,10 @@ public class PayRoll {
 		  
 		  while (startCal.getTimeInMillis() <= endCal.getTimeInMillis()) {
 			  
-			  startCal.add(Calendar.DAY_OF_MONTH, 1);
 			  if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
 				  workDays++;
 			  }
+			  startCal.add(Calendar.DAY_OF_MONTH, 1);
 		  }
 
 		  return workDays;
@@ -462,7 +476,7 @@ public class PayRoll {
 			}
 		}
 		
-		for(int i=0; i<buseo2.size(); i++) {
+		for(int i=0; i<buseo2.size(); i++) { //직급을 숫자로 환산한 것 일단 문자열로 넣어주고
 			buseo2.get(i)[1] =  ""+level(buseo2.get(i)[1]);
 		}
 		
@@ -507,7 +521,7 @@ public class PayRoll {
 				buseo2.get(i)[1] = "인턴";
 			}
 			
-			result += String.format("||  %s  ||  %s  ||  %s  ||  %,d원 ||\n"
+			result += String.format("||  %s  ||  %s  ||  %s  ||  %,11d원 ||\n"
 	
 												, buseo2.get(i)[0]
 												, buseo2.get(i)[1]
@@ -558,11 +572,11 @@ public class PayRoll {
 			
 			System.out.println();
 			System.out.println();
-			System.out.println("==============================================");  
-			System.out.printf("||   이름  ||  부서  ||  직급  ||   %s  ||  \n",ment);
+			System.out.println("===============================================");  
+			System.out.printf("||   이름  ||  부서  ||  직급  ||   %8s  ||  \n",ment);
 			System.out.println("-----------------------------------------------");  
-			System.out.printf("||  %s  ||  %s  ||  %s  ||  %,d원 ||\n",list.get(index)[0], list.get(index)[2], list.get(index)[1],pay);
-			System.out.println("==============================================");  
+			System.out.printf("||  %s  ||  %s  ||  %s  ||  %,11d원 ||\n",list.get(index)[0], list.get(index)[2], list.get(index)[1],pay);
+			System.out.println("===============================================");  
 			System.out.println();
 			System.out.println();
 			
@@ -600,11 +614,14 @@ public class PayRoll {
 			while((line = reader.readLine())!=null) {
 				//석박남,대리,인사,D,5,월급,근무시간(월)
 				String [] temp = line.split(",");
-				
+//				System.out.println(Arrays.toString(temp));
 				list.add(temp);
 
 			}
 
+//			for(int i =0; i<list.size(); i++) {
+//			System.out.println(Arrays.toString(list.get(i)));
+//			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}

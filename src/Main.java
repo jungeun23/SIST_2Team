@@ -32,15 +32,20 @@ public class Main {
 //		MeetingRoom mr = new MeetingRoom(user);
 //		mr.createRoomReservation();
 		
+<<<<<<< HEAD
 //		Board bd = new Board(user);
 //		bd.createBoard();
-		TrainingCenter tc = new TrainingCenter(user);
-		//tc.createTraining();
-		//tc.readTraining();
-		//tc.deleteTraining();
-		tc.updateTraining();
+=======
+		Board bd = new Board(user);
+//		bd.createBoard();
+//		bd.readBoard();
+//		bd.deleteBoard();
+		bd.updateBoard();
+		
+>>>>>>> 581b8200ebc99b24c386c95ba06b7c41d9d23d29
 		
 		
+		hr.hrScreen();
 		
 		
 		
@@ -66,11 +71,11 @@ public class Main {
 	}
 
 	private static void makeEmailDummy() throws Exception {
-		String path = "Data/Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
+		String path = "Data\\Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
 		File f = new File(path);
 //		System.out.println(f);
 		int cnt = 0;
-		BufferedReader reader = new BufferedReader(new FileReader("Data/Email/dummy.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("Data\\Email\\dummy.txt"));
 		
 		String line ="";
 		String result = "";
@@ -91,7 +96,7 @@ public class Main {
 //		ArrayList<String> t5 = new ArrayList<>();
 //		ArrayList<String> t6 = new ArrayList<>();
 		
-		BufferedReader reader2 = new BufferedReader(new FileReader("data/Contact.txt"));
+		BufferedReader reader2 = new BufferedReader(new FileReader("data\\Contact.txt"));
 //		t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
 		while((line = reader2.readLine())!=null) {
 			String[] temp = line.split(",");
@@ -103,7 +108,7 @@ public class Main {
 		Random rand = new Random();
 		int c = rand.nextInt(t1.size()-1);
 		
-		File f2 = new File("data/Email/dummyTest.txt");
+		File f2 = new File("data\\Email\\dummyTest.txt");
 		FileWriter fw = new FileWriter(f2);
 		cnt=1;
 		for(int i=0; i<1000; i++, cnt++) {
@@ -292,7 +297,7 @@ public class Main {
 			} else if (n == 2) {
 //				showReservate();
 			} else if (n == 3) {
-	//			showTrainingCenter();
+//				showTrainingCenter();
 			} else if (n == 4) {
 				menu();
 				break;
