@@ -12,7 +12,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
-
+/**
+ * 근태 관리 클래스 
+ * 
+ * @author 2조 
+ * 
+ */
 public class Attendance {
 	private User user;
 	private final String DATA;
@@ -28,8 +33,6 @@ public class Attendance {
 	private ArrayList<Integer> workingTime;
 	private int lastDay = 0;
 	private int day_of_week = 0;
-	private long weakWorkTime;
-	private long positionWorkTime;
 	private static Calendar c;
 	private static Scanner scan;
 
@@ -37,8 +40,6 @@ public class Attendance {
 		DATA = "data/Contact.txt";
 		DATA2 = "data/attendance/working.txt";
 
-		weakWorkTime = 0;
-		positionWorkTime = 0;
 		c = Calendar.getInstance();
 		chulgeun = new ArrayList<Calendar>();
 		toegeun = new ArrayList<Calendar>();
@@ -49,7 +50,9 @@ public class Attendance {
 		workingTime = new ArrayList<Integer>();
 
 	}
-
+	/*
+	 * 근태관리 항목 나타내주는 메뉴 
+	 */
 	private static String menu() {
 
 		System.out.println("                       ▣ 근태 관리 항목 ▣");
@@ -64,7 +67,11 @@ public class Attendance {
 		return sel;
 
 	}
-
+	
+	/**
+	 * 근태 관리 항목 선택시 해당 메소드로 연결 해주는 메소드 
+	 * @throws IOException
+	 */
 	public void attendanceScreen() throws IOException {
 
 		boolean loop = true;

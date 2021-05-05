@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MyCalendar_subin {
+public class MyCalendar_je {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -34,7 +34,7 @@ public class MyCalendar_subin {
 	LinkedList<String[]> listCar = new LinkedList<>();
 	LinkedList<String[]> listRoom = new LinkedList<>();
 
-	public MyCalendar_subin(User user) {
+	public MyCalendar_je(User user) {
 		this.user = user;
 		DATA = "data\\schedule\\schedule.txt";
 		DATA2 = "data\\schedule\\vacation.txt";
@@ -64,11 +64,6 @@ public class MyCalendar_subin {
 			while ((line = readCar.readLine()) != null) {
 				String[] temp = line.split(",");
 				listCar.add(temp);
-			}
-			BufferedReader readMeetingRoom = new BufferedReader(new FileReader(DATA4));
-			while((line = readMeetingRoom.readLine()) != null) {
-				String[] temp = line.split(",");
-				listRoom.add(temp);
 			}
 		} catch (IOException e) {
 			System.out.println(e);
@@ -187,7 +182,7 @@ public class MyCalendar_subin {
 
 			// 날짜 출력
 			for (int i = 1; i <= lastDay; i++) {
-				if (i == day && this.month == month && this.year == year)
+				if (i == day)
 //							System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
 					System.out.printf("%3d*\t", i);
 				else
@@ -375,13 +370,14 @@ public class MyCalendar_subin {
 	}
 
 	public void createScheduleVacation() {
-		System.out.println("연차를 등록합니다. 달력을 확인해주세요");
+		System.out.println("휴가를 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
 		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("연차 사유를 입력해주세요");
+		String title = Util.get("일정 제목을 입력해주세요");
+		String content = Util.get("일정의 내용을 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
 		// 홍길동,2021-5-4,t,testaaa
@@ -402,7 +398,7 @@ public class MyCalendar_subin {
 				if (t[0].equals(this.user.getName())) {
 					position = t[1];
 					depart = t[2];
-					String[] sl = { this.user.getName(), position, depart, randNum, ymd, title };
+					String[] sl = { this.user.getName(), position, depart, randNum, ymd, title, content };
 					listVacation.add(sl);
 				}
 			}
@@ -413,15 +409,23 @@ public class MyCalendar_subin {
 			fw.write(depart + ",");
 			fw.write(randNum + ",");
 			fw.write(ymd + ",");
-			fw.write(title + "\n");
+			fw.write(title + ",");
+			fw.write(content + "\n");
 			fw.close();
 
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		System.out.println("▶ 휴가 일정 등록이 완료됐습니다.");
+		System.out.println("휴가 일정 등록이 완료됐습니다.");
 	}
 
+	/**
+	 * 
+	 * @param carList
+	 * 
+	 * 
+	 */
+	
 	public void createCopCarReseravtion(ArrayList<String[]> carList) {
 		System.out.println("법인차량 예약을 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
@@ -429,8 +433,7 @@ public class MyCalendar_subin {
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
+		String reason = Util.get("예약 사유를 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
 
@@ -446,6 +449,7 @@ public class MyCalendar_subin {
 		selectedCar--;
 		if (Util.toInt(carList.get(selectedCar)[1]) == 0) {
 			System.out.println(selectedCar + " 차량의 재고가 존재하지 않습니다.");
+			return;
 		} else {
 			int t = Util.toInt(carList.get(selectedCar)[1]);
 			carList.get(selectedCar)[1] = Integer.toString(t - 1);
@@ -464,7 +468,7 @@ public class MyCalendar_subin {
 					position = t[1];
 					depart = t[2];
 					String[] sl = { this.user.getName(), position, depart, carList.get(selectedCar)[0],
-							(carList.get(selectedCar)[1]), ymd, title, content };
+							(carList.get(selectedCar)[1]), ymd, reason };
 					listCar.add(sl);
 				}
 			}
@@ -476,8 +480,7 @@ public class MyCalendar_subin {
 			fw.write(carList.get(selectedCar)[0] + ",");
 			fw.write(carList.get(selectedCar)[1] + ",");
 			fw.write(ymd + ",");
-			fw.write(title + ",");
-			fw.write(content + "\n");
+			fw.write(reason +"\n");
 			fw.close();
 
 		} catch (IOException e) {
@@ -493,7 +496,8 @@ public class MyCalendar_subin {
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String content = Util.get("예약 목적을 입력해주세요");
+		String title = Util.get("일정 제목을 입력해주세요");
+		String content = Util.get("일정의 내용을 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
 		// 홍길동,2021-5-4,t,testaaa
@@ -512,7 +516,7 @@ public class MyCalendar_subin {
 			while((line = readRoom.readLine())!=null) {
 				String[] t = line.split(","); 
 				if(selectedRoom == t[3] && ymd == t[4]){
-					Util.puase("이미 예약된 방과 같은 날짜 입니다. 다시 선택해주세요");
+					Util.puase("이미 예약된 방과 날짜 입니다. 다시 선택해주세요");
 					return;
 				}
 			}
@@ -527,7 +531,7 @@ public class MyCalendar_subin {
 				if (t[0].equals(this.user.getName())) {
 					position = t[1];
 					depart = t[2];
-					String[] sl = { this.user.getName(), position, depart, selectedRoom, ymd, content };
+					String[] sl = { this.user.getName(), position, depart, selectedRoom, ymd, title, content };
 					listRoom.add(sl);
 				}
 			}
@@ -538,13 +542,14 @@ public class MyCalendar_subin {
 			fw.write(depart + ",");
 			fw.write(selectedRoom + ",");
 			fw.write(ymd + ",");
+			fw.write(title + ",");
 			fw.write(content + "\n");
 			fw.close();
 
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		System.out.println("회의실 예약이 완료됐습니다.");
+		System.out.println("휴가 일정 등록이 완료됐습니다.");
 
 	}
 }

@@ -19,6 +19,7 @@ public class ContactList {
 	private String position;
 	private String buseo;
 	
+	//오름차순
 	
 	public ContactList() {
 		DATA = "data\\Contact.txt";
