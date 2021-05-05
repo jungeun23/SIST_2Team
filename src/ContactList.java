@@ -27,11 +27,6 @@ public class ContactList {
 		
 	}
 	
-	
-	// temp[0] = 아이디, temp[1] = 비밀번호, temp[2] = 이름 
-	// temp[3] = 이메일, temp[4] = 전화번호, temp[5] = 직급
-	
-	
 	//주소록 첫 화면 
 	public void firstScreen()  {
 				
@@ -47,7 +42,6 @@ public class ContactList {
 				System.out.print("카테고리 번호 : ");
 				this.num = scan.nextInt();
 				scan.nextLine(); // 입력 받으면서 들어온 \r\n을 지워주고 가야함.
-				
 				
 				try {
 					
@@ -68,9 +62,9 @@ public class ContactList {
 				} catch (Exception e) {
 					System.out.println(e);
 				}
-
-			
 	}//clScreen()
+	
+	
 	
 	//개인 주소록 첫 화면
 	private void makeIndividual() {
@@ -81,13 +75,12 @@ public class ContactList {
 		System.out.println("=======================================");
 		System.out.println();
 		System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
-		System.out.println("목차로 돌아가려면 0번을 누르세요.\n");
+		System.out.println("▶ 목차로 돌아가려면 0번을 누르세요.\n");
 		System.out.print("카테고리 번호 : ");
 		this.num = scan.nextInt();
 		scan.nextLine(); // 입력 받으면서 들어온 \r\n을 지워주고 가야함.
 		
 		try {
-			
 			if (num == 0) {
 				cls();
 				firstScreen();
@@ -96,36 +89,26 @@ public class ContactList {
 			} else if (num == 2) {
 				inputIndividual();
 			}
-			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
-		
 	}
+	
+	
 	
 	//개인 주소록 - 개인 주소록 확인
 	private void checkIndivisual() {
 		
 		try {
-			
 			BufferedReader reader = new BufferedReader(new FileReader(DATA2));
-			
 			String line = "";
-			
 			System.out.println("[이름] [아이디] [이메일] [전화번호] [직급] [부서]");
 			
 			while ((line = reader.readLine()) != null) {
-				
 				String[] temp = line.split(",");
 				
 				System.out.printf("%s%s%s%s%s%s\n"
-						, temp[0]
-						, temp[1]
-						, temp[2]
-						, temp[3]
-					    , temp[4]
-					    , temp[5]);
+						, temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
 				
 				scan.nextLine();
 			}
@@ -138,6 +121,7 @@ public class ContactList {
 	}//check()
 
 
+	
 	//개인 주소록 - 개인 주소록 추가
 	private void inputIndividual() {
 		
@@ -155,21 +139,15 @@ public class ContactList {
 		String buseo = Util.get("부서");
 		
 		try {
-			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(DATA2, true));
-			
 			writer.write(String.format("%s,%s,%s,%s,%s,%s\n", name, id, email, phone, position, buseo));
-			
 			writer.close();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		scan.nextLine();
-		
-		
 	}//input()
-	
 	
 	
 	
@@ -194,24 +172,27 @@ public class ContactList {
 			
 			if((list.get(i)[6]).equals(this.buseo)) {
 				
-				line += String.format("||  %s  ||   %s   || %s  ||  %s  ||   %s   ||   %s   ||"
+				line = String.format("||  %s  ||   %s   || %s  ||  %s  ||   %s   ||   %s   ||"
 						,list.get(i)[6] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5]);
 				
+				System.out.println(line);
 			}
-			
-		}
-		
+		}//for
 		if (line.equals("")) {
 			System.out.println("잘못된 부서입니다.");
-		} else {
-			System.out.println(line);
 		}
+		System.out.println("============================================================================================\n");
+		System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
+		this.num = scan.nextInt();
 		
-		System.out.println("============================================================================================");
+		//다시 목차로 돌려주기
+		if (num == 0) {
+			cls();
+			firstScreen();
+		}
 		scan.nextLine();
 		
 	}//buseo()
-	
 	
 	
 	
@@ -228,42 +209,39 @@ public class ContactList {
 		this.position = scan.nextLine(); 
 		System.out.println();
 		
-		
-		
-		
 		String line = "";
 		
 		System.out.println("============================================================================================");
-		System.out.println("||  직급  ||   이름    ||   아이디    ||     이메일    ||  전화번호    ||   부서   ||");
+		System.out.println("||  직급  ||   이름   ||    아이디 \t ||     이메일\t ||  전화번호\t ||   부서\t ||");
 		System.out.println("============================================================================================");
 
-
-		int index = -1;
+		
 		for (int i=0; i<list.size(); i++) {
-			
 			
 			if((list.get(i)[5]).equals(this.position)) {
 				
-				line += String.format("||  %s  ||   %s  ||  %s  ||  %s  ||   %s   ||   %s   ||"
+				line = String.format("||  %s  ||  %s  || %s\t ||  %s\t  ||   %s   ||   %s   ||"
 							,list.get(i)[5] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[6]);
 				
-				index = i;
-				break;
+				System.out.println("--------------------------------------------------------------------------------------------");
+				System.out.println(line);
 				}
-			
-		}
-		
-		if (line.equals("")) {
+		}//for
+		if (line.equals("")) 
 			System.out.println("잘못된 직급입니다.");
-		} else {
-			System.out.println(line);
-		}
 		
-		System.out.println("============================================================================================");
+		System.out.println("============================================================================================\n");
+		System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
+		this.num = scan.nextInt();
+		
+		//다시 목차로 돌려주기
+		if (num == 0) {
+			cls();
+			firstScreen();
+		}
 		scan.nextLine();
 		
 	}//position()
-	
 	
 	
 	
@@ -273,7 +251,7 @@ public class ContactList {
 		System.out.println();
 		System.out.println("--------------------------");
 		System.out.println();
-		System.out.println("검색 하고자 하는 이름을 입력하세요. ");
+		System.out.println("검색하고자 하는 이름을 입력하세요.\n");
 		System.out.print("이름: ");
 		this.name = scan.nextLine(); 
 		System.out.println();
@@ -285,8 +263,6 @@ public class ContactList {
 		System.out.println("============================================================================================");
 		
 		
-	
-		
 		for (int i=0; i<list.size(); i++) {
 				
 			//list.get(i)[2] = temp[2] / Array접근->배열접근->값접근 : 이게 내가 찾는 값. (string) 
@@ -295,7 +271,7 @@ public class ContactList {
 				line += String.format("||  %s  ||   %s   || %s  ||  %s  ||   %s   ||   %s   ||"
 							,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5] ,list.get(i)[6]);
 				}
-		}
+		}//for
 		
 		//데이터에 없는 값이 입력되면 그냥 아무 것도 출력 XXX -> 그래서 빈 문자열이 나오면 그걸 걸러주는 것. 
 		if ((line.equals("")) ) {
@@ -304,36 +280,38 @@ public class ContactList {
 			System.out.println(line);
 		}
 		
-		System.out.println("============================================================================================");
+		System.out.println("============================================================================================\n");
+		System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
+		this.num = scan.nextInt();
+		
+		//다시 목차로 돌려주기
+		if (num == 0) {
+			cls();
+			firstScreen();
+		}
 		scan.nextLine();
-		
-		
 	}//Name()
 	
-	// Contact.txt에서 
+	
+	
+	// Contact.txt에서 더미 데이터를 읽어오는 작업
 	private void load() {
 		
-		
 		try {
-			
 			BufferedReader reader = new BufferedReader(new FileReader(DATA));
 			
 			String line = "";
 			String temp2 = "";
 			
 			while ((line = reader.readLine()) != null) {
-				
 				String[] temp = line.split(",");
-				
 				list.add(temp);
-				
 			}
-			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
 	}//load()
+	
 	
 	
 	//가독성 생각해서 콘솔 내려주기
@@ -345,8 +323,5 @@ public class ContactList {
 
 
 }//class
-
-
-
 
 
