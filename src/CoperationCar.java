@@ -21,14 +21,14 @@ public class CoperationCar {
 			"TESLA Semi" };
 
 	private int stock;
-	private MyCalendar mc;
+	private MyCalendar_subin mc;
 	private User user;
 //    private HashMap<String, Integer> list = new HashMap<>();
 	private ArrayList<String[]> list = new ArrayList<>();
 
 	public CoperationCar(User user) {
 		this.user = user;
-		this.mc = new MyCalendar(user);
+		this.mc = new MyCalendar_subin(user);
 		Long seed = System.currentTimeMillis();
 		Random rand = new Random(seed);
 		rand.setSeed(seed);
