@@ -160,7 +160,7 @@ public class MyCalendar {
 		}
 	}
 
-	private int[] showCanlendar(int year, int month, int day) {
+	public int[] showCanlendar(int year, int month, int day) {
 		// 마지막일?
 		while (true) {
 			lastDay = getLastDay(year, month);
@@ -280,7 +280,7 @@ public class MyCalendar {
 
 			System.out.println();
 			System.out.println();
-			String s = Util.get("월 이동(a or d) 끝내기(q)");
+			String s = Util.get("월 이동(a or d) 일정/예약 날짜 입력(q)");
 			if (s.equals("q"))
 				break;
 //			KeyEvent event = new KeyEvent();
@@ -369,14 +369,13 @@ public class MyCalendar {
 	}
 
 	public void createScheduleVacation() {
-		System.out.println("휴가를 등록합니다. 달력을 확인해주세요");
+		System.out.println("연차를 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
 		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
+		String title = Util.get("연차 사유를 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
 		// 홍길동,2021-5-4,t,testaaa
@@ -397,7 +396,7 @@ public class MyCalendar {
 				if (t[0].equals(this.user.getName())) {
 					position = t[1];
 					depart = t[2];
-					String[] sl = { this.user.getName(), position, depart, randNum, ymd, title, content };
+					String[] sl = { this.user.getName(), position, depart, randNum, ymd, title };
 					listVacation.add(sl);
 				}
 			}
@@ -408,14 +407,13 @@ public class MyCalendar {
 			fw.write(depart + ",");
 			fw.write(randNum + ",");
 			fw.write(ymd + ",");
-			fw.write(title + ",");
-			fw.write(content + "\n");
+			fw.write(title + "\n");
 			fw.close();
 
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		System.out.println("휴가 일정 등록이 완료됐습니다.");
+		System.out.println("▶ 휴가 일정 등록이 완료됐습니다.");
 	}
 
 	public void createCopCarReseravtion(ArrayList<String[]> carList) {

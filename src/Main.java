@@ -23,8 +23,8 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
-//		Vacation v = new Vacation(user);
-//		v.createVacation();
+		Vacation v = new Vacation(user);
+		v.createVacation();
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
@@ -49,7 +49,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+//		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
