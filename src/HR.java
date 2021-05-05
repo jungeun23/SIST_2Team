@@ -84,7 +84,7 @@ public class HR {
 
 	private void goga() {
 		
-		System.out.println(" ▣ 고가 데이터 관리 화면 ▣");
+		System.out.println("     ▣ 고가 데이터 관리 화면 ▣");
 		System.out.println("====================================");
 		System.out.println("||1. 고가 데이터 || 2. 고가 데이터 ||");
 	    System.out.println("||          출력 ||         변경   ||");
@@ -108,7 +108,7 @@ public class HR {
 
 	private void gogaAlter() {
 
-		System.out.println("         ▣ 고가 데이터 변경 화면 ▣");
+		System.out.println("       ▣ 고가 데이터 변경 화면 ▣");
 		System.out.println("====================================");
 		System.out.println("||1. A ||2. B ||3. C ||4. D ||5. E ||");
 		System.out.println("====================================");
@@ -156,7 +156,7 @@ public class HR {
 
 	private void gogaPrint() {
 
-		System.out.println("▣ 고가 데이터 출력 화면 ▣");
+		System.out.println("        ▣ 고가 데이터 출력 화면 ▣");
 		String name = (Util.get("출력할 직원의 이름을 입력하세요"));
 		
 		int index = -1;
