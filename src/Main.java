@@ -23,15 +23,23 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
+		Messenger ms = new Messenger(user);
+//		ms.load();
+//		ms.createMessenger();
+//		ms.readMessenger();
+		ms.updateMessenger();
+		
+		
+		
 //		Vacation v = new Vacation(user);
 //		v.createVacation();
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-		MeetingRoom mr = new MeetingRoom(user);
+//		MeetingRoom mr = new MeetingRoom(user);
 		//mr.createRoomReservation();
-		mr.MeetingRoomScreen();
+//		mr.MeetingRoomScreen();
 		
 
 //		Board bd = new Board(user);
