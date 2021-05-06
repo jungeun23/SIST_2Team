@@ -23,11 +23,14 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
-		Messenger ms = new Messenger(user);
+//		Messenger ms = new Messenger(user);
 //		ms.load();
 //		ms.createMessenger();
 //		ms.readMessenger();
-		ms.updateMessenger();
+//		ms.updateMessenger();
+		MyCalendar_subin ms = new MyCalendar_subin(user);
+//		ms.showSchedule();
+		ms.deleteSchedule();
 		
 		
 		

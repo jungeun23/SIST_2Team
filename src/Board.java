@@ -37,7 +37,7 @@ public class Board {
 	}
 
 	public void createMessenger() {
-		// 번호 제목 내용 글쓴이 비밀번호
+		// 번호 제목 글쓴이 비밀번호 내용 
 		String title = Util.get("제목을 입력하세요");
 		String pw = Util.get("비밀번호를 입력하세요");
 		seq++;
