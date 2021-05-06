@@ -35,7 +35,7 @@ public class Attendance {
 
 	public Attendance(User user) {
 		DATA = "data/Contact.txt";
-		attendancePath = "data/attendance/memberWorkingTimeDummy.txt";
+		attendancePath = "data/attendance/memberWorkingTimeDummy2.txt";
 		memberPath = "data/attendance/memberTime.txt";
 		chulgeun = new ArrayList<Calendar>();
 		toegeun = new ArrayList<Calendar>();
@@ -52,10 +52,10 @@ public class Attendance {
 	private static String menu() {
 
 		System.out.println("                       ▣ 근태 관리 항목 ▣");
-		System.out.println("================================================================");
-		System.out.println("||  1. 출근  ||  2. 퇴근 	||  3. 월간 근무시간  ||  4. 월간 근무시간   ||");
-		System.out.println("||     등록  ||     등록 	||     조회  (개인)  ||     조회 (관리자)  ||");
-		System.out.println("================================================================");
+		System.out.println("========================================================================");
+		System.out.println("||  1. 출근  ||  2. 퇴근 	||  3. 월간 근무시간  ||  4. 월간 근무시간   || 5. 뒤로 ||" );
+		System.out.println("||     등록  ||     등록 	||     조회  (개인)  ||     조회 (관리자)  ||    가기 || ");
+		System.out.println("========================================================================");
 		System.out.print(" 카테고리(번호)를 선택하세요: ");
 
 		String sel = scan.nextLine();
@@ -69,7 +69,7 @@ public class Attendance {
 	 * 
 	 * @throws IOException
 	 */
-	public void attendanceScreen() throws IOException {
+	public void attendanceScreen() {
 
 		boolean loop = true;
 
@@ -88,8 +88,12 @@ public class Attendance {
 			} else {
 				System.out.println("관리자만 접근 가능합니다.");
 			}
+		} else if(sel.equals("5")) {
+			Main.menu();
+			
 		} else {
 			loop = true;
+			
 		}
 
 	}
@@ -145,7 +149,7 @@ public class Attendance {
 	 */
 	public void dummy() {
 		// ialbutt0,qdf5bG,주반택,nbresland0@sist2.co.kr,010-9965-6848,과장,인사
-		String path = "data/contact.txt";
+		String path = "data/Contact_dummy.txt";
 		String name = "";
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(path));
@@ -153,7 +157,7 @@ public class Attendance {
 			String line = "";
 			ArrayList<String> list = new ArrayList<String>();
 			Random r = new Random();
-			attendancePath = "data/attendance/memberWorkingTimeDummy.txt";
+			attendancePath = "data/attendance/memberWorkingTimeDummy2.txt";
 			FileWriter fw = new FileWriter(attendancePath, true);
 			String dummy = "";
 
@@ -169,8 +173,8 @@ public class Attendance {
 
 //					System.out.printf("%s,2021-05-%02d 08:%02d:00,2021-05-%02d 18:%2d:00\n", name, j,
 //							r.nextInt(40) + 20, j, r.nextInt(15) + 15);
-					dummy = String.format("%s,2021-05-%02d 08:%02d:00,2021-05-%02d 18:%2d:00\n", name, j,
-							r.nextInt(40) + 20, j, r.nextInt(15) + 15);
+					dummy = String.format("%s,2021-05-%02d 08:%02d:00,2021-05-%02d 18:%02d:00\n", name, j,
+							r.nextInt(30) + 30, j, r.nextInt(50));
 
 					fw.write(dummy);
 				}
@@ -247,7 +251,7 @@ public class Attendance {
 		int sum = 0;
 		int i = 0;
 		int cnt = 1;
-		String testPath = "data/attendance/memberTime.txt";
+		String testPath = "data/attendance/memberTime2.txt";
 		FileWriter fw = new FileWriter(testPath);
 
 		for (i = 0; i < this.chulgeun.size(); i++) {
