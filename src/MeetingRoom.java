@@ -104,7 +104,6 @@ public class MeetingRoom {
 					System.out.println();
 					System.out.println(listRoom.get(i)[3] + "회의실 예약을 취소했습니다.");
 					listRoom.remove(i);
-					System.out.println("!!!!!!!!!!!!!!!!!!");
 				}
 			}
 		}
