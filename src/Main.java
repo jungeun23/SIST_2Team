@@ -29,11 +29,19 @@ public class Main {
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-		mr.MeetingRoomScreen();
-		
-
+//		MeetingRoom mr = new MeetingRoom(user);
+//		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
+//		MyCalendar_junhee mc = new MyCalendar_junhee(user);
+//		mc.showSchedule();
+		//mc.deleteSchedule();
+		TrainingCenter tc = new TrainingCenter(user);
+		tc.trainingScreen();
+//		tc.deleteTraining();
+//		tc.createTraining();
+//		tc.readTraining();
+//		Attendance at = new Attendance(user);
+//		at.attendanceScreen();
 //		Board bd = new Board(user);
 //		bd.createBoard();
 
@@ -154,7 +162,7 @@ public class Main {
 			System.out.println();
 
 			System.out.println("            [2. APPROVAL] ");
-			System.out.println("            전자결재, 근태관리, 휴과관리");
+			System.out.println("            전자결재, 휴가관리");
 			System.out.println();
 
 			System.out.println("            [3. NOTICE] ");

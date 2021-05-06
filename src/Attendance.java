@@ -12,25 +12,22 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+
 /**
- * 근태 관리 클래스 
+ * 근태 관리 클래스
  * 
- * @author 2조 
+ * @author 2조
  * 
  */
 public class Attendance {
 	private User user;
-	private final String DATA;
-	private final String DATA2;
-	private String attendancePath = "data/attendance/memberWorkingTimeDummy.txt";
-	private String memberPath = "data/attendance/memberTime.txt";
-	ArrayList<String[]> time = new ArrayList<String[]>();
+	private String DATA;
+	private String attendancePath;
+	private String memberPath;
 
 	private ArrayList<Calendar> chulgeun; // 출근 시간
 	private ArrayList<Calendar> toegeun; // 퇴근 시간
-	private String dayWorkingTimePath;
 	private ArrayList<String> memberName;
-	private ArrayList<Integer> workingTime;
 	private int lastDay = 0;
 	private int day_of_week = 0;
 	private static Calendar c;
@@ -38,20 +35,19 @@ public class Attendance {
 
 	public Attendance(User user) {
 		DATA = "data/Contact.txt";
-		DATA2 = "data/attendance/working.txt";
-
-		c = Calendar.getInstance();
+		attendancePath = "data/attendance/memberWorkingTimeDummy.txt";
+		memberPath = "data/attendance/memberTime.txt";
 		chulgeun = new ArrayList<Calendar>();
 		toegeun = new ArrayList<Calendar>();
-		this.user = user;
-		attendancePath = "";
-		scan = new Scanner(System.in);
 		memberName = new ArrayList<String>();
-		workingTime = new ArrayList<Integer>();
+		scan = new Scanner(System.in);
+		c = Calendar.getInstance();
+		this.user = user;
 
 	}
+
 	/*
-	 * 근태관리 항목 나타내주는 메뉴 
+	 * 근태관리 항목 나타내주는 메뉴
 	 */
 	private static String menu() {
 
@@ -67,9 +63,10 @@ public class Attendance {
 		return sel;
 
 	}
-	
+
 	/**
-	 * 근태 관리 항목 선택시 해당 메소드로 연결 해주는 메소드 
+	 * 근태 관리 항목 선택시 해당 메소드로 연결 해주는 메소드
+	 * 
 	 * @throws IOException
 	 */
 	public void attendanceScreen() throws IOException {
@@ -85,9 +82,9 @@ public class Attendance {
 		} else if (sel.equals("3")) {
 			searchWorkingTime();
 		} else if (sel.equals("4")) {
-			if(this.user.getName().equals("홍길동")) { //t,t 를 임의의 관리자로 지정 
+			if (this.user.getName().equals("홍길동")) { // t,t 를 임의의 관리자로 지정
 				adminSearchWorkingTime();
-				
+
 			} else {
 				System.out.println("관리자만 접근 가능합니다.");
 			}
@@ -96,94 +93,6 @@ public class Attendance {
 		}
 
 	}
-
-	/**
-	 * 5월 출퇴근 시간이 나와있는 더미 데이터에서 필요한 값을 ArrayList 에 저장하는 메소드
-	 *  로그인한 본인의 근무시간만 확인가능
-	 * 
-	 * @author 2조
-	 * @throws IOException
-	 */
-	public void readWorkingTime() throws IOException {
-
-		BufferedReader read = new BufferedReader(new FileReader(DATA2));
-		String line = "";
-
-		while ((line = read.readLine()) != null) {
-			String[] temp = line.split(",");
-			if (temp[0].equals(this.user.getName())) {
-				String in = temp[1];
-				String out = temp[2];
-				String[] inDate = in.split(" ");
-				String[] inDate2 = inDate[0].split("-"); // 년월일
-				String[] inDate3 = inDate[1].split(":");// 시분초
-				int inYear = Integer.parseInt(inDate2[0]);
-				int inMonth = Integer.parseInt(inDate2[1]);
-				inMonth--;
-				int inDay = Integer.parseInt(inDate2[2]);
-
-				int inHour = Integer.parseInt(inDate3[0]);
-				int inMin = Integer.parseInt(inDate3[1]);
-
-				String[] outDate = out.split(" ");
-				String[] outDate2 = outDate[0].split("-"); // 년월일
-				String[] outDate3 = outDate[1].split(":");// 시분초
-				int outYear = Integer.parseInt(outDate2[0]);
-				int outMonth = Integer.parseInt(outDate2[1]);
-				outMonth--;
-				int outDay = Integer.parseInt(outDate2[2]);
-
-				int outHour = Integer.parseInt(outDate3[0]);
-				int outMin = Integer.parseInt(outDate3[1]);
-
-				Calendar c1 = Calendar.getInstance();
-				c1.set(inYear, inMonth, inDay, inHour, inMin, 00);
-				Calendar c2 = Calendar.getInstance();
-				c2.set(outYear, outMonth, outDay, outHour, outMin, 00);
-
-				this.chulgeun.add(c1);
-				this.toegeun.add(c2);
-			}
-		} // while
-
-	}// readWorkingTime
-
-	/**
-	 * ArrayList에 저장된 Calendar 값을 이용해 일별 근무시간 구하는 메소드 토, 일요일을 제외한 평일만 나타내주기
-	 * 
-	 * @throws IOException
-	 * 
-	 */
-	public void dayWorkingTime() throws IOException {
-
-		lastDay = getLastDay(this.chulgeun.get(this.chulgeun.size() - 1).get(Calendar.YEAR),
-				this.chulgeun.get(this.chulgeun.size() - 1).get(Calendar.MONTH));
-		int sum = 0;
-		int i = 0;
-		int cnt = 1;
-		dayWorkingTimePath = "data/attendance/dayWorkingTimePath.txt";
-		FileWriter fw = new FileWriter(dayWorkingTimePath);
-
-		for (i = 0; i < this.chulgeun.size(); i++) {
-			if ((this.chulgeun.get(i).get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
-					&& (chulgeun.get(i).get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)) {
-				sum = (int) ((this.toegeun.get(i).getTimeInMillis() - this.chulgeun.get(i).getTimeInMillis()) / 1000
-						/ 60);
-				cnt++;
-
-				String dayWorkingTime = String.format("%d", sum - 60);
-				fw.write(this.user.getName());
-				fw.write(",");
-				fw.write(String.format("%s-%s-%s", this.chulgeun.get(i).get(Calendar.YEAR),
-						this.chulgeun.get(i).get(Calendar.MONTH) + 1, this.chulgeun.get(i).get(Calendar.DATE)));
-				fw.write(",");
-				fw.write(dayWorkingTime);
-				fw.write("\r\n");
-			}
-		} // i for
-		fw.close();
-
-	}// DayWorkingTime
 
 	/**
 	 * 원하는 년,월을 입력하여 해당 근무 시간을 조회하는 메소드 로그인한 본인의 근무시간 조회
@@ -205,24 +114,27 @@ public class Attendance {
 			int sum = 0;
 			int workingMin = 0;
 			ArrayList<String> list = new ArrayList<String>();
-			
+
 			while ((line = read.readLine()) != null) {
 				// System.out.println(line);
 				String temp[] = line.split(",");
 				list.add(temp[0]);
 				workingMin = Integer.parseInt(temp[2]);
 //				System.out.println(workingMin);
-			
+
 				if (temp[0].equals(this.user.getName())) {
 					String workingDay = temp[1];
 					String[] yearMonthDay = temp[1].split("-"); // 2021-5-3 쪼개기
 					if (yearMonthDay[0].equals(temp1[0]) && yearMonthDay[1].equals(temp1[1])) {
 
 						sum += workingMin;
-					} 
-				} 
+					}
+				}
 			} // while
-			System.out.printf("%s님의 %s년 %s월 근무시간은 %d시간입니다.\n ", this.user.getName(), temp1[0], temp1[1], sum/60);
+			System.out.printf("%s님의 %s년 %s월 근무시간은 %d시간입니다.\n ", this.user.getName(), temp1[0], temp1[1], sum / 60);
+
+			pause();
+			attendanceScreen();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -273,13 +185,13 @@ public class Attendance {
 	}// dummy
 
 	/**
-	 * 5월 출퇴근 시간이 나와있는 더미 데이터에서 필요한 값을 ArrayList 에 저장하는 메소드
-	 * 관리자의 입장에서 모든 직원의 근무시간 확인하는 기능 
+	 * 5월 출퇴근 시간이 나와있는 더미 데이터에서 필요한 값을 ArrayList 에 저장하는 메소드 관리자의 입장에서 모든 직원의 근무시간
+	 * 확인하는 기능
 	 * 
 	 * @author 2조
 	 * @throws IOException
 	 */
-	public void readWorkingTime2() throws IOException {
+	public void readWorkingTime() throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader(this.attendancePath));
 		String line = "";
 
@@ -328,14 +240,13 @@ public class Attendance {
 	 * 
 	 * @throws IOException
 	 */
-	public void dayWorkingTime2() throws IOException {
+	public void dayWorkingTime() throws IOException {
 
 		lastDay = getLastDay(this.chulgeun.get(this.chulgeun.size() - 1).get(Calendar.YEAR),
 				this.chulgeun.get(this.chulgeun.size() - 1).get(Calendar.MONTH));
 		int sum = 0;
 		int i = 0;
 		int cnt = 1;
-		// dayWorkingTimePath = "data/attendance/dayWorkingTimePath.txt";
 		String testPath = "data/attendance/memberTime.txt";
 		FileWriter fw = new FileWriter(testPath);
 
@@ -396,14 +307,15 @@ public class Attendance {
 			} // while
 			System.out.printf("%s님의 %s년 %s월 근무시간은 %d시간입니다.\n ", memName, temp1[0], temp1[1], sum / 60);
 
+			pause();
+			attendanceScreen();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}// searchWorkingTime
 
-	
 	/*
-	 * 날짜 계산시 필요한 메소드 
+	 * 날짜 계산시 필요한 메소드
 	 */
 	public static int getDayOfWeek(int year, int month) {
 
@@ -469,13 +381,12 @@ public class Attendance {
 	}
 
 	/**
-	 * 출근 시간 입력하는 메소드 
-	 * 임의의 랜덤한 시간값이 출근시간으로 입력되도록 만듬 
+	 * 출근 시간 입력하는 메소드 임의의 랜덤한 시간값이 출근시간으로 입력되도록 만듬
 	 */
 	public void inTime() {
 		Random rnd = new Random();
 		Calendar in = Calendar.getInstance();
-		
+
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(DATA));
 			String line = "";
@@ -483,66 +394,66 @@ public class Attendance {
 			while ((line = read.readLine()) != null) {
 				String[] temp = line.split(",");
 				if (temp[2].equals(this.user.getName())) {
-					in.set(in.get(Calendar.YEAR), in.get(Calendar.MONTH), in.get(Calendar.DATE), 8, rnd.nextInt(20)+40, 00);
+					in.set(in.get(Calendar.YEAR), in.get(Calendar.MONTH), in.get(Calendar.DATE), 8,
+							rnd.nextInt(20) + 40, 00);
 				}
 			} // while
 			System.out.println("출근 완료 하셨습니다.");
-			System.out.printf("%s님의 출근시간 : %tF %tT\n",this.user.getName(),in,in);
-			
-			/**
-			 * 이름,출근시간,퇴근시간 으로 해당 파일에 저장.
-			 */
-//			String inTimePath = "data/attendance/inTime.txt";
-//			FileWriter fw = new FileWriter(inTimePath, true);
-//			String chulgeun = String.format("%tF %tT", in, in);
-//			fw.write(this.user.getName());
-//			fw.write(",");
-//			fw.write("\r\n");
-//			fw.close();
+			System.out.printf("%s님의 출근시간 : %tF %tT\n", this.user.getName(), in, in);
+
+			pause();
+			attendanceScreen();
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 
-	}
-	
+	}// inTime
+
 	/**
-	 * 퇴근시간 입력 메소드 
+	 * 퇴근시간 입력 메소드
 	 */
 	public void outTime() {
 		Random rnd = new Random();
-		//t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
+		// t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
 		Calendar out = Calendar.getInstance();
-		
+
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(DATA));
 			String line = "";
-			
+
 			while ((line = read.readLine()) != null) {
 				String[] temp = line.split(",");
 				if (temp[2].equals(this.user.getName())) {
-					out.set(out.get(Calendar.YEAR), out.get(Calendar.MONTH), out.get(Calendar.DATE), 18, rnd.nextInt(30), 00);
+					out.set(out.get(Calendar.YEAR), out.get(Calendar.MONTH), out.get(Calendar.DATE), 18,
+							rnd.nextInt(30), 00);
 				}
 			} // while
 			System.out.println("퇴근 완료 하셨습니다.");
-			System.out.printf("%s님의 퇴근시간 : %tF %tT\n",this.user.getName(),out,out);
-			
-			/**
-			 * 이름,출근시간,퇴근시간 으로 해당 파일에 저장.
-			 */
-//			String inTimePath = "data/attendance/inTime.txt";
-//			FileWriter fw = new FileWriter(inTimePath, true);
-//			String chulgeun = String.format("%tF %tT", chul, chul);
-//			fw.write(this.user.getName());
-//			fw.write(",");
-//			fw.write(chulgeun);
-//			fw.write("\r\n");
-//			fw.close();
-			
+			System.out.printf("%s님의 퇴근시간 : %tF %tT\n", this.user.getName(), out, out);
+
+			pause();
+			attendanceScreen();
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
+	}// OutTime
+
+	private static void cls() {
+
+		for (int i = 0; i < 100; i++) {
+			System.out.println();
+		}
+	}// cls()
+
+	private static void pause() {
+		System.out.println();
+		System.out.println("엔터를 누르시면 항목으로 돌아갑니다.");
+		scan.nextLine();// Block
+		cls();
+
 	}
 
 }
