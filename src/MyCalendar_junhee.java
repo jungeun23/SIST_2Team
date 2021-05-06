@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Random;
@@ -677,7 +678,7 @@ public class MyCalendar_junhee {
 
 		try {
 			// 홍길동,차장,인사,D,12,5000000
-			BufferedReader read = new BufferedReader(new FileReader("data/HR.txt"));
+			BufferedReader read = new BufferedReader(new FileReader("data/HR_test.txt"));
 
 			String line = "";
 			while ((line = read.readLine()) != null) {
@@ -689,6 +690,7 @@ public class MyCalendar_junhee {
 					listTraining.add(sl);
 				}
 			}
+			read.close();
 
 			FileWriter fw = new FileWriter(DATA5, true);
 			fw.write(this.user.getName() + ",");
@@ -751,17 +753,25 @@ public class MyCalendar_junhee {
 	public void updateTrainingSchedule() {
 		// 홍길동,2021-5-4,t,testaaa
 		// 홍길동,차장,인사,2021-5-11,신입사원 교육,신입사원 교육1
+		ArrayList<int[]> t2 = new ArrayList<>();
 		for (int i = 0; i < this.listTraining.size(); i++) {
+			
 			if (listTraining.get(i)[0].equals(this.user.getName())) {
 				String[] temp = this.listTraining.get(i)[3].split("-");
 				int year = Util.toInt(temp[0]);
 				int month = Util.toInt(temp[1]);
 				int day = Util.toInt(temp[2]);
+				int[] g = { year, month, day };
+				t2.add(g);
 				}
 			}
 		System.out.println("수정할 일정을 선택해주세요");
-		int[] c = showCanlendar(year, month, day);
+		int[] c = showCanlendar(t2);
 		for (int i = 0; i < listTraining.size(); i++) {
+			String[] temp = listTraining.get(i)[3].split("-");
+			int year = Util.toInt(temp[0]);
+			int month = Util.toInt(temp[1]);
+			int day = Util.toInt(temp[2]);
 			if (c[0] == year && c[1] == month && c[2] == day) {
 				String title = Util.get("일정의 제목을 입력해주세요");
 				String content = Util.get("일정의 내용을 입력해주세요");
@@ -782,8 +792,8 @@ public class MyCalendar_junhee {
 				fw.write(listTraining.get(i)[3] + ",");
 				fw.write(listTraining.get(i)[4] + ",");
 				fw.write(listTraining.get(i)[5] + "\n");
-				fw.close();
 			}
+			fw.close();
 			TrainingCenter tc = new TrainingCenter(user);
 			tc.pause();
 			tc.trainingScreen();
@@ -826,6 +836,7 @@ public class MyCalendar_junhee {
 					System.out.println();
 					System.out.println(listTraining.get(i)[4] + " 일정을 삭제했습니다.");
 					listTraining.remove(i);
+					
 				}
 			}
 		} // for
@@ -841,11 +852,11 @@ public class MyCalendar_junhee {
 				fw.write(listTraining.get(i)[3] + ",");
 				fw.write(listTraining.get(i)[4] + ",");
 				fw.write(listTraining.get(i)[5] + "\n");
-				fw.close();
 			}
+			fw.close();
 
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}// deleteTrainingSchedule
 

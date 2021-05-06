@@ -54,7 +54,7 @@ public class Main {
 
 		
 		
-		hr.hrScreen();
+//		hr.hrScreen();
 		
 		
 		
@@ -67,7 +67,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
@@ -288,7 +288,7 @@ public class Main {
 		}
 	}
 
-	private static void showReservation() {
+	public static void showReservation() {
 		while (true) {
 			cls();
 			System.out.println("            [4. RESERVATION] ");
@@ -304,7 +304,7 @@ public class Main {
 			if (n == 1) {
 //				showSchedule();
 			} else if (n == 2) {
-//				showReservate();
+				showReservate();
 			} else if (n == 3) {
 //				showTrainingCenter();
 			} else if (n == 4) {
@@ -422,6 +422,26 @@ public class Main {
 		}
 	}
 
+	public static void showReservate() {
+		System.out.println("[4. RESERVATION - 2.예약/대여]");
+		System.out.println("1. 회의실 예약");
+		System.out.println("2. 차량 대여");
+		System.out.println("3. 목차로 돌아가기");
+		String n = (Util.get("번호를 입력해주세요"));
+		
+		if(n.equals("1")) {
+			//수빈 - 회의실 예약
+		} else if(n.equals("2")) {
+			
+			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+			cop.copCar();
+			
+		} else {
+			showReservation();
+		}
+	}
+
+	
 	public static void showExtraPay() {
 
 		PayRoll ep = new PayRoll();
