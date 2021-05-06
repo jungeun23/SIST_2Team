@@ -21,26 +21,33 @@ public class HR {
 		scan = new Scanner(System.in);
 
 	}
+	public void hrlogin() {
+		// 관리자 전용 비밀번호 -> 권한 있는 사용자에게만 배포
+				cls();
+				int pw = 1234;
+
+				System.out.println("관리자 비밀번호를 입력하세요.");
+				System.out.println("=============================");
+				System.out.print("        PW: ");
+				pw = scan.nextInt();
+				System.out.println("=============================");
+				System.out.println();
+
+				if (pw == 1234) {
+
+					System.out.println("     [로그인 성공]");
+					cls();
+
+					read();
+					hrScreen();
+	
+				} else {
+					System.out.println("권한이 있는 사용자가 아닙니다.");
+					System.out.println("비밀번호를 다시 입력해주세요.");
+				}
+	}
 
 	public void hrScreen() {
-
-		// 관리자 전용 비밀번호 -> 권한 있는 사용자에게만 배포
-		cls();
-		int pw = 1234;
-
-		System.out.println("관리자 비밀번호를 입력하세요.");
-		System.out.println("=============================");
-		System.out.print("        PW: ");
-		pw = scan.nextInt();
-		System.out.println("=============================");
-		System.out.println();
-
-		if (pw == 1234) {
-
-			System.out.println("     [로그인 성공]");
-			cls();
-
-			read();
 
 			// cls();
 			System.out.println("                       ▣ 인사 관리 항목 ▣");
@@ -48,12 +55,17 @@ public class HR {
 			System.out.println("|| 1. 부서  || 2. 직급 || 3. 신입사원 || 4. 퇴사직원 || 5. 고과데이터 ||");
 			System.out.println("||    변경  ||    변경 ||    정보추가 ||    정보삭제 ||        관리   ||");
 			System.out.println("=======================================================================");
+			System.out.println("목차로 돌아가려면 0번을 누르세요.\n");
 			System.out.print(" 카테고리(번호)를 선택하세요: ");
 			int num = scan.nextInt();
+			scan.nextLine();// 입력 받으면서 들어온 \r\n을 지워주고 가야함.
 
 			cls();
 
-			if (num == 1) {
+			if(num == 0) {
+				return;
+				
+			} else if (num == 1) {
 				buseoAlter();
 
 			} else if (num == 2) {
@@ -73,11 +85,6 @@ public class HR {
 				System.out.println("카테고리(번호)를 다시 입력하세요.");
 			}
 
-		} else {
-			System.out.println("권한이 있는 사용자가 아닙니다.");
-			System.out.println("비밀번호를 다시 입력해주세요.");
-		}
-
 	}// hrScreen()
 
 	private void goga() {
@@ -87,11 +94,16 @@ public class HR {
 		System.out.println("||1. 고과 데이터 || 2. 고과 데이터 ||");
 		System.out.println("||          출력 ||         변경   ||");
 		System.out.println("====================================");
+		System.out.println("▶ 목차로 돌아가려면 0번을 누르세요.\n");
 		int num = Integer.parseInt(Util.get("카테고리(번호)를 선택하세요"));
 
 		cls();
-
-		if (num == 1) {
+		
+		if (num == 0) {
+				cls();
+				hrScreen();
+				
+		} else if (num == 1) {
 			gogaPrint();
 
 		} else if (num == 2) {
@@ -109,8 +121,14 @@ public class HR {
 		System.out.println("====================================");
 		System.out.println("||1. A ||2. B ||3. C ||4. D ||5. E ||");
 		System.out.println("====================================");
+		System.out.println("▶ 목차로 돌아가려면 q를 누르세요.\n");
 		String name = (Util.get("변경할 직원의 이름을 입력하세요"));
 		System.out.println();
+		
+		if(name.equals("q")) {
+			cls();
+			hrScreen();
+		}
 
 		int index = -1;
 		for (int i = 0; i < hr.size(); i++) {
@@ -126,7 +144,7 @@ public class HR {
 
 		if (hr.get(index)[0].equals(name)) {
 
-			if (num == 1) {
+			 if (num == 1) {
 				hr.get(index)[3] = "A";
 
 			} else if (num == 2) {
@@ -153,7 +171,13 @@ public class HR {
 	private void gogaPrint() {
 
 		System.out.println("        ▣ 고과 데이터 출력 화면 ▣");
+		System.out.println("▶ 목차로 돌아가려면 q를 누르세요.\n");
 		String name = (Util.get("출력할 직원의 이름을 입력하세요"));
+		
+		if(name.equals("q")) {
+			cls();
+			hrScreen();
+		}
 
 		int index = -1;
 		for (int i = 0; i < hr.size(); i++) {
@@ -176,8 +200,14 @@ public class HR {
 	}// gogaPrint()
 
 	private void delete() {
+		System.out.println("▶ 목차로 돌아가려면 q를 누르세요.\n");
 		System.out.println("▣ 퇴사 직원 삭제 화면 ▣");
 		String name = (Util.get("삭제할 직원의 이름을 입력하세요"));
+		
+		if(name.equals("q")) {
+			cls();
+			hrScreen();
+		}
 
 		for (int i = 0; i < contact.size(); i++) {
 			if (contact.get(i)[2].equals(name)) {
@@ -191,8 +221,17 @@ public class HR {
 
 	private void add() {
 		// t,t,홍길동,a@sis2.co.kr,010-1234-1234,인턴,인사
-
+		System.out.println("");
+		System.out.println("▶ 목차로 돌아가려면 q를 누르세요. 진행하시려면 엔터를 누르세요.\n");
+		String mok = scan.nextLine();
+		
+		if(mok.equals("q")) {
+			cls();
+			hrScreen();
+		}
+		
 		System.out.println("▣ 신입 사원 추가 화면 ▣");
+		
 		String name = (Util.get("이름"));
 		String id = (Util.get("아이디"));
 		String pw = (Util.get("비밀번호"));
@@ -224,8 +263,15 @@ public class HR {
 		System.out.println("=================================================================================");
 		System.out.println("||1.인턴 ||2.사원 ||3.대리 ||4.과장 ||5.차장 ||6.부장 ||7.상무 ||8.전무 ||9.사장||");
 		System.out.println("=================================================================================");
+		System.out.println("목차로 돌아가려면 q를 누르세요.\n");
 		String name = (Util.get("변경할 직원의 이름을 입력하세요"));
 		System.out.println();
+		
+		if(name.equals("q")) {
+			cls();
+			hrScreen();
+		}
+		
 
 		int index = -1;
 		for (int i = 0; i < contact.size(); i++) {
@@ -250,7 +296,7 @@ public class HR {
 
 		// "인턴","사원","대리","과장","차장","부장" + 상무, 전무, 사장
 		if (contact.get(index)[2].equals(name)) {
-
+			
 			if (num == 1) {
 
 				contact.get(index)[5] = "인턴";
@@ -305,8 +351,14 @@ public class HR {
 		System.out.println("=============================================================================");
 		System.out.println("||1.회계 ||2.재무 ||3.인사 ||4.영업 ||5.마케팅 ||6.개발 ||7.디자인 ||8.사업 ||");
 		System.out.println("=============================================================================");
+		System.out.println("목차로 돌아가려면 q를 누르세요.\n");
 		String name = (Util.get("변경할 직원의 이름을 입력하세요"));
 		System.out.println();
+		
+		if(name.equals("q")) {
+			cls();
+			hrScreen();
+		} 
 
 		int index = -1;
 		for (int i = 0; i < contact.size(); i++) {
@@ -449,8 +501,6 @@ public class HR {
 
 				}
 				
-
-			
 			hrsave();
 
 			System.out.println("[작업이 완료되었습니다.]");

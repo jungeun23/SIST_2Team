@@ -23,15 +23,23 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
-		Vacation v = new Vacation(user);
-		v.firstScreen();
+//		Messenger ms = new Messenger(user);
+//		ms.load();
+//		ms.createMessenger();
+//		ms.readMessenger();
+//		ms.updateMessenger();
+//		
+		
+		
+//		Vacation v = new Vacation(user);
+//		v.createVacation();
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-//		MeetingRoom mr = new MeetingRoom(user);
+		MeetingRoom mr = new MeetingRoom(user);
 		//mr.createRoomReservation();
-//		mr.MeetingRoomScreen();
+		mr.MeetingRoomScreen();
 		
 
 //		Board bd = new Board(user);
@@ -59,8 +67,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		
-//		menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
@@ -142,7 +149,7 @@ public class Main {
 		}
 	}
 
-	public static void menu() {
+	private static void menu() {
 		while (true) {
 			System.out.println("=============================================");
 			System.out.println("               환영합니다.");
@@ -155,7 +162,7 @@ public class Main {
 			System.out.println();
 
 			System.out.println("            [2. APPROVAL] ");
-			System.out.println("            전자결재, 근태관리, 휴과관리");
+			System.out.println("            전자결재, 휴가관리");
 			System.out.println();
 
 			System.out.println("            [3. NOTICE] ");
@@ -245,11 +252,11 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-				showElecApproval();
+//				showElecApproval();
 			} else if (n == 2) {
 //				showAttendance();
 			} else if (n == 3) {
-				
+//				showVacation();
 			} else if (n == 4) {
 				menu();
 				break;
@@ -281,7 +288,7 @@ public class Main {
 		}
 	}
 
-	private static void showReservation() {
+	public static void showReservation() {
 		while (true) {
 			cls();
 			System.out.println("            [4. RESERVATION] ");
@@ -297,7 +304,7 @@ public class Main {
 			if (n == 1) {
 //				showSchedule();
 			} else if (n == 2) {
-//				showReservate();
+				showReservate();
 			} else if (n == 3) {
 //				showTrainingCenter();
 			} else if (n == 4) {
@@ -415,6 +422,26 @@ public class Main {
 		}
 	}
 
+	public static void showReservate() {
+		System.out.println("[4. RESERVATION - 2.예약/대여]");
+		System.out.println("1. 회의실 예약");
+		System.out.println("2. 차량 대여");
+		System.out.println("3. 목차로 돌아가기");
+		String n = (Util.get("번호를 입력해주세요"));
+		
+		if(n.equals("1")) {
+			//수빈 - 회의실 예약
+		} else if(n.equals("2")) {
+			
+			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+			cop.copCar();
+			
+		} else {
+			showReservation();
+		}
+	}
+
+	
 	public static void showExtraPay() {
 
 		PayRoll ep = new PayRoll();
@@ -456,7 +483,7 @@ public class Main {
 	
 	
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
-	private static void showElecApproval() {
+	private static void showElecApproval() throws IOException {
 		while (true) {
 			cls();
 			System.out.println("            [전자결재 업무] ");
@@ -472,40 +499,34 @@ public class Main {
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
 			System.out.println();
-			
-			try {
-				
-				ElecApproval ea = new ElecApproval(user);
-				if (n == 1) {
-					try {
-						ea.createElecApproval();
-					} catch (Exception e) {
-						System.out.println(e);
-					}
-				} else if (n == 2) {
-					ea.readElecApproval();
-				} else if (n == 3) {
-//				ea.addCommnetElecApproval();
-				} else if (n == 4) {
-					ea.myElecApproval();
-				} else if (n == 5) {
-					ea.deleteElecApproval();
-				} else if (n == 6) {
-					try {
-						ea.setElecApprovalCondition();
-					} catch (IOException e) {
-						System.out.println(e);
-					}
-				} else if (n == 0) {
-					showContact();
-					break;
-				} else {
-					System.out.println("잘못된 번호를 입력하셨습니다.");
+
+			ElecApproval ea = new ElecApproval(user);
+			if (n == 1) {
+				try {
+					ea.createElecApproval();
+				} catch (Exception e) {
+					System.out.println(e);
 				}
-			} catch (Exception e) {
-				System.out.println(e);
+			} else if (n == 2) {
+				ea.readElecApproval();
+			} else if (n == 3) {
+//				ea.addCommnetElecApproval();
+			} else if (n == 4) {
+				ea.myElecApproval();
+			} else if (n == 5) {
+				ea.deleteElecApproval();
+			} else if (n == 6) {
+				try {
+					ea.setElecApprovalCondition();
+				} catch (IOException e) {
+					System.out.println(e);
+				}
+			} else if (n == 0) {
+				showContact();
+				break;
+			} else {
+				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
-			
 		}
 	}
 ///////////////////////////////////////////////      NOTICE         ///////////////////////////////////////////////
