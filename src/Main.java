@@ -30,7 +30,6 @@ public class Main {
 //		cc.createCopCarSchedule();
 		
 		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
 		mr.MeetingRoomScreen();
 		
 
@@ -45,8 +44,8 @@ public class Main {
 		
 
 		
-		
-//		hr.hrScreen();
+//		
+//		hr.hrlogin();
 		
 		
 		
@@ -59,7 +58,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
