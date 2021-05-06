@@ -23,14 +23,23 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
+		Messenger ms = new Messenger(user);
+//		ms.load();
+//		ms.createMessenger();
+//		ms.readMessenger();
+		ms.updateMessenger();
+		
+		
+		
 //		Vacation v = new Vacation(user);
 //		v.createVacation();
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		mr.MeetingRoomScreen();
+//		MeetingRoom mr = new MeetingRoom(user);
+		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
 		
 
 //		Board bd = new Board(user);
@@ -44,8 +53,8 @@ public class Main {
 		
 
 		
-//		
-//		hr.hrlogin();
+		
+//		hr.hrScreen();
 		
 		
 		
@@ -58,7 +67,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		menu();
+		//menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
