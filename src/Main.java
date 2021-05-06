@@ -29,7 +29,7 @@ public class Main {
 //		ms.readMessenger();
 //		ms.updateMessenger();
 		MyCalendar_subin ms = new MyCalendar_subin(user);
-//		ms.showSchedule();
+		ms.showSchedule();
 		ms.deleteSchedule();
 		
 		

@@ -124,8 +124,8 @@ public class MyCalendar_subin {
 				this.list.set(i, t);
 				System.out.println("일정 수정이 완료됐습니다.");
 			}
-
 		}
+		//Filewrite로 list 모두 쓰기
 	}
 
 	public void deleteSchedule() {
@@ -156,7 +156,7 @@ public class MyCalendar_subin {
 				}
 			}
 		} // exit for
-
+		//Filewrite로 list 모두 쓰기
 	}
 
 	public void showSchedule() {
