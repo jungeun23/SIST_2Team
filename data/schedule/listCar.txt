@@ -62,7 +62,7 @@ MB GLE-Class,5
 MB A-Class,4
 MB GLA-Class,2
 MB G-Class,1
-MB C-Class,4
+MB C-Class,3
 porsche Cayenne,1
 porsche Taycan,3
 porsche Panamera,5
@@ -74,9 +74,9 @@ Lamborghini Urus,1
 Lamborghini Huracan,3
 Lamborghini Aventador,1
 Ferrari Portofino Modificata,4
-Ferrari Roma,2
+Ferrari Roma,1
 Ferrari SF90 Stradale,4
-Ferrari F8 Tributo,3
+Ferrari F8 Tributo,4
 Ferrari 812 SuperFast,4
 LaFerrari,3
 Maserati Levante,2
@@ -84,7 +84,7 @@ Maserati Ghibli,5
 Maserati Quattroporte,4
 Maserati Corse 20,1
 Maserati Levante,1
-McLaren Artura,2
+McLaren Artura,3
 McLaren 720S,5
 McLaren 765LT,3
 McLaren Speedtail,4
