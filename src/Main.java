@@ -23,6 +23,14 @@ public class Main {
 		Login login = new Login();
 		user = login.loginScreen();
 		
+//		Messenger ms = new Messenger(user);
+//		ms.load();
+//		ms.createMessenger();
+//		ms.readMessenger();
+//		ms.updateMessenger();
+//		
+		
+		
 //		Vacation v = new Vacation(user);
 //		v.createVacation();
 		
@@ -30,7 +38,8 @@ public class Main {
 //		cc.createCopCarSchedule();
 		
 //		MeetingRoom mr = new MeetingRoom(user);
-//		mr.createRoomReservation();
+		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
 		
 
 //		Board bd = new Board(user);
@@ -153,7 +162,7 @@ public class Main {
 			System.out.println();
 
 			System.out.println("            [2. APPROVAL] ");
-			System.out.println("            전자결재, 근태관리, 휴과관리");
+			System.out.println("            전자결재, 휴가관리");
 			System.out.println();
 
 			System.out.println("            [3. NOTICE] ");
