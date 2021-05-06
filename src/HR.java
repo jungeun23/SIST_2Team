@@ -200,8 +200,8 @@ public class HR {
 	}// gogaPrint()
 
 	private void delete() {
-		System.out.println("▣ 퇴사 직원 삭제 화면 ▣");
 		System.out.println("▶ 목차로 돌아가려면 q를 누르세요.\n");
+		System.out.println("▣ 퇴사 직원 삭제 화면 ▣");
 		String name = (Util.get("삭제할 직원의 이름을 입력하세요"));
 		
 		if(name.equals("q")) {
@@ -222,10 +222,15 @@ public class HR {
 	private void add() {
 		// t,t,홍길동,a@sis2.co.kr,010-1234-1234,인턴,인사
 		System.out.println("");
-		String name = (Util.get("▶ 목차로 돌아가려면 q를 누르세요.\n"));
+		System.out.println("▶ 목차로 돌아가려면 q를 누르세요. 진행하시려면 엔터를 누르세요.\n");
+		String mok = scan.nextLine();
+		
+		if(mok.equals("q")) {
+			cls();
+			hrScreen();
+		}
 		
 		System.out.println("▣ 신입 사원 추가 화면 ▣");
-		
 		
 		String name = (Util.get("이름"));
 		String id = (Util.get("아이디"));

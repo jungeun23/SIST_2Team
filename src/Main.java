@@ -28,10 +28,7 @@ public class Main {
 //		ms.createMessenger();
 //		ms.readMessenger();
 //		ms.updateMessenger();
-		MyCalendar_subin ms = new MyCalendar_subin(user);
-//		ms.showSchedule();
-		ms.deleteSchedule();
-		
+//		
 		
 		
 //		Vacation v = new Vacation(user);
@@ -57,7 +54,7 @@ public class Main {
 
 		
 		
-//		hr.hrScreen();
+		hr.hrScreen();
 		
 		
 		
@@ -165,7 +162,7 @@ public class Main {
 			System.out.println();
 
 			System.out.println("            [2. APPROVAL] ");
-			System.out.println("            전자결재, 근태관리, 휴과관리");
+			System.out.println("            전자결재, 휴가관리");
 			System.out.println();
 
 			System.out.println("            [3. NOTICE] ");
