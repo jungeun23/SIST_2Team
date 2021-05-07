@@ -6,7 +6,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * 전자결재 구현
+ * 사용자는 전자결재 문서를 생성, 읽기, 삭제, 수정을 할 수 있다.
+ * @param elec DATA에 위치한 파일 정보를 모두 불러들어 저장
+ * @param DATA 파일의 정보가 저장된 위치를 저장
+ * @param user 현재 사용중인 유저의 정보를 식별하기 위한 변수
+ * @param sc 사용자로부터 입력을 받기 위한 Scanner 변수
+ */
 public class ElecApproval {
 	private static ArrayList<Elec> elec = new ArrayList<Elec>();
 	private final String DATA = "data\\ElecDoc\\ElecDocDB";
@@ -17,6 +24,9 @@ public class ElecApproval {
 		this.user = user;
 		load();
 	}
+	/**
+	 * DATA에 있는 정보를 모두 읽어 elec에 저장한다.
+	 */
 
 	private void load() throws IOException {
 		try {
@@ -78,8 +88,11 @@ public class ElecApproval {
 		fw.close();
 	}
 
-	public void readElecApproval() {
+	/**
+	 * elec에 존재하는 모든 문서의 번호와 제목을 출력한뒤 선택된 문서를 읽는다.
+	 */
 
+	public void readElecApproval() {
 		int cnt = 1;
 		for (int i = 0; i < elec.size(); i++, cnt++) {
 			System.out.printf("[%d] %s", elec.get(i).getSeq(), elec.get(i).getTitle());
@@ -118,6 +131,9 @@ public class ElecApproval {
 //		}
 	}
 
+	/**
+	 * elec에 존재하는 모든 문서의 번호와 제목을 출력한뒤 선택된 문서를 삭제한다.
+	 */
 	public void deleteElecApproval() {
 		for (int i = 0; i < elec.size(); i++) {
 			System.out.printf("[%d] %s\n", elec.get(i).getSeq(), elec.get(i).getTitle());
@@ -163,6 +179,9 @@ public class ElecApproval {
 //		}
 //	}
 
+	/**
+	 * elec에 존재하는 내가 작성한 문서의 번호와 제목을 출력한뒤 문서를 읽는다.
+	 */
 	public void myElecApproval() {
 		for (int i = 0; i < elec.size(); i++) {
 			if (elec.get(i).getName().equals(this.user.getName()))
@@ -193,6 +212,9 @@ public class ElecApproval {
 //		} catch (Exception e) {
 //			System.out.println(e);
 //		}
+	/**
+	 * list에 존재하는 정보를 출력하는 메소드
+	 */
 	public void readElecApproval(int choice) {
 		System.out.println();
 		System.out.println();
@@ -206,6 +228,9 @@ public class ElecApproval {
 		System.out.println();
 	}
 
+	/**
+	 * 직급에 따라 전자 결재를 여러 형태로 수정 가능하게 구현한 메소드
+	 */
 	public void setElecApprovalCondition() throws IOException {
 		if (this.user.getPosition().equals("부장")) {
 			for (int i = 0, cnt = 0; i < elec.size(); i++, cnt++) {

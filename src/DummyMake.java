@@ -23,7 +23,7 @@ public class DummyMake {
 //			boardDummy();
 //			ElecAppDummy();
 //			EmailDummy();
-			MessengerDummy();
+//			MessengerDummy();
 //			System.out.println(makeContent());
 		} catch (Exception e) {
 			System.out.println(e);
