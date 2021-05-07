@@ -15,11 +15,10 @@ public class HR {
 	ArrayList<String[]> hr = new ArrayList<String[]>();
 
 	public HR() {
-
-		DATA = "data/HR.txt";
-		DATA2 = "data/Contact.txt";
+		DATA = "data\\HR.txt";
+		DATA2 = "data\\Contact.txt";
 		scan = new Scanner(System.in);
-
+		read();
 	}
 	public void hrlogin() {
 		// 관리자 전용 비밀번호 -> 권한 있는 사용자에게만 배포
@@ -37,10 +36,8 @@ public class HR {
 
 					System.out.println("     [로그인 성공]");
 					cls();
-
-					read();
 					hrScreen();
-	
+					
 				} else {
 					System.out.println("권한이 있는 사용자가 아닙니다.");
 					System.out.println("비밀번호를 다시 입력해주세요.");
@@ -84,6 +81,14 @@ public class HR {
 
 				System.out.println("카테고리(번호)를 다시 입력하세요.");
 			}
+			System.out.println("목차로 돌아가려면 0번을 누르세요.\n");
+			int num2 = scan.nextInt();
+			scan.nextLine();
+			
+			if(num2 == 0) {
+				return;
+			}
+			
 
 	}// hrScreen()
 
@@ -112,6 +117,7 @@ public class HR {
 		} else {
 			System.out.println("잘못된 번호를 입력하셨습니다.");
 		}
+		
 
 	}// goga()
 
@@ -165,6 +171,13 @@ public class HR {
 		}
 
 		hrsave();
+		
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			hrScreen();
+		}
 
 	}// gogaAlter()
 
@@ -196,6 +209,13 @@ public class HR {
 
 			System.out.println(s);
 		}
+		
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			hrScreen();
+		}
 
 	}// gogaPrint()
 
@@ -216,6 +236,13 @@ public class HR {
 			}
 		}
 		contactsave();
+		
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			hrScreen();
+		}
 
 	}// delete()
 
@@ -242,9 +269,9 @@ public class HR {
 
 		String[] newPerson = new String[7];
 
-		newPerson[0] = name;
-		newPerson[1] = id;
-		newPerson[2] = pw;
+		newPerson[0] = id;
+		newPerson[1] = pw;
+		newPerson[2] = name;
 		newPerson[3] = email;
 		newPerson[4] = phone;
 		newPerson[5] = position;
@@ -253,6 +280,13 @@ public class HR {
 		contact.add(newPerson);
 
 		contactsave();
+		
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			hrScreen();
+		}
 
 	}// add()
 
@@ -341,6 +375,13 @@ public class HR {
 		}
 		// System.out.println(Arrays.toString(list.get(index)));
 		contactsave();
+		
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			hrScreen();
+		}
 
 	}// positionAlter()
 
@@ -370,7 +411,7 @@ public class HR {
 			}
 			// System.out.println(list);
 		}
-
+//t,t,홍길동,iehcksm1@sis2.co.kr,010-1234-1234,과장,영업
 		System.out.printf("■ %s님의 정보 ■\n", contact.get(index)[2]);
 
 		String s = String.format("현재 부서: %s", contact.get(index)[6]);
@@ -419,6 +460,13 @@ public class HR {
 			}
 		}
 		contactsave();
+		
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			hrScreen();
+		}
 	}// buseoAlter()
 
 	private static void cls() {
@@ -494,8 +542,9 @@ public class HR {
 						index = i;
 
 						if (contact.get(index)[2].equals(hr.get(index)[0])) {
-							hr.get(index)[1] = contact.get(index)[5];
-							hr.get(index)[2] = contact.get(index)[6];
+							hr.get(index)[1] = contact.get(index)[5]; //직급 연동
+							hr.get(index)[2] = contact.get(index)[6]; //부서 연동
+							
 						}
 					}
 
