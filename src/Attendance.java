@@ -89,7 +89,7 @@ public class Attendance {
 				System.out.println("관리자만 접근 가능합니다.");
 			}
 		} else if(sel.equals("5")) {
-			Main.menu();
+			//Main.menu();
 			
 		} else {
 			loop = true;

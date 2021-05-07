@@ -31,15 +31,15 @@ public class Main {
 //		
 		
 		
-//		Vacation v = new Vacation(user);
-//		v.createVacation();
+		Vacation v = new Vacation(user);
+		v.firstScreen();
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-		mr.MeetingRoomScreen();
+//		MeetingRoom mr = new MeetingRoom(user);
+//		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
 		
 
 //		Board bd = new Board(user);
@@ -67,7 +67,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		menu();
+//		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();

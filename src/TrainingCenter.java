@@ -37,7 +37,7 @@ public class TrainingCenter {
 
 			} else if (num == 5) {
 
-				Main.menu();
+				//Main.menu();
 
 			} else {
 

@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Vacation {
 	User user;
 	MyCalendar_jiwon mc;
+	
 	public Vacation(User user) {
 		this.user =user;
 		this.mc = new MyCalendar_jiwon(user);

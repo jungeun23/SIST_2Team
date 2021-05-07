@@ -68,7 +68,7 @@ public class ContactList {
 	//개인 주소록 첫 화면
 	private void makeIndividual() {
 		
-		System.out.println("=======================================");
+		System.out.println("\n\n=======================================");
 		System.out.println("|| 1. 개인 주소록  || 2. 개인 주소록 ||");
 		System.out.println("||           확인  ||           추가 ||");
 		System.out.println("=======================================");
@@ -97,26 +97,38 @@ public class ContactList {
 	
 	//개인 주소록 - 개인 주소록 확인
 	private void checkIndivisual() {
-		
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(DATA2));
-			String line = "";
-			System.out.println("[이름] [아이디] [이메일] [전화번호] [직급] [부서]");
-			
-			while ((line = reader.readLine()) != null) {
-				String[] temp = line.split(",");
+
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(DATA2));
+				String line = "";
+				System.out.println("==========================\n");
+				System.out.println("개인 주소록\n");
+				System.out.println(" [이름]  [아이디]  [이메일]  [전화번호]  [직급]  [부서]");
+				System.out.println("=====================================================");
 				
-				System.out.printf("%s%s%s%s%s%s\n"
-						, temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
+				while ((line = reader.readLine()) != null) {
+					String[] temp = line.split(",");
+					
+					System.out.printf("\n|| %s || %s || %s || %s || %s || %s ||\n\n"
+							, temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
+					
+				}
+				reader.close();
 				
+				System.out.println("=====================================================");
+				System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
+				this.num = scan.nextInt();
+				
+				//다시 목차로 돌려주기
+				if (num == 0) {
+					cls();
+					firstScreen();
+				}
 				scan.nextLine();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			reader.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 	}//check()
 
 
@@ -126,7 +138,8 @@ public class ContactList {
 		
 		Util juso = new Util();
 		
-		System.out.println("주소록 추가");
+		System.out.println("==========================\n");
+		System.out.println("[개인주소록 추가]\n");
 		
 		System.out.print("이름: ");
 		String name = scan.nextLine();
@@ -142,10 +155,20 @@ public class ContactList {
 			writer.write(String.format("%s,%s,%s,%s,%s,%s\n", name, id, email, phone, position, buseo));
 			writer.close();
 			
+			System.out.println("=====================================================");
+			System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
+			this.num = scan.nextInt();
+			
+			//다시 목차로 돌려주기
+			if (num == 0) {
+				cls();
+				firstScreen();
+			}
+			scan.nextLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		scan.nextLine();
+		
 	}//input()
 	
 	
@@ -153,10 +176,9 @@ public class ContactList {
 	//주소록 - 부서 검색
 	private void searchBuseo() {
 		
-		System.out.println();
-		System.out.println("--------------------------");
-		System.out.println();
-		System.out.println("");
+		System.out.println("\n==========================\n");
+		System.out.println("검색 하고자 하는 부서 명을 입력하세요. ");
+		System.out.println("[회계] [재무] [인사] [영업] [마케팅] [개발] [디자인] [사업]\n");
 		System.out.print("부서: ");
 		this.buseo = scan.nextLine(); 
 		System.out.println();
@@ -174,6 +196,7 @@ public class ContactList {
 				line = String.format("||%4s\t||%s\t||%s\t||%23s\t||%s\t||%s||"
 						,list.get(i)[6] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5]);
 				
+				System.out.println("--------------------------------------------------------------------------------------------------");
 				System.out.println(line);
 			}
 		}//for
@@ -199,11 +222,10 @@ public class ContactList {
 	private void searchPosition() {
 		
 		System.out.println();
-		System.out.println("--------------------------");
-		System.out.println();
+		System.out.println("--------------------------\n");
+		System.out.println("==========================\n");
 		System.out.println("검색 하고자 하는 직급 명을 입력하세요. ");
-		System.out.println("[인턴] [사원] [대리] [과장] [차장] [부장] [상무] [전무] [사장]");
-		System.out.println();
+		System.out.println("[인턴] [사원] [대리] [과장] [차장] [부장] [상무] [전무] [사장]\n");
 		System.out.print("직급: ");
 		this.position = scan.nextLine(); 
 		System.out.println();
@@ -248,8 +270,7 @@ public class ContactList {
 	private void searchName() {
 		
 		System.out.println();
-		System.out.println("--------------------------");
-		System.out.println();
+		System.out.println("==========================\n");
 		System.out.println("검색하고자 하는 이름을 입력하세요.\n");
 		System.out.print("이름: ");
 		this.name = scan.nextLine(); 
