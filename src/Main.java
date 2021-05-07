@@ -37,9 +37,9 @@ public class Main {
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-		mr.MeetingRoomScreen();
+//		MeetingRoom mr = new MeetingRoom(user);
+//		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
 		
 
 //		Board bd = new Board(user);
@@ -149,7 +149,7 @@ public class Main {
 		}
 	}
 
-	private static void menu() {
+	public static void menu() {
 		while (true) {
 			System.out.println("=============================================");
 			System.out.println("               환영합니다.");
@@ -423,10 +423,12 @@ public class Main {
 	}
 
 	public static void showReservate() {
-		System.out.println("[4. RESERVATION - 2.예약/대여]");
-		System.out.println("1. 회의실 예약");
-		System.out.println("2. 차량 대여");
-		System.out.println("3. 목차로 돌아가기");
+		System.out.println("            [4. RESERVATION - 2.예약/대여]");
+		System.out.println();
+		System.out.println("            1. 회의실 예약");
+		System.out.println("            2. 차량 대여");
+		System.out.println();
+		System.out.println("            3. 목차로 돌아가기");
 		String n = (Util.get("번호를 입력해주세요"));
 		
 		if(n.equals("1")) {
@@ -434,7 +436,7 @@ public class Main {
 		} else if(n.equals("2")) {
 			
 			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
-			cop.copCar();
+			cop.copCarScreen();
 			
 		} else {
 			showReservation();
@@ -450,14 +452,14 @@ public class Main {
 		
 		System.out.println();
 		System.out.println();
-		System.out.println("[5. HR]");
-		System.out.println("■ 수당관리 ■");
-		System.out.println("1. 근로 수당 조회");
-		System.out.println("2. 성과급 조회");
-		System.out.println("3. 인사부 전용");
-		System.out.println("4. 목차로 돌아가기");
+		System.out.println("            	[5. HR]");
+		System.out.println("            	▣ 수당관리 ▣");
+		System.out.println("==================================================");
+		System.out.println("|| 1. 근로 수당 || 2.  성과급 || 3.  인사부 || 4. 목차로 ||");
+		System.out.println("||        조회 ||      조회 ||      전용 ||   돌아가기 ||");
+		System.out.println("==================================================");
+		
 		System.out.println();
-		System.out.print("선택: ");
 		
 		String n = (Util.get("번호를 입력해주세요."));
 		
