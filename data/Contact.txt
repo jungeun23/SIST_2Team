@@ -358,3 +358,5 @@ jiwon,moon1234,문지원,jiwon@sist2.co.kr,010-3854-9854,상무,사업
 junhee,lee1234,이준희,junhee@sist2.co.kr,010-9534-8573,전무,사업
 hungrae,kim1234,김형래,hungrae@sist2.co.kr,010-8362-3764,사장,사업
 sdfsg9s,tghjgK,박보검,sdfs@sist2.co.kr,010-3303-5950,차장,마케팅
+t,t,홍길동,iehcksm1@sis2.co.kr,010-1234-1234,과장,영업
+
