@@ -13,7 +13,6 @@ public class Main {
 
 	public static HR hr = new HR();
 	public static ContactList cl = new ContactList();
-	public static Attendance at = new Attendance(user);
 	public static void main(String[] args) throws Exception {
 
 //		user.regist_user();
@@ -28,8 +27,7 @@ public class Main {
 //		ms.createMessenger();
 //		ms.readMessenger();
 //		ms.updateMessenger();
-//		
-		
+		menu();
 		
 //		Vacation v = new Vacation(user);
 //		v.createVacation();
@@ -54,16 +52,6 @@ public class Main {
 
 		
 		
-		hr.hrScreen();
-		
-		
-		
-		//at.dummy();
-//		at.readWorkingTime2();
-//		at.dayWorkingTime2();
-//		at.adminSearchWorkingTime();	
-		
-		
 //		Email mail = new Email(user);
 
 //		mail.readMail();
@@ -72,19 +60,15 @@ public class Main {
 //		MyCalendar c = new MyCalendar();
 //		c.output();
 		//makeEmailDummy();
-//		Attendance at = new Attendance(user);
-//		at.readWorkingTime();
-//		at.dayWorkingTime();
-//		at.searchWorkingTime();
 		
 	}
 
 	private static void makeEmailDummy() throws Exception {
-		String path = "Data\\Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
+		String path = "Data/Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
 		File f = new File(path);
 //		System.out.println(f);
 		int cnt = 0;
-		BufferedReader reader = new BufferedReader(new FileReader("Data\\Email\\dummy.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("Data/Email/dummy.txt"));
 		
 		String line ="";
 		String result = "";
@@ -105,7 +89,7 @@ public class Main {
 //		ArrayList<String> t5 = new ArrayList<>();
 //		ArrayList<String> t6 = new ArrayList<>();
 		
-		BufferedReader reader2 = new BufferedReader(new FileReader("data\\Contact.txt"));
+		BufferedReader reader2 = new BufferedReader(new FileReader("data/Contact.txt"));
 //		t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
 		while((line = reader2.readLine())!=null) {
 			String[] temp = line.split(",");
@@ -117,7 +101,7 @@ public class Main {
 		Random rand = new Random();
 		int c = rand.nextInt(t1.size()-1);
 		
-		File f2 = new File("data\\Email\\dummyTest.txt");
+		File f2 = new File("data/Email/dummyTest.txt");
 		FileWriter fw = new FileWriter(f2);
 		cnt=1;
 		for(int i=0; i<1000; i++, cnt++) {
@@ -149,7 +133,7 @@ public class Main {
 		}
 	}
 
-	private static void menu() {
+	public static void menu() {
 		while (true) {
 			System.out.println("=============================================");
 			System.out.println("               환영합니다.");
@@ -243,10 +227,9 @@ public class Main {
 			cls();
 			System.out.println("            [2. APPROVAL] ");
 			System.out.println("            1.  전자결재");
-			System.out.println("            2.  근태관리");
-			System.out.println("            3.  휴가관리"); 
+			System.out.println("            2.  휴가관리"); 
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            3.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -256,8 +239,6 @@ public class Main {
 			} else if (n == 2) {
 //				showAttendance();
 			} else if (n == 3) {
-//				showVacation();
-			} else if (n == 4) {
 				menu();
 				break;
 			} else {
@@ -306,7 +287,8 @@ public class Main {
 			} else if (n == 2) {
 //				showReservate();
 			} else if (n == 3) {
-//				showTrainingCenter();
+				TrainingCenter tc = new TrainingCenter(user);
+				tc.trainingScreen();
 			} else if (n == 4) {
 				menu();
 				break;
@@ -330,7 +312,8 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-//				showElecApproval();
+				Attendance at = new Attendance(user);
+				at.attendanceScreen();
 			} else if (n == 2) {
 				hr.hrScreen();
 			} else if (n == 3) {
