@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,17 +10,91 @@ import java.util.List;
 import java.util.Random;
 
 public class DummyMake {
+	static Random rnd = new Random();
+
 	public static void main(String[] args) {
 		try {
 //			ContactDummy();
-			HRDummy();
-		} catch (IOException e) {
+//			HRDummy();
+//			for (int i = 0; i < 100; i++) {
+//				System.out.println(makeTitle());
+//				System.out.println(makeContent());
+//			}
+			boardDummy();
+//			System.out.println(makeContent());
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
+	public static void boardDummy() throws IOException {
+//		1,title제목,홍길동,qwer1234,content내용
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\board\\board.txt");
+		for(int i=0; i<10000; i++) {
+			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getNameFromContact(), getPasswordDummy(), getContentDummy()));
+		}
+		fw.close();
+	}
+
+	private static String getPasswordDummy() {
+		int length = rnd.nextInt(20);
+		String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+		String specialCharacters = "!@#$";
+		String numbers = "1234567890";
+		String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
+		Random random = new Random();
+		char[] password = new char[length];
+		String result="";
+
+		for (int i = 0; i < length; i++) {
+			password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
+		}
+		for (int i = 0; i < length; i++) {
+			result += password[i];
+		}
+		
+		return result;
+	}
+
+	public static String getNameFromContact() throws IOException {
+
+		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
+		String line = "";
+		LinkedList<String> list = new LinkedList<>();
+		while ((line = read.readLine()) != null) {
+			String[] t = line.split(",");
+			list.add(t[2]);
+		}
+
+		return list.get(rnd.nextInt(list.size() - 1));
+	}
+
+	public static String getTitleDummy() throws IOException {
+		BufferedReader read = new BufferedReader(new FileReader("data\\dummy\\title.txt"));
+		String line = "";
+		String result = "";
+		LinkedList<String> list = new LinkedList<>();
+		while ((line = read.readLine()) != null) {
+			list.add(line);
+		}
+		return list.get(rnd.nextInt(list.size() - 1)) + " " + list.get(rnd.nextInt(list.size() - 1));
+	}
+
+	public static String getContentDummy() throws IOException {
+		BufferedReader read = new BufferedReader(new FileReader("data\\dummy\\content.txt"));
+		String line = "";
+		String result = "";
+		LinkedList<String> list = new LinkedList<>();
+		while ((line = read.readLine()) != null) {
+			list.add(line);
+		}
+		return list.get(rnd.nextInt(list.size() - 1)) + " " + list.get(rnd.nextInt(list.size() - 1)) + " "
+				+ list.get(rnd.nextInt(list.size() - 1));
+	}
+
 	public static void HRDummy() throws IOException {
-//		ehumber0,EcxPfdAl,반남석,ssellar0@bloglovin.com,010-3091-7832,과장,디자인
 		LinkedList<String[]> list = new LinkedList<>();
 		LinkedList<String[]> list2 = new LinkedList<>();
 
@@ -41,27 +116,27 @@ public class DummyMake {
 
 		for (int i = 0; i < list.size(); i++) {
 			String year = "";
-			
-			if(list.get(i)[1].equals("인턴")) {
-				year = (rand.nextInt(2)+1) +""; //인턴 1~2년 > 
-			} else if(list.get(i)[5].equals("사원")) {
-				year = (rand.nextInt(3)+1) + ""; //사원 1~3년  
-			} else if(list.get(i)[5].equals("대리")) {
-				year = (rand.nextInt(4)+4) + ""; //대리 4~7년
-			} else if(list.get(i)[5].equals("과장")) {
-				year = (rand.nextInt(4)+8) + ""; //과장 8~11년
-			} else if(list.get(i)[5].equals("차장")) {
-				year = (rand.nextInt(5)+12) + ""; //차장 12~16년
-			} else if(list.get(i)[5].equals("부장")) { 
-				year = (rand.nextInt(5)+17) + ""; //부장 17~21년
-			} else if(list.get(i)[5].equals("상무")) {
-				year = 23 +"";
-			} else if(list.get(i)[5].equals("전무")) {
-				year = 25 +"";
+
+			if (list.get(i)[1].equals("인턴")) {
+				year = (rand.nextInt(2) + 1) + ""; // 인턴 1~2년 >
+			} else if (list.get(i)[5].equals("사원")) {
+				year = (rand.nextInt(3) + 1) + ""; // 사원 1~3년
+			} else if (list.get(i)[5].equals("대리")) {
+				year = (rand.nextInt(4) + 4) + ""; // 대리 4~7년
+			} else if (list.get(i)[5].equals("과장")) {
+				year = (rand.nextInt(4) + 8) + ""; // 과장 8~11년
+			} else if (list.get(i)[5].equals("차장")) {
+				year = (rand.nextInt(5) + 12) + ""; // 차장 12~16년
+			} else if (list.get(i)[5].equals("부장")) {
+				year = (rand.nextInt(5) + 17) + ""; // 부장 17~21년
+			} else if (list.get(i)[5].equals("상무")) {
+				year = 23 + "";
+			} else if (list.get(i)[5].equals("전무")) {
+				year = 25 + "";
 			} else {
 				year = 30 + "";
 			}
-			
+
 			int salary = 0;
 
 			if (list.get(i)[5].equals("인턴")) {
@@ -92,7 +167,8 @@ public class DummyMake {
 				salary = 10000000;
 
 			}
-			String[] t = { list.get(i)[2], list.get(i)[5], list.get(i)[6], goga[rnd], year, Integer.toString(salary), Integer.toString(rand.nextInt(100)+500)};
+			String[] t = { list.get(i)[2], list.get(i)[5], list.get(i)[6], goga[rnd], year, Integer.toString(salary),
+					Integer.toString(rand.nextInt(100) + 500) };
 			list2.add(t);
 		}
 
@@ -110,8 +186,6 @@ public class DummyMake {
 		fw.close();
 //		ehumber0,EcxPfdAl,,ssellar0@bloglovin.com,010-3091-7832,과장,디자인
 	}
-
-
 
 	private static String workyear(LinkedList<String[]> list) {
 		// TODO Auto-generated method stub

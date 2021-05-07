@@ -725,7 +725,7 @@ public class MyCalendar_junhee {
 			int[] g = { year, month , day };
 			t.add(g);
 		}
-			System.out.println("일정을 선택해주세요");
+			System.out.println("조회할 일정을 선택해주세요");
 			int[] c = showCanlendar(t);
 			for (int i = 0; i < listTraining.size(); i++) {
 				String[] temp = listTraining.get(i)[3].split("-");
@@ -834,7 +834,7 @@ public class MyCalendar_junhee {
 
 				if (c[0] == year && c[1] == month && c[2] == day) {
 					System.out.println();
-					System.out.println(listTraining.get(i)[4] + " 일정을 삭제했습니다.");
+					System.out.println("'" + listTraining.get(i)[4] + "' 일정을 삭제했습니다.");
 					listTraining.remove(i);
 					
 				}
@@ -854,6 +854,9 @@ public class MyCalendar_junhee {
 				fw.write(listTraining.get(i)[5] + "\n");
 			}
 			fw.close();
+			TrainingCenter tc = new TrainingCenter(user);
+			tc.pause();
+			tc.trainingScreen();
 
 		} catch (Exception e) {
 			System.out.println(e);
