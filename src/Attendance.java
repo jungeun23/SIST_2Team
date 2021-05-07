@@ -1,15 +1,9 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileSystemNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -35,7 +29,7 @@ public class Attendance {
 
 	public Attendance(User user) {
 		DATA = "data/Contact.txt";
-		attendancePath = "data/attendance/memberWorkingTimeDummy2.txt";
+		attendancePath = "data/attendance/memberWorkingTimeDummy.txt";
 		memberPath = "data/attendance/memberTime.txt";
 		chulgeun = new ArrayList<Calendar>();
 		toegeun = new ArrayList<Calendar>();
@@ -53,8 +47,8 @@ public class Attendance {
 
 		System.out.println("                       ▣ 근태 관리 항목 ▣");
 		System.out.println("========================================================================");
-		System.out.println("||  1. 출근  ||  2. 퇴근 	||  3. 월간 근무시간  ||  4. 월간 근무시간   || 5. 뒤로 ||" );
-		System.out.println("||     등록  ||     등록 	||     조회  (개인)  ||     조회 (관리자)  ||    가기 || ");
+		System.out.println("||  1. 출근  ||  2. 퇴근 	||  3. 월간 근무 ||  4. 월간 근무시간  || 5. 뒤로 ||" );
+		System.out.println("||     등록  ||     등록 	||     시간 조회 ||     조회 관리자용  ||    가기 || ");
 		System.out.println("========================================================================");
 		System.out.print(" 카테고리(번호)를 선택하세요: ");
 
@@ -92,6 +86,7 @@ public class Attendance {
 			//Main.menu();
 			
 		} else {
+			System.out.println("번호를 다시 입력해주세요.");
 			loop = true;
 			
 		}
@@ -135,7 +130,14 @@ public class Attendance {
 					}
 				}
 			} // while
+			System.out.println();
+			System.out.println();
+			System.out.println("        ▣ 월간 근무 시간 조회(개인) ▣");
+			System.out.println("====================================");
+			System.out.println();
 			System.out.printf("%s님의 %s년 %s월 근무시간은 %d시간입니다.\n ", this.user.getName(), temp1[0], temp1[1], sum / 60);
+			System.out.println();
+			System.out.println("====================================");
 
 			pause();
 			attendanceScreen();
@@ -151,13 +153,13 @@ public class Attendance {
 		// ialbutt0,qdf5bG,주반택,nbresland0@sist2.co.kr,010-9965-6848,과장,인사
 		String path = "data/Contact_dummy.txt";
 		String name = "";
+		Random r = new Random();
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(path));
 
 			String line = "";
 			ArrayList<String> list = new ArrayList<String>();
-			Random r = new Random();
-			attendancePath = "data/attendance/memberWorkingTimeDummy2.txt";
+			attendancePath = "data/attendance/memberWorkingTimeDummy.txt";
 			FileWriter fw = new FileWriter(attendancePath, true);
 			String dummy = "";
 
@@ -171,8 +173,6 @@ public class Attendance {
 				name = list.get(i);
 				for (int j = 1; j <= 31; j++) {
 
-//					System.out.printf("%s,2021-05-%02d 08:%02d:00,2021-05-%02d 18:%2d:00\n", name, j,
-//							r.nextInt(40) + 20, j, r.nextInt(15) + 15);
 					dummy = String.format("%s,2021-05-%02d 08:%02d:00,2021-05-%02d 18:%02d:00\n", name, j,
 							r.nextInt(30) + 30, j, r.nextInt(50));
 
@@ -251,7 +251,7 @@ public class Attendance {
 		int sum = 0;
 		int i = 0;
 		int cnt = 1;
-		String testPath = "data/attendance/memberTime2.txt";
+		String testPath = "data/attendance/memberTime.txt";
 		FileWriter fw = new FileWriter(testPath);
 
 		for (i = 0; i < this.chulgeun.size(); i++) {
@@ -309,7 +309,14 @@ public class Attendance {
 					}
 				}
 			} // while
+			System.out.println();
+			System.out.println();
+			System.out.println("        ▣ 월간 근무 시간 조회(관리자) ▣");
+			System.out.println("====================================");
+			System.out.println();
 			System.out.printf("%s님의 %s년 %s월 근무시간은 %d시간입니다.\n ", memName, temp1[0], temp1[1], sum / 60);
+			System.out.println();
+			System.out.println("====================================");
 
 			pause();
 			attendanceScreen();
@@ -399,11 +406,16 @@ public class Attendance {
 				String[] temp = line.split(",");
 				if (temp[2].equals(this.user.getName())) {
 					in.set(in.get(Calendar.YEAR), in.get(Calendar.MONTH), in.get(Calendar.DATE), 8,
-							rnd.nextInt(20) + 40, 00);
+							rnd.nextInt(30) + 30, 00);
 				}
 			} // while
+			System.out.println();
+			System.out.println();
+			System.out.println("        ▣ 출근 등록 화면 ▣");
+			System.out.println("====================================");
 			System.out.println("출근 완료 하셨습니다.");
 			System.out.printf("%s님의 출근시간 : %tF %tT\n", this.user.getName(), in, in);
+			System.out.println("====================================");
 
 			pause();
 			attendanceScreen();
@@ -433,8 +445,13 @@ public class Attendance {
 							rnd.nextInt(30), 00);
 				}
 			} // while
+			System.out.println();
+			System.out.println();
+			System.out.println("        ▣ 퇴근 등록 화면 ▣");
+			System.out.println("====================================");
 			System.out.println("퇴근 완료 하셨습니다.");
 			System.out.printf("%s님의 퇴근시간 : %tF %tT\n", this.user.getName(), out, out);
+			System.out.println("====================================");
 
 			pause();
 			attendanceScreen();
@@ -454,7 +471,7 @@ public class Attendance {
 
 	private static void pause() {
 		System.out.println();
-		System.out.println("엔터를 누르시면 항목으로 돌아갑니다.");
+		System.out.println("엔터를 누르시면 이전 항목으로 돌아갑니다.");
 		scan.nextLine();// Block
 		cls();
 
