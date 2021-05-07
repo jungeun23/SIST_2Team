@@ -25,13 +25,11 @@ public class ContactList {
 		DATA = "data\\Contact.txt";
 		DATA2 = "data\\MyContactList.txt";
 		name = "";
-		
+		load();
 	}
 	
 	//주소록 첫 화면 
 	public void firstScreen()  {
-				
-				load();
 				
 				System.out.println("===============================================");
 				System.out.println("|| 1.이름  || 2. 직급 || 3. 부서 || 4.  개인 ||");
