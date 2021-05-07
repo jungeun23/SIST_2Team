@@ -20,25 +20,101 @@ public class DummyMake {
 //				System.out.println(makeTitle());
 //				System.out.println(makeContent());
 //			}
-			boardDummy();
+//			boardDummy();
+//			ElecAppDummy();
+//			EmailDummy();
+			MessengerDummy();
 //			System.out.println(makeContent());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+	public static void MessengerDummy() throws IOException {
+		// 번호 제목 보내는사람이름 내용
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\Messenger\\Messenger.txt");
+		for (int i = 0; i < 10000; i++) {
+			String s = getNameFromContact();
+			fw.write(String.format("%s, %s, %s\n", cnt++, getTitleDummy(), s));
+			fw.write(getContentDummy()+"\n");
+			fw.write("-----\n");
+		}
+		fw.close();
+	}
+	
+	public static void EmailDummy() throws IOException {
+//		번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\Email\\Email.txt");
+		for (int i = 0; i < 10000; i++) {
+			String s = getNameFromContact();
+			String s2 = getNameFromContact();
+			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getEmail(s), getEmail(s2),
+					s, s2));
+			fw.write(getContentDummy()+"\n");
+			fw.write("-----\n");
+		}
+		fw.close();
+	}
+
+	public static void ElecAppDummy() throws IOException {
+//		 2,테스트,1234,홍길동,과장
+//		 테스트 
+//		 중입니다 ~ 
+//		 -----
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\ElecDoc\\ElecDoc.txt");
+		for (int i = 0; i < 10000; i++) {
+			String s = getNameFromContact();
+			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getPasswordDummy(), s,
+					getPosition(s)));
+			fw.write(getContentDummy()+"\n");
+			fw.write("-----\n");
+		}
+		fw.close();
+	}
+	private static String getEmail(String s) throws IOException {
+		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
+		String line = "";
+		String res = "";
+		while ((line = read.readLine()) != null) {
+			String[] temp = line.split(",");
+			if (temp[2].equals(s)) {
+				res = temp[3];
+				break;
+			}
+		}
+		return res;
+	}
+	private static String getPosition(String s) throws IOException {
+		BufferedReader read = new BufferedReader(new FileReader("data\\HR.txt"));
+		String line = "";
+		String res = "";
+		while ((line = read.readLine()) != null) {
+			String[] temp = line.split(",");
+			if (temp[0].equals(s)) {
+				res = temp[1];
+				break;
+			}
+		}
+		return res;
 	}
 
 	public static void boardDummy() throws IOException {
 //		1,title제목,홍길동,qwer1234,content내용
 		int cnt = 1;
 		FileWriter fw = new FileWriter("data\\board\\board.txt");
-		for(int i=0; i<10000; i++) {
-			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getNameFromContact(), getPasswordDummy(), getContentDummy()));
+		for (int i = 0; i < 10000; i++) {
+			fw.write(String.format("%s, %s, %s, %s\n", cnt++, getTitleDummy(), getNameFromContact(),
+					getPasswordDummy()));
+			fw.write(getContentDummy()+"\n");
+			fw.write("-----\n");
 		}
 		fw.close();
 	}
 
 	private static String getPasswordDummy() {
-		int length = rnd.nextInt(20);
+		int length = rnd.nextInt(20)+8;
 		String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 		String specialCharacters = "!@#$";
@@ -46,7 +122,7 @@ public class DummyMake {
 		String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
 		Random random = new Random();
 		char[] password = new char[length];
-		String result="";
+		String result = "";
 
 		for (int i = 0; i < length; i++) {
 			password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
@@ -54,7 +130,7 @@ public class DummyMake {
 		for (int i = 0; i < length; i++) {
 			result += password[i];
 		}
-		
+
 		return result;
 	}
 
@@ -90,7 +166,7 @@ public class DummyMake {
 		while ((line = read.readLine()) != null) {
 			list.add(line);
 		}
-		return list.get(rnd.nextInt(list.size() - 1)) + " " + list.get(rnd.nextInt(list.size() - 1)) + " "
+		return list.get(rnd.nextInt(list.size() - 1)) + "\n" + list.get(rnd.nextInt(list.size() - 1)) + "\n"
 				+ list.get(rnd.nextInt(list.size() - 1));
 	}
 
