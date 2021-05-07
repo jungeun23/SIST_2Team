@@ -36,9 +36,9 @@ public class Main {
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-		
+//		
 		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
+//		//mr.createRoomReservation();
 		mr.MeetingRoomScreen();
 		
 
@@ -54,7 +54,7 @@ public class Main {
 
 		
 		
-//		hr.hrScreen();
+//		hr.hrlogin();
 		
 		
 		
@@ -67,7 +67,7 @@ public class Main {
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		menu();
+//		menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
@@ -433,8 +433,8 @@ public class Main {
 			//수빈 - 회의실 예약
 		} else if(n.equals("2")) {
 			
-			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
-			cop.copCar();
+//			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+//			cop.copCar();
 			
 		} else {
 			showReservation();

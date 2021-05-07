@@ -38,12 +38,15 @@ public class MeetingRoom {
 		System.out.println("|| 1. 회의실  || 2. 회의실 예약  || 3. 회의실 예약 ||");
 		System.out.println("||      예약  ||           취소  ||      현황 확인 ||");
 		System.out.println("====================================================");
+		System.out.println("목차로 돌아가려면 0번을 누르세요.\n");
 		int num = Integer.parseInt(Util.get("카테고리(번호)를 선택하세요"));
 
 		load();
 		cls();
 
-		if (num == 1) {
+		if(num == 0) {
+			return;
+		} else if (num == 1) {
 			createRoomReservation();
 		} else if (num == 2) {
 			deleteRoom();
@@ -85,6 +88,12 @@ public class MeetingRoom {
 
 	public void createRoomReservation() {
 		mc.createRoomReservation(roomNumber);
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			MeetingRoomScreen();
+		}
 	}// createRoomReservation()
 
 	public void deleteRoom() {
@@ -117,6 +126,12 @@ public class MeetingRoom {
 //			}
 
 		mc.deleteRoom();
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			MeetingRoomScreen();
+		}
 
 //		
 //		} // exit for
@@ -186,6 +201,12 @@ public class MeetingRoom {
 //	      System.out.println("남은 일정이 없습니다.");
 //	   }
 		mc.readRoom();
+		System.out.println();
+		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
+		if(num2 == 0) {
+			cls();
+			MeetingRoomScreen();
+		}
 
 //	public void readRoom() {
 //		// 홍길동,차장,인사,501,2021-5-5,t
