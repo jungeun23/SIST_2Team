@@ -544,7 +544,7 @@ public class MyCalendar_jungeun {
 	 * 
 	 */
 	
-	public void copCar() {
+	public void copCarScreen() {
 		
 //		for(int i=0; i<list.size(); i++) {
 //		System.out.println(Arrays.toString(list.get(i)));
@@ -566,7 +566,7 @@ public class MyCalendar_jungeun {
 			Main.showReservation();
 		} else {
 			System.out.println("잘못된 입력입니다.");
-			copCar();
+			copCarScreen();
 		}
 	}
 	
@@ -636,7 +636,7 @@ public class MyCalendar_jungeun {
 		saveCarList();
 		System.out.println("엔터를 누르면 목록으로 돌아갑니다.");
 		scan.nextLine();
-		copCar();
+		copCarScreen();
 	}
 
 	public void readCopCarSchedule() {
@@ -674,7 +674,7 @@ public class MyCalendar_jungeun {
 		System.out.println("모든 예약을 출력했습니다.");
 		System.out.println("엔터를 누르면 목록으로 돌아갑니다.");
 		scan.nextLine();
-		copCar();
+		copCarScreen();
 		
 	}
 	
@@ -728,7 +728,7 @@ public class MyCalendar_jungeun {
 		
 		System.out.println("엔터를 누르면 목록으로 돌아갑니다.");
 		scan.nextLine();
-		copCar();
+		copCarScreen();
 		
 	}
 
