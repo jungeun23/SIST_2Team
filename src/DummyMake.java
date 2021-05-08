@@ -1,5 +1,5 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,12 +23,30 @@ public class DummyMake {
 //			boardDummy();
 //			ElecAppDummy();
 //			EmailDummy();
+			editEmail();
 //			MessengerDummy();
 //			System.out.println(makeContent());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
+
+	public static void editEmail() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("data\\Contact.txt"));
+		String line = "";
+		String result = "";
+		while ((line = reader.readLine()) != null) {
+			String[] temp = line.split(",");
+			temp[3] = temp[3].substring(0, temp[3].indexOf("@") + 1);
+			String add = "sist2.co.kr";
+			temp[3] = temp[3].concat(add);
+			result += String.format("%s,%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+		}
+		BufferedWriter writer = new BufferedWriter(new FileWriter("data\\Contact.txt"));
+		writer.write(result);
+		writer.close();
+	}
+
 	public static void MessengerDummy() throws IOException {
 		// 번호 제목 보내는사람이름 내용
 		int cnt = 1;
@@ -36,22 +54,21 @@ public class DummyMake {
 		for (int i = 0; i < 10000; i++) {
 			String s = getNameFromContact();
 			fw.write(String.format("%s, %s, %s\n", cnt++, getTitleDummy(), s));
-			fw.write(getContentDummy()+"\n");
+			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
 		fw.close();
 	}
-	
+
 	public static void EmailDummy() throws IOException {
 //		번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
 		int cnt = 1;
 		FileWriter fw = new FileWriter("data\\Email\\Email.txt");
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 30000; i++) {
 			String s = getNameFromContact();
 			String s2 = getNameFromContact();
-			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getEmail(s), getEmail(s2),
-					s, s2));
-			fw.write(getContentDummy()+"\n");
+			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getEmail(s), getEmail(s2), s, s2));
+			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
 		fw.close();
@@ -68,11 +85,12 @@ public class DummyMake {
 			String s = getNameFromContact();
 			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getPasswordDummy(), s,
 					getPosition(s)));
-			fw.write(getContentDummy()+"\n");
+			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
 		fw.close();
 	}
+
 	private static String getEmail(String s) throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
 		String line = "";
@@ -86,6 +104,7 @@ public class DummyMake {
 		}
 		return res;
 	}
+
 	private static String getPosition(String s) throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\HR.txt"));
 		String line = "";
@@ -107,14 +126,14 @@ public class DummyMake {
 		for (int i = 0; i < 10000; i++) {
 			fw.write(String.format("%s, %s, %s, %s\n", cnt++, getTitleDummy(), getNameFromContact(),
 					getPasswordDummy()));
-			fw.write(getContentDummy()+"\n");
+			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
 		fw.close();
 	}
 
 	private static String getPasswordDummy() {
-		int length = rnd.nextInt(20)+8;
+		int length = rnd.nextInt(20) + 8;
 		String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 		String specialCharacters = "!@#$";
