@@ -1,3 +1,4 @@
+t,t,홍길동,iehcksm1@sis2.co.kr,010-1234-1234,과장,영업
 ehumber0,EcxPfdAl,반남석,ssellar0@bloglovin.com,010-3091-7832,과장,디자인
 ekermode1,gbEFRjpW5lJt,모충철,moaker1@phpbb.com,010-5269-3571,부장,영업
 qsayton2,iYSIH2PgC,탁심종,zdaftor2@bbc.co.uk,010-4814-3578,과장,마케팅
@@ -3005,4 +3006,3 @@ subin,bang1234,방수빈,subin@sist2.co.kr,010-4324-5432,상무,사업
 jiwon,moon1234,문지원,jiwon@sist2.co.kr,010-3854-9854,상무,사업
 junhee,lee1234,이준희,junhee@sist2.co.kr,010-9534-8573,전무,사업
 hungrae,kim1234,김형래,hungrae@sist2.co.kr,010-8362-3764,사장,사업
-t,t,홍길동,iehcksm1@sis2.co.kr,010-1234-1234,과장,영업
