@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,20 +10,163 @@ import java.util.List;
 import java.util.Random;
 
 public class DummyMake {
+	static Random rnd = new Random();
+
 	public static void main(String[] args) {
 		try {
 //			ContactDummy();
 //			HRDummy();
-			for (int i = 0; i < 100; i++) {
+//			for (int i = 0; i < 100; i++) {
 //				System.out.println(makeTitle());
-				System.out.println(makeContent());
-			}
-		} catch (IOException e) {
+//				System.out.println(makeContent());
+//			}
+			boardDummy();
+			ElecAppDummy();
+			EmailDummy();
+			editEmail();
+			MessengerDummy();
+//			System.out.println(makeContent());
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	public static String makeTitle() throws IOException {
+	public static void editEmail() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("data\\Contact.txt"));
+		String line = "";
+		String result = "";
+		while ((line = reader.readLine()) != null) {
+			String[] temp = line.split(",");
+			temp[3] = temp[3].substring(0, temp[3].indexOf("@") + 1);
+			String add = "sist2.co.kr";
+			temp[3] = temp[3].concat(add);
+			result += String.format("%s,%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+		}
+		BufferedWriter writer = new BufferedWriter(new FileWriter("data\\Contact.txt"));
+		writer.write(result);
+		writer.close();
+	}
+
+	public static void MessengerDummy() throws IOException {
+		// 번호 제목 보내는사람이름 내용
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\Messenger\\Messenger.txt");
+		for (int i = 0; i < 10000; i++) {
+			String s = getNameFromContact();
+			fw.write(String.format("%s,%s,%s\n", cnt++, getTitleDummy(), s));
+			fw.write(getContentDummy() + "\n");
+			fw.write("-----\n");
+		}
+		fw.close();
+	}
+
+	public static void EmailDummy() throws IOException {
+//		번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\Email\\Email.txt");
+		for (int i = 0; i < 30000; i++) {
+			String s = getNameFromContact();
+			String s2 = getNameFromContact();
+			fw.write(String.format("%s,%s,%s,%s,%s,%s\n", cnt++, getTitleDummy(), getEmail(s), getEmail(s2), s, s2));
+			fw.write(getContentDummy() + "\n");
+			fw.write("-----\n");
+		}
+		fw.close();
+	}
+
+	public static void ElecAppDummy() throws IOException {
+//		 2,테스트,1234,홍길동,과장
+//		 테스트 
+//		 중입니다 ~ 
+//		 -----
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\ElecDoc\\ElecDoc.txt");
+		for (int i = 0; i < 10000; i++) {
+			String s = getNameFromContact();
+			fw.write(String.format("%s,%s,%s,%s,%s\n", cnt++, getTitleDummy(), getPasswordDummy(), s,
+					getPosition(s)));
+			fw.write(getContentDummy() + "\n");
+			fw.write("-----\n");
+		}
+		fw.close();
+	}
+
+	private static String getEmail(String s) throws IOException {
+		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
+		String line = "";
+		String res = "";
+		while ((line = read.readLine()) != null) {
+			String[] temp = line.split(",");
+			if (temp[2].equals(s)) {
+				res = temp[3];
+				break;
+			}
+		}
+		return res;
+	}
+
+	private static String getPosition(String s) throws IOException {
+		BufferedReader read = new BufferedReader(new FileReader("data\\HR.txt"));
+		String line = "";
+		String res = "";
+		while ((line = read.readLine()) != null) {
+			String[] temp = line.split(",");
+			if (temp[0].equals(s)) {
+				res = temp[1];
+				break;
+			}
+		}
+		return res;
+	}
+
+	public static void boardDummy() throws IOException {
+//		1,title제목,홍길동,qwer1234,content내용
+		int cnt = 1;
+		FileWriter fw = new FileWriter("data\\board\\board.txt");
+		for (int i = 0; i < 10000; i++) {
+			fw.write(String.format("%s,%s,%s,%s\n", cnt++, getTitleDummy(), getNameFromContact(),
+					getPasswordDummy()));
+			fw.write(getContentDummy() + "\n");
+			fw.write("-----\n");
+		}
+		fw.close();
+	}
+
+	private static String getPasswordDummy() {
+		int length = rnd.nextInt(20) + 8;
+		String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+		String specialCharacters = "!@#$";
+		String numbers = "1234567890";
+		String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
+		Random random = new Random();
+		char[] password = new char[length];
+		String result = "";
+
+		for (int i = 0; i < length; i++) {
+			password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
+		}
+		for (int i = 0; i < length; i++) {
+			result += password[i];
+		}
+
+		return result;
+	}
+
+	public static String getNameFromContact() throws IOException {
+
+		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
+		String line = "";
+		LinkedList<String> list = new LinkedList<>();
+		while ((line = read.readLine()) != null) {
+			String[] t = line.split(",");
+			list.add(t[2]);
+		}
+
+		return list.get(rnd.nextInt(list.size() - 1));
+	}
+
+	public static String getTitleDummy() throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\dummy\\title.txt"));
 		String line = "";
 		String result = "";
@@ -30,11 +174,10 @@ public class DummyMake {
 		while ((line = read.readLine()) != null) {
 			list.add(line);
 		}
-		Random rnd = new Random();
 		return list.get(rnd.nextInt(list.size() - 1)) + " " + list.get(rnd.nextInt(list.size() - 1));
 	}
 
-	public static String makeContent() throws IOException {
+	public static String getContentDummy() throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\dummy\\content.txt"));
 		String line = "";
 		String result = "";
@@ -42,8 +185,7 @@ public class DummyMake {
 		while ((line = read.readLine()) != null) {
 			list.add(line);
 		}
-		Random rnd = new Random();
-		return list.get(rnd.nextInt(list.size() - 1)) + " " + list.get(rnd.nextInt(list.size() - 1)) + " "
+		return list.get(rnd.nextInt(list.size() - 1)) + "\n" + list.get(rnd.nextInt(list.size() - 1)) + "\n"
 				+ list.get(rnd.nextInt(list.size() - 1));
 	}
 

@@ -674,11 +674,10 @@ public class MyCalendar_junhee {
 		// 홍길동,2021-5-4,t,testaaa
 		String position = null;
 		String depart = null;
-		String randNum = null;
 
 		try {
 			// 홍길동,차장,인사,D,12,5000000
-			BufferedReader read = new BufferedReader(new FileReader("data/HR_test.txt"));
+			BufferedReader read = new BufferedReader(new FileReader("data/HR.txt"));
 
 			String line = "";
 			while ((line = read.readLine()) != null) {
@@ -690,7 +689,6 @@ public class MyCalendar_junhee {
 					listTraining.add(sl);
 				}
 			}
-			read.close();
 
 			FileWriter fw = new FileWriter(DATA5, true);
 			fw.write(this.user.getName() + ",");

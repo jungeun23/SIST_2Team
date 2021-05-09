@@ -7,12 +7,8 @@ import java.util.Calendar;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * 근태 관리 클래스
- * 
- * @author 2조
- * 
- */
+
+
 public class Attendance {
 	private User user;
 	private String DATA;
