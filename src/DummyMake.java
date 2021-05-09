@@ -20,11 +20,11 @@ public class DummyMake {
 //				System.out.println(makeTitle());
 //				System.out.println(makeContent());
 //			}
-//			boardDummy();
-//			ElecAppDummy();
-//			EmailDummy();
+			boardDummy();
+			ElecAppDummy();
+			EmailDummy();
 			editEmail();
-//			MessengerDummy();
+			MessengerDummy();
 //			System.out.println(makeContent());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -53,7 +53,7 @@ public class DummyMake {
 		FileWriter fw = new FileWriter("data\\Messenger\\Messenger.txt");
 		for (int i = 0; i < 10000; i++) {
 			String s = getNameFromContact();
-			fw.write(String.format("%s, %s, %s\n", cnt++, getTitleDummy(), s));
+			fw.write(String.format("%s,%s,%s\n", cnt++, getTitleDummy(), s));
 			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
@@ -67,7 +67,7 @@ public class DummyMake {
 		for (int i = 0; i < 30000; i++) {
 			String s = getNameFromContact();
 			String s2 = getNameFromContact();
-			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getEmail(s), getEmail(s2), s, s2));
+			fw.write(String.format("%s,%s,%s,%s,%s,%s\n", cnt++, getTitleDummy(), getEmail(s), getEmail(s2), s, s2));
 			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
@@ -83,7 +83,7 @@ public class DummyMake {
 		FileWriter fw = new FileWriter("data\\ElecDoc\\ElecDoc.txt");
 		for (int i = 0; i < 10000; i++) {
 			String s = getNameFromContact();
-			fw.write(String.format("%s, %s, %s, %s, %s\n", cnt++, getTitleDummy(), getPasswordDummy(), s,
+			fw.write(String.format("%s,%s,%s,%s,%s\n", cnt++, getTitleDummy(), getPasswordDummy(), s,
 					getPosition(s)));
 			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
@@ -124,7 +124,7 @@ public class DummyMake {
 		int cnt = 1;
 		FileWriter fw = new FileWriter("data\\board\\board.txt");
 		for (int i = 0; i < 10000; i++) {
-			fw.write(String.format("%s, %s, %s, %s\n", cnt++, getTitleDummy(), getNameFromContact(),
+			fw.write(String.format("%s,%s,%s,%s\n", cnt++, getTitleDummy(), getNameFromContact(),
 					getPasswordDummy()));
 			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");

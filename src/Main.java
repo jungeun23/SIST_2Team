@@ -213,7 +213,7 @@ public class Main {
 //				showContactAddress();
 				cl.firstScreen();
 			} else if (n == 4) {
-				menu();
+//				menu();
 				break;
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");

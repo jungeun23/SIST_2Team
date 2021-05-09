@@ -36,7 +36,7 @@ public class MyCalendar {
 	LinkedList<String[]> listRoom = new LinkedList<>();
 	LinkedList<String[]> listTraining = new LinkedList<>();
 
-	public MyCalendar_junhee(User user) {
+	public MyCalendar(User user) {
 		this.user = user;
 		DATA = "data/schedule/schedule.txt";
 		DATA2 = "data/schedule/vacation.txt";
