@@ -47,7 +47,7 @@ BMW 3 Series,1
 BMW 6 Series,1
 BMW 2 Series,4
 BMW 7 Series,2
-BMW 1 Series,4
+BMW 1 Series,5
 BMW X5,1
 BMW X3,2
 BMW X7,5
@@ -108,4 +108,4 @@ TESLA Model-X,4
 TESLA Model-Y,5
 TESLA Roadster,4
 TESLA Cybertruck,1
-TESLA Semi,1
+TESLA Semi,0

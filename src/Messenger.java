@@ -37,7 +37,7 @@ public class Messenger {
 	}
 
 	public void createMessenger() {
-		// 번호 제목 보내는사람 내용
+		// 번호 제목 보내는사람이름 내용
 		String title = Util.get("제목을 입력하세요");
 		seq++;
 		String content = "";
