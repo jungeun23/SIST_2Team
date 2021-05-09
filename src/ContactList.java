@@ -29,6 +29,11 @@ public class ContactList {
 	}
 	
 	//주소록 첫 화면 
+	
+
+	/**
+	 * 
+	 */
 	public void firstScreen()  {
 				
 				System.out.println("===============================================");
@@ -62,7 +67,6 @@ public class ContactList {
 					System.out.println(e);
 				}
 	}//clScreen()
-	
 	
 	
 	//개인 주소록 첫 화면

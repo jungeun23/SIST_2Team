@@ -269,7 +269,7 @@ public class Main {
 		}
 	}
 
-	private static void showReservation() {
+	public static void showReservation() {
 		while (true) {
 			cls();
 			System.out.println("            [4. RESERVATION] ");
