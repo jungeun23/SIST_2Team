@@ -36,10 +36,10 @@ public class Main {
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-//		
-		MeetingRoom mr = new MeetingRoom(user);
-//		//mr.createRoomReservation();
-		mr.MeetingRoomScreen();
+////		
+//		MeetingRoom mr = new MeetingRoom(user);
+////		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
 		
 
 //		Board bd = new Board(user);
@@ -54,7 +54,7 @@ public class Main {
 
 		
 		
-//		hr.hrlogin();
+		hr.hrlogin();
 		
 		
 		
