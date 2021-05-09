@@ -5,7 +5,12 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
+/**
+ * 
+ * @author 방수빈
+ * 
+ *
+ */
 public class HR {
 
 	private final String DATA;
@@ -20,6 +25,7 @@ public class HR {
 		scan = new Scanner(System.in);
 		read();
 	}
+	
 	public void hrlogin() {
 		// 관리자 전용 비밀번호 -> 권한 있는 사용자에게만 배포
 				cls();
@@ -180,11 +186,13 @@ public class HR {
 		}
 
 	}// gogaAlter()
-
+/**
+ * 
+ */
 	private void gogaPrint() {
 
-		System.out.println("        ▣ 고과 데이터 출력 화면 ▣");
 		System.out.println("▶ 목차로 돌아가려면 q를 누르세요.\n");
+		System.out.println("        ▣ 고과 데이터 출력 화면 ▣");
 		String name = (Util.get("출력할 직원의 이름을 입력하세요"));
 		
 		if(name.equals("q")) {

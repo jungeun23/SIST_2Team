@@ -25,7 +25,7 @@ public class PayRoll {
 		this.scan = new Scanner(System.in);
 		this.user = new User();
 		this.mentBonus = "지급된 성과급";
-		this.mentExtraWork = "지급된 연장근무 수당";
+		this.mentExtraWork = "지급된 연장 수당";
 		this.mentSalary = "지급된  급여";
 		this.mainMenu = new Main();
 	}
@@ -117,10 +117,12 @@ public class PayRoll {
 	private void approved() {
 		System.out.println();
 		System.out.println();
-		System.out.println("1. 직원 연장 근무 수당 조회");
-		System.out.println("2. 직원 성과급 조회");
-		System.out.println("3. 직원 급여 조회");
-		System.out.println("4. HR 수당관리 목록으로 돌아가기");
+		
+		System.out.println("==================================================");
+		System.out.println("|| 1. 연장 근무 || 2.  성과급 || 3.   급여 || 4.   목록 ||");
+		System.out.println("||    수당 조회 ||      조회 ||      조회 ||    돌아가기 ||");
+		System.out.println("==================================================");
+	
 		System.out.println();
 		int num = Integer.parseInt(Util.get("번호를 입력해주세요"));
 		System.out.println();
@@ -137,14 +139,17 @@ public class PayRoll {
 		
 	}
 
+
+	
 	// 인사부 검색 기능 메뉴
+	
 	private void selSearch(int num) {
 		
 		System.out.println();
-		System.out.println("===============");
-		System.out.println("1. 부서 검색");
-		System.out.println("2. 직원 검색");
-		System.out.println("3. HR 인사부 전용 목록으로 돌아가기");
+		System.out.println("===================================");
+		System.out.println("|| 1.  부서 || 2.  직원 || 3.   목록 ||");
+		System.out.println("||     검색 ||     검색 ||   돌아가기 ||");
+		System.out.println("===================================");
 		System.out.println();
 		String n = (Util.get("번호를 입력해주세요"));
 		System.out.println();
@@ -343,20 +348,20 @@ public class PayRoll {
 	// 성과급 계산 메소드
 	private int bonusPay(int index) {
 		
-		double pi = 0.0;
+		double productivityIncentive = 0.0;
 		
 		int salary = Integer.parseInt(list.get(index)[5]);
 		
 		//고과 점수에 따라 월급의 pi배가 성과급으로 차등 지급
 		if(list.get(index)[3].equals("A") || list.get(index)[3].equals("B") ) { 
-			pi = 1.0;
+			productivityIncentive = 1.0;
 		} else if(list.get(index)[3].equals("C") || list.get(index)[3].equals("D")) {
-			pi = 0.8;
+			productivityIncentive = 0.8;
 		} else {
-			pi = 0.6;
+			productivityIncentive = 0.6;
 		}
 		
-		int bonus = (int)(salary * pi);
+		int bonus = (int)(salary * productivityIncentive);
 		
 		return bonus;
 	}
@@ -573,7 +578,7 @@ public class PayRoll {
 			System.out.println();
 			System.out.println();
 			System.out.println("===============================================");  
-			System.out.printf("||   이름  ||  부서  ||  직급  ||   %8s  ||  \n",ment);
+			System.out.printf("||   이름  ||  부서  ||  직급  ||   %9s ||  \n",ment);
 			System.out.println("-----------------------------------------------");  
 			System.out.printf("||  %s  ||  %s  ||  %s  ||  %,11d원 ||\n",list.get(index)[0], list.get(index)[2], list.get(index)[1],pay);
 			System.out.println("===============================================");  
@@ -588,7 +593,7 @@ public class PayRoll {
 			System.out.println();
 			System.out.println();
 			System.out.println("===============================================");  
-			System.out.printf("||  부서  ||  직급  ||  이름   ||   %s  ||  \n",ment);
+			System.out.printf("||  부서  ||  직급  ||  이름   ||   %9s ||  \n",ment);
 			System.out.println("-----------------------------------------------");
 			System.out.println(result);
 			System.out.println("===============================================");  

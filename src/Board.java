@@ -4,7 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
-
+/**
+ * 게시판 구현
+ * 이용자는 게시글을 생성, 읽기, 수정, 삭제등을 할 수 있다.
+ * @param list DATA에 위치한 파일을 읽어 전부 저장
+ * @param seq 게시물의 번호
+ * @param user 현재 접속중인 유저의 정보
+ * @param DATA 게시물의 정보가 저장된 위치
+ */
 public class Board {
 	private static LinkedList<String[]> list = new LinkedList<>();
 	private static int seq;
@@ -15,7 +22,10 @@ public class Board {
 		this.user = user;
 		load();
 	}
-
+	
+	/**
+	 * load()메소드를 생성자에 넣어, 게시물 DB를 읽어 전부 저장한다. 
+	 */
 	public void load() {
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(DATA));
@@ -35,8 +45,12 @@ public class Board {
 			System.out.println(e);
 		}
 	}
-
-	public void createMessenger() {
+	
+	/**
+	 * 사용자로부터 제목, 비밀번호, 내용을 입력받고 list에 추가한다.
+	 * 추가된 내용은 FileWriter append모드로 추가한다.
+	 */
+	public void createBoard() {
 		// 번호 제목 글쓴이 비밀번호 내용 
 		String title = Util.get("제목을 입력하세요");
 		String pw = Util.get("비밀번호를 입력하세요");
@@ -70,7 +84,10 @@ public class Board {
 		System.out.println("글 작성을 완료했습니다.");
 	}
 
-	public void readMessenger() {
+	/**
+	 * list에 있는 번호와 제목을 출력 후 선택된 게시물을 출력한다.
+	 */
+	public void readBoard() {
 		// 번호 제목 보내는사람 내용
 		for (int i = 0; i < list.size(); i++) {
 			System.out.printf("[%s] %s\n", list.get(i)[0], list.get(i)[1]);
@@ -85,8 +102,11 @@ public class Board {
 			}
 		}
 	}
-
-	public void updateMessenger() {
+	
+	/**
+	 * list의 번호와 제목을 출력한 뒤 선택된 게시물을 수정한다.
+	 */
+	public void updateBoard() {
 		// 번호 제목 보내는사람 내용
 		for (int i = 0; i < list.size(); i++) {
 			System.out.printf("[%s] %s\n", list.get(i)[0], list.get(i)[1]);
@@ -135,8 +155,11 @@ public class Board {
 			System.out.println(e);
 		}
 	}
-
-	public void deleteMessenger() {
+	
+	/**
+	 * list의 번호와 제목을 출력한 뒤 선택된 게시물을 삭제한다.
+	 */
+	public void deleteBoard() {
 		// 번호 제목 보내는사람 내용
 		for (int i = 0; i < list.size(); i++) {
 			System.out.printf("[%s] %s\n", list.get(i)[0], list.get(i)[1]);
