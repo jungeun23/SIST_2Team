@@ -30,9 +30,6 @@ public class Main {
 //		ms.updateMessenger();
 		menu();
 
-//		Vacation v = new Vacation(user);
-//		v.createVacation();
-
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 //		mr.MeetingRoomScreen();
@@ -163,7 +160,7 @@ public class Main {
 			System.out.println();
 
 			if (n == 0) {
-				return;
+				break;
 			} else if (n == 1) {
 				showContact();
 			} else if (n == 2) {
@@ -179,10 +176,11 @@ public class Main {
 			}
 
 		}
+		System.out.println("프로그램을 종료합니다.");
 	}
 /////////////////////////////////////////////////      Lane2      ///////////////////////////////////////////////
 
-	private static void showContact() throws IOException {
+	private static void showContact() {
 		while (true) {
 			cls();
 			System.out.println("            [1. CONTACT] ");
@@ -199,7 +197,7 @@ public class Main {
 			if (n == 1) {
 				showMail();
 			} else if (n == 2) {
-				showMessenger();
+//				showMessenger();
 			} else if (n == 3) {
 //				showContactAddress();
 				cl.firstScreen();
@@ -212,7 +210,6 @@ public class Main {
 		}
 
 	}
-
 
 	private static void showApproval() throws Exception {
 		while (true) {
@@ -231,7 +228,8 @@ public class Main {
 			} else if (n == 1) {
 				showElecApproval();
 			} else if (n == 2) {
-//				showElecApproval();
+				Vacation v = new Vacation(user);
+				v.firstScreen();
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
@@ -244,7 +242,7 @@ public class Main {
 			System.out.println("            [3. NOTICE] ");
 			System.out.println("            1.  게시판");
 			System.out.println();
-			System.out.println("            2.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -256,7 +254,7 @@ public class Main {
 				} catch (IOException e) {
 					System.out.println(e);
 				}
-			} else if (n == 2) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -266,7 +264,7 @@ public class Main {
 	}
 
 
-	public static void showReservation() throws IOException {
+	public static void showReservation() {
 		while (true) {
 			cls();
 			System.out.println("            [4. RESERVATION] ");
@@ -274,19 +272,19 @@ public class Main {
 			System.out.println("            2.  예약/대여");
 			System.out.println("            3.  교육센터");
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-				showSchedule();
+//				showSchedule();
 			} else if (n == 2) {
-//				showReservate();
+				showReservate();
 			} else if (n == 3) {
 				TrainingCenter tc = new TrainingCenter(user);
 				tc.trainingScreen();
-			} else if (n == 4) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -294,7 +292,6 @@ public class Main {
 			}
 		}
 	}
-
 
 	private static void showHR() {
 		while (true) {
@@ -304,7 +301,7 @@ public class Main {
 			System.out.println("            2.  인사관리");
 			System.out.println("            3.  수당관리");
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -316,7 +313,7 @@ public class Main {
 				hr.hrScreen();
 			} else if (n == 3) {
 				showExtraPay();
-			} else if (n == 4) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -332,7 +329,7 @@ public class Main {
 			System.out.println("            1.  보안");
 			System.out.println("            2.  기타");
 			System.out.println();
-			System.out.println("            3.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
@@ -342,7 +339,7 @@ public class Main {
 //				showSecurity();
 			} else if (n == 2) {
 //				showEtcetera();
-			} else if (n == 3) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -404,42 +401,29 @@ public class Main {
 			}
 		}
 	}
-	public static void showMessenger() throws IOException {
-		while (true) {
-			cls();
-			System.out.println(" =========================================");
-			System.out.println(" ||1.메세지||2.메세지||3.메세지||4.메세지");
-			System.out.println(" ||   쓰기||    읽기||    수정||    삭제");
-			System.out.println(" =========================================");
-			System.out.println();
-			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
-			System.out.println("목차로 돌아가려면 0번을 누르세요.");
-			System.out.println();
-			System.out.println();
-			int n = Integer.parseInt(Util.get("카테고리 번호"));
-			System.out.println();
 
-			Messenger msg = new Messenger(user);
-			
-			if (n == 0) {
-				break;
-			} else if (n == 1) {
-				msg.createMessenger(); // 메일 쓰기 test 완료
-				puase("");
-			} else if (n == 2) {
-				msg.readMessenger();
-				puase("");
-			} else if (n == 3) {
-				msg.updateMessenger();
-				puase("");
-			} else if (n == 4) {
-				msg.deleteMessenger();
-				puase("");
-			} else {
-				System.out.println("잘못된 번호를 입력하셨습니다.");
-			}
-		}
-	}
+	   public static void showReservate() {
+		      System.out.println("            [4. RESERVATION - 2.예약/대여]");
+		      System.out.println();
+		      System.out.println("            1. 회의실 예약");
+		      System.out.println("            2. 차량 대여");
+		      System.out.println();
+		      System.out.println("            0. 목차로 돌아가기");
+		      String n = (Util.get("번호를 입력해주세요"));
+		      
+		      if(n.equals("1")) {
+		         //수빈 - 회의실 예약
+		      } else if(n.equals("2")) {
+		         
+		         MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+		         cop.copCarScreen();
+		         
+		      } else {
+		         showReservation();
+		      }
+		   }
+
+	
 	public static void showExtraPay() {
 
 		PayRoll ep = new PayRoll();
@@ -556,42 +540,6 @@ public class Main {
 		}
 	}
 ///////////////////////////////////////////////      RESERVATION    ///////////////////////////////////////////////
-	public static void showSchedule() throws IOException {
-		while (true) {
-			cls();
-			System.out.println(" ========================================");
-			System.out.println(" ||1.일정||2.일정||3.일정||4.일정");
-			System.out.println(" ||  쓰기||  읽기||  수정||  삭제");
-			System.out.println(" ========================================");
-			System.out.println();
-			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
-			System.out.println("목차로 돌아가려면 0번을 누르세요.");
-			System.out.println();
-			System.out.println();
-			int n = Integer.parseInt(Util.get("카테고리 번호"));
-			System.out.println();
-
-			MyCalendar mc = new MyCalendar(user);
-			
-			if (n == 0) {
-				break;
-			} else if (n == 1) {
-				mc.createSchedule();
-				puase("일정 쓰기를 완료했습니다.");
-			} else if (n == 2) {
-				mc.showSchedule();
-				puase("일정 읽기를 완료했습니다.");
-			} else if (n == 3) {
-				mc.updateSchedule();
-				puase("일정 수정을 완료했습니다.");
-			} else if (n == 4) {
-				mc.deleteSchedule();
-				puase("일정 삭제를 완료했습니다.");
-			} else {
-				System.out.println("잘못된 번호를 입력하셨습니다.");
-			}
-		}
-	}
 ///////////////////////////////////////////////      HR             ///////////////////////////////////////////////
 ///////////////////////////////////////////////      ADMIN          ///////////////////////////////////////////////
 	private static void puase(String string) {
