@@ -182,7 +182,7 @@ public class Main {
 	}
 /////////////////////////////////////////////////      Lane2      ///////////////////////////////////////////////
 
-	private static void showContact() {
+	private static void showContact() throws IOException {
 		while (true) {
 			cls();
 			System.out.println("            [1. CONTACT] ");
@@ -199,7 +199,7 @@ public class Main {
 			if (n == 1) {
 				showMail();
 			} else if (n == 2) {
-//				showMessenger();
+				showMessenger();
 			} else if (n == 3) {
 //				showContactAddress();
 				cl.firstScreen();
@@ -212,6 +212,7 @@ public class Main {
 		}
 
 	}
+
 
 	private static void showApproval() throws Exception {
 		while (true) {
@@ -265,7 +266,7 @@ public class Main {
 	}
 
 
-	public static void showReservation() {
+	public static void showReservation() throws IOException {
 		while (true) {
 			cls();
 			System.out.println("            [4. RESERVATION] ");
@@ -279,7 +280,7 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-//				showSchedule();
+				showSchedule();
 			} else if (n == 2) {
 //				showReservate();
 			} else if (n == 3) {
@@ -293,6 +294,7 @@ public class Main {
 			}
 		}
 	}
+
 
 	private static void showHR() {
 		while (true) {
@@ -402,7 +404,42 @@ public class Main {
 			}
 		}
 	}
+	public static void showMessenger() throws IOException {
+		while (true) {
+			cls();
+			System.out.println(" =========================================");
+			System.out.println(" ||1.메세지||2.메세지||3.메세지||4.메세지");
+			System.out.println(" ||   쓰기||    읽기||    수정||    삭제");
+			System.out.println(" =========================================");
+			System.out.println();
+			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
+			System.out.println("목차로 돌아가려면 0번을 누르세요.");
+			System.out.println();
+			System.out.println();
+			int n = Integer.parseInt(Util.get("카테고리 번호"));
+			System.out.println();
 
+			Messenger msg = new Messenger(user);
+			
+			if (n == 0) {
+				break;
+			} else if (n == 1) {
+				msg.createMessenger(); // 메일 쓰기 test 완료
+				puase("");
+			} else if (n == 2) {
+				msg.readMessenger();
+				puase("");
+			} else if (n == 3) {
+				msg.updateMessenger();
+				puase("");
+			} else if (n == 4) {
+				msg.deleteMessenger();
+				puase("");
+			} else {
+				System.out.println("잘못된 번호를 입력하셨습니다.");
+			}
+		}
+	}
 	public static void showExtraPay() {
 
 		PayRoll ep = new PayRoll();
@@ -519,6 +556,42 @@ public class Main {
 		}
 	}
 ///////////////////////////////////////////////      RESERVATION    ///////////////////////////////////////////////
+	public static void showSchedule() throws IOException {
+		while (true) {
+			cls();
+			System.out.println(" ========================================");
+			System.out.println(" ||1.일정||2.일정||3.일정||4.일정");
+			System.out.println(" ||  쓰기||  읽기||  수정||  삭제");
+			System.out.println(" ========================================");
+			System.out.println();
+			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
+			System.out.println("목차로 돌아가려면 0번을 누르세요.");
+			System.out.println();
+			System.out.println();
+			int n = Integer.parseInt(Util.get("카테고리 번호"));
+			System.out.println();
+
+			MyCalendar mc = new MyCalendar(user);
+			
+			if (n == 0) {
+				break;
+			} else if (n == 1) {
+				mc.createSchedule();
+				puase("일정 쓰기를 완료했습니다.");
+			} else if (n == 2) {
+				mc.showSchedule();
+				puase("일정 읽기를 완료했습니다.");
+			} else if (n == 3) {
+				mc.updateSchedule();
+				puase("일정 수정을 완료했습니다.");
+			} else if (n == 4) {
+				mc.deleteSchedule();
+				puase("일정 삭제를 완료했습니다.");
+			} else {
+				System.out.println("잘못된 번호를 입력하셨습니다.");
+			}
+		}
+	}
 ///////////////////////////////////////////////      HR             ///////////////////////////////////////////////
 ///////////////////////////////////////////////      ADMIN          ///////////////////////////////////////////////
 	private static void puase(String string) {

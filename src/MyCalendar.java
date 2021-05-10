@@ -124,7 +124,36 @@ public class MyCalendar {
 			System.out.println(e);
 		}
 	}
-
+	public void showSchedule() {
+		// 홍길동,2021-5-4,t,testaaa
+		ArrayList<int[]> t = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				int[] g = { year, month, day };
+				t.add(g);
+			}
+		}
+		System.out.println("일정을 선택해주세요");
+		int[] c = showCanlendar(t);
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				if (c[0] == year && c[1] == month && c[2] == day) {
+					System.out.println();
+					System.out.println("일정을 출력합니다");
+					System.out.println("제목 : " + list.get(i)[2]);
+					System.out.println("내용 : " + list.get(i)[3]);
+				}
+			}
+		}
+	}
 	/**
 	 * 일정을 삭제하기 위해 모든 일정을 보여주고 선택된 일정을 삭제하는 메소드
 	 * 
@@ -165,37 +194,54 @@ public class MyCalendar {
 	/**
 	 * 일정을 수정하기 위해 모든 일정을 보여주고 선택된 일정을 수정하는 메소드
 	 */
-	public void updateSchedule() throws IOException {
-		// 홍길동,2021-5-4,t,testaaa
-		ArrayList<int[]> t = new ArrayList<>();
+	public void updateSchedule() {
+		ArrayList<int[]> t2 = new ArrayList<>();
 		for (int i = 0; i < this.list.size(); i++) {
+//			석종익,2021-5-15,공탁 강행법규,유익비 초과근무수당
 			if (list.get(i)[0].equals(this.user.getName())) {
 				String[] temp = this.list.get(i)[1].split("-");
 				int year = Util.toInt(temp[0]);
 				int month = Util.toInt(temp[1]);
 				int day = Util.toInt(temp[2]);
 				int[] g = { year, month, day };
-				t.add(g);
+				t2.add(g);
 			}
 		}
 		System.out.println("수정할 일정을 선택해주세요");
-		int[] c = showCanlendar(t);
+		int[] c = showCanlendar(t2);
 		for (int i = 0; i < list.size(); i++) {
-			if (c[0] == year && c[1] == month && c[2] == day) {
-				String title = Util.get("일정의 제목을 입력해주세요");
-				String content = Util.get("일정의 내용을 입력해주세요");
-				String[] t2 = { this.user.getName(), this.list.get(i)[1], title, content };
-				this.list.set(i, t2);
-				System.out.println("일정 수정이 완료됐습니다.");
+			if (list.get(i)[0].equals(this.user.getName())) {
+				String[] temp = list.get(i)[1].split("-");
+				int year = Util.toInt(temp[0]);
+				int month = Util.toInt(temp[1]);
+				int day = Util.toInt(temp[2]);
+				if (c[0] == year && c[1] == month && c[2] == day) {
+					String title = Util.get("일정의 제목을 입력해주세요");
+					String content = Util.get("일정의 내용을 입력해주세요");
+					String[] t = { this.user.getName(), this.list.get(i)[1], this.list.get(i)[2],
+							this.list.get(i)[3], title, content };
+					this.list.set(i, t);
+					System.out.println("일정 수정이 완료됐습니다.");
+				}
 			}
+		} // for
+		try {
+			FileWriter fw = new FileWriter(DATA);
+			for (int i = 0; i < list.size(); i++) {
+//				석종익,2021-5-15,공탁 강행법규,유익비 초과근무수당
+				fw.write(list.get(i)[0] + ",");
+				fw.write(list.get(i)[1] + ",");
+				fw.write(list.get(i)[2] + ",");
+				fw.write(list.get(i)[3] + "\n");
+			}
+			fw.close();
+			Util.puase("");
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		FileWriter fw = new FileWriter(DATA);
-		for (int i = 0; i < list.size(); i++) {
-			fw.write(String.format("%s,%s,%s,%s\n", list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3]));
-		}
-		fw.close();
-	}
+	}// updateTrainingSchedule
 
 	/**
 	 * 일정이 등록된 달력을 출력하기 위한 메소드 사용자로부터 등록된 일정 날짜 뒤에 *을 붙여 일정을 표시한다.
