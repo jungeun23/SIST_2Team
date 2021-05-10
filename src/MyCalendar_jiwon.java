@@ -515,6 +515,11 @@ public class MyCalendar_jiwon {
 			System.out.println(e);
 		}
 		System.out.println("\n▶ 휴가 일정 등록이 완료됐습니다.");
+		System.out.println("=====================================================");
+		System.out.print("목차로 돌아가려면 엔터를 누르세요");
+		scan.nextLine();
+		Util.cls();
+		firstScreen();
 	}//create()
 
 	public void createCopCarReseravtion(ArrayList<String[]> carList) {
@@ -645,6 +650,11 @@ public class MyCalendar_jiwon {
 
 	}  
 	
+	
+	/**
+	 * 사용자가 휴가관리에 진입하여 처음으로 보게 되는 카테고리.
+	 * 여기에서 원하는 카테고리 번호를 입력받는다.
+	 */
 	public void firstScreen() {
 
 		System.out.println("=================================================");
@@ -678,7 +688,6 @@ public class MyCalendar_jiwon {
 	}
 	
 	public void deleteVacation() {
-		//이준희,전무,사업,2,2021-5-12,재충전
 		 ArrayList<int[]> t = new ArrayList<>();
 	      for (int i = 0; i < listVacation.size(); i++) {
 	         if (listVacation.get(i)[0].equals(this.user.getName())) {
@@ -715,9 +724,16 @@ public class MyCalendar_jiwon {
 				
 				writer.write(String.format("%s,%s,%s,%s,%s,%s\n", listVacation.get(i)[0], listVacation.get(i)[1],
 						listVacation.get(i)[2], listVacation.get(i)[3], listVacation.get(i)[4], listVacation.get(i)[5]));
-				
+			
 			}
 			writer.close();
+			System.out.println("\n▶ 휴가 일정 삭제가 완료됐습니다.");
+			System.out.println("=====================================================");
+			System.out.print("목차로 돌아가려면 엔터를 누르세요");
+			scan.nextLine();
+			Util.cls();
+			firstScreen();
+			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -737,7 +753,7 @@ public class MyCalendar_jiwon {
 	            t.add(g);
 	         }
 	      }
-	      System.out.println("일정을 선택해주세요");
+	      System.out.println("휴가일정을 선택해주세요");
 	      int[] c = showCanlendar(t);
 	      
 	      for (int i = 0; i < listVacation.size(); i++) {
@@ -750,38 +766,21 @@ public class MyCalendar_jiwon {
 	            
 	            if (c[0] == year && c[1] == month && c[2] == day) {
 	               System.out.println();
-	               System.out.println("일정을 출력합니다");
-	               System.out.println("제목 : " + listVacation.get(i)[5]);
+	               System.out.println("휴가일정을 출력합니다");
+	               System.out.println("사유 : " + listVacation.get(i)[5] + "\n");
 	            }
 	         }
 	      }
+			System.out.println("=====================================================");
+			System.out.print("목차로 돌아가려면 엔터를 누르세요");
+			scan.nextLine();
+			Util.cls();
+			firstScreen();
 		
 	}//read()
 	
 	
 }//class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

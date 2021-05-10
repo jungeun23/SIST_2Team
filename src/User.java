@@ -3,13 +3,27 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * 유저의 정보를 관리하기위한 메소드
+ * 
+ * @param ContactPath 파일의 위치를 저장하는 멤버변수
+ * @param id          사용자의 아이디를 저장하는 멤버변수
+ * @param name        사용자의 이름을 저장하는 멤버변수
+ * @param pw          사용자의 이름을 저장하는 멤버변수
+ * @param email       사용자의 이메일을 저장하는 멤버변수
+ * @param phone       사용자의 핸드폰 번호를 저장하는 멤버변수
+ * @param position    사용자의 직급을 저장하는 멤버변수
+ * @param depart사용자의  부서를 저장하는 멤버변수
+ */
 public class User {
-	private static final String ContactPATH = "data/Contact.txt";
+	private static final String DATA = "data/Contact.txt";
+	ArrayList<String[]> list = new ArrayList<>();
 //	private User ID;
 
 	private String id;
@@ -20,6 +34,9 @@ public class User {
 	private String position; // TODO :Contact.txt 직급 자료형 문자열로 바꿈에 따라 int > String 변경 요망 //TODO complete 확인
 	private String depart;
 
+	/**
+	 * ""으로 초기화
+	 */
 	public User() {
 //		ID = new User();
 //		this.ID.setID("");
@@ -33,6 +50,17 @@ public class User {
 		this.depart = "";
 	}
 
+	/**
+	 * 생성자.
+	 * 
+	 * @param id
+	 * @param name
+	 * @param pw
+	 * @param email
+	 * @param phone
+	 * @param position
+	 * @param depart
+	 */
 	public User(String id, String name, String pw, String email, String phone, String position, String depart) {
 		super();
 //		ID = new User(id);
@@ -46,8 +74,32 @@ public class User {
 		this.phone = phone;
 		this.position = position;
 		this.depart = depart;
+		load();
 	}
 
+	
+	/**
+	 * DATA에 저장된 파일 정보를 읽어 와 list에 저장하는 메소드
+	 */
+	public void load() {
+		try {
+			BufferedReader read = new BufferedReader(new FileReader(DATA));
+			String line = "";
+			while ((line = read.readLine()) != null) {
+				String[] temp = line.split(",");
+				String[] t = { temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6] };
+				list.add(t);
+			}
+
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	/**
+	 * 유저의 정보를 저장하기 위한 메소드
+	 * 사용자로부터 id pw name email phone position depart를 입력으로 받는다.
+	 */
 	public void regist_user() {
 //		System.out.println("아이디, 이름, 이메일, 핸드폰 번호, 직급을 입려");
 //		Scanner sc = new Scanner(System.in);
@@ -81,7 +133,97 @@ public class User {
 //		this.position = sc.nextInt();
 //		this.position = 1;
 		this.position = Util.get("직급 : ");
-		generateDBCreate();
+
+		// id pw name email phone position
+
+		String[] temp = { id, pw, name, email, phone, position, depart };
+		list.add(temp);
+
+		try {
+			FileWriter fw = new FileWriter(DATA, true);
+			fw.write(id + ",");
+			fw.write(pw + ",");
+			fw.write(name + ",");
+			fw.write(email + ",");
+			fw.write(phone + ",");
+			fw.write(depart + ",");
+			fw.write(position + "\n");
+			fw.close();
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+
+		System.out.println("글 작성을 완료했습니다.");
+	}
+
+	/**
+	 * 모든 사용자의 정보를 출력해주는 메소드
+	 */
+	public void readUser() {
+		for (int i = 0; i < list.size(); i++) {
+			System.out.printf("%s %s %s %s %s %s %s\n", list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3],
+					list.get(i)[4], list.get(i)[5], list.get(i)[6]);
+		}
+	}
+
+	/**
+	 * 사용자의 정보를 수정하는 메소드
+	 */
+	public void updateUser() {
+		// id pw name email phone position depart
+		String c = Util.get("수정할 id를 입력해 주세요");
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0] == c) {
+				String id = Util.get("제목을 입력하세요");
+				String pw = Util.get("비밀번호을 입력하세요");
+				String name = Util.get("이름을 입력하세요");
+				String email = Util.get("이메일을 입력하세요");
+				String phone = Util.get("핸드폰번호를 입력하세요");
+				String position = Util.get("직급을 입력하세요");
+				String depart = Util.get("부서를 입력하세요");
+				String[] temp = { id, pw, name, email, phone, position, depart};
+				list.set(i, temp);
+			}
+		} // exit for
+		try {
+			FileWriter fw = new FileWriter(DATA, true);
+			fw.write(id + ",");
+			fw.write(pw + ",");
+			fw.write(name + ",");
+			fw.write(email + ",");
+			fw.write(phone + ",");
+			fw.write(depart + ",");
+			fw.write(position + "\n");
+			fw.close();
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	/**
+	 * 사용자의 정보를 삭제하는 메소드
+	 */
+	public void deleteUser() {
+		// id pw name email phone position depart
+		String c = Util.get("삭제할 id를 입력해 주세요");
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)[0] == c) {
+				list.remove(i);
+			}
+		} // exit for
+		try {
+			FileWriter fw = new FileWriter(DATA, true);
+			fw.write(id + ",");
+			fw.write(pw + ",");
+			fw.write(name + ",");
+			fw.write(email + ",");
+			fw.write(phone + ",");
+			fw.write(depart + ",");
+			fw.write(position + "\n");
+			fw.close();
+		} catch (IOException e) {
+			System.out.println(e);
+		}
 	}
 
 	@Override
@@ -90,58 +232,44 @@ public class User {
 				this.name, this.email, this.phone, this.position);
 	}
 
-	// TODO : Contact 변수에 입력된 값을 .txt에 저장한다.
-	public void generateDBCreate() {
-		try {
-			FileWriter fw = new FileWriter(ContactPATH, true);
-			fw.write(String.format("%s,%s,%s,%s,%s,%d\n", this.id, this.pw, this.name, this.email, this.phone,
-					this.position));
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//	public void updateDB() throws IOException {
+//		// TODO : updateDB 불러오기 금지... 형식지금은 맞춰져서 이후 확정 이후 재구현 예정
+//		BufferedReader reader = new BufferedReader(new FileReader(DATA));
+//
+//		String result = "";
+//		String line = "";
+//
+//		try {
+//			while ((line = reader.readLine()) != null) {
+//
+//				String[] temp = line.split(",");
+//				if (temp.length == 5) {
+////				System.out.println(temp);
+//					String temp2 = String.format("%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], randName(), temp[2], temp[3],
+//							temp[4]);
+////				System.out.println(temp2);
+//					result += temp2;
+//				} else if (temp.length == 6) {
+////					System.out.println(temp.length);
+//					String temp2 = String.format("%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], randName(), temp[3], temp[4],
+//							temp[5]);
+//					result += temp2;
+//				}
+//
+//			}
+//			FileWriter writer = new FileWriter(new File(DATA));
+//			writer.write(result);
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-		try {
-			updateDB();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void updateDB() throws IOException {
-		// TODO : updateDB 불러오기 금지... 형식지금은 맞춰져서 이후 확정 이후 재구현 예정
-		BufferedReader reader = new BufferedReader(new FileReader(ContactPATH));
-
-		String result = "";
-		String line = "";
-
-		try {
-			while ((line = reader.readLine()) != null) {
-
-				String[] temp = line.split(",");
-				if (temp.length == 5) {
-//				System.out.println(temp);
-					String temp2 = String.format("%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], randName(), temp[2], temp[3],
-							temp[4]);
-//				System.out.println(temp2);
-					result += temp2;
-				} else if (temp.length == 6) {
-//					System.out.println(temp.length);
-					String temp2 = String.format("%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], randName(), temp[3], temp[4],
-							temp[5]);
-					result += temp2;
-				}
-
-			}
-			FileWriter writer = new FileWriter(new File(ContactPATH));
-			writer.write(result);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+	
+	/**
+	 * 더미데이터를 만들기 위하여 성과 이름을 랜덤으로 반환하는 메서드
+	 * @return 성+이름
+	 */
 	public static String randName() {
 		List<String> firstName = Arrays.asList("김", "이", "박", "최", "정", "강", "조", "윤", "장", "임", "한", "오", "서", "신",
 				"권", "황", "안", "송", "류", "전", "홍", "고", "문", "양", "손", "배", "조", "백", "허", "유", "남", "심", "노", "정", "하",
@@ -212,7 +340,7 @@ public class User {
 	}
 
 	public static String getContactpath() {
-		return ContactPATH;
+		return DATA;
 	}
 
 	public String getDepart() {

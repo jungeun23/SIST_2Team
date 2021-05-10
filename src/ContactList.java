@@ -7,6 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * 주소록 구현 클래스
+ * 사용자는 주소록을 통해 사원들의 인적정보를 검색하거나, 개인 주소록을 만들 수 있다.
+ * @param scan 사용자로부터 입력 받는 Scanner 변수
+ * @param list DATA에 저장한 정보를 모두 불러들여 저장
+ * @param DATA 파일의 정보가 저장된 위치를 저장
+ * @param DATA2 파일의 정보가 저장된 위치를 저장
+ 
+ * @param num 입력받는 카테고리 번호
+ * @param name 입력받는 이름
+ * @param position 입력받는 직급
+ * @param buseo 입력받는 부서
+ */
 public class ContactList {
 	private static Scanner scan = new Scanner(System.in);
 	ArrayList<String[]> list = new ArrayList<String[]>();
@@ -28,7 +41,30 @@ public class ContactList {
 		load();
 	}
 	
-	//주소록 첫 화면 
+	/**
+	 * DATA에 있는 정보를 모두 읽어 list에 저장한다. 
+	 */
+	private void load() {
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(DATA));
+			String line = "";
+			String temp2 = "";
+			
+			while ((line = reader.readLine()) != null) {
+				String[] temp = line.split(",");
+				list.add(temp);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}//load()
+	
+	
+	/**
+	 * 사용자가 주소록에 진입하여 가장 처음 보게 되는 카테고리
+	 * 여기서 원하는 카테고리 번호를 입력받는다.
+	 */
 	public void firstScreen()  {
 				
 				System.out.println("===============================================");
@@ -64,11 +100,13 @@ public class ContactList {
 	}//clScreen()
 	
 	
-	
-	//개인 주소록 첫 화면
+	/**
+	 * 개인 주소록 카테고리로 들어와서
+	 * 원하는 카테고리 번호를 입력 받고 해당 메소드로 넘겨주는 메소드. 
+	 */
 	private void makeIndividual() {
 		
-		System.out.println("=======================================");
+		System.out.println("\n\n=======================================");
 		System.out.println("|| 1. 개인 주소록  || 2. 개인 주소록 ||");
 		System.out.println("||           확인  ||           추가 ||");
 		System.out.println("=======================================");
@@ -93,40 +131,53 @@ public class ContactList {
 		}
 	}
 	
-	
-	
-	//개인 주소록 - 개인 주소록 확인
+	/**
+	 * 개인주소록 파일(DATA2)에 존재하는 정보를 모두 읽어서 출력하는 메소드.
+	 */
 	private void checkIndivisual() {
-		
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(DATA2));
-			String line = "";
-			System.out.println("[이름] [아이디] [이메일] [전화번호] [직급] [부서]");
-			
-			while ((line = reader.readLine()) != null) {
-				String[] temp = line.split(",");
+
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(DATA2));
+				String line = "";
+				System.out.println("==========================\n");
+				System.out.println("개인 주소록\n");
+				System.out.println(" [이름]  [아이디]  [이메일]  [전화번호]  [직급]  [부서]");
+				System.out.println("=====================================================");
 				
-				System.out.printf("%s%s%s%s%s%s\n"
-						, temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
+				while ((line = reader.readLine()) != null) {
+					String[] temp = line.split(",");
+					
+					System.out.printf("\n|| %s || %s || %s || %s || %s || %s ||\n\n"
+							, temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
+					
+				}
+				reader.close();
 				
+				System.out.println("=====================================================");
+				System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
+				this.num = scan.nextInt();
+				
+				//다시 목차로 돌려주기
+				if (num == 0) {
+					cls();
+					firstScreen();
+				}
 				scan.nextLine();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			reader.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 	}//check()
-
-
 	
-	//개인 주소록 - 개인 주소록 추가
+	/**
+	 * 사용자에게 입력받은 정보를 개인주소록 파일(DATA2)에 저장하는 메소드. 
+	 */
 	private void inputIndividual() {
 		
 		Util juso = new Util();
 		
-		System.out.println("주소록 추가");
+		System.out.println("==========================\n");
+		System.out.println("[개인주소록 추가]\n");
 		
 		System.out.print("이름: ");
 		String name = scan.nextLine();
@@ -142,21 +193,31 @@ public class ContactList {
 			writer.write(String.format("%s,%s,%s,%s,%s,%s\n", name, id, email, phone, position, buseo));
 			writer.close();
 			
+			System.out.println("=====================================================");
+			System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
+			this.num = scan.nextInt();
+			
+			//다시 목차로 돌려주기
+			if (num == 0) {
+				cls();
+				firstScreen();
+			}
+			scan.nextLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		scan.nextLine();
+		
 	}//input()
 	
 	
-	
-	//주소록 - 부서 검색
+	/**
+	 * 사용자에게 부서명을 입력받고, 그와 동일한 부서명들이 가진 정보를 모두 출력하는 메소드
+	 */
 	private void searchBuseo() {
 		
-		System.out.println();
-		System.out.println("--------------------------");
-		System.out.println();
-		System.out.println("");
+		System.out.println("\n==========================\n");
+		System.out.println("검색 하고자 하는 부서 명을 입력하세요. ");
+		System.out.println("[회계] [재무] [인사] [영업] [마케팅] [개발] [디자인] [사업]\n");
 		System.out.print("부서: ");
 		this.buseo = scan.nextLine(); 
 		System.out.println();
@@ -174,6 +235,7 @@ public class ContactList {
 				line = String.format("||%4s\t||%s\t||%s\t||%23s\t||%s\t||%s||"
 						,list.get(i)[6] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5]);
 				
+				System.out.println("--------------------------------------------------------------------------------------------------");
 				System.out.println(line);
 			}
 		}//for
@@ -194,16 +256,16 @@ public class ContactList {
 	}//buseo()
 	
 	
-	
-	//주소록 - 직급 검색
+	/**
+	 * 사용자에게 직급명을 입력받고, 그와 동일한 직급명들이 가진 정보를 모두 출력하는 메소드
+	 */
 	private void searchPosition() {
 		
 		System.out.println();
-		System.out.println("--------------------------");
-		System.out.println();
+		System.out.println("--------------------------\n");
+		System.out.println("==========================\n");
 		System.out.println("검색 하고자 하는 직급 명을 입력하세요. ");
-		System.out.println("[인턴] [사원] [대리] [과장] [차장] [부장] [상무] [전무] [사장]");
-		System.out.println();
+		System.out.println("[인턴] [사원] [대리] [과장] [차장] [부장] [상무] [전무] [사장]\n");
 		System.out.print("직급: ");
 		this.position = scan.nextLine(); 
 		System.out.println();
@@ -243,13 +305,13 @@ public class ContactList {
 	}//position()
 	
 	
-	
-	//주소록 - 이름 검색
+	/**
+	 * 사용자에게 이름을 입력받고, 그와 동일한 이름이 가진 정보를 모두 출력하는 메소드
+	 */
 	private void searchName() {
 		
 		System.out.println();
-		System.out.println("--------------------------");
-		System.out.println();
+		System.out.println("==========================\n");
 		System.out.println("검색하고자 하는 이름을 입력하세요.\n");
 		System.out.print("이름: ");
 		this.name = scan.nextLine(); 
@@ -291,29 +353,9 @@ public class ContactList {
 		scan.nextLine();
 	}//Name()
 	
-	
-	
-	// Contact.txt에서 더미 데이터를 읽어오는 작업
-	private void load() {
-		
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(DATA));
-			
-			String line = "";
-			String temp2 = "";
-			
-			while ((line = reader.readLine()) != null) {
-				String[] temp = line.split(",");
-				list.add(temp);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}//load()
-	
-	
-	
-	//가독성 생각해서 콘솔 내려주기
+	/**
+	 * 콘솔창에 출력되는 내용의 가독성을 높이기 위해 줄을 바꿔주는 메소드.
+	 */
 	private static void cls() {
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
