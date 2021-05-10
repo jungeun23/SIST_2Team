@@ -22,11 +22,11 @@ public class DummyMake {
 //				System.out.println(makeTitle());
 //				System.out.println(makeContent());
 //			}
-			boardDummy();
+//			boardDummy();
 			ElecAppDummy();
-			EmailDummy();
-			editEmail();
-			MessengerDummy();
+//			EmailDummy();
+//			editEmail();
+//			MessengerDummy();
 //			System.out.println(makeContent());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -93,6 +93,7 @@ public class DummyMake {
 		FileWriter fw = new FileWriter("data\\ElecDoc\\ElecDoc.txt");
 		for (int i = 0; i < 10000; i++) {
 			String s = getNameFromContact();
+//			1036,전월세 사직서,gcdXIdqIq#DXy!nJZt396,허신량,과장
 			fw.write(String.format("%s,%s,%s,%s,%s\n", cnt++, getTitleDummy(), getPasswordDummy(), s,
 					getPosition(s)));
 			fw.write(getContentDummy() + "\n");
@@ -236,7 +237,7 @@ public class DummyMake {
 		LinkedList<String[]> list2 = new LinkedList<>();
 
 		try {
-			BufferedReader read = new BufferedReader(new FileReader("DATA\\Contact_dummy.txt"));
+			BufferedReader read = new BufferedReader(new FileReader("DATA\\Contact.txt"));
 			String line = "";
 			while ((line = read.readLine()) != null) {
 				String[] temp = line.split(",");
@@ -249,12 +250,12 @@ public class DummyMake {
 
 		Random rand = new Random();
 
-		int rnd = rand.nextInt(5);
 
 		for (int i = 0; i < list.size(); i++) {
+			int rnd = rand.nextInt(5);
+//			ehumber0,EcxPfdAl,반남석,ssellar0@sist2.co.kr,010-3091-7832,과장,디자인
 			String year = "";
-
-			if (list.get(i)[1].equals("인턴")) {
+			if (list.get(i)[5].equals("인턴")) {
 				year = (rand.nextInt(2) + 1) + ""; // 인턴 1~2년 >
 			} else if (list.get(i)[5].equals("사원")) {
 				year = (rand.nextInt(3) + 1) + ""; // 사원 1~3년
@@ -304,8 +305,10 @@ public class DummyMake {
 				salary = 10000000;
 
 			}
+//			ehumber0,EcxPfdAl,반남석,ssellar0@sist2.co.kr,010-3091-7832,과장,디자인
+//			여보전,대리,부서,B,4,3200000,10144
 			String[] t = { list.get(i)[2], list.get(i)[5], list.get(i)[6], goga[rnd], year, Integer.toString(salary),
-					Integer.toString(rand.nextInt(100) + 500) };
+					Integer.toString(rand.nextInt(1000) + 10000) };
 			list2.add(t);
 		}
 
