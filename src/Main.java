@@ -34,26 +34,12 @@ public class Main {
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-<<<<<<< HEAD
 
-////		
-//		MeetingRoom mr = new MeetingRoom(user);
-////		//mr.createRoomReservation();
-
-=======
-////		
-//		MeetingRoom mr = new MeetingRoom(user);
-////		//mr.createRoomReservation();
->>>>>>> 03dfe67e57fa5b274e84f3921df3ae25177cc41f
 		
 		MeetingRoom mr = new MeetingRoom(user);
 		//mr.createRoomReservation();
-<<<<<<< HEAD
 
 		mr.MeetingRoomScreen();
-=======
-//		mr.MeetingRoomScreen();
->>>>>>> 03dfe67e57fa5b274e84f3921df3ae25177cc41f
 		
 
 //		Board bd = new Board(user);
@@ -67,11 +53,8 @@ public class Main {
 		
 
 		
-<<<<<<< HEAD
 
 //		hr.hrlogin();
-=======
->>>>>>> 03dfe67e57fa5b274e84f3921df3ae25177cc41f
 		
 		
 		

@@ -48,7 +48,8 @@ public class MeetingRoom {
 	 * 회의실 예약 관리 각 항목으로 넘어가도록 int값을 입력받아 각 메소드로 이동한다.
 	 */
 	public void MeetingRoomScreen() {
-
+		cls();
+		
 		System.out.println("                ▣ 회의실 예약 관리 목록 ▣");
 		System.out.println("====================================================");
 		System.out.println("|| 1. 회의실  || 2. 회의실 예약  || 3. 회의실 예약 ||");
