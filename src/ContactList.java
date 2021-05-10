@@ -7,6 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * 주소록 구현 클래스
+ * 사용자는 주소록을 통해 사원들의 인적정보를 검색하거나, 개인 주소록을 만들 수 있다.
+ * @param scan 사용자로부터 입력 받는 Scanner 변수
+ * @param list DATA에 저장한 정보를 모두 불러들여 저장
+ * @param DATA 파일의 정보가 저장된 위치를 저장
+ * @param DATA2 파일의 정보가 저장된 위치를 저장
+ 
+ * @param num 입력받는 카테고리 번호
+ * @param name 입력받는 이름
+ * @param position 입력받는 직급
+ * @param buseo 입력받는 부서
+ */
 public class ContactList {
 	private static Scanner scan = new Scanner(System.in);
 	ArrayList<String[]> list = new ArrayList<String[]>();
@@ -28,11 +41,29 @@ public class ContactList {
 		load();
 	}
 	
-	//주소록 첫 화면 
-	
-
 	/**
-	 * 
+	 * DATA에 있는 정보를 모두 읽어 list에 저장한다. 
+	 */
+	private void load() {
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(DATA));
+			String line = "";
+			String temp2 = "";
+			
+			while ((line = reader.readLine()) != null) {
+				String[] temp = line.split(",");
+				list.add(temp);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}//load()
+	
+	
+	/**
+	 * 사용자가 주소록에 진입하여 가장 처음 보게 되는 카테고리
+	 * 여기서 원하는 카테고리 번호를 입력받는다.
 	 */
 	public void firstScreen()  {
 				
@@ -69,7 +100,10 @@ public class ContactList {
 	}//clScreen()
 	
 	
-	//개인 주소록 첫 화면
+	/**
+	 * 개인 주소록 카테고리로 들어와서
+	 * 원하는 카테고리 번호를 입력 받고 해당 메소드로 넘겨주는 메소드. 
+	 */
 	private void makeIndividual() {
 		
 		System.out.println("\n\n=======================================");
@@ -97,9 +131,9 @@ public class ContactList {
 		}
 	}
 	
-	
-	
-	//개인 주소록 - 개인 주소록 확인
+	/**
+	 * 개인주소록 파일(DATA2)에 존재하는 정보를 모두 읽어서 출력하는 메소드.
+	 */
 	private void checkIndivisual() {
 
 			try {
@@ -134,10 +168,10 @@ public class ContactList {
 				e.printStackTrace();
 			}
 	}//check()
-
-
 	
-	//개인 주소록 - 개인 주소록 추가
+	/**
+	 * 사용자에게 입력받은 정보를 개인주소록 파일(DATA2)에 저장하는 메소드. 
+	 */
 	private void inputIndividual() {
 		
 		Util juso = new Util();
@@ -176,8 +210,9 @@ public class ContactList {
 	}//input()
 	
 	
-	
-	//주소록 - 부서 검색
+	/**
+	 * 사용자에게 부서명을 입력받고, 그와 동일한 부서명들이 가진 정보를 모두 출력하는 메소드
+	 */
 	private void searchBuseo() {
 		
 		System.out.println("\n==========================\n");
@@ -221,8 +256,9 @@ public class ContactList {
 	}//buseo()
 	
 	
-	
-	//주소록 - 직급 검색
+	/**
+	 * 사용자에게 직급명을 입력받고, 그와 동일한 직급명들이 가진 정보를 모두 출력하는 메소드
+	 */
 	private void searchPosition() {
 		
 		System.out.println();
@@ -269,8 +305,9 @@ public class ContactList {
 	}//position()
 	
 	
-	
-	//주소록 - 이름 검색
+	/**
+	 * 사용자에게 이름을 입력받고, 그와 동일한 이름이 가진 정보를 모두 출력하는 메소드
+	 */
 	private void searchName() {
 		
 		System.out.println();
@@ -316,29 +353,9 @@ public class ContactList {
 		scan.nextLine();
 	}//Name()
 	
-	
-	
-	// Contact.txt에서 더미 데이터를 읽어오는 작업
-	private void load() {
-		
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(DATA));
-			
-			String line = "";
-			String temp2 = "";
-			
-			while ((line = reader.readLine()) != null) {
-				String[] temp = line.split(",");
-				list.add(temp);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}//load()
-	
-	
-	
-	//가독성 생각해서 콘솔 내려주기
+	/**
+	 * 콘솔창에 출력되는 내용의 가독성을 높이기 위해 줄을 바꿔주는 메소드.
+	 */
 	private static void cls() {
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
