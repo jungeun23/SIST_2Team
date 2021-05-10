@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class TrainingCenter {
 	User user;
-	MyCalendar_junhee mc;
+	MyCalendar_Training mc;
 	public static Scanner scan;
 
 	public TrainingCenter(User user) {
 		this.user = user;
-		this.mc = new MyCalendar_junhee(user);
+		this.mc = new MyCalendar_Training(user);
 		scan = new Scanner(System.in);
 
 	}
@@ -37,7 +37,7 @@ public class TrainingCenter {
 
 			} else if (num == 5) {
 
-				//Main.menu();
+				Main.menu();
 
 			} else {
 
@@ -46,10 +46,7 @@ public class TrainingCenter {
 		}//while 
 	}
 
-	/**
-	 * @author 2조
-	 * 
-	 */
+	
 	public void createTraining() {
 		mc.createTraining();
 	}
@@ -65,6 +62,10 @@ public class TrainingCenter {
 	public void deleteTraining() {
 		mc.deleteTrainingSchedule();
 	}
+	
+	/**
+	 * 일시정지 기능의 메소드
+	 */
 	public static void pause() {
 		System.out.println();
 		System.out.println("엔터를 누르시면 항목으로 돌아갑니다.");
@@ -72,7 +73,10 @@ public class TrainingCenter {
 		cls();
 
 	}
-
+	
+	/**
+	 * 100줄을 띄워 새로운 창이 뜨는 효과를 나타내주는 메소드 
+	 */
 	private static void cls() {
 
 		for (int i = 0; i < 100; i++) {

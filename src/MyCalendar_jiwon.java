@@ -468,7 +468,10 @@ public class MyCalendar_jiwon {
 		}
 
 	}
-
+	
+	/**
+	 * 휴가날짜와 휴가사유를 입력받고, 그걸 휴가일정 파일(DATA2)에 저장하는 메소드
+	 */
 	public void createScheduleVacation() {
 		System.out.println("휴가를 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
@@ -687,6 +690,10 @@ public class MyCalendar_jiwon {
 		
 	}
 	
+	/**
+	 * 입력했던 휴가날짜를 모두 출력하고, 거기에서 취소할 일정을 입력받는다.
+	 * 입력받은 취소 일정을 휴가일정 파일(DATA2)에서 지우는 메소드.
+	 */
 	public void deleteVacation() {
 		 ArrayList<int[]> t = new ArrayList<>();
 	      for (int i = 0; i < listVacation.size(); i++) {
@@ -740,6 +747,10 @@ public class MyCalendar_jiwon {
 		}
 	}//delete()
 	
+	/**
+	 * 입력했던 휴가날짜를 모두 출력하고, 거기에서 확인할 일정을 입력받는다.
+	 * 확인할 일정은 휴가 사유와 함께 출력하는 메소드. 
+	 */
 	public void readVacation() {
 		
 		ArrayList<int[]> t = new ArrayList<>();
