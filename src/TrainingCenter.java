@@ -11,15 +11,17 @@ public class TrainingCenter {
 		scan = new Scanner(System.in);
 
 	}
-
+	/**
+	 * 교육일정 초기 항목 화면 
+	 */
 	public void trainingScreen() {
 		while(true) {
 			System.out.println("                       ▣ 교육 일정 항목 ▣");
-			System.out.println("=============================================================================");
+			System.out.println("==============================================================================");
 			System.out.println("||1.	교육	||2.	교육	||3.	교육	||4.	교육	||5.	뒤로||");
 			System.out.println("||  	일정	||  	일정	||  	일정	||  	일정	||  	가기||");
-			System.out.println("||  	등록	||  	조회	||  	수정	||  	삭제	||         ||");
-			System.out.println("=============================================================================");
+			System.out.println("||  	등록	||  	조회	||  	수정	||  	삭제	||          ||");
+			System.out.println("==============================================================================");
 			System.out.print(" 카테고리(번호)를 선택하세요: ");
 			int num = scan.nextInt();
 
@@ -37,7 +39,11 @@ public class TrainingCenter {
 
 			} else if (num == 5) {
 
-				Main.menu();
+				try {
+					Main.menu();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 			} else {
 
@@ -46,19 +52,28 @@ public class TrainingCenter {
 		}//while 
 	}
 
-	
+	/**
+	 * 달력에서 날짜를 선택해 교육 일정을 새로 생성해주는 메소드
+	 */
 	public void createTraining() {
 		mc.createTraining();
 	}
-
+	/**
+	 * 일정이 있다면 달력에서 날짜 뒤에 * 표시가 나타남 
+	 * 원하는 날짜를 입력하면 해당 날짜에 저장된 교육 일정을 조회 가능
+	 */
 	public void readTraining() {
 		mc.readTrainingSchedule();
 	}
-
+	/**
+	 * 입력한 날짜에 해당하는 일정을 수정해주는 메소드 
+	 */
 	public void updateTraining() {
 		mc.updateTrainingSchedule();
 	}
-
+	/**
+	 * 원하는 날짜에 작성된 교육 일정을 삭제하는 메소드 
+	 */
 	public void deleteTraining() {
 		mc.deleteTrainingSchedule();
 	}

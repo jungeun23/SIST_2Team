@@ -3,27 +3,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.LinkedList;
-import java.util.Random;
+import java.util.Scanner;
 
 
 public class MyCalendar_Training {
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
-	private final String DATA;
-	private final String DATA2;
-	private final String DATA3;
-	private final String DATA4;
+
 	private final String DATA5;
+	public static Scanner scan;
 	private Calendar date;
 	private int year;
 	private int month;
@@ -31,45 +19,23 @@ public class MyCalendar_Training {
 	private int lastDay = 0;
 	private int day_of_week = 0;
 	private User user;
-	LinkedList<String[]> list = new LinkedList<>();
-	LinkedList<String[]> listVacation = new LinkedList<>();
-	LinkedList<String[]> listCar = new LinkedList<>();
-	LinkedList<String[]> listRoom = new LinkedList<>();
 	LinkedList<String[]> listTraining = new LinkedList<>();
-
+	
 	public MyCalendar_Training(User user) {
 		this.user = user;
-		DATA = "data/schedule/schedule.txt";
-		DATA2 = "data/schedule/vacation.txt";
-		DATA3 = "data/schedule/car.txt";
-		DATA4 = "data/schedule/meetingRoom.txt";
 		DATA5 = "data/schedule/training.txt";
 		date = Calendar.getInstance();
 		this.year = date.get(Calendar.YEAR);
 		this.month = date.get(Calendar.MONTH) + 1;
 		this.day = date.get(Calendar.DATE);
 		load();
+		scan = new Scanner(System.in);
 	}
 
 	private void load() {
 		try {
-			BufferedReader read = new BufferedReader(new FileReader(DATA));
-			String line = "";
-			while ((line = read.readLine()) != null) {
-				String[] temp = line.split(",");
-				list.add(temp);
-			}
-			BufferedReader readVacation = new BufferedReader(new FileReader(DATA2));
-			while ((line = readVacation.readLine()) != null) {
-				String[] temp = line.split(",");
-				listVacation.add(temp);
-			}
-			BufferedReader readCar = new BufferedReader(new FileReader(DATA3));
-			while ((line = readCar.readLine()) != null) {
-				String[] temp = line.split(",");
-				listCar.add(temp);
-			}
 			BufferedReader readTraining = new BufferedReader(new FileReader(DATA5));
+			String line = "";
 			while ((line = readTraining.readLine()) != null) {
 				String[] temp = line.split(",");
 				listTraining.add(temp);
@@ -80,126 +46,13 @@ public class MyCalendar_Training {
 
 	}
 
-	public void createSchedule() {
-		System.out.println("일정을 등록합니다. 달력을 확인해주세요");
-		showCanlendar(this.year, this.month);
-		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
-		String[] temp = s.split("-");
-		Calendar newTask = Calendar.getInstance();
-		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
-
-		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
-				+ newTask.get(Calendar.DAY_OF_MONTH);
-		// 홍길동,2021-5-4,t,testaaa
-		String[] sl = { this.user.getName(), ymd, title, content };
-		list.add(sl);
-
-		try {
-			FileWriter fw = new FileWriter(DATA, true);
-			fw.write(this.user.getName() + ",");
-			fw.write(ymd + ",");
-			fw.write(title + ",");
-			fw.write(content + "\n");
-			fw.close();
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-	}
-
-	public void showSchedule() {
-		// 홍길동,2021-5-4,t,testaaa
-		ArrayList<int[]> t = new ArrayList<>();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i)[0].equals(this.user.getName())) {
-				String[] temp = list.get(i)[1].split("-");
-				int year = Util.toInt(temp[0]);
-				int month = Util.toInt(temp[1]);
-				int day = Util.toInt(temp[2]);
-				int[] g = { year, month, day };
-				t.add(g);
-			}
-		}
-		System.out.println("일정을 선택해주세요");
-		int[] c = showCanlendar(t);
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i)[0].equals(this.user.getName())) {
-				String[] temp = list.get(i)[1].split("-");
-				int year = Util.toInt(temp[0]);
-				int month = Util.toInt(temp[1]);
-				int day = Util.toInt(temp[2]);
-				if (c[0] == year && c[1] == month && c[2] == day) {
-					System.out.println();
-					System.out.println("일정을 출력합니다");
-					System.out.println("제목 : " + list.get(i)[2]);
-					System.out.println("내용 : " + list.get(i)[3]);
-				}
-			}
-		}
-
-	}//showSchedule
-
-	public void deleteSchedule() {
-		ArrayList<int[]> t = new ArrayList<>();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i)[0].equals(this.user.getName())) {
-				String[] temp = list.get(i)[1].split("-");
-				int year = Util.toInt(temp[0]);
-				int month = Util.toInt(temp[1]);
-				int day = Util.toInt(temp[2]);
-				int[] g = { year, month, day };
-				t.add(g);
-
-			}
-		} // exit for
-		System.out.println("삭제할 일정을 선택해주세요");
-		int[] c = showCanlendar(t);
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i)[0].equals(this.user.getName())) {
-				String[] temp = list.get(i)[1].split("-");
-				int year = Util.toInt(temp[0]);
-				int month = Util.toInt(temp[1]);
-				int day = Util.toInt(temp[2]);
-				if (c[0] == year && c[1] == month && c[2] == day) {
-					System.out.println();
-					System.out.println(list.get(i)[2] + " 일정을 삭제했습니다.");
-					list.remove(i);
-				}
-			}
-		} // exit for
-			// Filewrite로 list 모두 쓰기
-	}
-
-	public void updateSchedule() {
-		// 홍길동,2021-5-4,t,testaaa
-		for (int i = 0; i < this.list.size(); i++) {
-			if (list.get(i)[0].equals(this.user.getName())) {
-				String[] temp = this.list.get(i)[1].split("-");
-				int year = Util.toInt(temp[0]);
-				int month = Util.toInt(temp[1]);
-				int day = Util.toInt(temp[2]);
-			}
-		}
-		System.out.println("수정할 일정을 선택해주세요");
-		int[] c = showCanlendar(year, month, day);
-		for (int i = 0; i < list.size(); i++) {
-			if (c[0] == year && c[1] == month && c[2] == day) {
-				String title = Util.get("일정의 제목을 입력해주세요");
-				String content = Util.get("일정의 내용을 입력해주세요");
-				String[] t = { this.user.getName(), this.list.get(i)[1], title, content };
-				this.list.set(i, t);
-				System.out.println("일정 수정이 완료됐습니다.");
-			}
-		}
-		// Filewrite로 list 모두 쓰기
-	}// updateSchedule
+	/**
+	 * 달력 나타내주는 메소드 
+	 * @param t
+	 * @return
+	 */
 
 	public int[] showCanlendar(ArrayList<int[]> t) {
-//	      System.out.println(Arrays.toString(t.get(0)));
-//	      System.out.println(this.year);
-//	      System.out.println(this.month);
-//	      System.out.println(this.day);
 		// 마지막일?
 		while (true) {
 			lastDay = getLastDay(year, month);
@@ -215,7 +68,6 @@ public class MyCalendar_Training {
 			for (int i = 0; i < day_of_week; i++) {
 				System.out.print("\t");
 			}
-//	                     System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
 			// 날짜 출력
 			boolean isStar = false;
 			for (int i = 1; i <= lastDay; i++) {
@@ -230,7 +82,6 @@ public class MyCalendar_Training {
 				}
 				if (!isStar) {
 					System.out.printf("%3d\t", i);
-//	               System.out.println(t.get(0));
 				}
 //	               if ((day_of_week + i - 1) % 7 == 0) {
 				int a = i % 7;
@@ -267,89 +118,11 @@ public class MyCalendar_Training {
 		}
 	}//showCalendar
 
-	private int[] showCanlendar(int year, int month, int day) {
-		// 마지막일?
-		while (true) {
-			lastDay = getLastDay(year, month);
-
-			// 해당 월의 1일의 요일?
-			day_of_week = getDayOfWeek(year, month); // 4
-			// 달력 출력하기
-			System.out.println();
-			System.out.println("===================================================");
-			System.out.printf("                     %d년 %d월\n", year, month);
-			System.out.println("===================================================");
-			System.out.println("[일]\t[월]\t[화]\t[수]\t[목]\t[금]\t[토]");
-
-			// 1일의 요일을 맞추기 위해서..
-			for (int i = 0; i < day_of_week; i++) {
-				System.out.print("\t");
-			}
-
-			// 날짜 출력
-			for (int i = 1; i <= lastDay; i++) {
-				if (i == day)
-//							System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
-					System.out.printf("%3d*\t", i);
-				else
-					System.out.printf("%3d\t", i);
-
-				int a = i % 7;
-				int b = 7 - day_of_week;
-
-				b = 7 - day_of_week == 7 ? 0 : b;
-				if (i % 7 == b) {
-//					if ((day_of_week + i - 1) % 7 == 0) {
-					System.out.println();
-				}
-			}
-
-			System.out.println();
-			System.out.println();
-			String s = Util.get("월 이동(a or d) 끝내기(q) 날짜선택(요일입력)");
-			if (s.equals("q")) {
-//				break;
-				int[] t = { year, month, day };
-				return t;
-			}
-//					KeyEvent event = new KeyEvent();
-//					if(Event.getKeycode() == KeyEvent.VK_LEFT)
-			else if (s.equals("a")) {
-				if (month - 1 != 0)
-					month--;
-				else {
-					month = 12;
-					year--;
-				}
-			} else if (s.equals("d")) {
-				if (month + 1 != 12)
-					month++;
-				else {
-					month = 1;
-					year++;
-				}
-			} else {
-				int[] t = { year, month, Util.toInt(s) };
-				return t;
-			}
-
-		}
-
-	}
-
-//	public void output() {
-//
-//		this.date = Calendar.getInstance();
-//		year = date.get(Calendar.YEAR);
-//		month = date.get(Calendar.MONTH);
-//		month++;
-//
-//		// System.out.println(day_of_week);
-//
-//		showCanlendar(year, month);
-//
-//	}// output
-
+	/**
+	 * year와 month 값을 받아 해당 달력을 나타내주는 메소드 
+	 * @param year
+	 * @param month
+	 */
 	private void showCanlendar(int year, int month) {
 		// 마지막일?
 		while (true) {
@@ -372,7 +145,6 @@ public class MyCalendar_Training {
 			// 날짜 출력
 			for (int i = 1; i <= lastDay; i++) {
 				if (i == 9999)
-//					System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
 					System.out.printf("%3d*\t", i);
 				else
 					System.out.printf("%3d\t", i);
@@ -382,7 +154,6 @@ public class MyCalendar_Training {
 
 				b = 7 - day_of_week == 7 ? 0 : b;
 				if (i % 7 == b) {
-//			if ((day_of_week + i - 1) % 7 == 0) {
 					System.out.println();
 				}
 			}
@@ -392,8 +163,6 @@ public class MyCalendar_Training {
 			String s = Util.get("월 이동(a or d) 끝내기(q)");
 			if (s.equals("q"))
 				break;
-//			KeyEvent event = new KeyEvent();
-//			if(Event.getKeycode() == KeyEvent.VK_LEFT)
 			if (s.equals("a")) {
 				if (month - 1 != 0)
 					month--;
@@ -413,7 +182,7 @@ public class MyCalendar_Training {
 
 		}
 	}
-
+	
 	public static int getDayOfWeek(int year, int month) {
 
 		int totalDays = 0;
@@ -436,7 +205,12 @@ public class MyCalendar_Training {
 		totalDays++;
 		return totalDays % 7;
 	}
-
+	/**
+	 * 월별 마지막 날짜 구해주는 메소드 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
 	public static int getLastDay(int year, int month) {
 
 		switch (month) {
@@ -458,7 +232,11 @@ public class MyCalendar_Training {
 		}
 		return 0;
 	}// getLastDay
-
+	/**
+	 * 윤년 구분 메소드 
+	 * @param year
+	 * @return
+	 */
 	public static boolean isLeafYear(int year) {
 
 		if (year % 4 == 0) {
@@ -477,188 +255,15 @@ public class MyCalendar_Training {
 
 	}
 
-	public void createScheduleVacation() {
-		System.out.println("휴가를 등록합니다. 달력을 확인해주세요");
-		showCanlendar(this.year, this.month);
-		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd) ");
-		String[] temp = s.split("-");
-		Calendar newTask = Calendar.getInstance();
-		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
-		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
-				+ newTask.get(Calendar.DAY_OF_MONTH);
-		// 홍길동,2021-5-4,t,testaaa
-		String position = null;
-		String depart = null;
-		String randNum = null;
 
-		try {
-			BufferedReader read = new BufferedReader(new FileReader("data/HR.txt"));
-			long seed = System.currentTimeMillis();
-			Random rand = new Random(seed);
-			rand.setSeed(seed);
-			randNum = Integer.toString(rand.nextInt(15) + 1);
-
-			String line = "";
-			while ((line = read.readLine()) != null) {
-				String[] t = line.split(",");
-				if (t[0].equals(this.user.getName())) {
-					position = t[1];
-					depart = t[2];
-					String[] sl = { this.user.getName(), position, depart, randNum, ymd, title, content };
-					listVacation.add(sl);
-				}
-			}
-
-			FileWriter fw = new FileWriter(DATA2, true);
-			fw.write(this.user.getName() + ",");
-			fw.write(position + ",");
-			fw.write(depart + ",");
-			fw.write(randNum + ",");
-			fw.write(ymd + ",");
-			fw.write(title + ",");
-			fw.write(content + "\n");
-			fw.close();
-
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-		System.out.println("휴가 일정 등록이 완료됐습니다.");
-	}
-
-	public void createCopCarReseravtion(ArrayList<String[]> carList) {
-		System.out.println("법인차량 예약을 등록합니다. 달력을 확인해주세요");
-		showCanlendar(this.year, this.month);
-		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
-		String[] temp = s.split("-");
-		Calendar newTask = Calendar.getInstance();
-		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
-		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
-				+ newTask.get(Calendar.DAY_OF_MONTH);
-
-		System.out.println("법인 차량 목록입니다.");
-		for (int i = 0; i < carList.size(); i++) {
-			System.out.printf("[%d] : %s\n", i + 1, carList.get(i)[0]);
-		}
-//		for (String ss : carList.keySet()) {
-//			System.out.printf("[%d] : %s\n", cnt++ , ss);
-//		}
-//		String selecetedCar = Util.get("차량이름을 입력하세요");
-		int selectedCar = Util.toInt(Util.get("번호를 입력해주세요"));
-		selectedCar--;
-		if (Util.toInt(carList.get(selectedCar)[1]) == 0) {
-			System.out.println(selectedCar + " 차량의 재고가 존재하지 않습니다.");
-		} else {
-			int t = Util.toInt(carList.get(selectedCar)[1]);
-			carList.get(selectedCar)[1] = Integer.toString(t - 1);
-		}
-		// 홍길동,2021-5-4,t,testaaa
-		String position = null;
-		String depart = null;
-		String randNum = null;
-
-		try {
-			BufferedReader read = new BufferedReader(new FileReader("data/HR.txt"));
-			String line = "";
-			while ((line = read.readLine()) != null) {
-				String[] t = line.split(",");
-				if (t[0].equals(this.user.getName())) {
-					position = t[1];
-					depart = t[2];
-					String[] sl = { this.user.getName(), position, depart, carList.get(selectedCar)[0],
-							(carList.get(selectedCar)[1]), ymd, title, content };
-					listCar.add(sl);
-				}
-			}
-
-			FileWriter fw = new FileWriter(DATA3, true);
-			fw.write(this.user.getName() + ",");
-			fw.write(position + ",");
-			fw.write(depart + ",");
-			fw.write(carList.get(selectedCar)[0] + ",");
-			fw.write(carList.get(selectedCar)[1] + ",");
-			fw.write(ymd + ",");
-			fw.write(title + ",");
-			fw.write(content + "\n");
-			fw.close();
-
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-		System.out.println("차량 예약 등록이 완료됐습니다.");
-	}
-
-	public void createRoomReservation(String[] roomNumber) {
-		System.out.println("회의실 예약을 등록합니다. 달력을 확인해주세요");
-		showCanlendar(this.year, this.month);
-		String s = Util.get("날짜를 입력해주세요(yyyy-mm-dd): ");
-		String[] temp = s.split("-");
-		Calendar newTask = Calendar.getInstance();
-		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
-		String title = Util.get("일정 제목을 입력해주세요");
-		String content = Util.get("일정의 내용을 입력해주세요");
-		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
-				+ newTask.get(Calendar.DAY_OF_MONTH);
-		// 홍길동,2021-5-4,t,testaaa
-		for (int i = 0; i < roomNumber.length; i++) {
-			System.out.printf("[%d] %s\n", i + 1, roomNumber[i]);
-		}
-		int choiceRoom = Util.toInt(Util.get("방 번호를 선택해주세요"));
-		String selectedRoom = roomNumber[choiceRoom - 1];
-		String position = null;
-		String depart = null;
-		String randNum = null;
-
-		try {
-			BufferedReader readRoom = new BufferedReader(new FileReader(DATA4));
-			String line = "";
-			while ((line = readRoom.readLine()) != null) {
-				String[] t = line.split(",");
-				if (selectedRoom == t[3] && ymd == t[4]) {
-					Util.puase("이미 예약된 방과 날짜 입니다. 다시 선택해주세요");
-					return;
-				}
-			}
-			BufferedReader read = new BufferedReader(new FileReader("data/HR.txt"));
-//			long seed = System.currentTimeMillis();
-//			Random rand = new Random(seed);
-//			rand.setSeed(seed);
-//			randNum = Integer.toString(rand.nextInt(15) + 1);
-
-			while ((line = read.readLine()) != null) {
-				String[] t = line.split(",");
-				if (t[0].equals(this.user.getName())) {
-					position = t[1];
-					depart = t[2];
-					String[] sl = { this.user.getName(), position, depart, selectedRoom, ymd, title, content };
-					listRoom.add(sl);
-				}
-			}
-
-			FileWriter fw = new FileWriter(DATA4, true);
-			fw.write(this.user.getName() + ",");
-			fw.write(position + ",");
-			fw.write(depart + ",");
-			fw.write(selectedRoom + ",");
-			fw.write(ymd + ",");
-			fw.write(title + ",");
-			fw.write(content + "\n");
-			fw.close();
-
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-		System.out.println("휴가 일정 등록이 완료됐습니다.");
-
-	}
 
 	/**
 	 * 교육센터 일정 예약 메소드
 	 * 
-	 * @param
+	 * @param String title 교육 일정 제목 입력 
+	 * @param String content 교육 일정 내용 입력 
+	 * @param String s 원하는 교육 날짜 입력 
+	 * @param Calendar newTask 입력된 교육 날짜를 Calendar 형식으로 변환 
 	 */
 	public void createTraining() {
 		System.out.println("교육센터 일정을 등록합니다. 달력을 확인해주세요");
@@ -671,12 +276,10 @@ public class MyCalendar_Training {
 		String content = Util.get("교육 일정의 내용을 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
-		// 홍길동,2021-5-4,t,testaaa
 		String position = null;
 		String depart = null;
 
 		try {
-			// 홍길동,차장,인사,D,12,5000000
 			BufferedReader read = new BufferedReader(new FileReader("data/HR.txt"));
 
 			String line = "";
@@ -710,10 +313,13 @@ public class MyCalendar_Training {
 
 	/**
 	 * 예약된 교육 일정을 보여주는 메소드
+	 * @author 2조
+	 * @param ArrayList<int[]> t 날짜 형식을 int배열로 바꾼 값을 저장해주는 ArrayList
+	 * @param int year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
+	 * @param int month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
+	 * @param int day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
 	 */
 	public void readTrainingSchedule() {
-		// 홍길동,2021-5-4,t,testaaa
-		// 홍길동,차장,인사,2021-5-11,신입사원 교육,신입사원 교육1
 		ArrayList<int[]> t = new ArrayList<int[]>();
 		for (int i = 0; i < listTraining.size(); i++) {
 			String[] temp = listTraining.get(i)[3].split("-");
@@ -747,42 +353,49 @@ public class MyCalendar_Training {
 
 	/**
 	 * 교육 일정 수정 메소드
+	 * @author 2조
+	 * @param String title 수정할 교육 일정 제목 입력 
+	 * @param String content 수정할 교육 일정 내용 입력 
+ 	 * @param ArrayList<int[]> t2 날짜 형식을 int배열로 바꾼 값을 저장해주는 ArrayList
+ 	 * @param int year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
+	 * @param int month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
+	 * @param int day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
 	 */
 	public void updateTrainingSchedule() {
-		// 홍길동,2021-5-4,t,testaaa
-		// 홍길동,차장,인사,2021-5-11,신입사원 교육,신입사원 교육1
 		ArrayList<int[]> t2 = new ArrayList<>();
 		for (int i = 0; i < this.listTraining.size(); i++) {
+			
 			if (listTraining.get(i)[0].equals(this.user.getName())) {
 				String[] temp = this.listTraining.get(i)[3].split("-");
 				int year = Util.toInt(temp[0]);
 				int month = Util.toInt(temp[1]);
 				int day = Util.toInt(temp[2]);
-				int[] ymd = { year, month, day };
-				t2.add(ymd);
+				int[] g = { year, month, day };
+				t2.add(g);
 				}
 			}
-		System.out.println("수정할 일정을 선택해주세요");
-		int[] c = showCanlendar(t2);
-		for (int i = 0; i < listTraining.size(); i++) {
-			String[] temp = listTraining.get(i)[3].split("-");
-			int year = Util.toInt(temp[0]);
-			int month = Util.toInt(temp[1]);
-			int day = Util.toInt(temp[2]);
-			if (c[0] == year && c[1] == month && c[2] == day) {
-				String title = Util.get("일정의 제목을 입력해주세요");
-				String content = Util.get("일정의 내용을 입력해주세요");
-				String[] t = { this.user.getName(), this.listTraining.get(i)[1], this.listTraining.get(i)[2],
-						this.listTraining.get(i)[3], title, content };
-				this.listTraining.set(i, t);
-				System.out.println("일정 수정이 완료됐습니다.");
-			} 
-		}// for
-		try {
+			System.out.println("수정할 일정을 선택해주세요");
+			int[] c = showCanlendar(t2);
+			for (int i = 0; i < listTraining.size(); i++) {
+				if (listTraining.get(i)[0].equals(this.user.getName())) {
+					String[] temp = listTraining.get(i)[3].split("-");
+					int year = Util.toInt(temp[0]);
+					int month = Util.toInt(temp[1]);
+					int day = Util.toInt(temp[2]);
+					if (c[0] == year && c[1] == month && c[2] == day) {
+						String title = Util.get("일정의 제목을 입력해주세요");
+						String content = Util.get("일정의 내용을 입력해주세요");
+						String[] t = { this.user.getName(), this.listTraining.get(i)[1], this.listTraining.get(i)[2],
+								this.listTraining.get(i)[3], title, content };
+						this.listTraining.set(i, t);
+						System.out.println("일정 수정이 완료됐습니다.");
+					}
+				}
+			} // for
+			try {
 			FileWriter fw = new FileWriter(DATA5);
 			for (int i = 0; i < listTraining.size(); i++) {
-//				String[] sl = { this.user.getName(), position, depart, ymd, title, content };
-
+				
 				fw.write(listTraining.get(i)[0] + ",");
 				fw.write(listTraining.get(i)[1] + ",");
 				fw.write(listTraining.get(i)[2] + ",");
@@ -803,10 +416,13 @@ public class MyCalendar_Training {
 
 	/**
 	 * 교육 일정 삭제 메소드
+	 * @author 2조 
+ 	 * @param int year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
+	 * @param int month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
+	 * @param int day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
+	 * 
 	 */
 	public void deleteTrainingSchedule() {
-		// 홍길동,2021-5-4,t,testaaa
-		// 홍길동,차장,인사,2021-5-11,신입사원 교육,신입사원 교육1
 		ArrayList<int[]> t = new ArrayList<int[]>();
 		for (int i = 0; i < listTraining.size(); i++) {
 			if(listTraining.get(i)[0].equals(this.user.getName())) {
@@ -841,7 +457,6 @@ public class MyCalendar_Training {
 		try {
 			FileWriter fw = new FileWriter(DATA5);
 			for (int i = 0; i < listTraining.size(); i++) {
-//				String[] sl = { this.user.getName(), position, depart, ymd, title, content };
 
 				fw.write(listTraining.get(i)[0] + ",");
 				fw.write(listTraining.get(i)[1] + ",");
@@ -859,5 +474,64 @@ public class MyCalendar_Training {
 			System.out.println(e);
 		}
 	}// deleteTrainingSchedule
+	
+	/**
+	 * 교육일정 초기 항목 화면 
+	 */
+	public void trainingScreen() {
+		while(true) {
+			System.out.println("                       ▣ 교육 일정 항목 ▣");
+			System.out.println("==============================================================================");
+			System.out.println("||1.	교육	||2.	교육	||3.	교육	||4.	교육	||5.	뒤로||");
+			System.out.println("||  	일정	||  	일정	||  	일정	||  	일정	||  	가기||");
+			System.out.println("||  	등록	||  	조회	||  	수정	||  	삭제	||          ||");
+			System.out.println("==============================================================================");
+			System.out.print(" 카테고리(번호)를 선택하세요: ");
+			int num = scan.nextInt();
+
+			if (num == 1) {
+				createTraining();
+
+			} else if (num == 2) {
+				readTrainingSchedule();
+
+			} else if (num == 3) {
+				updateTrainingSchedule();
+
+			} else if (num == 4) {
+				deleteTrainingSchedule();
+
+			} else if (num == 5) {
+
+				try {
+					Main.menu();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			} else {
+
+				System.out.println("카테고리(번호)를 다시 입력하세요.");
+			}
+		}//while 
+	}
+	public static void pause() {
+		System.out.println();
+		System.out.println("엔터를 누르시면 항목으로 돌아갑니다.");
+		scan.nextLine();// Block
+		cls();
+
+	}
+	
+	/**
+	 * 100줄을 띄워 새로운 창이 뜨는 효과를 나타내주는 메소드 
+	 */
+	private static void cls() {
+
+		for (int i = 0; i < 100; i++) {
+			System.out.println();
+		}
+	}// cls()
+	
 
 }
