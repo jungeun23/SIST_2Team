@@ -30,9 +30,6 @@ public class Main {
 //		ms.updateMessenger();
 		menu();
 
-//		Vacation v = new Vacation(user);
-//		v.createVacation();
-
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
 //		mr.MeetingRoomScreen();
@@ -163,7 +160,7 @@ public class Main {
 			System.out.println();
 
 			if (n == 0) {
-				return;
+				break;
 			} else if (n == 1) {
 				showContact();
 			} else if (n == 2) {
@@ -179,6 +176,7 @@ public class Main {
 			}
 
 		}
+		System.out.println("프로그램을 종료합니다.");
 	}
 /////////////////////////////////////////////////      Lane2      ///////////////////////////////////////////////
 
@@ -230,7 +228,8 @@ public class Main {
 			} else if (n == 1) {
 				showElecApproval();
 			} else if (n == 2) {
-//				showElecApproval();
+				Vacation v = new Vacation(user);
+				v.firstScreen();
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
@@ -243,7 +242,7 @@ public class Main {
 			System.out.println("            [3. NOTICE] ");
 			System.out.println("            1.  게시판");
 			System.out.println();
-			System.out.println("            2.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -255,7 +254,7 @@ public class Main {
 				} catch (IOException e) {
 					System.out.println(e);
 				}
-			} else if (n == 2) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -273,7 +272,7 @@ public class Main {
 			System.out.println("            2.  예약/대여");
 			System.out.println("            3.  교육센터");
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -281,11 +280,11 @@ public class Main {
 			if (n == 1) {
 //				showSchedule();
 			} else if (n == 2) {
-//				showReservate();
+				showReservate();
 			} else if (n == 3) {
 				TrainingCenter tc = new TrainingCenter(user);
 				tc.trainingScreen();
-			} else if (n == 4) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -302,7 +301,7 @@ public class Main {
 			System.out.println("            2.  인사관리");
 			System.out.println("            3.  수당관리");
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -314,7 +313,7 @@ public class Main {
 				hr.hrScreen();
 			} else if (n == 3) {
 				showExtraPay();
-			} else if (n == 4) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -330,7 +329,7 @@ public class Main {
 			System.out.println("            1.  보안");
 			System.out.println("            2.  기타");
 			System.out.println();
-			System.out.println("            3.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
@@ -340,7 +339,7 @@ public class Main {
 //				showSecurity();
 			} else if (n == 2) {
 //				showEtcetera();
-			} else if (n == 3) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -403,6 +402,28 @@ public class Main {
 		}
 	}
 
+	   public static void showReservate() {
+		      System.out.println("            [4. RESERVATION - 2.예약/대여]");
+		      System.out.println();
+		      System.out.println("            1. 회의실 예약");
+		      System.out.println("            2. 차량 대여");
+		      System.out.println();
+		      System.out.println("            0. 목차로 돌아가기");
+		      String n = (Util.get("번호를 입력해주세요"));
+		      
+		      if(n.equals("1")) {
+		         //수빈 - 회의실 예약
+		      } else if(n.equals("2")) {
+		         
+		         MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+		         cop.copCarScreen();
+		         
+		      } else {
+		         showReservation();
+		      }
+		   }
+
+	
 	public static void showExtraPay() {
 
 		PayRoll ep = new PayRoll();
