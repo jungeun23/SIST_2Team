@@ -34,15 +34,15 @@ public class Main {
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-<<<<<<< HEAD
+
 ////		
 //		MeetingRoom mr = new MeetingRoom(user);
 ////		//mr.createRoomReservation();
-=======
+
 		
 //		MeetingRoom mr = new MeetingRoom(user);
 		//mr.createRoomReservation();
->>>>>>> 07a3c5461dd91a7fddf3bcbe3676ae5a0f768591
+
 //		mr.MeetingRoomScreen();
 		
 
@@ -58,8 +58,8 @@ public class Main {
 
 		
 		
-<<<<<<< HEAD
-		hr.hrlogin();
+
+//		hr.hrlogin();
 		
 		
 		
@@ -69,8 +69,7 @@ public class Main {
 //		at.adminSearchWorkingTime();	
 		
 		
-=======
->>>>>>> 07a3c5461dd91a7fddf3bcbe3676ae5a0f768591
+
 //		Email mail = new Email(user);
 
 //		mail.readMail();
@@ -424,6 +423,30 @@ public class Main {
 		}
 	}
 
+	public static void showReservate() {
+		System.out.println("            [4. RESERVATION - 2.예약/대여]");
+		System.out.println();
+		System.out.println("            1. 회의실 예약");
+		System.out.println("            2. 차량 대여");
+		System.out.println();
+		System.out.println("            3. 목차로 돌아가기");
+		String n = (Util.get("번호를 입력해주세요"));
+		
+		if(n.equals("1")) {
+			//수빈 - 회의실 예약
+		} else if(n.equals("2")) {
+			
+			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+			cop.copCarScreen();
+			
+		} else {
+			showReservation();
+		}
+	}
+
+	
+	
+	
 	public static void showExtraPay() {
 
 		PayRoll ep = new PayRoll();
