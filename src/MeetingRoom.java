@@ -6,7 +6,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Scanner;
-
+/**
+ * @author 방수빈
+ * 
+ * 회의실 예약 구현
+ * 이용자는 회의실 예약, 예약 취소, 예약 현황 확인을 할 수 있다.
+ * @param roomNumber 회의실 방 번호
+ * @param user 현재 접속 중인 유저의 정보
+ * @param mc MyCalendar 클래스
+ * @param DATA4 회의실 예약 정보가 저장된 경로
+ * @param year 회의실 예약 년도
+ * @param month 회의실 예약 달
+ * @param day 회의실 예약 일
+ * @param lastDay 달 일수 
+ * @param day of week 해당 월의 1일의 요일
+ * 
+ *
+ */
 public class MeetingRoom {
 	private String[] roomNumber = { "501", "502", "503", "504", "505", "506", "601", "602", "603", "701", "702", "703",
 			"704", "815", "816", "817", "819", "820", "821" };
@@ -28,12 +44,12 @@ public class MeetingRoom {
 		scan = new Scanner(System.in);
 		DATA4 = "data\\schedule\\meetingRoom.txt";
 	}
-
-	// 1.회의실 예약, 취소, 목록 확인 (날짜순 정렬)
-
+	/**
+	 * 회의실 예약 관리 각 항목으로 넘어가도록 int값을 입력받아 각 메소드로 이동한다.
+	 */
 	public void MeetingRoomScreen() {
 
-		System.out.println("                ▣ 회의실 예약 목록 ▣");
+		System.out.println("                ▣ 회의실 예약 관리 목록 ▣");
 		System.out.println("====================================================");
 		System.out.println("|| 1. 회의실  || 2. 회의실 예약  || 3. 회의실 예약 ||");
 		System.out.println("||      예약  ||           취소  ||      현황 확인 ||");
@@ -41,7 +57,6 @@ public class MeetingRoom {
 		System.out.println("목차로 돌아가려면 0번을 누르세요.\n");
 		int num = Integer.parseInt(Util.get("카테고리(번호)를 선택하세요"));
 
-		load();
 		cls();
 
 		if(num == 0) {
@@ -57,37 +72,22 @@ public class MeetingRoom {
 		}
 
 	}// MeetingRoomScreen()
-
-	private void load() {
-//		/*
-//		 * 
-//		 * 홍길동,차장,인사,501,2021-5-5,t 홍길동,차장,인사,501,2021-5-30,dc
-//		 * 홍길동,차장,인사,505,2021-5-1,sdf
-//		 * 
-//		 */
-//		try {
-//			BufferedReader reader = new BufferedReader(new FileReader(DATA4));
-//
-//			String line = "";
-//			while ((line = reader.readLine()) != null) {
-//				String[] temp = line.split(",");
-//				listRoom.add(temp);
-//			}
-//
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//
-	}// load()
-
+	/**
+	 * 출력화면에서 화면이 넘어간 것처럼 표현하기 위해 빈줄 100줄 출력
+	 */
 	private void cls() {
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
 		}
 	}// cls()
-
+	/**
+	 * roomNumber를 가지고 mc의 createRoomReservation()로 넘어가서, 회의실 예약을 한다. 
+	 */
 	public void createRoomReservation() {
+		
 		mc.createRoomReservation(roomNumber);
+		
+		
 		System.out.println();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
 		if(num2 == 0) {
@@ -95,37 +95,14 @@ public class MeetingRoom {
 			MeetingRoomScreen();
 		}
 	}// createRoomReservation()
-
+	/**
+	 * mc의 deleteRoom()으로 넘어가서, 회의실 예약을 취소한다.
+	 */
 	public void deleteRoom() {
-//		// 홍길동,차장,인사,505,2021-5-1,sdf
-//		ArrayList<int[]> t = new ArrayList<>();
-//		for (int i = 0; i < listRoom.size(); i++) {
-//			if (listRoom.get(i)[0].equals(this.user.getName())) {
-//				String[] temp = listRoom.get(i)[4].split("-");
-//				int year = Util.toInt(temp[0]);
-//				int month = Util.toInt(temp[1]);
-//				int day = Util.toInt(temp[2]);
-//				int[] g = { year, month, day };
-//				t.add(g);
-//
-//			}
-//		} // exit for
-//		System.out.println("삭제할 일정을 선택해주세요");
-//		int[] c = mc.showCanlendar(t);
-//		for (int i = 0; i < listRoom.size(); i++) {
-//			if (listRoom.get(i)[0].equals(this.user.getName())) {
-//				String[] temp = listRoom.get(i)[4].split("-");
-//				int year = Util.toInt(temp[0]);
-//				int month = Util.toInt(temp[1]);
-//				int day = Util.toInt(temp[2]);
-//				if (c[0] == year && c[1] == month && c[2] == day) {
-//					System.out.println();
-//					System.out.println(listRoom.get(i)[3] + " 회의실 예약을 취소했습니다.");
-//					listRoom.remove(i);
-//				}
-//			}
 
 		mc.deleteRoom();
+		
+		
 		System.out.println();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
 		if(num2 == 0) {
@@ -133,74 +110,15 @@ public class MeetingRoom {
 			MeetingRoomScreen();
 		}
 
-//		
-//		} // exit for
-//			// Filewrite로 list 모두 쓰기
-//		FileWriter fw = null;
-//		try {
-//			fw = new FileWriter(DATA4);
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		
-//		for (int i = 0; i < listRoom.size(); i++) {
-//			try {
-//				fw.write(String.format("%s,%s,%s,%s,%s,%s\n", 
-//						listRoom.get(i)[0], listRoom.get(i)[1], listRoom.get(i)[2],
-//						listRoom.get(i)[3], listRoom.get(i)[4], listRoom.get(i)[5]));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		try {
-//			fw.close();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
 	}// deleteVacation()
-
+	/**
+	 * mc의 readRoom으로 넘어가서, 회의실 예약 현황을 확인한다.
+	 */
 	public void readRoom() {
-		// 홍길동,차장,인사,821,2021-5-18,회의
-//	      ArrayList<int[]> t = new ArrayList<>();
-//	      for (int i = 0; i < listRoom.size(); i++) {
-//	         if (listRoom.get(i)[0].equals(this.user.getName())) {
-//	            String[] temp = listRoom.get(i)[4].split("-");
-//	            int year = Util.toInt(temp[0]);
-//	            int month = Util.toInt(temp[1]);
-//	            int day = Util.toInt(temp[2]);
-//	            int[] g = { year, month, day };
-//	            t.add(g);
-//	         }
-//	      }
-//	      System.out.println("일정을 선택해주세요");
-//	      int[] c = mc.showCanlendar(t);
-//	      for (int i = 0; i < listRoom.size(); i++) {
-//	         if (listRoom.get(i)[0].equals(this.user.getName())) {
-//	            String[] temp = listRoom.get(i)[4].split("-");
-//	            int year = Util.toInt(temp[0]);
-//	            int month = Util.toInt(temp[1]);
-//	            int day = Util.toInt(temp[2]);
-//	            if (c[0] == year && c[1] == month && c[2] == day) {
-//	               System.out.println();
-//	               System.out.println("예약 일정을 출력합니다");
-//	               System.out.println();
-//	               System.out.println("이름 : " + listRoom.get(i)[0]);
-//	               System.out.println("직급 : " + listRoom.get(i)[1]);
-//	               System.out.println("부서 : " + listRoom.get(i)[2]);
-//	               System.out.println("회의실 번호 : " + listRoom.get(i)[3]);
-//	               System.out.println("예약 날짜 : " + listRoom.get(i)[4]);
-//	               System.out.println("내용 : " + listRoom.get(i)[5]);
-//	               System.out.println();
-//	            }
-//	         }
-//	      }
-//	      System.out.println("남은 일정이 없습니다.");
-//	   }
+		
 		mc.readRoom();
+		
+		
 		System.out.println();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
 		if(num2 == 0) {
@@ -208,32 +126,6 @@ public class MeetingRoom {
 			MeetingRoomScreen();
 		}
 
-//	public void readRoom() {
-//		// 홍길동,차장,인사,501,2021-5-5,t
-//		for (int i = 0; i < listRoom.size(); i++) {
-//			if (listRoom.get(i)[0].equals(this.user.getName())) {
-//				String[] temp = listRoom.get(i)[4].split("-");
-//				int year = Util.toInt(temp[0]);
-//				int month = Util.toInt(temp[1]);
-//				int day = Util.toInt(temp[2]);
-//				System.out.println("일정을 선택해주세요");
-//				int[] c = mc.showCanlendar(year, month, day);
-//				if (c[0] == year && c[1] == month && c[2] == day) {
-//					System.out.println();
-//					System.out.println("예약 일정을 출력합니다");
-//					System.out.println();
-//					System.out.println("이름 : " + listRoom.get(i)[0]);
-//					System.out.println("직급 : " + listRoom.get(i)[1]);
-//					System.out.println("부서 : " + listRoom.get(i)[2]);
-//					System.out.println("회의실 번호 : " + listRoom.get(i)[3]);
-//					System.out.println("예약 날짜 : " + listRoom.get(i)[4]);
-//					System.out.println("내용 : " + listRoom.get(i)[5]);
-//					System.out.println();
-//				}
-//			}
-//		}
-//		System.out.println("남은 일정이 없습니다.");
-//
-//	}// readVacation()
+
 	}
 }// MeetingRoom
