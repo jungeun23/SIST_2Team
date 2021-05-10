@@ -147,13 +147,13 @@ public class ContactList {
 				while ((line = reader.readLine()) != null) {
 					String[] temp = line.split(",");
 					
-					System.out.printf("\n|| %s || %s || %s || %s || %s || %s ||\n\n"
+					System.out.printf("\n|| %3s || %7s || %s || %s || %s || %s ||"
 							, temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
 					
 				}
 				reader.close();
 				
-				System.out.println("=====================================================");
+				System.out.println("\n=====================================================");
 				System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
 				this.num = scan.nextInt();
 				
@@ -193,7 +193,7 @@ public class ContactList {
 			writer.write(String.format("%s,%s,%s,%s,%s,%s\n", name, id, email, phone, position, buseo));
 			writer.close();
 			
-			System.out.println("=====================================================");
+			System.out.println("==========================\n");
 			System.out.print("▶ 목차로 돌아가려면 0번을 누르세요 : ");
 			this.num = scan.nextInt();
 			
@@ -224,18 +224,17 @@ public class ContactList {
 		
 		String line = "";
 		
-		System.out.println("============================================================================================");
-		System.out.println("||   부서   ||   이름  ||       아이디       ||     이메일    ||   전화번호   ||   직급   ||");
-		System.out.println("============================================================================================");
+		System.out.println("================================================================================================");
+		System.out.println("||부서\t||이름  \t||아이디\t||    \t이메일         \t  ||전화번호\t||직급\t||");
+		System.out.println("================================================================================================");
 		
 		for (int i=0; i<list.size(); i++) {
 			
 			if((list.get(i)[6]).equals(this.buseo)) {
 				
-				line = String.format("||%4s\t||%s\t||%s\t||%23s\t||%s\t||%s||"
+				line = String.format("||%s\t||%s\t||%s\t||%23s\t||%s\t||%s||"
 						,list.get(i)[6] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[5]);
 				
-				System.out.println("--------------------------------------------------------------------------------------------------");
 				System.out.println(line);
 			}
 		}//for
@@ -262,7 +261,6 @@ public class ContactList {
 	private void searchPosition() {
 		
 		System.out.println();
-		System.out.println("--------------------------\n");
 		System.out.println("==========================\n");
 		System.out.println("검색 하고자 하는 직급 명을 입력하세요. ");
 		System.out.println("[인턴] [사원] [대리] [과장] [차장] [부장] [상무] [전무] [사장]\n");
@@ -284,7 +282,6 @@ public class ContactList {
 				line = String.format("||%s\t||%s\t||%s\t||%23s\t||%s\t||%4s||"
 							,list.get(i)[5] ,list.get(i)[2] ,list.get(i)[0] ,list.get(i)[3] ,list.get(i)[4] ,list.get(i)[6]);
 				
-				System.out.println("--------------------------------------------------------------------------------------------------");
 				System.out.println(line);
 				}
 		}//for
