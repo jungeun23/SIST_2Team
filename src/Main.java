@@ -13,6 +13,7 @@ public class Main {
 
 	public static HR hr = new HR();
 	public static ContactList cl = new ContactList();
+
 	public static void main(String[] args) throws Exception {
 
 //		user.regist_user();
@@ -21,34 +22,20 @@ public class Main {
 
 		Login login = new Login();
 		user = login.loginScreen();
-		
+
 //		Messenger ms = new Messenger(user);
 //		ms.load();
 //		ms.createMessenger();
 //		ms.readMessenger();
 //		ms.updateMessenger();
-//		menu();
-		
+		menu();
+
 //		Vacation v = new Vacation(user);
 //		v.createVacation();
-		
+
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-
-////		
-//		MeetingRoom mr = new MeetingRoom(user);
-////		//mr.createRoomReservation();
-
-////		
-//		MeetingRoom mr = new MeetingRoom(user);
-////		//mr.createRoomReservation();
-		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-
-		mr.MeetingRoomScreen();
 //		mr.MeetingRoomScreen();
-		
 
 //		Board bd = new Board(user);
 //		bd.createBoard();
@@ -58,78 +45,65 @@ public class Main {
 //		bd.readBoard();
 //		bd.deleteBoard();
 //		bd.updateBoard();
-		
 
-		
-
-//		hr.hrlogin();
-		
-		
-		
-		//at.dummy();
-//		at.readWorkingTime2();
-//		at.dayWorkingTime2();
-//		at.adminSearchWorkingTime();	
-		
-		
 //		Email mail = new Email(user);
 
 //		mail.readMail();
-		//menu();
+		// menu();
 
 //		MyCalendar c = new MyCalendar();
 //		c.output();
-		//makeEmailDummy();
-		
+		// makeEmailDummy();
+
 	}
 
 	private static void makeEmailDummy() throws Exception {
-		String path = "Data/Contract.txt"; //제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
+		String path = "Data/Contract.txt"; // 제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
 		File f = new File(path);
 //		System.out.println(f);
 		int cnt = 0;
 		BufferedReader reader = new BufferedReader(new FileReader("Data/Email/dummy.txt"));
-		
-		String line ="";
+
+		String line = "";
 		String result = "";
-		ArrayList<String> title = new ArrayList<>(); //5, 6
+		ArrayList<String> title = new ArrayList<>(); // 5, 6
 		ArrayList<String> content = new ArrayList<>();
-		
-		while((line = reader.readLine()) != null){
+
+		while ((line = reader.readLine()) != null) {
 			String[] temp = line.split(",");
 //			System.out.println(Arrays.toString(temp));
 			title.add(temp[0]);
 			content.add(temp[1]);
 		}
-		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용 
-		ArrayList<String> t1 = new ArrayList<>();	//이름 + 이메일
+		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		ArrayList<String> t1 = new ArrayList<>(); // 이름 + 이메일
 //		ArrayList<String> t2 = new ArrayList<>();	//이메일
 //		ArrayList<String> t3 = new ArrayList<>();
 //		ArrayList<String> t4 = new ArrayList<>();
 //		ArrayList<String> t5 = new ArrayList<>();
 //		ArrayList<String> t6 = new ArrayList<>();
-		
+
 		BufferedReader reader2 = new BufferedReader(new FileReader("data/Contact.txt"));
 //		t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
-		while((line = reader2.readLine())!=null) {
+		while ((line = reader2.readLine()) != null) {
 			String[] temp = line.split(",");
-			t1.add(temp[2] +","+temp[3]);
+			t1.add(temp[2] + "," + temp[3]);
 		}
-		//번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
-		//title, content t1(사람)
+		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+		// title, content t1(사람)
 		int n = t1.size();
 		Random rand = new Random();
-		int c = rand.nextInt(t1.size()-1);
-		
+		int c = rand.nextInt(t1.size() - 1);
+
 		File f2 = new File("data/Email/dummyTest.txt");
 		FileWriter fw = new FileWriter(f2);
-		cnt=1;
-		for(int i=0; i<1000; i++, cnt++) {
-			c = rand.nextInt(t1.size()-1);
+		cnt = 1;
+		for (int i = 0; i < 1000; i++, cnt++) {
+			c = rand.nextInt(t1.size() - 1);
 			String[] temp = t1.get(c).split(",");
 			String sendName = temp[0];
 			String sendEmail = temp[1];
-			c = rand.nextInt(t1.size()-1);
+			c = rand.nextInt(t1.size() - 1);
 			temp = t1.get(c).split(",");
 			String receiveName = temp[0];
 			String receiveEmail = temp[1];
@@ -141,19 +115,16 @@ public class Main {
 			fw.write(receiveName + "\n");
 			fw.write(content.get(i) + "\n");
 			fw.write("-----\n");
-			//번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
+			// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
 		}
 		fw.close();
-		
-		
-		
-			
-		for(String s : title) {
+
+		for (String s : title) {
 			System.out.println(s);
 		}
 	}
 
-	public static void menu() {
+	public static void menu() throws Exception {
 		while (true) {
 			System.out.println("=============================================");
 			System.out.println("               환영합니다.");
@@ -219,7 +190,7 @@ public class Main {
 			System.out.println("            2.  메신저");
 			System.out.println("            3.  주소록");
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -232,7 +203,7 @@ public class Main {
 			} else if (n == 3) {
 //				showContactAddress();
 				cl.firstScreen();
-			} else if (n == 4) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -242,25 +213,24 @@ public class Main {
 
 	}
 
-	private static void showApproval() {
+	private static void showApproval() throws Exception {
 		while (true) {
 			cls();
 			System.out.println("            [2. APPROVAL] ");
 			System.out.println("            1.  전자결재");
-			System.out.println("            2.  휴가관리"); 
+			System.out.println("            2.  휴가관리");
 			System.out.println();
-			System.out.println("            3.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
 			System.out.println();
-			if (n == 1) {
-//				showElecApproval();
-			} else if (n == 2) {
-//				showAttendance();
-			} else if (n == 3) {
-				menu();
+			if (n == 0) {
 				break;
+			} else if (n == 1) {
+				showElecApproval();
+			} else if (n == 2) {
+//				showElecApproval();
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
@@ -271,17 +241,22 @@ public class Main {
 		while (true) {
 			cls();
 			System.out.println("            [3. NOTICE] ");
-			System.out.println("            1.  게시판"); 
+			System.out.println("            1.  게시판");
 			System.out.println();
 			System.out.println("            2.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
 			System.out.println();
+			
 			if (n == 1) {
-//				showBoard();
+				try {
+					showBoard();
+				} catch (IOException e) {
+					System.out.println(e);
+				}
 			} else if (n == 2) {
-				menu();
+//				menu();
 				break;
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
@@ -289,13 +264,14 @@ public class Main {
 		}
 	}
 
+
 	public static void showReservation() {
 		while (true) {
 			cls();
 			System.out.println("            [4. RESERVATION] ");
 			System.out.println("            1.  일정관리");
 			System.out.println("            2.  예약/대여");
-			System.out.println("            3.  교육센터"); 
+			System.out.println("            3.  교육센터");
 			System.out.println();
 			System.out.println("            4.  목차로 돌아가기");
 			System.out.println();
@@ -310,7 +286,7 @@ public class Main {
 				TrainingCenter tc = new TrainingCenter(user);
 				tc.trainingScreen();
 			} else if (n == 4) {
-				menu();
+//				menu();
 				break;
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
@@ -339,7 +315,7 @@ public class Main {
 			} else if (n == 3) {
 				showExtraPay();
 			} else if (n == 4) {
-				menu();
+//				menu();
 				break;
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
@@ -365,7 +341,7 @@ public class Main {
 			} else if (n == 2) {
 //				showEtcetera();
 			} else if (n == 3) {
-				menu();
+//				menu();
 				break;
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
@@ -373,29 +349,28 @@ public class Main {
 		}
 	}
 
-
-	
-	
 ///////////////////////////////////////////////      Lane3      ///////////////////////////////////////////////
 ///////////////////////////////////////////////      CONTACT    ///////////////////////////////////////////////
 
 	private static void showMail() {
 		while (true) {
 			cls();
-			System.out.println("            [Mail 업무] ");
-			System.out.println("            1.  메일 쓰기");
-			System.out.println("            2.  메일 읽기");
-			System.out.println("            3.  검색어로 메일 찾기");
-			System.out.println("            4.  Spam 확인");
+			System.out.println(" ===================================");
+			System.out.println(" ||1.메일||2.메일||3.메일||4.스팸");
+			System.out.println(" ||  쓰기||  읽기||  검색||  확인");
+			System.out.println(" ===================================");
 			System.out.println();
-			System.out.println("            0.  목차로 돌아가기");
+			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
+			System.out.println("목차로 돌아가려면 0번을 누르세요.");
 			System.out.println();
-			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
+			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
 			Email mail = new Email(user);
-			if (n == 1) {
+			if (n == 0) {
+				break;
+			} else if (n == 1) {
 				try {
 					mail.writeMail(); // 메일 쓰기 test 완료
 					puase("메일 쓰기를 완료했습니다.");
@@ -416,9 +391,12 @@ public class Main {
 				} catch (IOException e) {
 					System.out.println(e);
 				}
-			} else if (n == 0) {
-				showContact();
-				break;
+			} else if (n == 4) {
+				try {
+					mail.sapmMailFilter();
+				} catch (IOException e) {
+					System.out.println(e);
+				}
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
@@ -430,7 +408,7 @@ public class Main {
 		PayRoll ep = new PayRoll();
 
 		ep.load();
-		
+
 		System.out.println();
 		System.out.println();
 		System.out.println("[5. HR]");
@@ -438,66 +416,58 @@ public class Main {
 		System.out.println("1. 근로 수당 조회");
 		System.out.println("2. 성과급 조회");
 		System.out.println("3. 인사부 전용");
-		System.out.println("4. 목차로 돌아가기");
+		System.out.println("0. 목차로 돌아가기");
 		System.out.println();
 		System.out.print("선택: ");
-		
+
 		String n = (Util.get("번호를 입력해주세요."));
-		
-		if(n.equals("1")) {
+
+		if (n.equals("1")) {
 			ep.extraWork(Main.user);
-		} else if(n.equals("2")) {
+		} else if (n.equals("2")) {
 			ep.bonus(Main.user);
-		} else if(n.equals("3")) {
+		} else if (n.equals("3")) {
 			ep.HrAccess();
-		} else if(n.equals("4")) {
-			menu();
+		} else if (n.equals("0")) {
+			return;
+//			menu();
 		} else {
 			System.out.println("※ 올바르지 않은 입력입니다 ※");
 			System.out.println();
 			System.out.println();
-		
+
 			showExtraPay();
 		}
-		
+
 	}
 
-	
-	
-	
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
-	private static void showElecApproval() throws IOException {
+	private static void showElecApproval() throws Exception {
 		while (true) {
 			cls();
-			System.out.println("            [전자결재 업무] ");
-			System.out.println("            1.  문서 작성");
-			System.out.println("            2.  문서 읽기");
-			System.out.println("            3.  댓글 달기");
-			System.out.println("            4.  내가 작성한 문서 확인");
-			System.out.println("            5.  문서 삭제");
-			System.out.println("            6.  문서 관리(직급별)");
+			System.out.println(" ===================================================================");
+			System.out.println(" ||1.전자결재||2.전자결재||3.전자결재||4.전자결재||5.내가쓴 전자결재");
+			System.out.println(" ||    쓰기  ||    읽기  ||    수정  ||    삭제  ||        확인");
+			System.out.println(" ===================================================================");
 			System.out.println();
-			System.out.println("            0.  목차로 돌아가기");
+			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
+			System.out.println("목차로 돌아가려면 0번을 누르세요.");
 			System.out.println();
-			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
+			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
 			ElecApproval ea = new ElecApproval(user);
 			if (n == 1) {
-				try {
-					ea.createElecApproval();
-				} catch (Exception e) {
-					System.out.println(e);
-				}
+				ea.createElecApproval();
 			} else if (n == 2) {
 				ea.readElecApproval();
 			} else if (n == 3) {
-//				ea.addCommnetElecApproval();
+				ea.updateElecApproval();
 			} else if (n == 4) {
-				ea.myElecApproval();
-			} else if (n == 5) {
 				ea.deleteElecApproval();
+			} else if (n == 5) {
+				ea.myElecApproval();
 			} else if (n == 6) {
 				try {
 					ea.setElecApprovalCondition();
@@ -512,7 +482,42 @@ public class Main {
 			}
 		}
 	}
+
 ///////////////////////////////////////////////      NOTICE         ///////////////////////////////////////////////
+	public static void showBoard() throws IOException {
+		while (true) {
+			cls();
+			System.out.println(" ========================================");
+			System.out.println(" ||1.게시글||2.게시글||3.게시글||4.게시글");
+			System.out.println(" ||   쓰기||    읽기||    수정||    삭제");
+			System.out.println(" ========================================");
+			System.out.println();
+			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
+			System.out.println("목차로 돌아가려면 0번을 누르세요.");
+			System.out.println();
+			System.out.println();
+			int n = Integer.parseInt(Util.get("카테고리 번호"));
+			System.out.println();
+
+			Board board = new Board(user);
+			if (n == 0) {
+				break;
+			} else if (n == 1) {
+				board.createBoard();
+				puase("게시글 쓰기를 완료했습니다.");
+			} else if (n == 2) {
+				board.readBoard();
+				puase("게시글 읽기를 완료했습니다.");
+			} else if (n == 3) {
+				board.updateBoard();
+				puase("메일 검색을 완료했습니다.");
+			} else if (n == 4) {
+				board.deleteBoard();
+			} else {
+				System.out.println("잘못된 번호를 입력하셨습니다.");
+			}
+		}
+	}
 ///////////////////////////////////////////////      RESERVATION    ///////////////////////////////////////////////
 ///////////////////////////////////////////////      HR             ///////////////////////////////////////////////
 ///////////////////////////////////////////////      ADMIN          ///////////////////////////////////////////////
