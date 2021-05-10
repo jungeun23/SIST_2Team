@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 /**
- * 
  * @author 방수빈
  * 
+ * 인사관리 구현
+ * 권한이 있는 관리자가 직원들의 정보를 변경, 추가, 삭제, 관리 등을 할 수 있다.
+ * @param hr DATA에 위치한 파일을 읽어 전부 저장
+ * @param contact DATA2에 위치한 파일을 읽어 전부 저장
  *
  */
 public class HR {
@@ -25,7 +28,9 @@ public class HR {
 		scan = new Scanner(System.in);
 		read();
 	}
-	
+	/**
+	 * 권한이 있는 관리자만이 인사 관리 작업을 할 수 있도록 비밀번호 설정
+	 */
 	public void hrlogin() {
 		// 관리자 전용 비밀번호 -> 권한 있는 사용자에게만 배포
 				cls();
@@ -49,7 +54,9 @@ public class HR {
 					System.out.println("비밀번호를 다시 입력해주세요.");
 				}
 	}
-
+	/**
+	 * 인사관리 각 항목으로 넘어가도록 int값을 입력받아 각 메소드로 이동한다.
+	 */
 	public void hrScreen() {
 
 			// cls();
@@ -97,7 +104,9 @@ public class HR {
 			
 
 	}// hrScreen()
-
+	/**
+	 * 고가 데이터 관리의 각 항목으로 넘어가도록 int값을 입력받아 각 메소드로 이동한다. 
+	 */
 	private void goga() {
 
 		System.out.println("     ▣ 고과 데이터 관리 화면 ▣");
@@ -126,7 +135,11 @@ public class HR {
 		
 
 	}// goga()
-
+	/**
+	 * 고과 데이터를 변경할 직원의 이름을 입력하면 HR.txt를 읽은 뒤, 
+	 * 입력 받은 이름이 포함된 hr의 index를 찾아서 그 index의 고과 데이터를 변경한 후
+	 * HR.txt를 다시 저장한다.
+	 */
 	private void gogaAlter() {
 
 		System.out.println("       ▣ 고과 데이터 변경 화면 ▣");
@@ -187,7 +200,8 @@ public class HR {
 
 	}// gogaAlter()
 /**
- * 
+ * 고과 데이터를 출력할 직원의 이름을 입력하면 HR.txt를 읽은 뒤, 
+ * 입력 받은 이름이 포함된 hr의 index를 찾아서 그 index의 고과 데이터 정보를 출력한다.
  */
 	private void gogaPrint() {
 
@@ -226,7 +240,11 @@ public class HR {
 		}
 
 	}// gogaPrint()
-
+	/**
+	 * 퇴사한 직원의 이름을 입력하면, Contact.txt를 읽은 뒤
+	 * 입력 받은 이름이 포함된 contact의 index를 찾아서 그 index의 모든 정보를 삭제한 뒤
+	 * Contact.txt를 다시 저장한다.
+	 */
 	private void delete() {
 		System.out.println("▶ 목차로 돌아가려면 q를 누르세요.\n");
 		System.out.println("▣ 퇴사 직원 삭제 화면 ▣");
@@ -253,7 +271,11 @@ public class HR {
 		}
 
 	}// delete()
-
+	/**
+	 * Contact.txt를 읽어온 뒤, 
+	 * 신입사원의 이름, 아이디, 비밀번호, 이메일, 전화번호, 직급, 부서를 입력 받은 후
+	 * Contact.txt에 추가한 후, 그 내용을 contact에 FileWriter append 모드로 추가한다.
+	 */
 	private void add() {
 		// t,t,홍길동,a@sis2.co.kr,010-1234-1234,인턴,인사
 		System.out.println("");
@@ -297,7 +319,11 @@ public class HR {
 		}
 
 	}// add()
-
+	/**
+	 * 직급을 변경할 직원의 이름을 입력하면 Contact.txt를 읽은 뒤
+	 * 입력 받은 이름이 포함된 contact의 index를 찾아서 그 index의 직급 항목을 변경한 후
+	 * Contact.txt를 다시 저장한다.
+	 */
 	private void positionAlter() {
 		// t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사 -> temp[5]
 
@@ -392,7 +418,11 @@ public class HR {
 		}
 
 	}// positionAlter()
-
+	/**
+	 * 부서를 변경할 직원의 이름을 입력하면 Contact.txt를 읽은 뒤
+	 * 입력 받은 이름이 포함된 contact의 index를 찾아서 그 index의 부서 항목을 변경한 후
+	 * Contact.txt를 다시 저장한다.
+	 */
 	private void buseoAlter() {
 		// t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사 -> temp[6]
 
@@ -476,14 +506,18 @@ public class HR {
 			hrScreen();
 		}
 	}// buseoAlter()
-
+	/**
+	 * 출력화면에서 화면이 넘어간 것처럼 표현하기 위해 빈줄 100줄 출력
+	 */
 	private static void cls() {
 
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
 		}
 	}// cls()
-
+	/**
+	 * read() 메소드를 생성자에 넣어, Contact.txt와 HR.txt를 한번에 읽어온다.
+	 */
 	private void read() {
 
 		try {
@@ -514,7 +548,11 @@ public class HR {
 			System.out.println(e);
 		}
 	}// read()
-
+	/**
+	 * Contact.txt의 변경된 내용을 저장한다.
+	 * Contact.txt와 HR.txt가 직원의 이름을 기준으로 연동되어 
+	 * Contact.txt의 직급, 부서가 변경되면 HR.txt의 직급, 부서가 함께 변경된다.
+	 */
 	private void contactsave() {// 바뀐 내용 저장하는 작업
 //		t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
 
@@ -536,17 +574,14 @@ public class HR {
 			// 문종분,차장,디자인,D,14,5000000 -> hr
 			// contact 읽어서 이름, 직급, 파트 저장
 			// hr 읽어서 이름으로 검색, 직급, 파트를 변경
-//		if 이름 찾으면 list에 있는 1,2를 바꾸고
-//		while(list) 모두 저장
-
-			// read();
-
+			//		if 이름 찾으면 list에 있는 1,2를 바꾸고
+			//		while(list) 모두 저장
 
 				int index = -1;
 				for (int i = 0; i < contact.size(); i++) {
 
 					// list 방 찾기
-					if (contact.get(i)[2].equals(hr.get(i)[0])) {
+					if (contact.get(i)[2].equals(hr.get(i)[0])) { //이름으로 연동
 						index = i;
 
 						if (contact.get(index)[2].equals(hr.get(index)[0])) {
@@ -567,7 +602,9 @@ public class HR {
 		}
 
 	}// Contactsave()
-
+	/**
+	 * HR.txt의 변경된 내용을 저장한다.
+	 */
 	private void hrsave() {
 
 		try {
