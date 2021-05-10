@@ -581,7 +581,10 @@ public class MyCalendar_subin {
 		}
 		System.out.println("차량 예약 등록이 완료됐습니다.");
 	}
-
+/**
+ * meetingRoom.txt을 읽어온 후 예약 내용을 저장한다.
+ * @param roomNumber방 번호
+ */
 	public void createRoomReservation(String[] roomNumber) {
 		System.out.println("회의실 예약을 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
@@ -643,7 +646,10 @@ public class MyCalendar_subin {
 		
 
 	}
-
+/**
+ * listRoom의 index를 찾아서 그 index의 내용을 삭제한다.
+ * meetingRoom.txt를 다시 저장한다.
+ */
 	public void deleteRoom() {
 		// 홍길동,차장,인사,505,2021-5-1,sdf
 		ArrayList<int[]> t = new ArrayList<>();
@@ -680,7 +686,6 @@ public class MyCalendar_subin {
 		try {
 			fw = new FileWriter(DATA4);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -689,19 +694,19 @@ public class MyCalendar_subin {
 				fw.write(String.format("%s,%s,%s,%s,%s,%s\n", listRoom.get(i)[0], listRoom.get(i)[1],
 						listRoom.get(i)[2], listRoom.get(i)[3], listRoom.get(i)[4], listRoom.get(i)[5]));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		try {
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}// deleteVacation()
-
+/**
+ * listRoom의 index를 찾은 후 그 index의 내용을 읽어온다. 
+ */
 	public void readRoom() {
 //홍길동,차장,인사,821,2021-5-18,회의
 		ArrayList<int[]> t = new ArrayList<>();
@@ -721,7 +726,7 @@ public class MyCalendar_subin {
 			if (listRoom.get(i)[0].equals(this.user.getName())) {
 				String[] temp = listRoom.get(i)[4].split("-");
 				int year = Util.toInt(temp[0]);
-				int month = Util.toInt(temp[1]);
+				int month = Util.toInt(temp[1]); 
 				int day = Util.toInt(temp[2]);
 				if (c[0] == year && c[1] == month && c[2] == day) {
 					System.out.println();

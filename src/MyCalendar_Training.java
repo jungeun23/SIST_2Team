@@ -753,7 +753,6 @@ public class MyCalendar_Training {
 		// 홍길동,차장,인사,2021-5-11,신입사원 교육,신입사원 교육1
 		ArrayList<int[]> t2 = new ArrayList<>();
 		for (int i = 0; i < this.listTraining.size(); i++) {
-			
 			if (listTraining.get(i)[0].equals(this.user.getName())) {
 				String[] temp = this.listTraining.get(i)[3].split("-");
 				int year = Util.toInt(temp[0]);
