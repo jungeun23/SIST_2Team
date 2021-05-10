@@ -546,12 +546,13 @@ public class MyCalendar_jungeun {
 	
 	public void copCarScreen() {
 		
-
+		System.out.println();
+		System.out.println();
 		System.out.println("                ▣ 법인 차량 예약 ▣");
-		System.out.println("================================================");
-		System.out.println("||1. 법인차량 | 2. 법인차량 | 3. 법인차량 | 4. 목록으로 ||");
+		System.out.println("==========================================================");
+		System.out.println("||1. 법인차량 | 2. 법인차량 | 3. 법인차량 | 0. 목록으로 ||");
 		System.out.println("||  예약 신청 |   예약 확인 |   예약 취소 |    돌아가기 ||");
-		System.out.println("================================================");
+		System.out.println("==========================================================");
 		String n = (Util.get("번호를 입력해주세요"));
 		if(n.equals("1")) {
 			createCopCarReseravtion();
@@ -559,7 +560,7 @@ public class MyCalendar_jungeun {
 			readCopCarSchedule();
 		} else if(n.equals("3")) {
 			deleteCopCarSchedule();
-		} else if(n.equals("4")) {
+		} else if(n.equals("0")) {
 			Main.showReservation();
 		} else {
 			System.out.println("잘못된 입력입니다.");
@@ -581,11 +582,14 @@ public class MyCalendar_jungeun {
 		String[] temp = s.split("-");
 		Calendar newTask = Calendar.getInstance();
 		newTask.set(Util.toInt(temp[0]), Util.toInt(temp[1]), Util.toInt(temp[2]));
+		System.out.println("-------------------------------------");
 		String reason = Util.get("예약 사유를 입력해주세요");
 		String ymd = newTask.get(Calendar.YEAR) + "-" + newTask.get(Calendar.MONTH) + "-"
 				+ newTask.get(Calendar.DAY_OF_MONTH);
 
+		System.out.println();
 		System.out.println("법인 차량 목록입니다.");
+		System.out.println("----------------------------------");
 		for (int i = 0; i < carList.size(); i++) {
 			System.out.printf("[%d] : %s\n", i + 1, carList.get(i)[0]);
 		}
@@ -632,6 +636,7 @@ public class MyCalendar_jungeun {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+		System.out.println("------------------------------------");
 		System.out.println("차량 예약 등록이 완료됐습니다.");
 		
 		saveCarList();
@@ -678,7 +683,7 @@ public class MyCalendar_jungeun {
 	         }
 	      }
 
-
+	    System.out.println();
 		System.out.println("모든 예약을 출력했습니다.");
 		System.out.println("엔터를 누르면 목록으로 돌아갑니다.");
 		scan.nextLine();
@@ -735,7 +740,7 @@ public class MyCalendar_jungeun {
 		
 		
 		saveCarList();
-		
+		System.out.println();
 		System.out.println("엔터를 누르면 목록으로 돌아갑니다.");
 		scan.nextLine();
 		copCarScreen();

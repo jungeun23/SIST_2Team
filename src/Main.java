@@ -273,7 +273,7 @@ public class Main {
 			System.out.println("            2.  예약/대여");
 			System.out.println("            3.  교육센터");
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -281,11 +281,11 @@ public class Main {
 			if (n == 1) {
 //				showSchedule();
 			} else if (n == 2) {
-//				showReservate();
+				showReservate();
 			} else if (n == 3) {
 				TrainingCenter tc = new TrainingCenter(user);
 				tc.trainingScreen();
-			} else if (n == 4) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -302,7 +302,7 @@ public class Main {
 			System.out.println("            2.  인사관리");
 			System.out.println("            3.  수당관리");
 			System.out.println();
-			System.out.println("            4.  목차로 돌아가기");
+			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -314,7 +314,7 @@ public class Main {
 				hr.hrScreen();
 			} else if (n == 3) {
 				showExtraPay();
-			} else if (n == 4) {
+			} else if (n == 0) {
 //				menu();
 				break;
 			} else {
@@ -411,12 +411,12 @@ public class Main {
 
 		System.out.println();
 		System.out.println();
-		System.out.println("[5. HR]");
-		System.out.println("■ 수당관리 ■");
-		System.out.println("1. 근로 수당 조회");
-		System.out.println("2. 성과급 조회");
-		System.out.println("3. 인사부 전용");
-		System.out.println("0. 목차로 돌아가기");
+		System.out.println("            [5. HR]");
+		System.out.println("            ▣ 수당관리 ▣");
+		System.out.println("            1. 근로 수당 조회");
+		System.out.println("            2. 성과급 조회");
+		System.out.println("            3. 인사부 전용");
+		System.out.println("            0. 목차로 돌아가기");
 		System.out.println();
 		System.out.print("선택: ");
 
@@ -440,6 +440,28 @@ public class Main {
 		}
 
 	}
+	
+	public static void showReservate() {
+		System.out.println("            [4. RESERVATION - 2.예약/대여]");
+		System.out.println();
+		System.out.println("            1. 회의실 예약");
+		System.out.println("            2. 차량 대여");
+		System.out.println();
+		System.out.println("            0. 목차로 돌아가기");
+		String n = (Util.get("번호를 입력해주세요"));
+		
+		if(n.equals("1")) {
+			//수빈 - 회의실 예약
+		} else if(n.equals("2")) {
+			
+			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+			cop.copCarScreen();
+			
+		} else {
+			showReservation();
+		}
+	}
+	
 
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
 	private static void showElecApproval() throws Exception {
