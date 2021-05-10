@@ -415,11 +415,16 @@ public class Main {
 		         //수빈 - 회의실 예약
 		      } else if(n.equals("2")) {
 		         
-		         MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
+		         CoperationCar cop = new CoperationCar(user);
 		         cop.copCarScreen();
 		         
 		      } else {
-		         showReservation();
+		         try {
+					menu();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		      }
 		   }
 
@@ -462,26 +467,7 @@ public class Main {
 
 	}
 	
-	public static void showReservate() {
-		System.out.println("            [4. RESERVATION - 2.예약/대여]");
-		System.out.println();
-		System.out.println("            1. 회의실 예약");
-		System.out.println("            2. 차량 대여");
-		System.out.println();
-		System.out.println("            0. 목차로 돌아가기");
-		String n = (Util.get("번호를 입력해주세요"));
-		
-		if(n.equals("1")) {
-			//수빈 - 회의실 예약
-		} else if(n.equals("2")) {
-			
-			MyCalendar_jungeun cop = new MyCalendar_jungeun(user);
-			cop.copCarScreen();
-			
-		} else {
-			showReservation();
-		}
-	}
+
 	
 
 ///////////////////////////////////////////////      APPROVAL    ///////////////////////////////////////////////
