@@ -650,6 +650,11 @@ public class MyCalendar_jiwon {
 
 	}  
 	
+	
+	/**
+	 * 사용자가 휴가관리에 진입하여 처음으로 보게 되는 카테고리.
+	 * 여기에서 원하는 카테고리 번호를 입력받는다.
+	 */
 	public void firstScreen() {
 
 		System.out.println("=================================================");
@@ -683,7 +688,6 @@ public class MyCalendar_jiwon {
 	}
 	
 	public void deleteVacation() {
-		//이준희,전무,사업,2,2021-5-12,재충전
 		 ArrayList<int[]> t = new ArrayList<>();
 	      for (int i = 0; i < listVacation.size(); i++) {
 	         if (listVacation.get(i)[0].equals(this.user.getName())) {
