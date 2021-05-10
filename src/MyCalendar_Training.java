@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 
-public class MyCalendar_junhee {
+public class MyCalendar_Training {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -37,7 +37,7 @@ public class MyCalendar_junhee {
 	LinkedList<String[]> listRoom = new LinkedList<>();
 	LinkedList<String[]> listTraining = new LinkedList<>();
 
-	public MyCalendar_junhee(User user) {
+	public MyCalendar_Training(User user) {
 		this.user = user;
 		DATA = "data/schedule/schedule.txt";
 		DATA2 = "data/schedule/vacation.txt";
@@ -758,8 +758,8 @@ public class MyCalendar_junhee {
 				int year = Util.toInt(temp[0]);
 				int month = Util.toInt(temp[1]);
 				int day = Util.toInt(temp[2]);
-				int[] g = { year, month, day };
-				t2.add(g);
+				int[] ymd = { year, month, day };
+				t2.add(ymd);
 				}
 			}
 		System.out.println("수정할 일정을 선택해주세요");
