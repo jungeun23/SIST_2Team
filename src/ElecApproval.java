@@ -25,7 +25,7 @@ public class ElecApproval {
 		load();
 	}
 	/**
-	 * DATA에 있는 정보를 모두 읽어 elec에 저장한다.
+	 * DATA에 있는 정보를 모두 읽어 elec ArrayList변수에 저장한다.
 	 */
 
 	private void load() throws IOException {
@@ -53,7 +53,10 @@ public class ElecApproval {
 		}
 
 	}
-
+	/**
+	 * 전자결재문서를 작성하기 위한 클래스 
+	 * 제목과 내용 비밀번호를 사용자에게 입력받아 파일에 저장한다.
+	 */
 	public void createElecApproval() throws Exception {
 		String title = "";
 		String content = "";
@@ -72,11 +75,6 @@ public class ElecApproval {
 		temp.setPosition(this.user.getPosition());
 		temp.setSeq(temp.getSeq() + 1);
 		elec.add(temp);
-		// 1,this is title,this is password,직급
-//		전자문서
-//		내
-//		용
-//		-----
 
 		fw.write(temp.getSeq() + ",");
 		fw.write(temp.getTitle() + ",");
@@ -89,6 +87,7 @@ public class ElecApproval {
 	}
 
 	/**
+	 * 파일에 저장되어있는 모든 정보를 출력하는 메소드
 	 * elec에 존재하는 모든 문서의 번호와 제목을 출력한뒤 선택된 문서를 읽는다.
 	 */
 
@@ -132,6 +131,7 @@ public class ElecApproval {
 	}
 
 	/**
+	 * 파일에 존재하는 메소드 중 원하는 문서를 삭제하는 메소드
 	 * elec에 존재하는 모든 문서의 번호와 제목을 출력한뒤 선택된 문서를 삭제한다.
 	 */
 	public void deleteElecApproval() {
@@ -145,6 +145,7 @@ public class ElecApproval {
 			System.out.println(elec.get(choice).getTitle() + " 파일을 삭제했습니다.");
 			elec.remove(choice);
 		}
+	}
 
 //		File f = new File("data\\ElecDoc\\");
 //		File[] fl = f.listFiles();
@@ -154,7 +155,7 @@ public class ElecApproval {
 //		int n = Integer.parseInt(Util.get("삭제할 문서의 번호를 입력하세요"));
 //		System.out.println(fl[n - 1].getName() + "파일을 삭제했습니다.");
 //		fl[n - 1].delete();
-	}
+//	}
 
 	// @ TODO : 코멘트를 어떻게 구현할지 미정. 추후 구현 예정.
 //	public void addCommnetElecApproval() { 
@@ -180,6 +181,7 @@ public class ElecApproval {
 //	}
 
 	/**
+	 * 파일에 존재하는 문서 중 로그인 한 사용자의 문서를 출력하는 메소드
 	 * elec에 존재하는 내가 작성한 문서의 번호와 제목을 출력한뒤 문서를 읽는다.
 	 */
 	public void myElecApproval() {
@@ -213,7 +215,8 @@ public class ElecApproval {
 //			System.out.println(e);
 //		}
 	/**
-	 * list에 존재하는 정보를 출력하는 메소드
+	 * list에 존재하는 정보중 choice 문서를 출력하는 메소드
+	 * @parma choice 문서의 번호를 인자값으로 받는다.
 	 */
 	public void readElecApproval(int choice) {
 		System.out.println();
@@ -229,7 +232,7 @@ public class ElecApproval {
 	}
 
 	/**
-	 * 직급에 따라 전자 결재를 여러 형태로 수정 가능하게 구현한 메소드
+	 * 직급에 따라 전자 결재를 여러 형태로 수정 가능하게 구현한 메소드(TODO: 미구현)
 	 */
 	public void setElecApprovalCondition() throws IOException {
 		if (this.user.getPosition().equals("부장")) {

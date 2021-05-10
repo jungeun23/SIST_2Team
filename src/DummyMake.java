@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * 더미 데이터를 생성하기 위한 메소드
+ */
 public class DummyMake {
 	static Random rnd = new Random();
 
@@ -31,6 +33,9 @@ public class DummyMake {
 		}
 	}
 
+	/**
+	 * @뒤를 사내 메일로 맞추기 위하여 실행하는 메소드  
+	 */
 	public static void editEmail() throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("data\\Contact.txt"));
 		String line = "";
@@ -47,6 +52,9 @@ public class DummyMake {
 		writer.close();
 	}
 
+	/**
+	 * 메신저 더미 데이터 생성하는 메서드
+	 */
 	public static void MessengerDummy() throws IOException {
 		// 번호 제목 보내는사람이름 내용
 		int cnt = 1;
@@ -60,6 +68,9 @@ public class DummyMake {
 		fw.close();
 	}
 
+	/**
+	 * email 더미 데이터를 생성하는 메서드
+	 */
 	public static void EmailDummy() throws IOException {
 //		번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
 		int cnt = 1;
@@ -74,11 +85,10 @@ public class DummyMake {
 		fw.close();
 	}
 
+	/**
+	 * 전자결재 더미 데이터를 생성하기 위한 메서드 
+	 */
 	public static void ElecAppDummy() throws IOException {
-//		 2,테스트,1234,홍길동,과장
-//		 테스트 
-//		 중입니다 ~ 
-//		 -----
 		int cnt = 1;
 		FileWriter fw = new FileWriter("data\\ElecDoc\\ElecDoc.txt");
 		for (int i = 0; i < 10000; i++) {
@@ -91,6 +101,11 @@ public class DummyMake {
 		fw.close();
 	}
 
+	/**
+	 * 이메일 정보를 가져오기 위한 메서드
+	 * @param ,로 나누어진 Contact 형식 문자열
+	 * @return contact에서 같은 이름을 찾고 이메일을 반환한다.
+	 */
 	private static String getEmail(String s) throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
 		String line = "";
@@ -105,6 +120,12 @@ public class DummyMake {
 		return res;
 	}
 
+	/**
+	 * 직급 정보를 가져오기 위한 메서드
+	 * @param ,로 나누어진 HR 형식 문자열
+	 * @return contact에서 같은 이름을 찾고 직급을 반환한다.
+	 * @throws IOException
+	 */
 	private static String getPosition(String s) throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\HR.txt"));
 		String line = "";
@@ -119,6 +140,9 @@ public class DummyMake {
 		return res;
 	}
 
+	/**
+	 * 게시물 더미 데이터 생성을 위한 메서드
+	 */
 	public static void boardDummy() throws IOException {
 //		1,title제목,홍길동,qwer1234,content내용
 		int cnt = 1;
@@ -132,6 +156,9 @@ public class DummyMake {
 		fw.close();
 	}
 
+	/**
+	 * 패스워드를 생성하기 위한 메서드
+	 */
 	private static String getPasswordDummy() {
 		int length = rnd.nextInt(20) + 8;
 		String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -153,6 +180,9 @@ public class DummyMake {
 		return result;
 	}
 
+	/**
+	 * 연락처에서 이름을 랜덤으로 가져오기 위한 메서드 
+	 */
 	public static String getNameFromContact() throws IOException {
 
 		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
@@ -166,6 +196,11 @@ public class DummyMake {
 		return list.get(rnd.nextInt(list.size() - 1));
 	}
 
+	
+	/**
+	 * 제목 더미를 생성하는 메서드
+	 * @return 제목에 해당하는 데이터를 2개 가져와서 새로운 제목을 반환한다.
+	 */
 	public static String getTitleDummy() throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\dummy\\title.txt"));
 		String line = "";
@@ -177,6 +212,10 @@ public class DummyMake {
 		return list.get(rnd.nextInt(list.size() - 1)) + " " + list.get(rnd.nextInt(list.size() - 1));
 	}
 
+	/**
+	 * 내용 더미를 생성하는 메서드
+	 * @return 내용에 해당하는 데이터를 3개 가져와서 새로운 내용을 반환한다.
+	 */
 	public static String getContentDummy() throws IOException {
 		BufferedReader read = new BufferedReader(new FileReader("data\\dummy\\content.txt"));
 		String line = "";
@@ -189,6 +228,9 @@ public class DummyMake {
 				+ list.get(rnd.nextInt(list.size() - 1));
 	}
 
+	/**
+	 * HR에 필요한 데이터를 생성하는 메서드
+	 */
 	public static void HRDummy() throws IOException {
 		LinkedList<String[]> list = new LinkedList<>();
 		LinkedList<String[]> list2 = new LinkedList<>();
@@ -282,11 +324,10 @@ public class DummyMake {
 //		ehumber0,EcxPfdAl,,ssellar0@bloglovin.com,010-3091-7832,과장,디자인
 	}
 
-	private static String workyear(LinkedList<String[]> list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/**
+	 * Contact 더미를 생성하는 메서드
+	 * @throws IOException
+	 */
 	public static void ContactDummy() throws IOException {
 //		ehumber0,EcxPfdAl,,ssellar0@bloglovin.com,010-3091-7832,과장,디자인
 		LinkedList<String[]> list = new LinkedList<>();
@@ -321,6 +362,10 @@ public class DummyMake {
 
 	}
 
+	/**
+	 * 이름을 랜덤으로 생성하는 메서드
+	 * @return 성+이름을 반환한다.
+	 */
 	public static String randName() {
 		List<String> firstName = Arrays.asList("김", "이", "박", "최", "정", "강", "조", "윤", "장", "임", "한", "오", "서", "신",
 				"권", "황", "안", "송", "류", "전", "홍", "고", "문", "양", "손", "배", "조", "백", "허", "유", "남", "심", "노", "정", "하",

@@ -1,4 +1,16 @@
-
+/**
+ * Email 정보를 담기위한 클래스
+ * 이하 getter, setter 메서드로 구성돼 있음
+ * 
+ *  @param seq 이메일의 번호를 매기기 위한 변수
+ *  @param title 이메일의 제목을 저장하기 위한 변수
+ *  @param content 이메일의 내용을 저장하기 위한 변수
+ *  @param receiverName 받는 사람의 이름을 저장하기 위한 변수
+ *  @param receiverEmail 받는 사람의 이메일을 저장하기 위한 변수
+ *  @param senderName 보낸 사람의 이름을 저장하기 위한 변수
+ *  @param senderEmail 보낸 사람의 이메일을 저장하기 위한 변수
+ *
+ */
 public class Mail {
 	private static int seq = 0;
 	private String title;
