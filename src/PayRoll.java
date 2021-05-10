@@ -7,6 +7,23 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Scanner;
 
+
+/**
+ * 수당관리 구현
+ * 사용자는 자신의 연장근무 수당과 성과급을 확인할 수 있다.
+ * 권한이 있는 사용자(인사부)는 직원들의 연장근무 수당, 성과급, 월급을 확인할 수 있다.
+ * 인사부 전용 메뉴는 비밀번호 입력을 통해 접근이 가능하다.
+ * 
+ *@param DATA 전직원 정보인 HR의 정보가 저장된 위치  
+ *@param list DATA에 위치한 파일을 윍어 전부 저장
+ *@param scan 이용자의 입력받기
+ *@param user 현재 접속중인 유저의 정보
+ *@param mentBonus 성과급 출력 공통 멘트
+ *@param mentExtraWork 연장 근무 수당 출력 공통 멘트
+ *@param mentSalary 월급 출력 공통 멘트
+ *@param mainMenu 메인 목록으로 돌아가기
+ *
+ */
 public class PayRoll {
 
 	private final String DATA;
@@ -17,10 +34,13 @@ public class PayRoll {
 	private String  mentExtraWork;
 	private String mentSalary;
 	private Main mainMenu;
+	
+	/**
+	 *  사용자가 메뉴창에서 수당관리를 선택 시 실행되는 생성자와 메소드
+	 */
 	public PayRoll() {
 		
 		this.DATA = "data\\HR.txt";
-		//송월승,대리,마케팅,E,7,3200000
 		this.list = new ArrayList<String[]>();
 		this.scan = new Scanner(System.in);
 		this.user = new User();
@@ -28,36 +48,45 @@ public class PayRoll {
 		this.mentExtraWork = "지급된 연장 수당";
 		this.mentSalary = "지급된  급여";
 		this.mainMenu = new Main();
+		load();
 	}
 	
 	
 	////////////////             개인 User 성과급, 연장근무 수당 조회          ///////////////////// 
 	
-	// 개인 - 성과급 조회
+	/**
+	 * 사용자의 성과급 조회 메소드
+	 * 사용자의 정보인 user를 매개변수로 받아 PayRoll의 멤버 변수 user에 저장해준다.
+	 * user의 list index 값을 이용해서 성과급 수당 계산을 통해 성과급을 return 받고, 표를 출력한다.
+	 * 
+	 * @param user
+	 */
 	public void bonus(User user) {
-		////송월승,대리,마케팅,E,7,3200000
-		//일반 유저 접근
-		this.user = user; //main에서 받아온 유저 PayRoll 변수에 저장해줌
-
-		int index = userIndex(this.user); // user의 list index값을 알려줌
 		
-		int bonus = bonusPay(index); // index 값 보내서 bonus 수당 값을 데려옴
+		this.user = user;
+
+		int index = userIndex(this.user); 
+		
+		int bonus = bonusPay(index); 
 		
 		printPerson(mentBonus,index,bonus);
 		
-		System.out.println(getWorkday()); ///&&&&&&&&&&&&&&&&&
+		System.out.println(getWorkday()); 
 		
 		pause();
 	}
 	
-	
-
-	//개인 - 연장 근무 수당 조회
+	/**
+	 * 사용자의 연장 근무 수당 조회 메소드
+	 * 사용자의 정보인 user를 매개변수로 받아 PayRoll의 멤버 변수 user에 저장해준다.
+	 * user의 list index 값을 이용해서 연장근무 수당 계산을 통해 수당 금액을 return 받고, 표를 출력한다.
+	 * @param user
+	 */
 	public void extraWork(User user) {
-		//일반 유저 접근
+		
 		this.user = user;
 
-		int index = userIndex(this.user); // user의 list index값을 알려줌
+		int index = userIndex(this.user); 
 
 		int extraWork = extraWork(index);
 		
@@ -67,7 +96,12 @@ public class PayRoll {
 	}
 	
 
-	// 개인 - user index 넘버 구하기
+
+	/**
+	 * 현재 접속한 user의 list에서의 index값을 구하는 메소드
+	 * @param user
+	 * @return int index user의 list index값을 return
+	 */
 	private int userIndex(User user) {
 	
 		int index = -1;
@@ -85,7 +119,11 @@ public class PayRoll {
 	
 /////////////////////////             인사부  전용  급여관리  메뉴             //////////////////////////	
 	
-	//인사부 급여관리 메뉴 접근
+
+	/**
+	 * 인사부 전용의 급여관리 메뉴 접근 창을 출력하는 메소드
+	 * 비밀번호 입력을 통해 접근을 제한한다.
+	 */
 	public void HrAccess() {
 		System.out.println();
 		System.out.println();
@@ -113,7 +151,10 @@ public class PayRoll {
 		
 	}
 	
-	//인사부 전용 급여관리 메뉴 
+	
+	/**
+	 * 인사부 전용의 급여관리 메뉴 선택창을 출력하는 메소드
+	 */
 	private void approved() {
 		System.out.println();
 		System.out.println();
@@ -131,7 +172,7 @@ public class PayRoll {
 		if(num == 1 || num == 2 || num == 3) {
 			selSearch(num);
 		} else if(num == 4) {
-			Main.showExtraPay(); // 처음 HR 수당관리 선택 화면
+			Main.showExtraPay(); 
 		} else {
 			System.out.println("※ 올바르지 않은 입력입니다 ※");
 			approved();
@@ -141,8 +182,11 @@ public class PayRoll {
 
 
 	
-	// 인사부 검색 기능 메뉴
 	
+	/**
+	 * 부서검색, 직원 검색, 목록 돌아가기를 선택하는 메뉴를 출력하는 메소드
+	 * @param num 사용자가 approved()에서 선택한 메뉴 번호를 매개변수로 받는다.
+	 */
 	private void selSearch(int num) {
 		
 		System.out.println();
@@ -155,28 +199,28 @@ public class PayRoll {
 		System.out.println();
 		System.out.println();
 		
-		if(n.equals("1")) {// 부서검색
+		if(n.equals("1")) {
 			
-			if(num == 1) { //연장 근무 수당 조회
+			if(num == 1) { 
 				searchBuseoExtraWork();
-			} else if(num == 2) { //성과급 조회
+			} else if(num == 2) { 
 				searchBuseoBonus();
-			} else if(num == 3) { // 월급 조회
+			} else if(num == 3) { 
 				searchBuseoSalary();
 			}
 			
-		} else if (n.equals("2")) { //직원검색
+		} else if (n.equals("2")) { 
 			
-			if(num == 1) { //연장 근무 수당 조회
+			if(num == 1) { 
 				searchPersonExtraWork();
-			} else if(num == 2) { //성과급 조회
+			} else if(num == 2) { 
 				searchPersonBonus();
-			} else if(num == 3) { // 월급 조회
+			} else if(num == 3) { 
 				searchPersonSalary();
 			}
 			
 		} else if (n.equals("3")) {
-			approved(); // 인사부 전용 화면으로 돌아가기
+			approved(); 
 		} else {
 			System.out.println("※ 올바르지 않은 입력입니다 ※");
 			selSearch(num);
@@ -184,6 +228,9 @@ public class PayRoll {
 		
 	}
 
+	/**
+	 * 사용자가 급여 확인 후 목록으로 돌아가는 메소드
+	 */
 	private void pause() {
 		
 		System.out.println("엔터를 누르면 HR 수당 관리 목록으로 돌아갑니다.");
@@ -191,8 +238,12 @@ public class PayRoll {
 		Main.showExtraPay();
 	}
 	
-	
-	private void backToScreen(String search, int num) { // 인사부 검색기능에서 이어서 검색 / 목록 돌아가기
+	/**
+	 * 인사부의 검색 기능에서 이어서 검색할지 목록으로 돌아갈지 선택하는 메소드
+	 * @param search buseo 또는 person을 매개변수로 받아 부서 검색, 직원 검색 여부를 판단할 수 있다.
+	 * @param num 매개변수 num으로 연장 근무 수당 조회, 성과급 조회, 월급 조회 여부를 판단할 수 있다.
+	 */
+	private void backToScreen(String search, int num) { 
 		
 		System.out.println("[ 1. 이어서 검색하기 ]");
 		System.out.println("[ 2. HR 인사부 전용 목록으로 돌아가기 ]");
@@ -201,19 +252,19 @@ public class PayRoll {
 		
 		if(n == 1) {
 			if(search.equals("buseo")) {
-				if(num == 1) { //연장 근무 수당 조회
+				if(num == 1) { 
 					searchBuseoExtraWork();
-				} else if(num == 2) { //성과급 조회
+				} else if(num == 2) { 
 					searchBuseoBonus();
-				} else if(num == 3) { // 월급 조회
+				} else if(num == 3) { 
 					searchBuseoSalary();
 				}
 			} else if(search.equals("person")) {
-				if(num == 1) { //연장 근무 수당 조회
+				if(num == 1) {
 					searchPersonExtraWork();
-				} else if(num == 2) { //성과급 조회
+				} else if(num == 2) { 
 					searchPersonBonus();
-				} else if(num == 3) { // 월급 조회
+				} else if(num == 3) { 
 					searchPersonSalary();
 				}
 			}
@@ -230,7 +281,10 @@ public class PayRoll {
 	/////////////////////////////       인사부  급여  (부서검색, 직원검색)      /////////////////////
 	
 
-	//인사부 - 급여 - 부서검색
+	
+	/**
+	 * 사용자에게 부서이름을 입력받아 해당하는 부서의 월급을 전체 출력해주는 메소드
+	 */
 	private void searchBuseoSalary() {
 		
 		String result = searchBuseo("salary");
@@ -242,7 +296,10 @@ public class PayRoll {
 		}
 	}
 
-	//인사부 - 급여 - 직원검색
+	
+	/**
+	 * 사용자에게 직원 이름을 입력받아 해당하는 직원의 월급을 출력해주는 메소드
+	 */
 	private void searchPersonSalary() {
 		
 		int index = searchPersonIndex();
@@ -267,7 +324,9 @@ public class PayRoll {
 	//////////////////////////         인사부   성과급   (부서검색, 직원검색)      ///////////////////
 
 	
-	// 인사부 - 성과급 - 부서검색
+	/**
+	 * 사용자에게 부서이름을 입력받아 해당하는 부서의 성과급을 전체 출력해주는 메소드
+	 */
 	private void searchBuseoBonus() {
 		
 		String result = searchBuseo("bonus");
@@ -279,7 +338,9 @@ public class PayRoll {
 		}
 	}
 
-	// 인사부 - 성과급 - 직원검색
+	/**
+	 * 사용자에게 직원 이름을 입력받아 해당하는 직원의 성과급을 출력해주는 메소드
+	 */
 	private void searchPersonBonus() {
 		
 		int index = searchPersonIndex();
@@ -307,7 +368,9 @@ public class PayRoll {
 	////////////////////////////        인사부 연장근무   (부서검색, 직원검색)    //////////////////////////
 	
 
-	// 인사부 - 연장근무 - 부서 검색
+	/**
+	 * 사용자에게 부서이름을 입력받아 해당하는 부서의 연장 근무 수당을 전체 출력해주는 메소드
+	 */
 	private void searchBuseoExtraWork() {
 		
 		String result = searchBuseo("extraWork");
@@ -319,7 +382,9 @@ public class PayRoll {
 		}
 	}
 
-	// 인사부 - 연장근무 - 직원검색
+	/**
+	 * 사용자에게 직원 이름을 입력받아 해당하는 직원의 연장 근무 수당을 출력해주는 메소드
+	 */
 	private void searchPersonExtraWork() {
 		
 		int index = searchPersonIndex();
@@ -345,14 +410,18 @@ public class PayRoll {
 	
 	////////////////////////////     성과급 , 연장근무 수당 계산 메소드      ////////////////////////
 	
-	// 성과급 계산 메소드
+	/**
+	 * 성과급 계산 메소드
+	 * 고과 점수에 따라 월급의 pi배가 성과급으로 차등 지급
+	 * @param index 입력받은 사용자의 index를 매개변수로 받아 list의 기본급을 이용한다.
+	 * @return 계산한 성과급을 return한다.
+	 */
 	private int bonusPay(int index) {
 		
 		double productivityIncentive = 0.0;
 		
 		int salary = Integer.parseInt(list.get(index)[5]);
 		
-		//고과 점수에 따라 월급의 pi배가 성과급으로 차등 지급
 		if(list.get(index)[3].equals("A") || list.get(index)[3].equals("B") ) { 
 			productivityIncentive = 1.0;
 		} else if(list.get(index)[3].equals("C") || list.get(index)[3].equals("D")) {
@@ -367,22 +436,29 @@ public class PayRoll {
 	}
 	
 	
-	// 연장 근무 계산 메소드
+
+	/**
+	 * 연장 근무 수당 계산 메소드
+	 * 기본급/209H를 통해 통상 시급을 구한다.
+	 * list의 한달치 근로 시간(분)을 법정근로시간으로 빼서 연장 근로 시간을 구한 뒤 통상 시급 * 1.5를 곱한다.
+	 * @param index 입력받은 사용자의 index를 매개변수로 받아 list의 기본급을 이용한다.
+	 * @return 계산한 연장 근무 수당을 return한다.
+	 */
 	private int extraWork(int index) {
 	
-		int salary = Integer.parseInt(list.get(index)[5]);// 기본급
+		int salary = Integer.parseInt(list.get(index)[5]);
 		
-		int hourlyRate = salary / 209; // 통상 시급 (기본급 / 209H)
+		int hourlyRate = salary / 209; 
 		
 		int workday = getWorkday();
 		
-		int extraTime =  Integer.parseInt(list.get(index)[6])/60; //> 분 데이터임 > 시간으로 만듦 한달 일한 시간
+		int extraTime =  Integer.parseInt(list.get(index)[6])/60; 
 		
-		int legalWorkingTime = workday * 8; //workday * 8시간 근무 = 법적 근무시간
+		int legalWorkingTime = workday * 8; 
 		
 		if(extraTime - legalWorkingTime > 0) {
 			
-			int extraWorkPay = (int)((extraTime - legalWorkingTime) * hourlyRate * 1.5); // 연장 근무 시간 * 통상시급 * 1.5
+			int extraWorkPay = (int)((extraTime - legalWorkingTime) * hourlyRate * 1.5); 
 			
 			return extraWorkPay;
 			
@@ -394,7 +470,10 @@ public class PayRoll {
 
 	
 
-	
+	/**
+	 * 영업일수 구하는 메소드 
+	 * @return 주말을 뺸 평일의 합을 구해 값을 return한다. 
+	 */
 	private int getWorkday() {
 		
 		  Calendar startCal = Calendar.getInstance();
@@ -421,7 +500,10 @@ public class PayRoll {
 	///////////////////////////////     직원  &  부서 검색 및 정렬    /////////////////////////////////////
 
 	
-	// 직원 이름 검색 index값 리턴
+	/**
+	 * 사용자에게 직원 이름을 입력받아 list의 index를 찾는 메소드
+	 * @return list의 index를 return한다.
+	 */
 	private int searchPersonIndex() {
 		
 		String name = Util.get("이름 검색: ");
@@ -437,7 +519,12 @@ public class PayRoll {
 	}
 	
 	
-	// 부서 검색 반복 메소드!! >> 직급, 이름 오름차순 정렬 
+	/**
+	 * 부서 검색 메소드
+	 * 사용자에게 입력받은 부서의 급여 리스트를 만들고, 직급, 이름을 기준으로 오름차순 정렬한다.
+	 * @param what 월급,성과급,연장근무 중 무엇인지 매개변수로 입력받아서 출력할 급여를 결정한다.
+	 * @return 부서의 리스트를 String으로 만들어 return한다.
+	 */
 	private String searchBuseo(String what) {
 		
 		System.out.println("[1.사업] [2.인사] [3.재무] [4.회계] [5.영업] [6.개발] [7.마케팅] [8.디자인] ");
@@ -460,13 +547,13 @@ public class PayRoll {
 			if(list.get(i)[2].equals(buseo)) {
 	
 				int pay = 0;
-				if(what.equals("salary")) { //급여면 급여 돈
+				if(what.equals("salary")) { 
 				
 					pay = Integer.parseInt(list.get(i)[5]);
 				
-				} else if(what.equals("bonus")) { //보너스면 보너스 돈
+				} else if(what.equals("bonus")) { 
 					pay = bonusPay(i);
-				} else if(what.equals("extraWork")) { // 연장근무 수당
+				} else if(what.equals("extraWork")) {
 					pay = extraWork(i);
 				}
 
@@ -481,7 +568,7 @@ public class PayRoll {
 			}
 		}
 		
-		for(int i=0; i<buseo2.size(); i++) { //직급을 숫자로 환산한 것 일단 문자열로 넣어주고
+		for(int i=0; i<buseo2.size(); i++) { 
 			buseo2.get(i)[1] =  ""+level(buseo2.get(i)[1]);
 		}
 		
@@ -490,7 +577,6 @@ public class PayRoll {
 
 			@Override
 			public int compare(String[] o1, String[] o2) {
-//				return o1[1].compareTo(o2[1]);//숫자
 				
 				if(Integer.parseInt(o1[1])-Integer.parseInt(o2[1]) > 0) {
 					return 1;
@@ -543,27 +629,31 @@ public class PayRoll {
 		
 	}
 	
-	
-	//직급별 정렬용 문자열 -> 숫자 변환
-	private int level(String jik) {
+
+	/**
+	 * 직급별 정렬하기 위한 문자열을 숫자로 변환하는 메소드 
+	 * @param position list index에 해당하는 직급을 매개변수로 받는다 
+	 * @return 직급을 숫자로 변환한 값을 return한다.
+	 */
+	private int level(String position) {
 		
-		if(jik.equals("사장")) {
+		if(position.equals("사장")) {
 			return 1;
-		} else if(jik.equals("전무")) {
+		} else if(position.equals("전무")) {
 			return 2;
-		} else if(jik.equals("상무")) {
+		} else if(position.equals("상무")) {
 			return 3;
-		} else if(jik.equals("부장")) {
+		} else if(position.equals("부장")) {
 			return 4;
-		} else if(jik.equals("차장")) {
+		} else if(position.equals("차장")) {
 			return 5;
-		} else if(jik.equals("과장")) {
+		} else if(position.equals("과장")) {
 			return 6;
-		} else if(jik.equals("대리")) {
+		} else if(position.equals("대리")) {
 			return 7;
-		} else if(jik.equals("사원")) {
+		} else if(position.equals("사원")) {
 			return 8;
-		}    else if(jik.equals("인턴")) {
+		}    else if(position.equals("인턴")) {
 			return 9;
 		}
 		return 0;
@@ -572,7 +662,12 @@ public class PayRoll {
 	
 	///////////////////////////////////      검색 목록 프린트          ///////////////////////////
 	
-	// 1명 검색 프린트 (user / 직원 검색시 사용)
+	/**
+	 * user 또는 직원 검색 결과를 표로 출력하는 메소드
+	 * @param ment 성과급,연장근무수당,월급 중 출력할 문구 
+	 * @param index 직원의 list index
+	 * @param pay 검색한 급여
+	 */
 		private void printPerson(String ment ,int index, int pay) {
 			
 			System.out.println();
@@ -588,7 +683,12 @@ public class PayRoll {
 			
 		}
 		
-		// 부서 검색 프린트 
+	
+		/**
+		 * 부서 검색 결과를 표로 출력하는 메소드
+		 * @param ment 성과급, 연장 근무 수당, 월급 중 출력할 문구 
+		 * @param result 출력할 표를 저장한 문자열
+		 */
 		private void printBuseo(String ment, String result) {
 			System.out.println();
 			System.out.println();
@@ -608,6 +708,9 @@ public class PayRoll {
 	//////////////////    HR 파일 Load 
 	
 	// HR 데이터 불러오기 > 프로그램 시작 전
+	/**
+	 * load()메소드를 생성자에 넣어, HR DB를 읽어 전부 저장한다.
+	 */
 	public void load() {
 		
 		try {
@@ -617,16 +720,12 @@ public class PayRoll {
 			String line = "";
 			
 			while((line = reader.readLine())!=null) {
-				//석박남,대리,인사,D,5,월급,근무시간(월)
 				String [] temp = line.split(",");
-//				System.out.println(Arrays.toString(temp));
 				list.add(temp);
 
 			}
 
-//			for(int i =0; i<list.size(); i++) {
-//			System.out.println(Arrays.toString(list.get(i)));
-//			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}

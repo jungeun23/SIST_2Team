@@ -538,18 +538,15 @@ public class MyCalendar_jungeun {
 	}
 
 	/**
-	 * 
-	 * @param carList
-	 * 
-	 * 
+	 * 법인 차량 예약 구현
+	 * 이용자는 차량 예약을 등록, 확인, 삭제등을 할 수 있다.
+	 * 법인 차량 예약 선택 창 출력 메소드
+	 * 사용자의 선택에 따라 예약 신청, 예약 확인, 예약 취소, 목록으로 돌아가기를 구현한다.
 	 */
 	
 	public void copCarScreen() {
 		
-//		for(int i=0; i<list.size(); i++) {
-//		System.out.println(Arrays.toString(list.get(i)));
-//		}
-	
+
 		System.out.println("                ▣ 법인 차량 예약 ▣");
 		System.out.println("================================================");
 		System.out.println("||1. 법인차량 | 2. 법인차량 | 3. 법인차량 | 4. 목록으로 ||");
@@ -570,6 +567,13 @@ public class MyCalendar_jungeun {
 		}
 	}
 	
+	/**
+	 * 법인 차량 예약 등록 메소드
+	 * 사용자가 원하는 예약 날짜를 입력하여 예약 사유를 입력 받는다.
+	 * 법인차량 목록을 출력하여 사용자가 원하는 법인차량을 입력받은 후 예약이 완료된다.
+	 * 만약 사용자가 선택한 차량의 남은 재고가 없을 시 예약 불가능으로 출력이 된다.
+	 */
+	
 	public void createCopCarReseravtion() {
 		System.out.println("법인차량 예약을 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
@@ -585,10 +589,7 @@ public class MyCalendar_jungeun {
 		for (int i = 0; i < carList.size(); i++) {
 			System.out.printf("[%d] : %s\n", i + 1, carList.get(i)[0]);
 		}
-//		for (String ss : carList.keySet()) {
-//			System.out.printf("[%d] : %s\n", cnt++ , ss);
-//		}
-//		String selecetedCar = Util.get("차량이름을 입력하세요");
+
 		int selectedCar = Util.toInt(Util.get("번호를 입력해주세요"));
 		selectedCar--;
 		if (Util.toInt(carList.get(selectedCar)[1]) == 0) {
@@ -598,7 +599,7 @@ public class MyCalendar_jungeun {
 			int t = Util.toInt(carList.get(selectedCar)[1]);
 			carList.get(selectedCar)[1] = Integer.toString(t - 1);
 		}
-		// 홍길동,2021-5-4,t,testaaa
+		
 		String position = null;
 		String depart = null;
 		String randNum = null;
@@ -639,6 +640,13 @@ public class MyCalendar_jungeun {
 		copCarScreen();
 	}
 
+	/**
+	 * 법인 차량 예약 확인 메소드
+	 * 사용자의 정보로 예약된 일정들을 달력에 *로 전체 표시되어 나타난다.
+	 * 사용자는 특정 일정의 날짜를 입력하여 자세한 일정 보기가 가능하다.
+	 * 이때 예약자명, 예약 일자, 예약 목적을 확인할 수 있다. 
+	 */
+	
 	public void readCopCarSchedule() {
 		
 		 ArrayList<int[]> t = new ArrayList<>();
@@ -678,6 +686,11 @@ public class MyCalendar_jungeun {
 		
 	}
 	
+	/**
+	 * 법인 차량 예약 삭제 메소드
+	 * 사용자의 정보로 예약된 일정들이 달력에 *로 전체 표시되어 나타난다.
+	 * 사용자는 예약 취소할 날짜를 선택하고, 예약이 취소된다. 
+	 */
 	
 	public void deleteCopCarSchedule() {
 		
@@ -692,7 +705,7 @@ public class MyCalendar_jungeun {
 	            t.add(g);
 
 	         }
-	      } // exit for
+	      } 
 	      System.out.println("삭제할 일정을 선택해주세요");
 	      int[] c = showCanlendar(t);
 	      for (int i = 0; i < listCar.size(); i++) {
@@ -717,14 +730,11 @@ public class MyCalendar_jungeun {
 	               listCar.remove(i);
 	            }
 	         }
-	      } // exit for
-		
+	      } 
 
 		
 		
 		saveCarList();
-		
-		//writer > 전체 for문 
 		
 		System.out.println("엔터를 누르면 목록으로 돌아갑니다.");
 		scan.nextLine();
@@ -732,6 +742,12 @@ public class MyCalendar_jungeun {
 		
 	}
 
+	/**
+	 * 법인 차량 목록 및 재고 파일 저장 메소드
+	 * 사용자가 법인 차량 목록을 선택시 재고가 하나씩 줄고, 예약 취소시 하나 늘어나게 된다.
+	 * 그 리스트를 별도의 listCar.txt 파일로 저장한다.
+	 */
+	
 	public void saveCarList() {
 	
 	try {
