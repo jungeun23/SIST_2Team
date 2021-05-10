@@ -34,6 +34,12 @@ public class Main {
 		
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
+////		
+//		MeetingRoom mr = new MeetingRoom(user);
+////		//mr.createRoomReservation();
+		
+//		MeetingRoom mr = new MeetingRoom(user);
+		//mr.createRoomReservation();
 //		mr.MeetingRoomScreen();
 		
 
@@ -47,6 +53,14 @@ public class Main {
 //		bd.updateBoard();
 		
 
+		
+		
+		
+		
+		//at.dummy();
+//		at.readWorkingTime2();
+//		at.dayWorkingTime2();
+//		at.adminSearchWorkingTime();	
 		
 		
 //		Email mail = new Email(user);
@@ -196,7 +210,7 @@ public class Main {
 			System.out.println("            2.  메신저");
 			System.out.println("            3.  주소록");
 			System.out.println();
-			System.out.println("            0.  목차로 돌아가기");
+			System.out.println("            4.  목차로 돌아가기");
 			System.out.println();
 			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
@@ -209,7 +223,7 @@ public class Main {
 			} else if (n == 3) {
 //				showContactAddress();
 				cl.firstScreen();
-			} else if (n == 0) {
+			} else if (n == 4) {
 //				menu();
 				break;
 			} else {
@@ -359,23 +373,20 @@ public class Main {
 	private static void showMail() {
 		while (true) {
 			cls();
-			System.out.println(" ===================================");
-			System.out.println(" ||1.메일||2.메일||3.메일||4.메일||5.스팸");
-			System.out.println(" ||  쓰기||  읽기||  삭제||  검색||  확인");
-			System.out.println(" ===================================");
+			System.out.println("            [Mail 업무] ");
+			System.out.println("            1.  메일 쓰기");
+			System.out.println("            2.  메일 읽기");
+			System.out.println("            3.  검색어로 메일 찾기");
+			System.out.println("            4.  Spam 확인");
 			System.out.println();
-			System.out.println("검색 하고자 하는 카테고리(번호)를 선택하세요.");
-			System.out.println("목차로 돌아가려면 0번을 누르세요.");
+			System.out.println("            0.  목차로 돌아가기");
+			System.out.println();
+			int n = Integer.parseInt(Util.get("번호를 입력해주세요"));
 			System.out.println();
 			System.out.println();
-			int n = Integer.parseInt(Util.get("카테고리 번호"));
-			System.out.println();
-			
+
 			Email mail = new Email(user);
-			if (n == 0) {
-				break;
-			}
-			else if (n == 1) {
+			if (n == 1) {
 				try {
 					mail.writeMail(); // 메일 쓰기 test 완료
 					puase("메일 쓰기를 완료했습니다.");
@@ -396,12 +407,9 @@ public class Main {
 				} catch (IOException e) {
 					System.out.println(e);
 				}
-			} else if (n == 4) {
-				try {
-					mail.searchMail();
-				} catch (IOException e) {
-					System.out.println(e);
-				}
+			} else if (n == 0) {
+				showContact();
+				break;
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
