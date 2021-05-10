@@ -1,4 +1,15 @@
-
+/**
+ * 전자결재문서 정보를 담기위한 클래스
+ * 이하 getter, setter 메서드로만 구성돼 있음
+ * 
+ *  @param seq 문서의 번호를 매기기 위한 변수
+ *  @param title 문서의 제목을 저장하기 위한 변수
+ *  @param content 문서의 내용을 저장하기 위한 변수
+ *  @param docuPW 문서의 패스워드를 저장하기 위한 변수
+ *  @param position 문서 작성자의 직급을 저장하기 위한 변수
+ *  @param name 문서 작성자의 이름을 저장하기 위한 변수
+ *
+ */
 public class Elec {
 	private static int seq = 0;
 	private String title;

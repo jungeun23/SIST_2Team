@@ -8,9 +8,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 
- * @author 2조 통합 Mail 기능 클래스 1. 메일 쓰기 - 수신자 검색 -> 해당하는 mail주소 가져오기 -> 내용입력 후 새로운
- *         txt 파일로 저장. 2. 메일 읽기 - 내 메일을 찾아 내용 읽기
+ * 이메일 구현 클래스
+ * 이메일의 읽기, 쓰기, 검색, 삭제, 수정이 가능하다.
+ * @param list Mail클래스에 속한 멤버객체에 파일에서 읽은 내용을 저장한다.
+ * @param scan 사용자로부터 입력을 받기위한 Scanner 멤버변수
+ * @param DATA 파일의 위치를 기록하기 위한 멤버변수
+ * @param user 현재 사용중인 유저를 식별하기 위한 멤버변수
+ * @param receiverName 이메일을 받을 사람의 이름을 저장하기 위한 멤버변수
+ * @param receiverEmail 이메일을 받을 사람의 이메일을 저장하기 위한 멤버변수
  */
 public class Email {
 	private static ArrayList<Mail> list = new ArrayList<Mail>();
@@ -23,13 +28,16 @@ public class Email {
 
 	public Email() {
 
-		DATA = "data\\Email\\mailDB.txt"; // Window
+		DATA = "data\\Email\\Email.txt"; // Window
 
 	}
 
+	/**
+	 * 이메일 생성자 DATA, scan, user등을 초기화 해주고 load메소드를 통해 파일을 읽어온다.
+	 * @param user 사용자를 식별하기 위해 매개변수로 user를 받아온다.
+	 */
 	public Email(User user) {
-
-		DATA = "data\\Email\\mailDB.txt"; // Window
+		DATA = "data\\Email\\Email.txt"; // Window
 		// DATA = "data/Contact.txt"; // Mac
 		scan = new Scanner(System.in);
 		this.user = user;
@@ -60,8 +68,7 @@ public class Email {
 //	}
 
 	/**
-	 * @throws IOException
-	 * 
+	 * 파일에 저장된 내용을 읽어와 list변수인 ArrayList에 저장한다. 
 	 */
 	private void load() throws IOException {
 		try {
@@ -94,24 +101,33 @@ public class Email {
 		}
 	}
 
+	/**
+	 * 메일을 작성하기 위해 상대방이 이름, 제목, 내용을 입력받아 파일에 저장한다.
+	 */
 	public void writeMail() throws IOException {
 		String title = "";
 		String content = "";
 
-		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
+//		BufferedReader read = new BufferedReader(new FileReader(DATA));
 		this.receiverEmail = Util.get("상대방 이메일을 입력하세요");
-		String t = "";
 		Boolean isExist = false;
-		Mail tempMail = new Mail();
-		
-		while ((t = read.readLine()) != null) {
-			String[] tl = t.split(",");
-			if (tl[3].equals(this.receiverEmail)) {
-				this.receiverName = tl[2];
+		for(int i=0; i<list.size(); i++) {
+			if(this.list.get(i).getReceiverEmail().equals(this.receiverEmail)){
+				this.receiverName = this.list.get(i).getReceiverName();
 				isExist = true;
 				break;
 			}
 		}
+		Mail tempMail = new Mail();
+		
+//		while ((t = read.readLine()) != null) {
+//			String[] tl = t.split(",");
+//			if (tl[3].equals(this.receiverEmail)) {
+//				this.receiverName = tl[2];
+//				isExist = true;
+//				break;
+//			}
+//		}
 		if (!isExist) {
 			System.out.println("존재하지 않는 메일입니다. 사내 메일을 확인해주세요");
 			return;
@@ -191,6 +207,9 @@ public class Email {
 
 	}
 
+	/**
+	 * 검색어를 통해 list에 있는 내용을 검색하여 일치하는 메일을 전부 출력한다. 
+	 */
 	public void searchMail() throws IOException {
 		int cnt = 0;
 		String keyword = Util.get("검색어를 입력하세요");
@@ -230,7 +249,10 @@ public class Email {
 //
 //		} 
 	}
-
+	
+	/**
+	 * list의 내용에 keyword에 해당하는 단어가 존재하면 해당 메일을 출력한다. 
+	 */
 	public void sapmMailFilter() throws IOException {
 		String[] keyword = { "환영", "승부", "도박", "하우스", "포인트", "현출", "슬롯", "베팅" };
 		for(int i=0; i<list.size(); i++) {
