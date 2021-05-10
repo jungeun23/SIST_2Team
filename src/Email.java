@@ -214,8 +214,9 @@ public class Email {
 		int cnt = 0;
 		String keyword = Util.get("검색어를 입력하세요");
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getContent().contains(keyword)) {
+			if (list.get(i).getContent().contains(keyword) && list.get(i).getReceiverEmail().equals(this.user.getEmail())) {
 				System.out.println(list.get(i).getTitle() + "문서에서 검색어가 발견됐습니다.");
+//				Util.puase(""); 
 			}
 			cnt++;
 		}
@@ -257,8 +258,10 @@ public class Email {
 		String[] keyword = { "환영", "승부", "도박", "하우스", "포인트", "현출", "슬롯", "베팅" };
 		for(int i=0; i<list.size(); i++) {
 			for(int j=0; j<keyword.length; j++) {
-				if(list.get(i).getContent().contains(keyword[j]))	
+				if(list.get(i).getContent().contains(keyword[j])) {	
 					System.out.println(list.get(i).getTitle() + " 메일은 스팸일 가능성이 높습니다.");
+					Util.puase("");
+				}
 			}
 			
 		}

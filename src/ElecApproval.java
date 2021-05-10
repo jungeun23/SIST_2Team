@@ -1,10 +1,10 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -16,8 +16,9 @@ import java.util.Scanner;
  * @param sc   사용자로부터 입력을 받기 위한 Scanner 변수
  */
 public class ElecApproval {
+	private static int seq;
 	private static ArrayList<Elec> elec = new ArrayList<Elec>();
-	private final String DATA = "data\\ElecDoc\\ElecDocDB";
+	private final String DATA = "data\\ElecDoc\\ElecDoc.txt";
 	private User user;
 	private static Scanner sc = new Scanner(System.in);
 
@@ -32,6 +33,7 @@ public class ElecApproval {
 
 	private void load() throws IOException {
 		try {
+			// 1,경매대가 인사이동,gAwrK3poqk0zPjOzGg#$3Tp7B$,금천광,사원
 			BufferedReader read = new BufferedReader(new FileReader(DATA));
 			String line = "";
 			while ((line = read.readLine()) != null) {
@@ -40,13 +42,16 @@ public class ElecApproval {
 				t.setSeq(Integer.parseInt(temp[0]));
 				t.setTitle(temp[1]);
 				t.setDocuPW(temp[2]);
-				t.setPosition(temp[3]);
-				t.setName(temp[4]);
+				t.setName(temp[3]);
+				t.setPosition(temp[4]);
 				String line2 = "";
 				while (!(line = read.readLine()).equals("-----")) {
 					line2 += line + "\n";
 				}
 				t.setContent(line2);
+//				elec.get(elec.size()-1).setSeq(seq+1);
+//				seq = Util.toInt(list.get(list.size()-1)[0]);
+//				seq = elec.get(elec.size()-1).getSeq();
 				elec.add(t);
 			}
 
@@ -65,10 +70,17 @@ public class ElecApproval {
 		String docuPW = "";
 
 		title = Util.get("제목");
-		content = Util.get("내용");
 		docuPW = Util.get("전자결제 비밀번호 ");
-		String path = "data\\ElecDoc\\ElecDocDB";
-		FileWriter fw = new FileWriter(path);
+		System.out.println("내용을 입력하세요 (끝내기 : exit입력): ");
+		String line = "\n";
+		Scanner scan = new Scanner(System.in);
+		while (true) {
+			line = scan.nextLine();
+			if (line.equals("exit"))
+				break;
+			content += line + "\n";
+		}
+		FileWriter fw = new FileWriter(DATA, true);
 		Elec temp = new Elec();
 		temp.setTitle(title);
 		temp.setContent(content);
@@ -86,6 +98,7 @@ public class ElecApproval {
 		fw.write(temp.getContent() + "\n");
 		fw.write("-----");
 		fw.close();
+		Util.puase("");
 	}
 
 	/**
@@ -95,7 +108,8 @@ public class ElecApproval {
 	public void readElecApproval() {
 		int cnt = 1;
 		for (int i = 0; i < elec.size(); i++, cnt++) {
-			System.out.printf("[%d] %s", elec.get(i).getSeq(), elec.get(i).getTitle());
+			if (this.user.getName().equals(elec.get(i).getName()))
+				System.out.printf("[%d] %s\n", i + 1, elec.get(i).getTitle());
 		}
 
 		if (cnt == 0)
@@ -113,6 +127,7 @@ public class ElecApproval {
 		System.out.println();
 		System.out.printf("내용\n====================\n%s", elec.get(choice).getContent());
 		System.out.println();
+		Util.puase("");
 //		File f = new File("data\\ElecDoc\\");
 //		File[] fl = f.listFiles();
 //		for (int i = 0, cnt = 1; i < fl.length; i++, cnt++) {
@@ -136,7 +151,8 @@ public class ElecApproval {
 	 */
 	public void deleteElecApproval() {
 		for (int i = 0; i < elec.size(); i++) {
-			System.out.printf("[%d] %s\n", elec.get(i).getSeq(), elec.get(i).getTitle());
+			if (this.user.getName().equals(elec.get(i).getName()))
+				System.out.printf("[%d] %s\n", i + 1, elec.get(i).getTitle());
 		}
 		int choice = Integer.parseInt(Util.get("삭제할 문서의 번호를 입력하세요"));
 		choice--;
@@ -145,35 +161,38 @@ public class ElecApproval {
 			System.out.println(elec.get(choice).getTitle() + " 파일을 삭제했습니다.");
 			elec.remove(choice);
 		}
+		Util.puase("");
 	}
 
 	public void updateElecApproval() throws IOException {
 //		seq, title, docuPW, name, position, content
 		for (int i = 0; i < elec.size(); i++) {
-			System.out.printf("[%d] %s\n", elec.get(i).getSeq(), elec.get(i).getTitle());
+			if (this.user.getName().equals(elec.get(i).getName()))
+				System.out.printf("[%d] %s\n", i + 1, elec.get(i).getTitle());
 		}
 		int choice = Integer.parseInt(Util.get("수정할 문서의 번호를 입력하세요"));
 		choice--;
 		String getPW = Util.get("전자결재문서 비밀번호를 입력하세요");
 		if (elec.get(choice).getDocuPW().equals(getPW)) {
 			elec.get(choice).setTitle(Util.get("전자결재 제목을 입력하세요"));
-			elec.get(choice).setDocuPW(Util.get("전자결재 비밀번호를 입력하세요"));
+			elec.get(choice).setDocuPW(getPW);
 			elec.get(choice).setName(this.user.getName());
 			elec.get(choice).setPosition(this.user.getPosition());
-			elec.get(choice).setContent(Util.get("전자결재 내용을 입력하세요 : "));
+			elec.get(choice).setContent(Util.get("전자결재 내용을 입력하세요 "));
 			System.out.println(elec.get(choice).getTitle() + " 파일을 수정했습니다.");
 		}
+		Util.puase("");
 		FileWriter fw = new FileWriter(DATA);
 		for (int i = 0; i < elec.size(); i++) {
-			fw.write(elec.get(i).getSeq() + ",");
+			fw.write(i+1 + ",");
 			fw.write(elec.get(i).getTitle() + ",");
 			fw.write(elec.get(i).getDocuPW() + ",");
 			fw.write(elec.get(i).getName() + ",");
 			fw.write(elec.get(i).getPosition() + "\n");
 			fw.write(elec.get(i).getContent() + "\n");
 			fw.write("-----");
-			fw.close();
 		}
+		fw.close();
 	}
 //		File f = new File("data\\ElecDoc\\");
 //		File[] fl = f.listFiles();
