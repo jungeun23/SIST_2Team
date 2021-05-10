@@ -165,8 +165,9 @@ public class Messenger {
 
 	/**
 	 * 메세지를 삭제하기 위하여 자신에게 온 메세지중 선택하여 메세지를 삭제하는 메소드
+	 * @throws IOException 
 	 */
-	public void deleteMessenger() {
+	public void deleteMessenger() throws IOException {
 		// 번호 제목 보내는사람 내용
 		for (int i = 0; i < list.size(); i++) {
 			if (this.user.getName().equals(list.get(i)[2]))
@@ -181,28 +182,17 @@ public class Messenger {
 		}
 
 		FileWriter fw = null;
-		try {
-			fw = new FileWriter(DATA);
-		} catch (IOException e1) {
-			System.out.println(e1);
-		}
+		fw = new FileWriter(DATA);
 		for (int i = 0; i < list.size(); i++) {
-			try {
-				fw.write(list.get(i)[0] + ",");
-				fw.write(list.get(i)[1] + ",");
-				fw.write(list.get(i)[2] + "\n");
-				fw.write(list.get(i)[3]);
-				fw.write("-----");
-				fw.write("\n");
-			} catch (IOException e) {
-				System.out.println(e);
-			}
-			try {
-				fw.close();
-			} catch (IOException e) {
-				System.out.println(e);
-			}
+			fw.write(list.get(i)[0] + ",");
+			fw.write(list.get(i)[1] + ",");
+			fw.write(list.get(i)[2] + "\n");
+			fw.write(list.get(i)[3]);
+			fw.write("-----");
+			fw.write("\n");
 		} // exit for
+
+		fw.close();
 
 	}
 }

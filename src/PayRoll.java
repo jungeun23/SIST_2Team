@@ -48,7 +48,7 @@ public class PayRoll {
 		this.mentExtraWork = "지급된 연장 수당";
 		this.mentSalary = "지급된  급여";
 		this.mainMenu = new Main();
-		load();
+	
 	}
 	
 	
@@ -71,7 +71,6 @@ public class PayRoll {
 		
 		printPerson(mentBonus,index,bonus);
 		
-		System.out.println(getWorkday()); 
 		
 		pause();
 	}
@@ -140,11 +139,11 @@ public class PayRoll {
 			System.out.println("※ 올바르지 않은 입력입니다 ※");
 			System.out.println();
 			System.out.println("[1. 비밀번호 다시 입력하기]");
-			System.out.println("[2. HR 수당관리 목록으로 돌아가기]");
+			System.out.println("[0. HR 수당관리 목록으로 돌아가기]");
 			String num = (Util.get("번호를 입력해주세요"));
 			if(num.equals("1")) {
 				HrAccess();
-			} else if (num.equals("2")){
+			} else if (num.equals("0")){
 				Main.showExtraPay();
 			}
 		}
@@ -159,10 +158,10 @@ public class PayRoll {
 		System.out.println();
 		System.out.println();
 		
-		System.out.println("==================================================");
-		System.out.println("|| 1. 연장 근무 || 2.  성과급 || 3.   급여 || 4.   목록 ||");
-		System.out.println("||    수당 조회 ||      조회 ||      조회 ||    돌아가기 ||");
-		System.out.println("==================================================");
+		System.out.println("===========================================================");
+		System.out.println("|| 1. 연장 근무 || 2.  성과급 || 3.   급여 || 0.    목록 ||");
+		System.out.println("||    수당 조회 ||       조회 ||      조회 ||    돌아가기||");
+		System.out.println("===========================================================");
 	
 		System.out.println();
 		int num = Integer.parseInt(Util.get("번호를 입력해주세요"));
@@ -171,7 +170,7 @@ public class PayRoll {
 	
 		if(num == 1 || num == 2 || num == 3) {
 			selSearch(num);
-		} else if(num == 4) {
+		} else if(num == 0) {
 			Main.showExtraPay(); 
 		} else {
 			System.out.println("※ 올바르지 않은 입력입니다 ※");
@@ -190,10 +189,10 @@ public class PayRoll {
 	private void selSearch(int num) {
 		
 		System.out.println();
-		System.out.println("===================================");
-		System.out.println("|| 1.  부서 || 2.  직원 || 3.   목록 ||");
+		System.out.println("========================================");
+		System.out.println("|| 1.  부서 || 2.  직원 || 0.    목록 ||");
 		System.out.println("||     검색 ||     검색 ||   돌아가기 ||");
-		System.out.println("===================================");
+		System.out.println("========================================");
 		System.out.println();
 		String n = (Util.get("번호를 입력해주세요"));
 		System.out.println();
@@ -219,7 +218,7 @@ public class PayRoll {
 				searchPersonSalary();
 			}
 			
-		} else if (n.equals("3")) {
+		} else if (n.equals("0")) {
 			approved(); 
 		} else {
 			System.out.println("※ 올바르지 않은 입력입니다 ※");
@@ -246,7 +245,7 @@ public class PayRoll {
 	private void backToScreen(String search, int num) { 
 		
 		System.out.println("[ 1. 이어서 검색하기 ]");
-		System.out.println("[ 2. HR 인사부 전용 목록으로 돌아가기 ]");
+		System.out.println("[ 0. HR 인사부 전용 목록으로 돌아가기 ]");
 		
 		int n = Integer.parseInt(Util.get("번호를 입력해주세요."));
 		
@@ -268,7 +267,7 @@ public class PayRoll {
 					searchPersonSalary();
 				}
 			}
-		} else if(n == 2) {
+		} else if(n == 0) {
 			approved();
 		} else {
 			System.out.println("※ 올바르지 않은 입력입니다 ※");
@@ -310,7 +309,7 @@ public class PayRoll {
 		} else {
 			System.out.println("존재하지 않는 이름입니다.");
 			System.out.println("[1. 다시 검색하기]");
-			System.out.println("[2. 직전 목록으로 돌아가기]");
+			System.out.println("[0. 직전 목록으로 돌아가기]");
 			String n = (Util.get("번호를 입력해주세요."));
 			
 			if(n.equals("1")) {
@@ -352,7 +351,7 @@ public class PayRoll {
 		} else {
 			System.out.println("존재하지 않는 이름입니다.");
 			System.out.println("[1. 다시 검색하기]");
-			System.out.println("[2. 직전 목록으로 돌아가기]");
+			System.out.println("[0. 직전 목록으로 돌아가기]");
 			String n = (Util.get("번호를 입력해주세요."));
 			
 			if(n.equals("1")) {
@@ -396,7 +395,7 @@ public class PayRoll {
 		} else {
 			System.out.println("존재하지 않는 이름입니다.");
 			System.out.println("[1. 다시 검색하기]");
-			System.out.println("[2. 직전 목록으로 돌아가기]");
+			System.out.println("[0. 직전 목록으로 돌아가기]");
 			String n = (Util.get("번호를 입력해주세요."));
 			
 			if(n.equals("1")) {
@@ -612,7 +611,7 @@ public class PayRoll {
 				buseo2.get(i)[1] = "인턴";
 			}
 			
-			result += String.format("||  %s  ||  %s  ||  %s  ||  %,11d원 ||\n"
+			result += String.format("||  %s  ||  %s  ||  %s  ||  %,14d원 ||\n"
 	
 												, buseo2.get(i)[0]
 												, buseo2.get(i)[1]
@@ -672,11 +671,11 @@ public class PayRoll {
 			
 			System.out.println();
 			System.out.println();
-			System.out.println("===============================================");  
-			System.out.printf("||   이름  ||  부서  ||  직급  ||   %9s ||  \n",ment);
-			System.out.println("-----------------------------------------------");  
-			System.out.printf("||  %s  ||  %s  ||  %s  ||  %,11d원 ||\n",list.get(index)[0], list.get(index)[2], list.get(index)[1],pay);
-			System.out.println("===============================================");  
+			System.out.println("=======================================================");  
+			System.out.printf("||    이름  ||  부서  ||  직급  ||   %9s ||  \n",ment);
+			System.out.println("-------------------------------------------------------");  
+			System.out.printf("||  %s  ||  %s  ||  %s  ||  %,14d원 ||\n",list.get(index)[0], list.get(index)[2], list.get(index)[1],pay);
+			System.out.println("=======================================================");  
 			System.out.println();
 			System.out.println();
 			
@@ -692,11 +691,11 @@ public class PayRoll {
 		private void printBuseo(String ment, String result) {
 			System.out.println();
 			System.out.println();
-			System.out.println("===============================================");  
-			System.out.printf("||  부서  ||  직급  ||  이름   ||   %9s ||  \n",ment);
-			System.out.println("-----------------------------------------------");
+			System.out.println("=====================================================");  
+			System.out.printf("||  부서  ||  직급  ||  이름   ||   %s ||  \n",ment);
+			System.out.println("-----------------------------------------------------");
 			System.out.println(result);
-			System.out.println("===============================================");  
+			System.out.println("=====================================================");  
 			System.out.println();
 			System.out.println();
 			

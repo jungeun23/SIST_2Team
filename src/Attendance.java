@@ -42,10 +42,10 @@ public class Attendance {
 	private static String menu() {
 
 		System.out.println("                       ▣ 근태 관리 항목 ▣");
-		System.out.println("========================================================================");
-		System.out.println("||  1. 출근  ||  2. 퇴근 	||  3. 월간 근무 ||  4. 월간 근무시간  || 5. 뒤로 ||" );
-		System.out.println("||     등록  ||     등록 	||     시간 조회 ||     조회 관리자용  ||    가기 || ");
-		System.out.println("========================================================================");
+		System.out.println("==============================================================================");
+		System.out.println("||  1. 출근  ||  2. 퇴근  ||  3. 월간 근무 ||  4. 월간 근무시간  || 5. 뒤로 ||" );
+		System.out.println("||     등록  ||     등록  ||     시간 조회 ||     조회 관리자용  ||    가기 || ");
+		System.out.println("==============================================================================");
 		System.out.print(" 카테고리(번호)를 선택하세요: ");
 
 		String sel = scan.nextLine();
@@ -77,6 +77,8 @@ public class Attendance {
 
 			} else {
 				System.out.println("관리자만 접근 가능합니다.");
+				pause();
+				attendanceScreen();
 			}
 		} else if(sel.equals("5")) {
 			//Main.menu();
@@ -144,10 +146,11 @@ public class Attendance {
 
 	/**
 	 * contact.txt 명단에 있는 인원들마다 각각 근무시간을 생성하기 위한 더미 메소드
+	 * @param String path 생성된 더미를 저장할 경로 
 	 */
 	public void dummy() {
 		// ialbutt0,qdf5bG,주반택,nbresland0@sist2.co.kr,010-9965-6848,과장,인사
-		String path = "data/Contact_dummy.txt";
+		String path = "data/Contact.txt";
 		String name = "";
 		Random r = new Random();
 		try {
@@ -185,8 +188,8 @@ public class Attendance {
 	}// dummy
 
 	/**
-	 * 5월 출퇴근 시간이 나와있는 더미 데이터에서 필요한 값을 ArrayList 에 저장하는 메소드 관리자의 입장에서 모든 직원의 근무시간
-	 * 확인하는 기능
+	 * 5월 출퇴근 시간이 나와있는 더미 데이터에서 필요한 값을 ArrayList 에 저장하는 메소드 
+	 * 관리자의 입장에서 모든 직원의 근무시간 확인하는 기능
 	 * 
 	 * @author 2조
 	 * @throws IOException
@@ -235,8 +238,8 @@ public class Attendance {
 	}// readWorkingTime
 
 	/**
-	 * 멤버별 근무시간 더미 데이터 이용해 월~금 근무 일자 추출 + 근무 시간을 새로운 더미로 만드는 메소드 ex)
-	 * 홍길동,2021-5-3,521
+	 * 멤버별 근무시간 더미 데이터 이용해 월~금 근무 일자 추출 + 근무 시간을 새로운 더미로 만드는 메소드
+	 *  ex)홍길동,2021-5-3,521
 	 * 
 	 * @throws IOException
 	 */
@@ -389,6 +392,8 @@ public class Attendance {
 
 	/**
 	 * 출근 시간 입력하는 메소드 임의의 랜덤한 시간값이 출근시간으로 입력되도록 만듬
+	 * @param Random rnd Random 변수 
+	 * @param Calendar in 출근날짜,시간 관련 Calendar 변수 
 	 */
 	public void inTime() {
 		Random rnd = new Random();
@@ -403,6 +408,7 @@ public class Attendance {
 				if (temp[2].equals(this.user.getName())) {
 					in.set(in.get(Calendar.YEAR), in.get(Calendar.MONTH), in.get(Calendar.DATE), 8,
 							rnd.nextInt(30) + 30, 00);
+					
 				}
 			} // while
 			System.out.println();
@@ -417,13 +423,15 @@ public class Attendance {
 			attendanceScreen();
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 
 	}// inTime
 
 	/**
 	 * 퇴근시간 입력 메소드
+	 * @param Random rnd Random메소드 
+	 * @param Calendar out 퇴근 시간 관련 Calendar 변수 
 	 */
 	public void outTime() {
 		Random rnd = new Random();
@@ -439,6 +447,7 @@ public class Attendance {
 				if (temp[2].equals(this.user.getName())) {
 					out.set(out.get(Calendar.YEAR), out.get(Calendar.MONTH), out.get(Calendar.DATE), 18,
 							rnd.nextInt(30), 00);
+					
 				}
 			} // while
 			System.out.println();
@@ -453,18 +462,24 @@ public class Attendance {
 			attendanceScreen();
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 
 	}// OutTime
-
+	/**
+	 * 100줄을 생성해 새로운 창에서 화면이 뜨는 효과를 내기 위한 메소드
+	 */
 	private static void cls() {
 
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
 		}
 	}// cls()
-
+	
+	/**
+	 * 일시정지 기능을 해주는 메소드 
+	 * 엔터를 누르면 cls() 메소드 실행 
+	 */
 	private static void pause() {
 		System.out.println();
 		System.out.println("엔터를 누르시면 이전 항목으로 돌아갑니다.");
