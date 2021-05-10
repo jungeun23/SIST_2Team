@@ -133,7 +133,12 @@ public class CoperationCar {
 		selectedCar--;
 		if (Util.toInt(carList.get(selectedCar)[1]) == 0) {
 			System.out.println(selectedCar+1 + " 차량의 재고가 존재하지 않습니다.");
-			Main.showReservation();
+			try {
+				Main.showReservation();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			int t = Util.toInt(carList.get(selectedCar)[1]);
 			carList.get(selectedCar)[1] = Integer.toString(t - 1);
