@@ -10,9 +10,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-import ASAP.User;
-import ASAP.Util;
-import ASAP.*;
+import HSJ.*;
 /**
  * 사용자는 휴가를 신청하거나 취소하거나, 신청한 일정을 확인할 수 있다.
  * 
