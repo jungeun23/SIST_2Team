@@ -32,44 +32,44 @@ public class Main {
 
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-<<<<<<< HEAD
-
-		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-
-		mr.MeetingRoomScreen();
-		
-=======
+//<<<<<<< HEAD
+//
+//		
+//		MeetingRoom mr = new MeetingRoom(user);
+//		//mr.createRoomReservation();
+//
 //		mr.MeetingRoomScreen();
->>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
-
-//		Board bd = new Board(user);
-//		bd.createBoard();
-
-//		Board bd = new Board(user);
-//		bd.createBoard();
-//		bd.readBoard();
-//		bd.deleteBoard();
-//		bd.updateBoard();
-<<<<<<< HEAD
-		
-
-		
-
-//		hr.hrlogin();
-		
-		
-		
-		//at.dummy();
-//		at.readWorkingTime2();
-//		at.dayWorkingTime2();
-//		at.adminSearchWorkingTime();	
-		
-		
-=======
-
->>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
+//		
+//=======
+////		mr.MeetingRoomScreen();
+//>>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
+//
+////		Board bd = new Board(user);
+////		bd.createBoard();
+//
+////		Board bd = new Board(user);
+////		bd.createBoard();
+////		bd.readBoard();
+////		bd.deleteBoard();
+////		bd.updateBoard();
+//<<<<<<< HEAD
+//		
+//
+//		
+//
+////		hr.hrlogin();
+//		
+//		
+//		
+//		//at.dummy();
+////		at.readWorkingTime2();
+////		at.dayWorkingTime2();
+////		at.adminSearchWorkingTime();	
+//		
+//		
+//=======
+//
+//>>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
 //		Email mail = new Email(user);
 
 //		mail.readMail();
@@ -308,8 +308,8 @@ public class Main {
 			}  else if (n == 3) {
 				showReservate();
 			} else if (n == 4) {
-				TrainingCenter tc = new TrainingCenter(user);
-				tc.trainingScreen();
+				MyCalendar_Training mt = new MyCalendar_Training(user);
+				mt.trainingScreen();
 			} else if (n == 0) {
 //				menu();
 				break;
