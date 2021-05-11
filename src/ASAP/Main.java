@@ -14,6 +14,7 @@ import Calendar.MeetingRoom;
 import Calendar.MyCalendar;
 import Calendar.PayRoll;
 import Calendar.TrainingCenter;
+import Calendar.TrainingCenter;
 import Calendar.Vacation;
 import Contact.ContactList;
 import Contact.Email;
@@ -219,7 +220,6 @@ public class Main {
 			} else if (n == 3) {
 				showReservate();
 			} else if (n == 4) {
-				
 				tc.trainingScreen();
 			} else if (n == 0) {
 //				menu();
