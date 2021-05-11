@@ -1,3 +1,5 @@
+package Calendar;
+import ASAP.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -8,6 +10,8 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
+
+import ASAP.Util;
 
 public class CoperationCar {
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -133,7 +137,12 @@ public class CoperationCar {
 		selectedCar--;
 		if (Util.toInt(carList.get(selectedCar)[1]) == 0) {
 			System.out.println(selectedCar+1 + " 차량의 재고가 존재하지 않습니다.");
-			Main.showReservation();
+			try {
+				Main.showReservation();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			int t = Util.toInt(carList.get(selectedCar)[1]);
 			carList.get(selectedCar)[1] = Integer.toString(t - 1);

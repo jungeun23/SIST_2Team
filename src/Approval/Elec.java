@@ -1,3 +1,4 @@
+package Approval;
 /**
  * 전자결재문서 정보를 담기위한 클래스
  * 이하 getter, setter 메서드로만 구성돼 있음
