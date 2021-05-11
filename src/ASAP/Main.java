@@ -59,9 +59,9 @@ public class Main {
 //		bd.deleteBoard();
 //		bd.updateBoard();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-		mr.MeetingRoomScreen();
+//		MeetingRoom mr = new MeetingRoom(user);
+//		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
 
 
 	}
@@ -494,7 +494,9 @@ public class Main {
 		      String n = (Util.get("번호를 입력해주세요"));
 		      
 		      if(n.equals("1")) {
-		         //수빈 - 회의실 예약
+		  		MeetingRoom mr = new MeetingRoom(user);
+		  		mr.MeetingRoomScreen();
+
 		      } else if(n.equals("2")) {
 		         
 		         CoperationCar cop = new CoperationCar(user);
