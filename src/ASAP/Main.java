@@ -29,6 +29,7 @@ public class Main {
 
 	public static HR hr = new HR();
 	public static ContactList cl = new ContactList();
+	public static Email mail = new Email(user);
 
 	public static void main(String[] args) throws Exception {
 
@@ -373,7 +374,6 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			Email mail = new Email(user);
 			if (n == 0) {
 				break;
 			} else if (n == 1) {
