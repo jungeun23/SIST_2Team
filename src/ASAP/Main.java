@@ -45,7 +45,7 @@ public class Main {
 //		ms.createMessenger();
 //		ms.readMessenger();
 //		ms.updateMessenger();
-		menu();
+//		menu();
 
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
@@ -59,6 +59,10 @@ public class Main {
 //		bd.readBoard();
 //		bd.deleteBoard();
 //		bd.updateBoard();
+		
+		MeetingRoom mr = new MeetingRoom(user);
+		//mr.createRoomReservation();
+		mr.MeetingRoomScreen();
 
 
 	}

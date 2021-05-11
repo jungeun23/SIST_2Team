@@ -174,7 +174,7 @@ public class Email {
 		for (int i = 0; i < list.size(); i++) {
 //			System.out.println(list.get(i).toString());
 			if (list.get(i).getReceiverName().equals(this.user.getName())) {
-				System.out.printf("[%s]\t%s\t\n", list.get(i).getSeq(), list.get(i).getTitle());
+				System.out.printf("[%s]\t%s\t\n", i+1, list.get(i).getTitle());
 				cnt++;
 			}
 		}
@@ -192,6 +192,7 @@ public class Email {
 		System.out.printf("보낸이 : %s\n 받는이 : %s\n", list.get(choice).getSenderName(),
 				list.get(choice).getReceiverName());
 		System.out.println();
+		return;
 //		for (int i = 0; i < fl.length; i++) {
 //			if (fl[i].isFile()) {
 //				String s = fl[i].getName();
