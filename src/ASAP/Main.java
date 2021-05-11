@@ -1,3 +1,4 @@
+package ASAP;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,9 +8,20 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Approval.ElecApproval;
+import Calendar.CoperationCar;
+import Calendar.MeetingRoom;
+import Calendar.MyCalendar;
+import Calendar.PayRoll;
+import Calendar.TrainingCenter;
+import Calendar.Vacation;
 import Contact.ContactList;
 import Contact.Email;
 import Contact.Messenger;
+import HR.Attendance;
+import HR.HR;
+import Notice.Board;
+
 
 public class Main {
 	private static Scanner sc = new Scanner(System.in);
@@ -36,7 +48,7 @@ public class Main {
 
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-//		mr.MeetingRoomScreen();
+
 
 //		Board bd = new Board(user);
 //		bd.createBoard();
@@ -47,14 +59,6 @@ public class Main {
 //		bd.deleteBoard();
 //		bd.updateBoard();
 
-//		Email mail = new Email(user);
-
-//		mail.readMail();
-		// menu();
-
-//		MyCalendar c = new MyCalendar();
-//		c.output();
-		// makeEmailDummy();
 
 	}
 

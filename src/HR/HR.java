@@ -1,3 +1,4 @@
+package HR;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -5,6 +6,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import ASAP.Util;
 /**
  * @author 방수빈
  * 
@@ -326,20 +329,13 @@ public class HR {
 	 */
 	private void positionAlter() {
 		// t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사 -> temp[5]
-
+		
 		System.out.println("                           ▣ 직급 변경 화면 ▣");
 		System.out.println("=================================================================================");
 		System.out.println("||1.인턴 ||2.사원 ||3.대리 ||4.과장 ||5.차장 ||6.부장 ||7.상무 ||8.전무 ||9.사장||");
 		System.out.println("=================================================================================");
-		System.out.println("목차로 돌아가려면 q를 누르세요.\n");
 		String name = (Util.get("변경할 직원의 이름을 입력하세요"));
 		System.out.println();
-		
-		if(name.equals("q")) {
-			cls();
-			hrScreen();
-		}
-		
 
 		int index = -1;
 		for (int i = 0; i < contact.size(); i++) {
@@ -349,66 +345,66 @@ public class HR {
 				index = i;
 				break;
 			}
-			// System.out.println(list);
+			//System.out.println(list);
 		}
 
 		System.out.printf("■ %s님의 정보 ■\n", contact.get(index)[2]);
 //		System.out.println(list.get(index));
 //		System.out.println();
-		// 입력된 사원 정보 보여주기
-		String s = String.format("현재 직급: %s", contact.get(index)[5]);
-		System.out.println(s);
-		System.out.println();
-
+	// 입력된 사원 정보 보여주기
+      String s = String.format("현재 직급: %s", contact.get(index)[5]);
+           System.out.println(s); 
+           System.out.println();
+     
 		int num = Integer.parseInt(Util.get("변경할 직급을 선택하세요(번호)"));
 
-		// "인턴","사원","대리","과장","차장","부장" + 상무, 전무, 사장
-		if (contact.get(index)[2].equals(name)) {
+	// "인턴","사원","대리","과장","차장","부장" + 상무, 전무, 사장
+	if(contact.get(index)[2].equals(name)) {
+		
+		if (num == 1) {
+
+			contact.get(index)[5] = "인턴";
 			
-			if (num == 1) {
+		} else if (num == 2) {
+			
+			contact.get(index)[5] = "사원";
 
-				contact.get(index)[5] = "인턴";
+		} else if (num == 3) {
+			
+			contact.get(index)[5] = "대리";
 
-			} else if (num == 2) {
+		} else if (num == 4) {
 
-				contact.get(index)[5] = "사원";
+			contact.get(index)[5] = "과장";
+			
+		} else if (num == 5) {
 
-			} else if (num == 3) {
+			contact.get(index)[5] = "차장";
+			
+		} else if (num == 6) {
 
-				contact.get(index)[5] = "대리";
+			contact.get(index)[5] = "부장";
+			
+		} else if (num == 7) {
 
-			} else if (num == 4) {
+			contact.get(index)[5] = "상무";
+			
+		} else if (num == 8) {
 
-				contact.get(index)[5] = "과장";
+			contact.get(index)[5] = "전무";
+			
+		} else if (num == 9) {
 
-			} else if (num == 5) {
+			contact.get(index)[5] = "사장";
+			
+		} else {
 
-				contact.get(index)[5] = "차장";
-
-			} else if (num == 6) {
-
-				contact.get(index)[5] = "부장";
-
-			} else if (num == 7) {
-
-				contact.get(index)[5] = "상무";
-
-			} else if (num == 8) {
-
-				contact.get(index)[5] = "전무";
-
-			} else if (num == 9) {
-
-				contact.get(index)[5] = "사장";
-
-			} else {
-
-				System.out.println("잘못된 번호를 입력하셨습니다.");
-			}
-
+			System.out.println("잘못된 번호를 입력하셨습니다.");
 		}
-		// System.out.println(Arrays.toString(list.get(index)));
-		contactsave();
+
+	}
+	//System.out.println(Arrays.toString(list.get(index)));
+	contactsave();
 		
 		System.out.println();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
@@ -449,6 +445,7 @@ public class HR {
 			}
 			// System.out.println(list);
 		}
+		
 //t,t,홍길동,iehcksm1@sis2.co.kr,010-1234-1234,과장,영업
 		System.out.printf("■ %s님의 정보 ■\n", contact.get(index)[2]);
 
@@ -457,7 +454,7 @@ public class HR {
 		System.out.println();
 
 		int num = Integer.parseInt(Util.get("변경할 부서를 선택하세요(번호)"));
-
+		//t,t,홍길동,iehcksm1@sist2.co.kr,010-1234-1234,차장,개발
 		// "회계","재무","인사","영업","마케팅","개발","디자인"
 		if (contact.get(index)[2].equals(name)) {
 
@@ -500,6 +497,8 @@ public class HR {
 		contactsave();
 		
 		System.out.println();
+//		Scanner sc = new Scanner(System.in);
+//		sc.nextLine();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
 		if(num2 == 0) {
 			cls();
@@ -578,7 +577,7 @@ public class HR {
 			//		while(list) 모두 저장
 
 				int index = -1;
-				for (int i = 0; i < contact.size(); i++) {
+				for (int i = 0; i < contact.size(); i++) { 
 
 					// list 방 찾기
 					if (contact.get(i)[2].equals(hr.get(i)[0])) { //이름으로 연동

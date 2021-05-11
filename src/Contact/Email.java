@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import ASAP.*;
+
 /**
  * 이메일 구현 클래스
  * 이메일의 읽기, 쓰기, 검색, 삭제, 수정이 가능하다.
