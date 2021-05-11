@@ -45,7 +45,7 @@ public class Main {
 //		ms.createMessenger();
 //		ms.readMessenger();
 //		ms.updateMessenger();
-//		menu();
+		menu();
 
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
