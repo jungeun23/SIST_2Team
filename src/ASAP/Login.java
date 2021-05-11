@@ -43,6 +43,8 @@ public class Login {
 
 		try {
 
+			System.out.println("=======================");
+			System.out.println("          HSJ");
 			System.out.println("       그룹웨어");
 			System.out.println("=======================");
 			System.out.println("        [로그인]");
