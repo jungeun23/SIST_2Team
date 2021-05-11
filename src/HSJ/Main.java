@@ -29,6 +29,7 @@ public class Main {
 
 	public static HR hr = new HR();
 	public static ContactList cl = new ContactList();
+	public static Email mail = new Email(user);
 
 	public static void main(String[] args) throws Exception {
 
@@ -44,7 +45,7 @@ public class Main {
 //		ms.createMessenger();
 //		ms.readMessenger();
 //		ms.updateMessenger();
-//		menu();
+		menu();
 
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
@@ -59,9 +60,9 @@ public class Main {
 //		bd.deleteBoard();
 //		bd.updateBoard();
 		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-		mr.MeetingRoomScreen();
+//		MeetingRoom mr = new MeetingRoom(user);
+//		//mr.createRoomReservation();
+//		mr.MeetingRoomScreen();
 
 
 	}
@@ -188,7 +189,8 @@ public class Main {
 			}
 
 		}
-		System.out.println("프로그램을 종료합니다.");
+		System.out.println("\n프로그램을 종료합니다.");
+		sc.nextLine();
 	}
 /////////////////////////////////////////////////      Lane2      ///////////////////////////////////////////////
 
@@ -377,7 +379,6 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			Email mail = new Email(user);
 			if (n == 0) {
 				break;
 			} else if (n == 1) {
@@ -494,7 +495,9 @@ public class Main {
 		      String n = (Util.get("번호를 입력해주세요"));
 		      
 		      if(n.equals("1")) {
-		         //수빈 - 회의실 예약
+		  		MeetingRoom mr = new MeetingRoom(user);
+		  		mr.MeetingRoomScreen();
+
 		      } else if(n.equals("2")) {
 		         
 		         CoperationCar cop = new CoperationCar(user);

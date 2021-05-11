@@ -10,7 +10,19 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-import HSJ.*;
+import ASAP.User;
+import ASAP.Util;
+import ASAP.*;
+/**
+ * 사용자는 휴가를 신청하거나 취소하거나, 신청한 일정을 확인할 수 있다.
+ * 
+ * @param DATA 		휴가 정보가 저장된 경로
+ * @param user		현재 접속 중인 유저의 정보
+ * @param mc 		MyCalendar 클래스
+ * @param year      휴가 일정 년도
+ * @param month     휴가 일정 달
+ * @param day       휴가 일정 일
+ */
 public class Vacation {
 	private final String DATA;
 	private User user;
@@ -34,7 +46,9 @@ public class Vacation {
 		scan = new Scanner(System.in);
 		load();
 	}
-
+	/**
+	 * DATA에서 받아온 파일을 한 줄씩 listVacation에 저장.
+	 */
 	private void load() {
 		try {
 			BufferedReader readVacation = new BufferedReader(new FileReader(DATA));
@@ -52,7 +66,7 @@ public class Vacation {
 	
 	/**
 	 * 사용자가 휴가관리에 진입하여 처음으로 보게 되는 카테고리.
-	 * 여기에서 원하는 카테고리 번호를 입력받는다.
+	 * 여기에서 원하는 카테고리 번호를 입력받아 각 메소드로 이동한다.
 	 */
 	public void firstScreen() {
 
