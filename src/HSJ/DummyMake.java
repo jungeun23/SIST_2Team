@@ -1,4 +1,5 @@
 package HSJ;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,6 +10,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * 더미 데이터를 생성하기 위한 메소드
  */
@@ -24,18 +26,40 @@ public class DummyMake {
 //				System.out.println(makeContent());
 //			}
 //			boardDummy();
-			ElecAppDummy();
+//			ElecAppDummy();
 //			EmailDummy();
 //			editEmail();
 //			MessengerDummy();
 //			System.out.println(makeContent());
+			privateContactDummy();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
+	public static void privateContactDummy() throws IOException {
+		// 이름 아이디 이메일 핸드폰 직급 부서
+		int cnt = 1;
+		// ehumber0,EcxPfdAl,반남석,ssellar0@sist2.co.kr,010-3091-7832,과장,디자인
+		BufferedReader read = new BufferedReader(new FileReader("data\\Contact.txt"));
+		String line = "";
+		LinkedList<String[]> alist = new LinkedList<>();
+		while ((line = read.readLine()) != null) {
+			String[] t = line.split(",");
+			String[] tl = { t[2], t[0], t[3], t[4], t[5], t[6] };
+			alist.add(tl);
+		}
+
+		FileWriter fw = new FileWriter("data\\MyContactList.txt", true);
+		for (int i = 0; i < 500; i++) {
+			fw.write(String.format("%s,%s,%s,%s,%s,%s\n", alist.get(i)[0], alist.get(i)[1], alist.get(i)[2],
+					alist.get(i)[3], alist.get(i)[4], alist.get(i)[5]));
+		}
+		fw.close();
+	}
+
 	/**
-	 * @뒤를 사내 메일로 맞추기 위하여 실행하는 메소드  
+	 * @뒤를 사내 메일로 맞추기 위하여 실행하는 메소드
 	 */
 	public static void editEmail() throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("data\\Contact.txt"));
@@ -46,7 +70,8 @@ public class DummyMake {
 			temp[3] = temp[3].substring(0, temp[3].indexOf("@") + 1);
 			String add = "sist2.co.kr";
 			temp[3] = temp[3].concat(add);
-			result += String.format("%s,%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+			result += String.format("%s,%s,%s,%s,%s,%s,%s\n", temp[0], temp[1], temp[2], temp[3], temp[4], temp[5],
+					temp[6]);
 		}
 		BufferedWriter writer = new BufferedWriter(new FileWriter("data\\Contact.txt"));
 		writer.write(result);
@@ -87,7 +112,7 @@ public class DummyMake {
 	}
 
 	/**
-	 * 전자결재 더미 데이터를 생성하기 위한 메서드 
+	 * 전자결재 더미 데이터를 생성하기 위한 메서드
 	 */
 	public static void ElecAppDummy() throws IOException {
 		int cnt = 1;
@@ -95,8 +120,7 @@ public class DummyMake {
 		for (int i = 0; i < 10000; i++) {
 			String s = getNameFromContact();
 //			1036,전월세 사직서,gcdXIdqIq#DXy!nJZt396,허신량,과장
-			fw.write(String.format("%s,%s,%s,%s,%s\n", cnt++, getTitleDummy(), getPasswordDummy(), s,
-					getPosition(s)));
+			fw.write(String.format("%s,%s,%s,%s,%s\n", cnt++, getTitleDummy(), getPasswordDummy(), s, getPosition(s)));
 			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
@@ -105,6 +129,7 @@ public class DummyMake {
 
 	/**
 	 * 이메일 정보를 가져오기 위한 메서드
+	 * 
 	 * @param ,로 나누어진 Contact 형식 문자열
 	 * @return contact에서 같은 이름을 찾고 이메일을 반환한다.
 	 */
@@ -124,6 +149,7 @@ public class DummyMake {
 
 	/**
 	 * 직급 정보를 가져오기 위한 메서드
+	 * 
 	 * @param ,로 나누어진 HR 형식 문자열
 	 * @return contact에서 같은 이름을 찾고 직급을 반환한다.
 	 * @throws IOException
@@ -150,8 +176,7 @@ public class DummyMake {
 		int cnt = 1;
 		FileWriter fw = new FileWriter("data\\board\\board.txt");
 		for (int i = 0; i < 10000; i++) {
-			fw.write(String.format("%s,%s,%s,%s\n", cnt++, getTitleDummy(), getNameFromContact(),
-					getPasswordDummy()));
+			fw.write(String.format("%s,%s,%s,%s\n", cnt++, getTitleDummy(), getNameFromContact(), getPasswordDummy()));
 			fw.write(getContentDummy() + "\n");
 			fw.write("-----\n");
 		}
@@ -183,7 +208,7 @@ public class DummyMake {
 	}
 
 	/**
-	 * 연락처에서 이름을 랜덤으로 가져오기 위한 메서드 
+	 * 연락처에서 이름을 랜덤으로 가져오기 위한 메서드
 	 */
 	public static String getNameFromContact() throws IOException {
 
@@ -198,9 +223,9 @@ public class DummyMake {
 		return list.get(rnd.nextInt(list.size() - 1));
 	}
 
-	
 	/**
 	 * 제목 더미를 생성하는 메서드
+	 * 
 	 * @return 제목에 해당하는 데이터를 2개 가져와서 새로운 제목을 반환한다.
 	 */
 	public static String getTitleDummy() throws IOException {
@@ -216,6 +241,7 @@ public class DummyMake {
 
 	/**
 	 * 내용 더미를 생성하는 메서드
+	 * 
 	 * @return 내용에 해당하는 데이터를 3개 가져와서 새로운 내용을 반환한다.
 	 */
 	public static String getContentDummy() throws IOException {
@@ -250,7 +276,6 @@ public class DummyMake {
 		String[] goga = { "A", "B", "C", "D", "E" };
 
 		Random rand = new Random();
-
 
 		for (int i = 0; i < list.size(); i++) {
 			int rnd = rand.nextInt(5);
@@ -330,6 +355,7 @@ public class DummyMake {
 
 	/**
 	 * Contact 더미를 생성하는 메서드
+	 * 
 	 * @throws IOException
 	 */
 	public static void ContactDummy() throws IOException {
@@ -368,6 +394,7 @@ public class DummyMake {
 
 	/**
 	 * 이름을 랜덤으로 생성하는 메서드
+	 * 
 	 * @return 성+이름을 반환한다.
 	 */
 	public static String randName() {
