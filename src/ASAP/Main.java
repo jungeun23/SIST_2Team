@@ -12,7 +12,6 @@ import Approval.ElecApproval;
 import Calendar.CoperationCar;
 import Calendar.MeetingRoom;
 import Calendar.MyCalendar;
-import Calendar.PayRoll;
 import Calendar.TrainingCenter;
 import Calendar.Vacation;
 import Contact.ContactList;
@@ -20,13 +19,15 @@ import Contact.Email;
 import Contact.Messenger;
 import HR.Attendance;
 import HR.HR;
+import HR.PayRoll;
 import Notice.Board;
+
 
 
 public class Main {
 	private static Scanner sc = new Scanner(System.in);
 	private static User user = new User();
-
+	private static Messenger msg = new Messenger(user);
 	public static HR hr = new HR();
 	public static ContactList cl = new ContactList();
 
@@ -128,6 +129,8 @@ public class Main {
 			System.out.println(s);
 		}
 	}
+
+	
 
 	public static void menu() throws Exception {
 		while (true) {
@@ -423,8 +426,6 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			Messenger msg = new Messenger(user);
-			
 			if (n == 0) {
 				break;
 			} else if (n == 1) {
@@ -480,71 +481,6 @@ public class Main {
 			}
 		}
 	}
-	   public static void showReservate() throws IOException {
-		      System.out.println("            [4. RESERVATION - 2.예약/대여]");
-		      System.out.println();
-		      System.out.println("            1. 회의실 예약");
-		      System.out.println("            2. 차량 대여");
-		      System.out.println();
-		      System.out.println("            0. 목차로 돌아가기");
-		      String n = (Util.get("번호를 입력해주세요"));
-		      
-		      if(n.equals("1")) {
-		         //수빈 - 회의실 예약
-		      } else if(n.equals("2")) {
-		         
-		         CoperationCar cop = new CoperationCar(user);
-		         cop.copCarScreen();
-		         
-		      } else {
-		         try {
-					menu();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		      }
-		   }
-
-	
-	public static void showExtraPay() {
-
-		PayRoll ep = new PayRoll();
-
-		ep.load();
-
-		System.out.println();
-		System.out.println();
-		System.out.println("            [5. HR]");
-		System.out.println("            ▣ 수당관리 ▣");
-		System.out.println("            1. 근로 수당 조회");
-		System.out.println("            2. 성과급 조회");
-		System.out.println("            3. 인사부 전용");
-		System.out.println("            0. 목차로 돌아가기");
-		System.out.println();
-		System.out.print("선택: ");
-
-		String n = (Util.get("번호를 입력해주세요."));
-
-		if (n.equals("1")) {
-			ep.extraWork(Main.user);
-		} else if (n.equals("2")) {
-			ep.bonus(Main.user);
-		} else if (n.equals("3")) {
-			ep.HrAccess();
-		} else if (n.equals("0")) {
-			return;
-//			menu();
-		} else {
-			System.out.println("※ 올바르지 않은 입력입니다 ※");
-			System.out.println();
-			System.out.println();
-
-			showExtraPay();
-		}
-
-	}
-	
 
 	
 
@@ -626,8 +562,79 @@ public class Main {
 		}
 	}
 ///////////////////////////////////////////////      RESERVATION    ///////////////////////////////////////////////
+	   public static void showReservate() throws IOException {
+		      System.out.println("            [4. RESERVATION - 2.예약/대여]");
+		      System.out.println();
+		      System.out.println("            1. 회의실 예약");
+		      System.out.println("            2. 차량 대여");
+		      System.out.println();
+		      System.out.println("            0. 목차로 돌아가기");
+		      String n = (Util.get("번호를 입력해주세요"));
+		      
+		      if(n.equals("1")) {
+		         //수빈 - 회의실 예약
+		      } else if(n.equals("2")) {
+		         
+		         CoperationCar cop = new CoperationCar(user);
+		         cop.copCarScreen();
+		         
+		      } else {
+		         try {
+					menu();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		      }
+		   }
+
+	
+
+	
 ///////////////////////////////////////////////      HR             ///////////////////////////////////////////////
+		
+		public static void showExtraPay() {
+
+			PayRoll ep = new PayRoll();
+
+			ep.load();
+			
+
+			System.out.println();
+			System.out.println();
+			System.out.println("            [5. HR]");
+			System.out.println("            ▣ 수당관리 ▣");
+			System.out.println("            1. 근로 수당 조회");
+			System.out.println("            2. 성과급 조회");
+			System.out.println("            3. 인사부 전용");
+			System.out.println("            0. 목차로 돌아가기");
+			System.out.println();
+			System.out.print("선택: ");
+
+			String n = (Util.get("번호를 입력해주세요."));
+
+			if (n.equals("1")) {
+				ep.extraWork(Main.user);
+			} else if (n.equals("2")) {
+				ep.bonus(Main.user);
+			} else if (n.equals("3")) {
+				ep.HrAccess();
+			} else if (n.equals("0")) {
+				return;
+//				menu();
+			} else {
+				System.out.println("※ 올바르지 않은 입력입니다 ※");
+				System.out.println();
+				System.out.println();
+
+				showExtraPay();
+			}
+
+		}
+
 ///////////////////////////////////////////////      ADMIN          ///////////////////////////////////////////////
+
+	
 	private static void puase(String string) {
 		System.out.println(string);
 		System.out.println("계속하시려면 엔터를 입력해주세요.");
