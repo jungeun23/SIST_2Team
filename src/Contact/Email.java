@@ -37,7 +37,7 @@ public class Email {
 
 	/**
 	 * 이메일 생성자 DATA, scan, user등을 초기화 해주고 load메소드를 통해 파일을 읽어온다.
-	 * @param user 사용자를 식별하기 위해 매개변수로 user를 받아온다.
+	 * e.@param user 사용자를 식별하기 위해 매개변수로 user를 받아온다.
 	 */
 	public Email(User user) {
 		DATA = "data\\Email\\Email.txt"; // Window
