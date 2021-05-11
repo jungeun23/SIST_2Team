@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Random;
 import java.util.Scanner;
 
-import ASAP.User;
+import HSJ.User;
 
 
 

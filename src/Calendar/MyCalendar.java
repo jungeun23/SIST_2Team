@@ -1,6 +1,5 @@
 package Calendar;
 
-import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-import ASAP.Util;
+import HSJ.*;
 
 /**
  * 일정을 출력하기 위해 달력을 보여주고, 일정에 대한 정보를 생성하는 메소드

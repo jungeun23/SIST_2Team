@@ -1,5 +1,4 @@
 package Calendar;
-import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,7 +8,7 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import ASAP.Util;
+import HSJ.*;
 
 
 public class MyCalendar_Training {
@@ -264,10 +263,10 @@ public class MyCalendar_Training {
 	/**
 	 * 교육센터 일정 예약 메소드
 	 * 
-	 * @param String title 교육 일정 제목 입력 
-	 * @param String content 교육 일정 내용 입력 
-	 * @param String s 원하는 교육 날짜 입력 
-	 * @param Calendar newTask 입력된 교육 날짜를 Calendar 형식으로 변환 
+	 * @param title 교육 일정 제목 입력 
+	 * @param content 교육 일정 내용 입력 
+	 * @param s 원하는 교육 날짜 입력 
+	 * @param newTask 입력된 교육 날짜를 Calendar 형식으로 변환 
 	 */
 	public void createTraining() {
 		System.out.println("교육센터 일정을 등록합니다. 달력을 확인해주세요");
@@ -318,10 +317,10 @@ public class MyCalendar_Training {
 	/**
 	 * 예약된 교육 일정을 보여주는 메소드
 	 * @author 2조
-	 * @param ArrayList<int[]> t 날짜 형식을 int배열로 바꾼 값을 저장해주는 ArrayList
-	 * @param int year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
-	 * @param int month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
-	 * @param int day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
+	 * @param t 날짜 형식을 int배열로 바꾼 값을 저장해주는 ArrayList
+	 * @param year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
+	 * @param month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
+	 * @param day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
 	 */
 	public void readTrainingSchedule() {
 		ArrayList<int[]> t = new ArrayList<int[]>();
@@ -358,12 +357,12 @@ public class MyCalendar_Training {
 	/**
 	 * 교육 일정 수정 메소드
 	 * @author 2조
-	 * @param String title 수정할 교육 일정 제목 입력 
-	 * @param String content 수정할 교육 일정 내용 입력 
- 	 * @param ArrayList<int[]> t2 날짜 형식을 int배열로 바꾼 값을 저장해주는 ArrayList
- 	 * @param int year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
-	 * @param int month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
-	 * @param int day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
+	 * @param title 수정할 교육 일정 제목 입력 
+	 * @param content 수정할 교육 일정 내용 입력 
+ 	 * @param t2 날짜 형식을 int배열로 바꾼 값을 저장해주는 ArrayList
+ 	 * @param year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
+	 * @param month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
+	 * @param day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
 	 */
 	public void updateTrainingSchedule() {
 		ArrayList<int[]> t2 = new ArrayList<>();
@@ -421,9 +420,9 @@ public class MyCalendar_Training {
 	/**
 	 * 교육 일정 삭제 메소드
 	 * @author 2조 
- 	 * @param int year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
-	 * @param int month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
-	 * @param int day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
+ 	 * @param year 입력된 날짜 형식의 값중 year의 String 값을 int로 변환
+	 * @param month 입력된 날짜 형식의 값중 month의 String 값을 int로 변환
+	 * @param day 입력된 날짜 형식의 값중 day의 String 값을 int로 변환
 	 * 
 	 */
 	public void deleteTrainingSchedule() {

@@ -1,5 +1,5 @@
 package Approval;
-import ASAP.*;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import ASAP.Util;
+import HSJ.*;
 
 /**
  * 전자결재 구현 사용자는 전자결재 문서를 생성, 읽기, 삭제, 수정을 할 수 있다.
@@ -116,8 +116,8 @@ public class ElecApproval {
 	public void readElecApproval() {
 		int cnt = 1;
 		for (int i = 0; i < elec.size(); i++, cnt++) {
-			if (this.user.getName().equals(elec.get(i).getName()))
-				System.out.printf("[%d] %s\n", i + 1, elec.get(i).getTitle());
+//			if (this.user.getName().equals(elec.get(i).getName()))
+			System.out.printf("[%d] %s\n", i + 1, elec.get(i).getTitle());
 		}
 
 		if (cnt == 0)
@@ -192,7 +192,7 @@ public class ElecApproval {
 		Util.puase("");
 		FileWriter fw = new FileWriter(DATA);
 		for (int i = 0; i < elec.size(); i++) {
-			fw.write(i+1 + ",");
+			fw.write(i + 1 + ",");
 			fw.write(elec.get(i).getTitle() + ",");
 			fw.write(elec.get(i).getDocuPW() + ",");
 			fw.write(elec.get(i).getName() + ",");
@@ -242,7 +242,7 @@ public class ElecApproval {
 	public void myElecApproval() {
 		for (int i = 0; i < elec.size(); i++) {
 			if (elec.get(i).getName().equals(this.user.getName()))
-				System.out.printf("[%d] %s\n", elec.get(i).getSeq(), elec.get(i).getTitle());
+				System.out.printf("[%d] %s\n", i + 1, elec.get(i).getTitle());
 		}
 		int choice = Integer.parseInt(Util.get("읽을 문서의 번호를 입력하세요"));
 		choice--;

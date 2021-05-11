@@ -1,5 +1,4 @@
 package Calendar;
-import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-import ASAP.Util;
+import HSJ.*;
 /**
  * @author 방수빈
  * 
@@ -383,7 +382,7 @@ public class MeetingRoom {
 	
 /**
  * meetingRoom.txt을 읽어온 후 예약 내용을 저장한다.
- * @param roomNumber방 번호
+ * @param roomNumber 방 번호
  */
 	public void createRoomReservation(String[] roomNumber) {
 		System.out.println("회의실 예약을 등록합니다. 달력을 확인해주세요");

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import ASAP.Util;
+import HSJ.Util;
 /**
  * @author 방수빈
  * 

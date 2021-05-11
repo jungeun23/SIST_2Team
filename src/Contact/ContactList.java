@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import ASAP.Util;
+import HSJ.Util;
 
 /**
  * 주소록 구현 클래스

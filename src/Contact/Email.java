@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ASAP.*;
+import HSJ.*;
 
 /**
  * 이메일 구현 클래스

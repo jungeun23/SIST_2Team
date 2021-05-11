@@ -10,9 +10,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-import ASAP.User;
-import ASAP.Util;
-import ASAP.*;
+import HSJ.*;
 public class Vacation {
 	private final String DATA;
 	private User user;

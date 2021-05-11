@@ -1,11 +1,12 @@
 package Notice;
-import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import HSJ.*;
 /**
  * 게시판 구현
  * 이용자는 게시글을 생성, 읽기, 수정, 삭제등을 할 수 있다.

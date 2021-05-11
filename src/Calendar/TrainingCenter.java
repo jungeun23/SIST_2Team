@@ -1,7 +1,7 @@
 package Calendar;
 import java.util.Scanner;
 
-import ASAP.*;
+import HSJ.*;
 
 public class TrainingCenter {
 	User user;
