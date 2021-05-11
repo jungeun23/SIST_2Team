@@ -1,3 +1,4 @@
+package ASAP;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -6,6 +7,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import Approval.ElecApproval;
+import Calendar.CoperationCar;
+import Calendar.MeetingRoom;
+import Calendar.MyCalendar;
+import Calendar.PayRoll;
+import Calendar.TrainingCenter;
+import Calendar.Vacation;
+import Contact.ContactList;
+import Contact.Email;
+import Contact.Messenger;
+import HR.Attendance;
+import HR.HR;
+import Notice.Board;
+
 
 public class Main {
 	private static Scanner sc = new Scanner(System.in);
@@ -32,17 +48,7 @@ public class Main {
 
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-<<<<<<< HEAD
 
-		
-		MeetingRoom mr = new MeetingRoom(user);
-		//mr.createRoomReservation();
-
-		mr.MeetingRoomScreen();
-		
-=======
-//		mr.MeetingRoomScreen();
->>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
 
 //		Board bd = new Board(user);
 //		bd.createBoard();
@@ -52,32 +58,7 @@ public class Main {
 //		bd.readBoard();
 //		bd.deleteBoard();
 //		bd.updateBoard();
-<<<<<<< HEAD
-		
 
-		
-
-//		hr.hrlogin();
-		
-		
-		
-		//at.dummy();
-//		at.readWorkingTime2();
-//		at.dayWorkingTime2();
-//		at.adminSearchWorkingTime();	
-		
-		
-=======
-
->>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
-//		Email mail = new Email(user);
-
-//		mail.readMail();
-		// menu();
-
-//		MyCalendar c = new MyCalendar();
-//		c.output();
-		// makeEmailDummy();
 
 	}
 

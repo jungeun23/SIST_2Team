@@ -1,3 +1,4 @@
+package Contact;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import ASAP.*;
 
 /**
  * 이메일 구현 클래스

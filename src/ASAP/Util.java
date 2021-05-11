@@ -1,9 +1,10 @@
+package ASAP;
 import java.util.Scanner;
 /**
  * 코드의 재사용을 줄이기 위한 메소드 
  */
 public class Util {
-	private static Scanner scan = new Scanner(System.in);
+	public static Scanner scan = new Scanner(System.in);
 	
 	/**
 	 * 사용자로부터 입력을 받기 위한 메소드

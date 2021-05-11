@@ -1,3 +1,5 @@
+package Approval;
+import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -6,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import ASAP.Util;
 
 /**
  * 전자결재 구현 사용자는 전자결재 문서를 생성, 읽기, 삭제, 수정을 할 수 있다.
