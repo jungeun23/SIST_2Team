@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Contact.ContactList;
+import Contact.Email;
+import Contact.Messenger;
+
 public class Main {
 	private static Scanner sc = new Scanner(System.in);
 	private static User user = new User();
