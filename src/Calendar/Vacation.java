@@ -1,3 +1,4 @@
+package Calendar;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,6 +10,9 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+import ASAP.User;
+import ASAP.Util;
+import ASAP.*;
 public class Vacation {
 	private final String DATA;
 	private User user;

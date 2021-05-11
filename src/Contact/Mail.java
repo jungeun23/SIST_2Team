@@ -1,3 +1,4 @@
+package Contact;
 /**
  * Email 정보를 담기위한 클래스
  * 이하 getter, setter 메서드로 구성돼 있음

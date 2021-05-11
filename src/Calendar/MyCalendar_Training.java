@@ -1,3 +1,5 @@
+package Calendar;
+import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -6,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import ASAP.Util;
+
 
 public class MyCalendar_Training {
 
@@ -483,7 +488,7 @@ public class MyCalendar_Training {
 			System.out.println("==============================================================================");
 			System.out.println("||1.	교육	||2.	교육	||3.	교육	||4.	교육	||5.	뒤로||");
 			System.out.println("||  	일정	||  	일정	||  	일정	||  	일정	||  	가기||");
-			System.out.println("||  	등록	||  	조회	||  	수정	||  	삭제	||         ||");
+			System.out.println("||  	등록	||  	조회	||  	수정	||  	삭제	||          ||");
 			System.out.println("==============================================================================");
 			System.out.print(" 카테고리(번호)를 선택하세요: ");
 			int num = scan.nextInt();
@@ -518,6 +523,8 @@ public class MyCalendar_Training {
 		System.out.println();
 		System.out.println("엔터를 누르시면 항목으로 돌아갑니다.");
 		scan.nextLine();// Block
+		cls();
+
 	}
 	
 	/**

@@ -1,4 +1,7 @@
+package Calendar;
 import java.util.Scanner;
+
+import ASAP.*;
 
 public class TrainingCenter {
 	User user;
