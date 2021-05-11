@@ -28,11 +28,11 @@ public class Main {
 //		ms.createMessenger();
 //		ms.readMessenger();
 //		ms.updateMessenger();
-		menu();
+//		menu();
 
 //		CoperationCar cc = new CoperationCar(user);
 //		cc.createCopCarSchedule();
-<<<<<<< HEAD
+
 
 		
 		MeetingRoom mr = new MeetingRoom(user);
@@ -40,9 +40,7 @@ public class Main {
 
 		mr.MeetingRoomScreen();
 		
-=======
 //		mr.MeetingRoomScreen();
->>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
 
 //		Board bd = new Board(user);
 //		bd.createBoard();
@@ -52,7 +50,6 @@ public class Main {
 //		bd.readBoard();
 //		bd.deleteBoard();
 //		bd.updateBoard();
-<<<<<<< HEAD
 		
 
 		
@@ -67,9 +64,7 @@ public class Main {
 //		at.adminSearchWorkingTime();	
 		
 		
-=======
 
->>>>>>> e33866b78b5dd76a5cad7ab3b0a76296e6d90671
 //		Email mail = new Email(user);
 
 //		mail.readMail();

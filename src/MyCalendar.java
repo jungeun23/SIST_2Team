@@ -39,6 +39,7 @@ public class MyCalendar {
 	LinkedList<String[]> listCar = new LinkedList<>();
 	LinkedList<String[]> listRoom = new LinkedList<>();
 	LinkedList<String[]> listTraining = new LinkedList<>();
+	LinkedList<String[]> listMeetingRoom = new LinkedList<>();
 
 	/**
 	 * 파일의 위치, 오늘 날짜, 파일의 정보를 저장하기 위한 load메소드를 초기화 한다.
@@ -80,11 +81,17 @@ public class MyCalendar {
 				String[] temp = line.split(",");
 				listCar.add(temp);
 			}
+			BufferedReader readRoom = new BufferedReader(new FileReader(DATA4));
+			while ((line = readRoom.readLine()) != null) {
+				String[] temp = line.split(",");
+				listTraining.add(temp);
+			}
 			BufferedReader readTraining = new BufferedReader(new FileReader(DATA5));
 			while ((line = readTraining.readLine()) != null) {
 				String[] temp = line.split(",");
 				listTraining.add(temp);
 			}
+			
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -418,70 +425,6 @@ public class MyCalendar {
 			return false;
 		}
 
-	}
-
-	public void showCanlendar(int year, int month) {
-		// 마지막일?
-		while (true) {
-			lastDay = getLastDay(year, month);
-
-			// 해당 월의 1일의 요일?
-			day_of_week = getDayOfWeek(year, month); // 4
-			// 달력 출력하기
-			System.out.println();
-			System.out.println("===================================================");
-			System.out.printf("                     %d년 %d월\n", year, month);
-			System.out.println("===================================================");
-			System.out.println("[일]\t[월]\t[화]\t[수]\t[목]\t[금]\t[토]");
-
-			// 1일의 요일을 맞추기 위해서..
-			for (int i = 0; i < day_of_week; i++) {
-				System.out.print("\t");
-			}
-
-			// 날짜 출력
-			for (int i = 1; i <= lastDay; i++) {
-				if (i == 9999)
-//					System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
-					System.out.printf("%3d*\t", i);
-				else
-					System.out.printf("%3d\t", i);
-
-				int a = i % 7;
-				int b = 7 - day_of_week;
-
-				b = 7 - day_of_week == 7 ? 0 : b;
-				if (i % 7 == b) {
-//			if ((day_of_week + i - 1) % 7 == 0) {
-					System.out.println();
-				}
-			}
-
-			System.out.println();
-			System.out.println();
-			String s = Util.get("월 이동(a or d) 일정/예약 날짜 입력(q)");
-			if (s.equals("q"))
-				break;
-//			KeyEvent event = new KeyEvent();
-//			if(Event.getKeycode() == KeyEvent.VK_LEFT)
-			if (s.equals("a")) {
-				if (month - 1 != 0)
-					month--;
-				else {
-					month = 12;
-					year--;
-				}
-			}
-			if (s.equals("d")) {
-				if (month + 1 != 12)
-					month++;
-				else {
-					month = 1;
-					year++;
-				}
-			}
-
-		}
 	}
 	
 }
