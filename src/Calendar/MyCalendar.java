@@ -1,4 +1,5 @@
 package Calendar;
+
 import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -95,14 +96,12 @@ public class MyCalendar {
 				String[] temp = line.split(",");
 				listTraining.add(temp);
 			}
-			
+
 		} catch (IOException e) {
 			System.out.println(e);
 		}
 
 	}
-	
-	
 
 	/**
 	 * 일정을 등록하기 위해 달력을 보여주고, 사용자로부터 날짜, 제목, 내용을 입력받아 일정을 등록한다.
@@ -209,8 +208,6 @@ public class MyCalendar {
 		}
 		fw.close();
 	}
-	
-	   
 
 	/**
 	 * 일정이 등록된 달력을 출력하기 위한 메소드 사용자로부터 등록된 일정 날짜 뒤에 *을 붙여 일정을 표시한다.
@@ -286,6 +283,59 @@ public class MyCalendar {
 			}
 		}
 	}// showCalendar
+
+	public void showCanlendar(int year, int month) {
+		while (true) {
+			lastDay = getLastDay(year, month);
+			day_of_week = getDayOfWeek(year, month); // 4
+			System.out.println();
+			System.out.println("===================================================");
+			System.out.printf("                     %d년 %d월\n", year, month);
+			System.out.println("===================================================");
+			System.out.println("[일]\t[월]\t[화]\t[수]\t[목]\t[금]\t[토]");
+
+			for (int i = 0; i < day_of_week; i++) {
+				System.out.print("\t");
+			}
+
+			for (int i = 1; i <= lastDay; i++) {
+				System.out.printf("%3d\t", i);
+
+				int a = i % 7;
+				int b = 7 - day_of_week;
+
+				b = 7 - day_of_week == 7 ? 0 : b;
+				if (i % 7 == b) {
+					System.out.println();
+				}
+			}
+
+			System.out.println();
+			System.out.println();
+			String s = Util.get("월 이동(a or d) 끝내기(q)");
+			if (s.equals("q"))
+				break;
+//			KeyEvent event = new KeyEvent();
+//			if(Event.getKeycode() == KeyEvent.VK_LEFT)
+			if (s.equals("a")) {
+				if (month - 1 != 0)
+					month--;
+				else {
+					month = 12;
+					year--;
+				}
+			}
+			if (s.equals("d")) {
+				if (month + 1 != 12)
+					month++;
+				else {
+					month = 1;
+					year++;
+				}
+			}
+
+		}
+	}
 
 	/**
 	 * 요일을 반환하기 위한 메소드
@@ -367,5 +417,5 @@ public class MyCalendar {
 		}
 
 	}
-	
+
 }
