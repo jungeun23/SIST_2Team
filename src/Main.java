@@ -134,15 +134,15 @@ public class Main {
 			System.out.println();
 
 			System.out.println("            [2. APPROVAL] ");
-			System.out.println("            전자결재, 휴가관리");
+			System.out.println("            전자결재");
 			System.out.println();
 
 			System.out.println("            [3. NOTICE] ");
 			System.out.println("            게시판");
 			System.out.println();
 
-			System.out.println("            [4. RESERVATION] ");
-			System.out.println("            일정관리, 예약/대여, 교육센터");
+			System.out.println("            [4. CALENDAR] ");
+			System.out.println("            일정관리, 휴가관리, 예약/대여, 교육센터");
 			System.out.println();
 
 			System.out.println("            [5. HR] ");
@@ -216,7 +216,6 @@ public class Main {
 			cls();
 			System.out.println("            [2. APPROVAL] ");
 			System.out.println("            1.  전자결재");
-			System.out.println("            2.  휴가관리");
 			System.out.println();
 			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
@@ -227,9 +226,6 @@ public class Main {
 				break;
 			} else if (n == 1) {
 				showElecApproval();
-			} else if (n == 2) {
-				Vacation v = new Vacation(user);
-				v.firstScreen();
 			} else {
 				System.out.println("잘못된 번호를 입력하셨습니다.");
 			}
@@ -267,10 +263,11 @@ public class Main {
 	public static void showReservation() {
 		while (true) {
 			cls();
-			System.out.println("            [4. RESERVATION] ");
+			System.out.println("            [4. CALENDAR] ");
 			System.out.println("            1.  일정관리");
-			System.out.println("            2.  예약/대여");
-			System.out.println("            3.  교육센터");
+			System.out.println("            2.  휴가관리");
+			System.out.println("            3.  예약/대여");
+			System.out.println("            4.  교육센터");
 			System.out.println();
 			System.out.println("            0.  목차로 돌아가기");
 			System.out.println();
@@ -280,8 +277,11 @@ public class Main {
 			if (n == 1) {
 //				showSchedule();
 			} else if (n == 2) {
+				Vacation v = new Vacation(user);
+				v.firstScreen();
+			}  else if (n == 3) {
 				showReservate();
-			} else if (n == 3) {
+			} else if (n == 4) {
 				TrainingCenter tc = new TrainingCenter(user);
 				tc.trainingScreen();
 			} else if (n == 0) {
