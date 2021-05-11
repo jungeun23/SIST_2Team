@@ -459,7 +459,7 @@ public class Main {
 				mc.createSchedule();
 				puase("일정 쓰기를 완료했습니다.");
 			} else if (n == 2) {
-				mc.showSchedule();
+				//mc.showSchedule();
 				puase("일정 읽기를 완료했습니다.");
 			} else if (n == 3) {
 				mc.updateSchedule();
