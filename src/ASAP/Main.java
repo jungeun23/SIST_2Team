@@ -27,107 +27,37 @@ public class Main {
 	private static Scanner sc = new Scanner(System.in);
 	private static User user = new User();
 
-	public static HR hr = new HR();
-	public static ContactList cl = new ContactList();
+	private static HR hr = new HR();
+	private static ContactList cl = new ContactList();
+	private static Email mail;
+	private static Messenger msg;
+	private static MyCalendar mc;
+	private static CoperationCar cop;
+	private static ElecApproval ea;
+	private static Vacation v;
+	private static TrainingCenter tc;
+	private static Attendance at;
+	private static PayRoll ep;
+	private static Board board;
 
 	public static void main(String[] args) throws Exception {
 
-//		user.regist_user();
-//		user.updateDB();
-//		System.out.println(user);
-
 		Login login = new Login();
 		user = login.loginScreen();
-
-//		Messenger ms = new Messenger(user);
-//		ms.load();
-//		ms.createMessenger();
-//		ms.readMessenger();
-//		ms.updateMessenger();
+		
+		mail = new Email(user);
+		msg = new Messenger(user);
+		mc = new MyCalendar(user);
+		cop = new CoperationCar(user);
+		ea = new ElecApproval(user);
+		v= new Vacation(user);
+		tc = new TrainingCenter(user);
+		at = new Attendance(user);
+		ep = new PayRoll();
+		board = new Board(user);
 		menu();
-
-//		CoperationCar cc = new CoperationCar(user);
-//		cc.createCopCarSchedule();
-
-
-//		Board bd = new Board(user);
-//		bd.createBoard();
-
-//		Board bd = new Board(user);
-//		bd.createBoard();
-//		bd.readBoard();
-//		bd.deleteBoard();
-//		bd.updateBoard();
-
-
 	}
 
-	private static void makeEmailDummy() throws Exception {
-		String path = "Data/Contract.txt"; // 제목 더미를... 하ㅜㅜ 생각좀해봐야겟다.
-		File f = new File(path);
-//		System.out.println(f);
-		int cnt = 0;
-		BufferedReader reader = new BufferedReader(new FileReader("Data/Email/dummy.txt"));
-
-		String line = "";
-		String result = "";
-		ArrayList<String> title = new ArrayList<>(); // 5, 6
-		ArrayList<String> content = new ArrayList<>();
-
-		while ((line = reader.readLine()) != null) {
-			String[] temp = line.split(",");
-//			System.out.println(Arrays.toString(temp));
-			title.add(temp[0]);
-			content.add(temp[1]);
-		}
-		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
-		ArrayList<String> t1 = new ArrayList<>(); // 이름 + 이메일
-//		ArrayList<String> t2 = new ArrayList<>();	//이메일
-//		ArrayList<String> t3 = new ArrayList<>();
-//		ArrayList<String> t4 = new ArrayList<>();
-//		ArrayList<String> t5 = new ArrayList<>();
-//		ArrayList<String> t6 = new ArrayList<>();
-
-		BufferedReader reader2 = new BufferedReader(new FileReader("data/Contact.txt"));
-//		t,t,홍길동,a@sis2.co.kr,010-1234-1234,차장,인사
-		while ((line = reader2.readLine()) != null) {
-			String[] temp = line.split(",");
-			t1.add(temp[2] + "," + temp[3]);
-		}
-		// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
-		// title, content t1(사람)
-		int n = t1.size();
-		Random rand = new Random();
-		int c = rand.nextInt(t1.size() - 1);
-
-		File f2 = new File("data/Email/dummyTest.txt");
-		FileWriter fw = new FileWriter(f2);
-		cnt = 1;
-		for (int i = 0; i < 1000; i++, cnt++) {
-			c = rand.nextInt(t1.size() - 1);
-			String[] temp = t1.get(c).split(",");
-			String sendName = temp[0];
-			String sendEmail = temp[1];
-			c = rand.nextInt(t1.size() - 1);
-			temp = t1.get(c).split(",");
-			String receiveName = temp[0];
-			String receiveEmail = temp[1];
-			fw.write(cnt + ",");
-			fw.write(title.get(i) + ",");
-			fw.write(sendEmail + ",");
-			fw.write(receiveEmail + ",");
-			fw.write(sendName + ",");
-			fw.write(receiveName + "\n");
-			fw.write(content.get(i) + "\n");
-			fw.write("-----\n");
-			// 번호 제목 보낸이메일 받는이메일 보낸이름 받는이름 내용
-		}
-		fw.close();
-
-		for (String s : title) {
-			System.out.println(s);
-		}
-	}
 
 	public static void menu() throws Exception {
 		while (true) {
@@ -284,12 +214,12 @@ public class Main {
 			if (n == 1) {
 				showSchedule();
 			} else if (n == 2) {
-				Vacation v = new Vacation(user);
+				
 				v.firstScreen();
-			}  else if (n == 3) {
+			} else if (n == 3) {
 				showReservate();
 			} else if (n == 4) {
-				TrainingCenter tc = new TrainingCenter(user);
+				
 				tc.trainingScreen();
 			} else if (n == 0) {
 //				menu();
@@ -314,7 +244,7 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			if (n == 1) {
-				Attendance at = new Attendance(user);
+				
 				at.attendanceScreen();
 			} else if (n == 2) {
 				hr.hrScreen();
@@ -373,7 +303,7 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			Email mail = new Email(user);
+			
 			if (n == 0) {
 				break;
 			} else if (n == 1) {
@@ -423,7 +353,7 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			Messenger msg = new Messenger(user);
+			
 			
 			if (n == 0) {
 				break;
@@ -459,7 +389,7 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			MyCalendar mc = new MyCalendar(user);
+			
 			
 			if (n == 0) {
 				break;
@@ -493,7 +423,7 @@ public class Main {
 		         //수빈 - 회의실 예약
 		      } else if(n.equals("2")) {
 		         
-		         CoperationCar cop = new CoperationCar(user);
+		         
 		         cop.copCarScreen();
 		         
 		      } else {
@@ -509,7 +439,7 @@ public class Main {
 	
 	public static void showExtraPay() {
 
-		PayRoll ep = new PayRoll();
+		
 
 		ep.load();
 
@@ -564,7 +494,7 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			ElecApproval ea = new ElecApproval(user);
+			
 			if (n == 1) {
 				ea.createElecApproval();
 			} else if (n == 2) {
@@ -606,7 +536,7 @@ public class Main {
 			int n = Integer.parseInt(Util.get("카테고리 번호"));
 			System.out.println();
 
-			Board board = new Board(user);
+			
 			if (n == 0) {
 				break;
 			} else if (n == 1) {
