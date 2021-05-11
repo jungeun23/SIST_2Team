@@ -1,4 +1,5 @@
 package Calendar;
+import ASAP.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,7 +9,8 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
-import ASAP.*;
+
+import ASAP.Util;
 /**
  * @author 방수빈
  * 
@@ -26,17 +28,6 @@ import ASAP.*;
  *
  */
 public class MeetingRoom {
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
-	private String[] roomNumber = { "501", "502", "503", "504", "505", "506", "601", "602", "603", "701", "702", "703",
-			"704", "815", "816", "817", "819", "820", "821" };
 	private final String DATA4;
 	private Calendar date;
 	private int year;
@@ -45,12 +36,12 @@ public class MeetingRoom {
 	private int lastDay = 0;
 	private int day_of_week = 0;
 	private User user;
-	private MyCalendar mc;
+	private String[] roomNumber = { "501", "502", "503", "504", "505", "506", "601", "602", "603", "701", "702", "703",
+			"704", "815", "816", "817", "819", "820", "821" };
 	LinkedList<String[]> listRoom = new LinkedList<>();
-	
+
 	public MeetingRoom(User user) {
 		this.user = user;
-
 		DATA4 = "data\\schedule\\meetingRoom.txt";
 		date = Calendar.getInstance();
 		this.year = date.get(Calendar.YEAR);
@@ -58,7 +49,6 @@ public class MeetingRoom {
 		this.day = date.get(Calendar.DATE);
 		load();
 	}
-
 	/**
 	 * 회의실 예약 관리 각 항목으로 넘어가도록 int값을 입력받아 각 메소드로 이동한다.
 	 */
@@ -390,12 +380,11 @@ public class MeetingRoom {
 		}
 
 	}
-
-	/**
-	 * meetingRoom.txt을 읽어온 후 예약 내용을 저장한다.
-	 * 
-	 * @param roomNumber방 번호
-	 */
+	
+/**
+ * meetingRoom.txt을 읽어온 후 예약 내용을 저장한다.
+ * @param roomNumber방 번호
+ */
 	public void createRoomReservation(String[] roomNumber) {
 		System.out.println("회의실 예약을 등록합니다. 달력을 확인해주세요");
 		showCanlendar(this.year, this.month);
@@ -454,19 +443,18 @@ public class MeetingRoom {
 			System.out.println(e);
 		}
 		System.out.println("회의실 예약이 완료됐습니다.");
-
 		System.out.println();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
-		if (num2 == 0) {
+		if(num2 == 0) {
 			cls();
 			MeetingRoomScreen();
 		}
 
 	}
-
-	/**
-	 * listRoom의 index를 찾아서 그 index의 내용을 삭제한다. meetingRoom.txt를 다시 저장한다.
-	 */
+/**
+ * listRoom의 index를 찾아서 그 index의 내용을 삭제한다.
+ * meetingRoom.txt를 다시 저장한다.
+ */
 	public void deleteRoom() {
 		// 홍길동,차장,인사,505,2021-5-1,sdf
 		ArrayList<int[]> t = new ArrayList<>();
@@ -519,19 +507,17 @@ public class MeetingRoom {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		System.out.println();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
-		if (num2 == 0) {
+		if(num2 == 0) {
 			cls();
 			MeetingRoomScreen();
 		}
 
 	}// deleteVacation()
-
-	/**
-	 * listRoom의 index를 찾은 후 그 index의 내용을 읽어온다.
-	 */
+/**
+ * listRoom의 index를 찾은 후 그 index의 내용을 읽어온다. 
+ */
 	public void readRoom() {
 //홍길동,차장,인사,821,2021-5-18,회의
 		ArrayList<int[]> t = new ArrayList<>();
@@ -551,7 +537,7 @@ public class MeetingRoom {
 			if (listRoom.get(i)[0].equals(this.user.getName())) {
 				String[] temp = listRoom.get(i)[4].split("-");
 				int year = Util.toInt(temp[0]);
-				int month = Util.toInt(temp[1]);
+				int month = Util.toInt(temp[1]); 
 				int day = Util.toInt(temp[2]);
 				if (c[0] == year && c[1] == month && c[2] == day) {
 					System.out.println();
@@ -568,10 +554,9 @@ public class MeetingRoom {
 			}
 		}
 		System.out.println("남은 일정이 없습니다.");
-
 		System.out.println();
 		int num2 = Integer.parseInt(Util.get("▶ 목차로 돌아가려면 0번을 누르세요."));
-		if (num2 == 0) {
+		if(num2 == 0) {
 			cls();
 			MeetingRoomScreen();
 		}
