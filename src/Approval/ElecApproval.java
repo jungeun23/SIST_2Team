@@ -26,9 +26,13 @@ public class ElecApproval {
 	private User user;
 	private static Scanner sc = new Scanner(System.in);
 
-	public ElecApproval(User user) throws IOException {
+	public ElecApproval(User user) {
 		this.user = user;
-		load();
+		try {
+			load();
+		} catch (IOException e) {
+			System.out.println(e);
+		}
 	}
 
 	/**
